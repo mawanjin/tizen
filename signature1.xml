@@ -43,21 +43,29 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>wPBS488c+YvsWaCAwLTbGCrA021qWPZpcXaI/Z028Ro=</DigestValue>
 </Reference>
+<Reference URI="database.xml">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>LgRyi8n7fALqfXQ4O5wjZKZZjWVWG2qZRIsDDfK3P3o=</DigestValue>
+</Reference>
 <Reference URI="icon.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>wfwuPIJiNBXrBw5Nl4NE8B7X1QpT3UVtFoiOoAiJsnU=</DigestValue>
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>v1PJRu5R/Ag1o3xrOBufTKPZi+ny8IbHvYRSbU62IPw=</DigestValue>
+<DigestValue>ZePAQWlZYsriKLICMnpCHIbuEiLz4CFDBShUDOfNia4=</DigestValue>
+</Reference>
+<Reference URI="information.plist">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>Yo0skmLVmjbSE8jk+1ShJ9Npoo+rdh9yoD1L7D0Xo4U=</DigestValue>
 </Reference>
 <Reference URI="js/XMLParser.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>IZWYBc+o9rszVwfUAqT8lNj13zTkv1RgOTFTQuouDPU=</DigestValue>
+<DigestValue>2kPIb7TmETMv1IrKpBGtoNcmPaLbv7bfo/dI6qZui4s=</DigestValue>
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>KjdXhvNkRYz+v72HYo8aiUDZzUIcU7DB1dA6piHO4q4=</DigestValue>
+<DigestValue>eQBhg0YOMJXz2+yoRYXtCqUeb8qxJp1eZBfXAzUMO6w=</DigestValue>
 </Reference>
 <Reference URI="js/jqm-docs.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -73,7 +81,15 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>pU6IbfK/5+5n7Am3Hp1RUJIE6qrOf7Lk8XKCvZSawFI=</DigestValue>
+<DigestValue>GJAQdomDv44aDcxON0gpF1kc1x4y51fl/KIK7I84qJA=</DigestValue>
+</Reference>
+<Reference URI="moduleinfo.plist">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>sV0N+SwYZ7tqE+zYy5bw0Tamq1gTMN5+4YpHJsod088=</DigestValue>
+</Reference>
+<Reference URI="problempackages.plist">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>Sz21GrtMDjD0e1+cylUzjvxHc6Yec/5bJW1afgVILMA=</DigestValue>
 </Reference>
 <Reference URI="#prop">
 <Transforms>
@@ -84,9 +100,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-DQY0DS5xlMpdxn9H0Y5lMknGz1rF6iDMhH7FlptP2GZgvTzLuA1734E1q/NsbIARVrPp3SndE9IU
-CaG7GV79z7UKaYA3lzsJe4RgOEpILl6Ocuo1SPjXF0tiTzfuNiaSSr1m4ZJ5IWjVpYbwJZJXNBmm
-dFm5d5MDAhpPTfNZXLU=
+Fk3hj0xUz8aznDU0FPSODM+T02tsWei3NANtA5hfLd8GoaRsMCx1i1tYr2kHW1wwFScdgYU7VIoU
+DZY57E3rEsezzLcEm8pwCiuXF2dqv70Afqqg59fMPfkKp7J4DT076Vs+n+pc1TOuc23MwLhKR4qx
+EHvjXys4MTuf6HM2H1k=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

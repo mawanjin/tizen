@@ -21,27 +21,29 @@ function DBManager() {
 	self.createBookmark = 'CREATE TABLE bookmark( id integer primary key,ex_app_id integer,question_id integer,position integer,title text,date text);';
 	self.createExamResultInfo = 'CREATE TABLE exam_result_info( id integer primary key,ex_app_id integer,ex_app_name text,score integer,finish text,progress integer,start_time text,end_time text, question_count text,section text);';
 	self.createquestionExamResultInfo = 'CREATE TABLE question_exam_result_info( id integer primary key,ex_app_id integer,question_id integer,choice text,correctChoice text,mark text);';
-	//self.createQuestionWorkspaceNotes = 'CREATE TABLE question_workspace_notes( id integer primary key,ex_app_id integer, question_id integer, note text);';
+	// self.createQuestionWorkspaceNotes = 'CREATE TABLE
+	// question_workspace_notes( id integer primary key,ex_app_id integer,
+	// question_id integer, note text);';
 
 	// insert statement
-	
+
 	self.insertIphoneExAppsStatement = 'insert into iphone_ex_apps values(?,?,?,?,?,?,?,?,?,?,?,?)';
 	self.insertIphoneExAppPagesStatement = 'insert into iphone_ex_app_pages values(?,?,?,?,?,?);';
 	self.insertIphoneQuestionsStatement = 'insert into iphone_questions values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-	
+
 	self.insertBookmarkStatement = "insert into  bookmark(ex_app_id,question_id,position,title,date) values (?,?,?,?,?);";
 	self.insertExamResultInfoStatement = 'insert into exam_result_info(ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section) values(?,?,?,?,?,?,?,?,?);';
 	self.insertquestionExamResultInfoStatement = 'insert into  question_exam_result_info(ex_app_id,question_id,choice,correctChoice,mark) values(?,?,?,?,?);';
 	self.insertQuestionWorkSpaceNoteStatement = 'insert into question_workspace_notes (ex_app_id,question_id,note) values(?,?,?);';
-	//drop statement
-	self.dropIphoneExAppsStatement='DROP TABLE iphone_ex_apps';
-	self.dropExAppPagesStatement='DROP TABLE iphone_ex_app_pages';
-	self.dropQuestionsStatement='DROP TABLE iphone_questions';
-	self.dropBookmarkStatement='DROP TABLE bookmark';
-	self.dropExamResultInfoStatement='DROP TABLE exam_result_info';
-	self.dropQuestionExamResultInfoStatement='DROP TABLE question_exam_result_info';
-	self.dropQuestionExamResultInfoStatement='DROP TABLE question_exam_result_info';
-	
+	// drop statement
+	self.dropIphoneExAppsStatement = 'DROP TABLE iphone_ex_apps';
+	self.dropExAppPagesStatement = 'DROP TABLE iphone_ex_app_pages';
+	self.dropQuestionsStatement = 'DROP TABLE iphone_questions';
+	self.dropBookmarkStatement = 'DROP TABLE bookmark';
+	self.dropExamResultInfoStatement = 'DROP TABLE exam_result_info';
+	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
+	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
+
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
 	self.updateItemFavoriteStatement = "UPDATE items SET favorite = ? WHERE _id = ?";
@@ -63,7 +65,7 @@ function DBManager() {
 	self.onSuccess = function(tx, result) {
 	};
 
-	self.createTables = function() {
+	self.createTables = function(callback) {
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.createIphoneExAppsStatement, [], self.onSuccess,
 					self.onError);
@@ -76,30 +78,50 @@ function DBManager() {
 							self.onError);
 			tx.executeSql(self.createExamResultInfo, [], self.onSuccess,
 					self.onError);
-			tx.executeSql(self.createquestionExamResultInfo, [],
-					self.onSuccess, self.onError);
-//			tx.executeSql(self.createQuestionWorkspaceNotes, [],
-//					self.onSuccess, self.onError);
+			tx.executeSql(self.createquestionExamResultInfo, [], callback,
+					self.onError);
+			// tx.executeSql(self.createQuestionWorkspaceNotes, [],
+			// self.onSuccess, self.onError);
 		});
 	};
-	
-	
-	
-	self.insertIphoneQuestions = function(id,ex_app_id,name,difficulty,text_block1a,text_block1b,text_block1c,text_block1d,image,question_stem_a,answer1_a,answer2_a,answer3_a,answer4_a,answer5_a,answer6_a,hint1,video2,video1,solution,solution_text,solution_text1,solution_text2,solution_text3,solution_text4,solution_text5,date,idx,pt_id,pt_section,pt_qid,pt_group_first) {
+
+	self.insertIphoneQuestions = function(id, ex_app_id, name, difficulty,
+			text_block1a, text_block1b, text_block1c, text_block1d, image,
+			question_stem_a, answer1_a, answer2_a, answer3_a, answer4_a,
+			answer5_a, answer6_a, hint1, video2, video1, solution,
+			solution_text, solution_text1, solution_text2, solution_text3,
+			solution_text4, solution_text5, date, idx, pt_id, pt_section,
+			pt_qid, pt_group_first) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.insertIphoneQuestionsStatement, [id,ex_app_id,name,difficulty,text_block1a,text_block1b,text_block1c,text_block1d,image,question_stem_a,answer1_a,answer2_a,answer3_a,answer4_a,answer5_a,answer6_a,hint1,video2,video1,solution,solution_text,solution_text1,solution_text2,solution_text3,solution_text4,solution_text5,date,idx,pt_id,pt_section,pt_qid,pt_group_first], self.onSuccess, self.onError);
+			tx.executeSql(self.insertIphoneQuestionsStatement, [ id, ex_app_id,
+					name, difficulty, text_block1a, text_block1b, text_block1c,
+					text_block1d, image, question_stem_a, answer1_a, answer2_a,
+					answer3_a, answer4_a, answer5_a, answer6_a, hint1, video2,
+					video1, solution, solution_text, solution_text1,
+					solution_text2, solution_text3, solution_text4,
+					solution_text5, date, idx, pt_id, pt_section, pt_qid,
+					pt_group_first ], self.onSuccess, self.onError);
 		});
 	};
-	
-	self.insertIphoneExAppPages = function(id,ex_app_id,content,idx,date,solving) {
+
+	self.insertIphoneExAppPages = function(id, ex_app_id, content, idx, date,
+			solving) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.insertIphoneExAppPagesStatement, [id,ex_app_id,content,idx,date,solving], self.onSuccess, self.onError);
+			tx.executeSql(self.insertIphoneExAppPagesStatement, [ id,
+					ex_app_id, content, idx, date, solving ], self.onSuccess,
+					self.onError);
 		});
 	};
-	
-	self.insertIphoneExApps = function(id,section,subsection,name,date,duration,solving_title,evaluation_title,price,total_time,difficulty,video_url) {
+
+	self.insertIphoneExApps = function(id, section, subsection, name, date,
+			duration, solving_title, evaluation_title, price, total_time,
+			difficulty, video_url) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.insertIphoneExAppsStatement, [id,section,subsection,name,date,duration,solving_title,evaluation_title,price,total_time,difficulty,video_url], self.onSuccess, self.onError);
+			tx.executeSql(self.insertIphoneExAppsStatement,
+					[ id, section, subsection, name, date, duration,
+							solving_title, evaluation_title, price, total_time,
+							difficulty, video_url ], self.onSuccess,
+					self.onError);
 		});
 	};
 
@@ -458,67 +480,187 @@ function DBManager() {
 		});
 	};
 
-	self.exsitsStatement = "select count(*) as c from iphone_ex_apps";
-	self.checkExists = function(callback,error) {
+	self.exsitsIphoneExAppPagesStatement = "select count(*) as c from iphone_ex_app_pages";
+	self.checkIphoneExAppPagesExists = function(callback, error) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.exsitsStatement, [], function(tx, result) {
+			tx.executeSql(self.exsitsIphoneExAppPagesStatement, [], function(
+					tx, result) {
 				var dataset = result.rows;
 				callback(dataset);
 			}, error);
 		});
 	};
+	
+	self.getIphoneExAppPagesCount = function() {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.exsitsIphoneExAppPagesStatement, [], function(tx,
+					result) {
+				var dataset = result.rows;
+				self.data_count_IphoneExAppPages = dataset.item(0)['c'];
+				
+			}, self.onError);
+		});
+	};
 
-	self.exists = function(callback) {
+	self.exsitsStatement = "select count(*) as c from iphone_ex_apps";
+	self.checkExists = function(callback, error) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.exsitsStatement, [], function(tx, result) {
+				var dataset = result.rows;
+				// alert(dataset.item(0)['c']);
+				callback(dataset);
+			}, error);
+		});
+	};
+	
+	self.getIphoneExAppsCount = function(callback) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.exsitsStatement, [], function(tx,
+					result) {
+				var dataset = result.rows;
+				self.data_count_iphone_ex_apps = dataset.item(0)['c'];
+			}, self.onError);
+		});
+	};
+	
+	
+	self.exsitsiphoneQuestionsStatement = "select count(*) as c from iphone_questions";
+	self.checkiphoneQuestionsExists = function(callback, error) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.exsitsiphoneQuestionsStatement, [], function(tx,
+					result) {
+				var dataset = result.rows;
+				callback(dataset);
+			}, error);
+		});
+	};
+	
+	self.getIphoneQuestionsCount = function(callback) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.exsitsiphoneQuestionsStatement, [], function(tx,
+					result) {
+				var dataset = result.rows;
+				self.data_count_iphoneQuestions = dataset.item(0)['c'];
+			}, self.onError);
+		});
+	};
+
+	self.data_count_iphone_ex_apps = 0;
+	self.data_count_IphoneExAppPages = 0;
+	self.data_count_iphoneQuestions = 0;
+	
+	self.exists_iphone_ex_apps = -1;
+	self.exists_IphoneExAppPages = -1;
+	self.exists_iphoneQuestions = -1;
+
+	self.exists = function() {
+
 		self.checkExists(function(data) {
-			callback(true);
-		},function(){callback(false);});
+			self.exists_iphone_ex_apps = 0;
+		}, function() {
+			self.exists_iphone_ex_apps=1;
+		});
+
+		self.checkIphoneExAppPagesExists(function(data) {
+			self.exists_iphone_ex_apps=0;
+		}, function() {
+			self.exists_iphone_ex_apps=1;
+		});
+
+		self.checkiphoneQuestionsExists(function(data) {
+			self.exists_iphone_ex_apps=0;
+		}, function() {
+			self.exists_iphone_ex_apps = 1;
+		});
+
 	};
-	
-	self.insertTest=function(){
-		self.insertBookmark("1","1","1","title",""+new Date());
-		self.insertExamResultInfo("1","name","10","true","1","start_time","end_time","20","section name");
-		self.insertquestionExamResultInfo("1","1","0","1","true");
-		self.insertQuestionWorkSpaceNote("1","1","note"); 
-		
-		self.insertIphoneExApps(774,'Package','','2011 LSAT Package (PT 63, 64, 65)','2012-02-09 16:56:07','0','The Complete Package of 2011 LSATs','','0.0','','5','');
-		self.insertIphoneExAppPages(69, 388, 'content', 1, "2011-06-07 10:51:38", "1");
-		self.insertIphoneQuestions(1585, 321, 'A company employee generates a series of five-digit productcodes in accordance ... ...', 1, 'd212a2d21b66e1811b2495fe8b05bd1293ab05b5UVZYVVUHVlIHB1dTAwoDClwABlAiGVVaXkIHCB0RUQsSVQtBA1MWUlcMXBEHEABFE1YTQlJAC10WFl9TQ19fQ1YfAg8DWEBGEksLXBNVQhU/aFoMAgEWFlpZE1BUUQ1KAVdeVgYZQVxHWkYSDFQUAA1VCFcRX1hSEhBMDwMXXxY+PT47C0JCSxFPXFBeG1tUQVUPCF4BRB5CCRRARgZGTRJRCRMeXxFTS0MeWFlWB1YRDB0EU0lOFw0/bEZEEWAOBxkHVwJTRRVHEVxDEgwAFldeVFhDQUIISRYBGUMLGhUAHkYHClUUUk4ZBVYCFlhaEg1NCwMWFhgTCxxBCT9oNW8KQBUQTU9ZVg9ECwVDUw8MA1RIHhYGRUpCCRMeRFYGQ08IRVJKFhUMWFRQDU0MGAICFh5GDzlsQhlEfQdVXhVWC14KEkQKVVBCQUIXVxpZBkJcTENWWFZWEg8IRFBaH0JaC1wDGBYJHRIHbmxYFRZAQ0pdUg9AVQREV1wNAwZFSxJWFhwRBBYaGVcIFk4NQVcaTU4PCgFTXUMJHAYCEkBHCD0/QxkWYVtXRhUBUlsIBhkAUQFfQhVaA0pDB0QTV19CVhFSSgNbEVpJFRdOX1ZWEhIOBUUUCQQZEFADFjs/EkIZQwANF0VHF1dYUFsWFkUKH0VdNDwJQxIVEh1dUVtAVAVKAV9YDwISQUNWFB0WA0dLEQQCEkBeQlVNFxRfW1dXCBJeHAVWEkFGBms8FhUSNlEGRhIEWkZSE15REhZQABZEXQpLUhVXWwEPEBFdFUJVAUsVFkJdUwwZFw4BRUBSW0ZUF10EGBFeVRVuMxYVExIADwJFXEYGUANREhgWODheFhNYXVBQVg9RAQJQBglXDwNUAQkDVwY', 'table ', 'text_block1c', 'text_block1d', '', 'cf3795403e71f3a2fe7169d399194c8a452cccd9UlZUBQpWCgBXAwUEDFkHBQEDAgMrAkVDUFUWWgBHQUVdWldfEkENAxEDWxNYVloBE0cABFQERkdKWlATARBFVFdUUxYIRxVUFRNZQkZsaAhEEUETW1AZEBFGBEZMCQdDGEFcA1RdAQQBCQcPVVcNBA0GAlUFAgZc', 'Zone 1: Kim, Parra Zone 2: Stuckey, Udall Zone 3: Mahr, Quinn, Tiao', 'Zone 1: Kim, Tiao Zone 2: Stuckey, Udall Zone 3: Mahr, Parra, Quinn', 'Zone 1: Parra, Quinn Zone 2: Kim, Udall Zone 3: Mahr, Stuckey, Tiao', 'Zone 1: Stuckey, Udall Zone 2: Kim, Tiao Zone 3: Mahr, Parra, Quinn', 'Zone 1: Tiao Zone 2: Kim, Parra, Quinn Zone 3: Stuckey, Udall', '', '', '', '', 'b', '', '', '', '', '', '', '2012-08-28 17:19:32', 1, 66, 3, 12, 0);
-		
+
+	self.insertTest = function() {
+		self.insertBookmark("1", "1", "1", "title", "" + new Date());
+		self.insertExamResultInfo("1", "name", "10", "true", "1", "start_time",
+				"end_time", "20", "section name");
+		self.insertquestionExamResultInfo("1", "1", "0", "1", "true");
+		self.insertQuestionWorkSpaceNote("1", "1", "note");
+
+		self.insertIphoneExApps(774, 'Package', '',
+				'2011 LSAT Package (PT 63, 64, 65)', '2012-02-09 16:56:07',
+				'0', 'The Complete Package of 2011 LSATs', '', '0.0', '', '5',
+				'');
+		self.insertIphoneExAppPages(69, 388, 'content', 1,
+				"2011-06-07 10:51:38", "1");
+		self
+				.insertIphoneQuestions(
+						1585,
+						321,
+						'A company employee generates a series of five-digit productcodes in accordance ... ...',
+						1,
+						'd212a2d21b66e1811b2495fe8b05bd1293ab05b5UVZYVVUHVlIHB1dTAwoDClwABlAiGVVaXkIHCB0RUQsSVQtBA1MWUlcMXBEHEABFE1YTQlJAC10WFl9TQ19fQ1YfAg8DWEBGEksLXBNVQhU/aFoMAgEWFlpZE1BUUQ1KAVdeVgYZQVxHWkYSDFQUAA1VCFcRX1hSEhBMDwMXXxY+PT47C0JCSxFPXFBeG1tUQVUPCF4BRB5CCRRARgZGTRJRCRMeXxFTS0MeWFlWB1YRDB0EU0lOFw0/bEZEEWAOBxkHVwJTRRVHEVxDEgwAFldeVFhDQUIISRYBGUMLGhUAHkYHClUUUk4ZBVYCFlhaEg1NCwMWFhgTCxxBCT9oNW8KQBUQTU9ZVg9ECwVDUw8MA1RIHhYGRUpCCRMeRFYGQ08IRVJKFhUMWFRQDU0MGAICFh5GDzlsQhlEfQdVXhVWC14KEkQKVVBCQUIXVxpZBkJcTENWWFZWEg8IRFBaH0JaC1wDGBYJHRIHbmxYFRZAQ0pdUg9AVQREV1wNAwZFSxJWFhwRBBYaGVcIFk4NQVcaTU4PCgFTXUMJHAYCEkBHCD0/QxkWYVtXRhUBUlsIBhkAUQFfQhVaA0pDB0QTV19CVhFSSgNbEVpJFRdOX1ZWEhIOBUUUCQQZEFADFjs/EkIZQwANF0VHF1dYUFsWFkUKH0VdNDwJQxIVEh1dUVtAVAVKAV9YDwISQUNWFB0WA0dLEQQCEkBeQlVNFxRfW1dXCBJeHAVWEkFGBms8FhUSNlEGRhIEWkZSE15REhZQABZEXQpLUhVXWwEPEBFdFUJVAUsVFkJdUwwZFw4BRUBSW0ZUF10EGBFeVRVuMxYVExIADwJFXEYGUANREhgWODheFhNYXVBQVg9RAQJQBglXDwNUAQkDVwY',
+						'table ',
+						'text_block1c',
+						'text_block1d',
+						'',
+						'cf3795403e71f3a2fe7169d399194c8a452cccd9UlZUBQpWCgBXAwUEDFkHBQEDAgMrAkVDUFUWWgBHQUVdWldfEkENAxEDWxNYVloBE0cABFQERkdKWlATARBFVFdUUxYIRxVUFRNZQkZsaAhEEUETW1AZEBFGBEZMCQdDGEFcA1RdAQQBCQcPVVcNBA0GAlUFAgZc',
+						'Zone 1: Kim, Parra Zone 2: Stuckey, Udall Zone 3: Mahr, Quinn, Tiao',
+						'Zone 1: Kim, Tiao Zone 2: Stuckey, Udall Zone 3: Mahr, Parra, Quinn',
+						'Zone 1: Parra, Quinn Zone 2: Kim, Udall Zone 3: Mahr, Stuckey, Tiao',
+						'Zone 1: Stuckey, Udall Zone 2: Kim, Tiao Zone 3: Mahr, Parra, Quinn',
+						'Zone 1: Tiao Zone 2: Kim, Parra, Quinn Zone 3: Stuckey, Udall',
+						'', '', '', '', 'b', '', '', '', '', '', '',
+						'2012-08-28 17:19:32', 1, 66, 3, 12, 0);
+
 	};
-	
-	self.fillData = function(){
-		
+
+	self.executeSQL = function(sql) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(sql, [], self.onSuccess, self.onError);
+		});
 	};
-	
-	
-	
+	self.fillData = function() {
+		$.ajax({
+			url : "database.xml",
+			type : 'GET',
+			dataType : 'xml',
+			success : function(xml) {
+
+				$(xml).find("sql").each(function() {
+					self.executeSQL($(this).text());
+				});
+			}
+		});
+	};
+
 	self.dropDB = function() {
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.dropBookmarkStatement, [], function(tx, result) {
 			});
 		});
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.dropExamResultInfoStatement, [], function(tx, result) {
+			tx.executeSql(self.dropExamResultInfoStatement, [], function(tx,
+					result) {
 			});
 		});
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.dropExAppPagesStatement, [], function(tx, result) {
+			tx.executeSql(self.dropExAppPagesStatement, [],
+					function(tx, result) {
+					});
+		});
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.dropIphoneExAppsStatement, [], function(tx,
+					result) {
 			});
 		});
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.dropIphoneExAppsStatement, [], function(tx, result) {
-			});
+			tx.executeSql(self.dropQuestionExamResultInfoStatement, [],
+					function(tx, result) {
+					});
 		});
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.dropQuestionExamResultInfoStatement, [], function(tx, result) {
-			});
-		});
-		self.db.transaction(function(tx) {
-			tx.executeSql(self.dropQuestionsStatement, [], function(tx, result) {
-			});
+			tx.executeSql(self.dropQuestionsStatement, [],
+					function(tx, result) {
+					});
 		});
 	};
-	
+
 	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);
 	return self;
 	/*

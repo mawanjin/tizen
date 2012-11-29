@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>examType</key>
+	<string>LSAT</string>
+	<key>examSection</key>
+	<array>
+		<dict>
+			<key>secName</key>
+			<string>Logical Reasoning</string>
+			<key>secNameShort</key>
+			<string>LR</string>
+			<key>secFile</key>
+			<string>db</string>
+		</dict>
+		<dict>
+			<key>secName</key>
+			<string>Logic Games</string>
+			<key>secNameShort</key>
+			<string>LG</string>
+			<key>secFile</key>
+			<string>db</string>
+		</dict>
+		<dict>
+			<key>secName</key>
+			<string>Reading Comprehension</string>
+			<key>secNameShort</key>
+			<string>RC</string>
+			<key>secFile</key>
+			<string>db</string>
+		</dict>
+		<dict>
+			<key>secName</key>
+			<string>Engineering Test</string>
+			<key>secNameShort</key>
+			<string>EC</string>
+			<key>secFile</key>
+			<string>db</string>
+		</dict>
+	</array>
+	<key>resetPassURL</key>
+	<string>http://www.ArcadiaPrep.com/recover_password/</string>
+	<key>ServerURL</key>
+	<string>arcadia.witagg.com</string>
+	<key>SecureServerURL</key>
+	<string>http://arcadia.witagg.com</string>
+	<key>appCode</key>
+	<string>2000</string>
+	<key>moduleColor</key>
+	<dict>
+		<key>Red</key>
+		<integer>5</integer>
+		<key>Green</key>
+		<integer>34</integer>
+		<key>Blue</key>
+		<integer>97</integer>
+	</dict>
+	<key>mainMenu</key>
+	<array>
+		<string>Start a New Session</string>
+		<string>Resume Previous Session</string>
+		<string>Review Last Session</string>
+		<string>Performance Data</string>
+		<string>About Author</string>
+	</array>
+	<key>websiteName</key>
+	<string>Arcadiaprep.com</string>
+	<key>websiteURL</key>
+	<string>http://www.arcadiaprep.com</string>
+	<key>IntroPage</key>
+	<string>&lt;div class=&quot;WordSection1&quot;&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;Press Begin New Session to start your practice, or Resume to go to the problem that you last did in the previous session. To see your score for this problem set, press Review.&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;From within the problem, you will find many useful tools:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;text-indent: -18pt;&quot; class=&quot;MsoListParagraphCxSpFirst&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;-&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;Use the &lt;strong style=&quot;&quot;&gt;Pen Tools&lt;/strong&gt; with your fingers and use the Work Space as scratch paper to work out Math problems. Use the highlighter to mark important paragraphs and the red pen to underline key sentences in Reading Comprehension passages.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;text-indent: -18pt;&quot; class=&quot;MsoListParagraphCxSpMiddle&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;-&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;Take notes. Press the &lt;strong style=&quot;&quot;&gt;In Person&lt;/strong&gt; button in the lower right (&lt;span class=&quot;SpellE&quot;&gt;iPad&lt;/span&gt; only) to record your own voice and animation. Publish the recording for other people to share.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;text-indent: -18pt;&quot; class=&quot;MsoListParagraphCxSpMiddle&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;&quot;&gt;&lt;span style=&quot;&quot;&gt;-&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;From within a problem, you can press &lt;strong style=&quot;&quot;&gt;Menu&lt;/strong&gt; to access a couple useful features:&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left: 72pt; text-indent: -18pt;&quot; class=&quot;MsoListParagraphCxSpMiddle&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;span style=&quot;&quot;&gt;o&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;strong style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;Bookmark&lt;/span&gt;&lt;/strong&gt;&lt;span lang=&quot;EN-US&quot;&gt; problems that you want to revisit. Later you can access the bookmarked pages from the app&amp;rsquo;s main menu by pressing the bookmark icon in the upper left corner.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;margin-left: 72pt; text-indent: -18pt;&quot; class=&quot;MsoListParagraphCxSpLast&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-family: &amp;quot;Courier New&amp;quot;;&quot;&gt;&lt;span style=&quot;&quot;&gt;o&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;To email us your feedback, tap on &lt;strong style=&quot;&quot;&gt;Report a Problem&lt;/strong&gt;.&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;Thank you for using our app and good luck with your preparation.&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;</string>
+	<key>iTunesID</key>
+	<string>420926539</string>
+	<key>Samsung Market GroupID</key>
+	<string>100000029006</string>
+	<key>Developer</key>
+	<string>Yes</string>
+</dict>
+</plist>

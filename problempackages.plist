@@ -1,0 +1,1169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>June 2012 LSAT PrepTest 66</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;strong&gt;Officially licensed from Law School Admissions Council (LSAC)*&lt;/strong&gt;&lt;/h3&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lsat2011&quot;&gt;&lt;img width=&quot;100&quot; height=&quot;97&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/LSAT2012.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $9.99 &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/strong&gt;&lt;/span&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lsat2012&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;Buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;/a&gt;&lt;span lang=&quot;EN-US&quot;&gt; &lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;There is no better way to prepare for the LSAT than practicing the official test questions. This practice package contains all the questions asked in the June 2012 LSAT examinations. Licensed directly from LSAC (the official administrator of the LSAT exams), the test is conveniently packaged in this app. The app allows you to practice the test interactively. Use your finger to work out the logic games and logical reasoning in the amply provided workspace. Highlight key passages with the app&amp;rsquo;s pen tools. Improve your score one practice at a time.&lt;/p&gt;
+&lt;strong style=&quot;&quot;&gt;&lt;strong&gt;
+&lt;p style=&quot;&quot; class=&quot;MsoNormal&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Content Outline&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/strong&gt;&lt;/strong&gt;
+&lt;p style=&quot;text-indent: -0.25in;&quot; class=&quot;MsoListParagraphCxSpFirst&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;&lt;span style=&quot;&quot;&gt;A.&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Jun 2012 (PT 66) LSAT:&lt;/span&gt;&lt;/p&gt;
+&lt;ol&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Reading Comprehension&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Logical Reasoning&lt;br /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Logic Games&lt;/span&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Logical Reasoning&lt;br /&gt;
+    &lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;strong style=&quot;&quot;&gt;&lt;strong&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/span&gt;&lt;/strong&gt;&lt;/strong&gt;
+&lt;p class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;*About LSAC&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;All actual LSAT questions published within this work are used with the permission of the copyright owner: Law School Admission Council, Inc., Box 2000, Newtown, PA 18940. LSAC does not review or endorse specific test preparation materials or services, and inclusion of licensed LSAT questions within this work does not imply the review or endorsement of LSAC.&lt;/p&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$9.99</string>
+			<key>Icon</key>
+			<string>LSAT2012.png</string>
+			<key>Bought</key>
+			<false/>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg_lsat2012</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>886</string>
+				<string>925</string>
+				<string>926</string>
+				<string>930</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>June 2012 LSAT PrepTest 66</string>
+			<key>ExamSectionName</key>
+			<string>ALL</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>2011 LSAT Package (PT 63, 64, 65)</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;strong&gt;Officially licensed from Law School Admissions Council (LSAC)*&lt;/strong&gt;&lt;/h3&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lsat2011&quot;&gt;&lt;img width=&quot;100&quot; height=&quot;97&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/LSAT2011.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; $29.99 &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/strong&gt;&lt;/span&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lsat2011&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;Buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;/a&gt;&lt;span lang=&quot;EN-US&quot;&gt; &lt;br /&gt;
+&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;There is no better way to prepare for the LSAT than practicing the official test questions. This practice package contains all the questions asked in the June, October, and December 2011 LSAT examinations. Licensed directly from LSAC (the official administrator of the LSAT exams), the 3 tests are conveniently packaged in this app. The app allows you to practice the tests interactively while leaving the heavy test prep books at home. Use your finger to work out the logic games and logical reasoning in the amply provided workspace. Highlight key passages with the app&amp;rsquo;s pen tools. Improve your score one practice at a time.&lt;/p&gt;
+&lt;strong style=&quot;&quot;&gt;&lt;strong&gt;
+&lt;p style=&quot;&quot; class=&quot;MsoNormal&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Content Outline&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/strong&gt;&lt;/strong&gt;
+&lt;p style=&quot;text-indent: -0.25in;&quot; class=&quot;MsoListParagraphCxSpFirst&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;&lt;span style=&quot;&quot;&gt;A.&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Jun 2011 (PT 63) LSAT&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;text-indent: -0.25in;&quot; class=&quot;MsoListParagraphCxSpMiddle&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;&lt;span style=&quot;&quot;&gt;B.&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Oct 2011 (PT 64) LSAT&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;text-indent: -0.25in;&quot; class=&quot;MsoListParagraphCxSpLast&quot;&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;&lt;span style=&quot;&quot;&gt;C.&lt;span style=&quot;font: 7pt &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 10pt;&quot;&gt;Dec 2011 (PT 65) LSAT&lt;/span&gt;&lt;/p&gt;
+&lt;strong style=&quot;&quot;&gt;&lt;strong&gt; &lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&amp;nbsp;&lt;/strong&gt;&lt;/strong&gt;&lt;/span&gt;
+&lt;p class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;Recommended Packages&lt;/span&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/strong&gt;&lt;/strong&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;Logical Reasoning Mastery (All 12 LR Question Types Explained)&lt;/span&gt;
+&lt;p class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;Logic Games Part 1: Introduction (Lesson Sets for 4 Game Types)&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;Logic Games Part 2: Mastery (More Lesson Sets)&lt;/span&gt;&lt;/p&gt;
+&lt;br /&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg2&quot;&gt;&lt;img width=&quot;60&quot; height=&quot;50&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LR.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lg1&quot;&gt;&lt;img width=&quot;60&quot; height=&quot;50&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg5&quot;&gt;&lt;img width=&quot;60&quot; height=&quot;50&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; alt=&quot;&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt;&amp;nbsp;&amp;nbsp; $9.99&amp;nbsp;&amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/strong&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt; $9.99&lt;/strong&gt;&lt;/span&gt;&lt;span lang=&quot;EN-US&quot;&gt;&lt;strong style=&quot;&quot;&gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; $19.99&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot; style=&quot;&quot;&gt;&lt;strong style=&quot;&quot;&gt;&lt;span lang=&quot;EN-US&quot; style=&quot;font-size: 10pt;&quot;&gt;*About LSAC&lt;/span&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;MsoNormal&quot;&gt;All actual LSAT questions published within this work are used with the permission of the copyright owner: Law School Admission Council, Inc., Box 2000, Newtown, PA 18940. LSAC does not review or endorse specific test preparation materials or services, and inclusion of licensed LSAT questions within this work does not imply the review or endorsement of LSAC.&lt;/p&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$29.99</string>
+			<key>Icon</key>
+			<string>LSAT2011.png</string>
+			<key>Bought</key>
+			<false/>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg_lsat2011</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>752</string>
+				<string>755</string>
+				<string>756</string>
+				<string>757</string>
+				<string>770</string>
+				<string>771</string>
+				<string>772</string>
+				<string>773</string>
+				<string>766</string>
+				<string>767</string>
+				<string>768</string>
+				<string>769</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>2011 LSAT Package (PT 63, 64, 65)</string>
+			<key>ExamSectionName</key>
+			<string>ALL</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Logical Reasoning Mastery</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;12 Types of Logical Reasoning Questions, with Explanations&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h4&gt;by Arcadia Prep&apos;s staff&lt;br /&gt;
+&lt;/h4&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;img src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LR.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+            &amp;nbsp;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$9.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg2&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;12 types of Logical Reasoning questions are introduced, so you can easily identify them in the real exam. Real and official questions from past LSATs are used to illustrate the different types. Each question is carefully explained, so that you can practice and master them at the same time. There is no more convenient and affordable way to improve your Logical Reasoning score.&lt;br /&gt;
+&lt;ol&gt;
+    &lt;li&gt;Parallel Flaw&lt;br /&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Parallel Structure&lt;/li&gt;
+    &lt;li&gt;Principles&lt;/li&gt;
+    &lt;li&gt;Method / Function&lt;/li&gt;
+    &lt;li&gt;Flawed Reasoning&lt;/li&gt;
+    &lt;li&gt;Necessary Premise&lt;/li&gt;
+    &lt;li&gt;Drawing Conclusions&lt;/li&gt;
+    &lt;li&gt;Resolving and Explaining&lt;/li&gt;
+    &lt;li&gt;Weaker Argument&lt;/li&gt;
+    &lt;li&gt;Stronger Argument&lt;/li&gt;
+    &lt;li&gt;Disagree / Agree Dialog&lt;/li&gt;
+    &lt;li&gt;Main Point&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements&lt;br /&gt;
+&lt;/h3&gt;
+&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own whenever I had a few minutes. It is a much better value than the $2,000 I spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; Tiffany M.</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$9.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LR.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg2</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>89</string>
+				<string>87</string>
+				<string>86</string>
+				<string>85</string>
+				<string>70</string>
+				<string>65</string>
+				<string>63</string>
+				<string>56</string>
+				<string>57</string>
+				<string>53</string>
+				<string>52</string>
+				<string>51</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Logical Reasoning Mastery</string>
+			<key>ExamSectionName</key>
+			<string>LR</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Logic Games Part 1: Introduction</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;font size=&quot;3&quot;&gt;Introduction to Logic Games, with Explanations&lt;/font&gt;&lt;/h3&gt;
+&lt;h4&gt;by Arcadia Prep&lt;br /&gt;
+&lt;/h4&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;img width=&quot;99&quot; height=&quot;81&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$9.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg_lg1&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;Buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;
+&lt;div&gt;
+&lt;p&gt;&lt;font size=&quot;3&quot;&gt;Four (4) types of Logic Games questions are  introduced so you can easily identify them in the real exam.&lt;/font&gt;&lt;font size=&quot;3&quot;&gt; Official questions from past LSATs are used to illustrate the types. &lt;/font&gt;&lt;font size=&quot;3&quot;&gt;Each  question is carefully explained to guide you step-by-step, so that you can practice and  master  them at the same time. There is no more convenient and affordable  way  to improve your Logic Games score. The following Logic Games question  sets are included:&lt;/font&gt;&lt;/p&gt;
+&lt;font size=&quot;3&quot;&gt; &lt;/font&gt;
+&lt;ol&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequencing&lt;/font&gt;&lt;font size=&quot;3&quot;&gt; - Intro&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Grouping - Intro&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Assignment - Intro&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;2&quot;&gt;&lt;font size=&quot;3&quot;&gt;Spatial Games - Intro&lt;/font&gt;&lt;br /&gt;
+    &lt;/font&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements for the Course&lt;br /&gt;
+&lt;/h3&gt;
+&lt;font size=&quot;3&quot;&gt;&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own  whenever I had a few minutes. It is a much better value than the $2,000 I  spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the  score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a busy working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt;&lt;/font&gt; &lt;font size=&quot;3&quot;&gt; Tiffany M.&lt;/font&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$9.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LG.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg_lg1</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>223</string>
+				<string>235</string>
+				<string>240</string>
+				<string>249</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Logic Games Part 1: Introduction</string>
+			<key>ExamSectionName</key>
+			<string>LG</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Logic Games Part 2: Mastery</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;font size=&quot;3&quot;&gt;Introduction to More Logic Games, with Explanations&lt;/font&gt;&lt;/h3&gt;
+&lt;h4&gt;by LSAT Freedom&lt;br /&gt;
+&lt;/h4&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;img width=&quot;99&quot; height=&quot;81&quot; alt=&quot;&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; /&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$19.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg5&quot;&gt;&lt;input type=&quot;button&quot; value=&quot;Buy Now&quot; name=&quot;Buy&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;font size=&quot;3&quot;&gt;More types of Logic Games questions are  introduced so you can easily identify them in the real exam.&lt;/font&gt;&lt;font size=&quot;3&quot;&gt; Official questions from past LSATs are used to illustrate the types. &lt;/font&gt;&lt;font size=&quot;3&quot;&gt;Each  question is carefully explained to guide you step-by-step, so that you can practice and  master  them at the same time. There is no more convenient and affordable  way  to improve your Logic Games score. The following Logic Games question  sets are included:&lt;/font&gt;&lt;/p&gt;
+&lt;div&gt;
+&lt;ol&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequencing - Variable Chains&lt;br /&gt;
+    &lt;/font&gt; &lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequencing - Conditionals&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequencing - Gaps&lt;br /&gt;
+    &lt;/font&gt; &lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequencing - Repetition / Omission&lt;br /&gt;
+    &lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Grouping - Conditionals&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Grouping - Subcategories&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Assignment - Subcategories&lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequential Assignment - Moderate&lt;br /&gt;
+    &lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequential Assignment - Difficult&lt;br /&gt;
+    &lt;/font&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;font size=&quot;3&quot;&gt;Sequential Assignment - Subcategories&lt;/font&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;font size=&quot;2&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;/font&gt;
+&lt;h3&gt;Endorsements for the Course&lt;br /&gt;
+&lt;/h3&gt;
+&lt;font size=&quot;3&quot;&gt;&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own   whenever I had a few minutes. It is a much better value than the $2,000  I  spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the   score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; &lt;/font&gt;&lt;font size=&quot;3&quot;&gt; Tiffany M.&lt;/font&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;font size=&quot;2&quot;&gt;&lt;/font&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$19.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LG.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg5</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>223</string>
+				<string>224</string>
+				<string>229</string>
+				<string>230</string>
+				<string>231</string>
+				<string>235</string>
+				<string>236</string>
+				<string>237</string>
+				<string>240</string>
+				<string>241</string>
+				<string>244</string>
+				<string>245</string>
+				<string>246</string>
+				<string>249</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Logic Games Part 2: Mastery</string>
+			<key>ExamSectionName</key>
+			<string>LG</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Nathan Fox</string>
+				<key>Text</key>
+				<string>&lt;p class=&quot;p2&quot;&gt;&lt;strong&gt;Arcadia Pro Tutor Sets:&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;Arcadia&apos;s mission is to help you achieve your LSAT goals. In order to ensure that you successfully get to your target score&lt;span class=&quot;s1&quot;&gt;&lt;strong&gt;&amp;mdash;&lt;/strong&gt;&lt;/span&gt;be it 160 or 180&lt;span class=&quot;s1&quot;&gt;&lt;strong&gt;&amp;mdash;&lt;/strong&gt;&lt;/span&gt;we&apos;re partnering with some of the top tutors in the land.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;We&apos;re please to introduce Nathan Fox, our first Pro LSAT  Tutor. Nathan has a wall full of degrees, and he scored a 179 on his  LSAT. But that&apos;s not his main selling point. What puts Nathan over the  top is his passion for teaching. Class after class, Nathan&apos;s students  come away raving. We&apos;re pleased to be able to offer you Nathan&apos;s  insights into the LSAT. And if you&apos;re a resident of the San Francisco  Bay Area, we highly recommend you consider his course.&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;&lt;strong&gt;Pro Tutor Profile:&lt;/strong&gt;&lt;/p&gt;
+&lt;br /&gt;
+&lt;img alt=&quot;l.jpeg&quot; src=&quot;data:image/jpeg;base64,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&quot; /&gt; &lt;br /&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Tutor: &lt;/span&gt;&lt;strong&gt;Nathan Fox&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;p5&quot;&gt;LSAT Score: &lt;span class=&quot;s3&quot;&gt;&lt;strong&gt;179&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Education: &lt;/span&gt;&lt;strong&gt;JD, U. C. Hastings; MBA, Babson&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Website: &lt;/span&gt;&lt;strong&gt;foxtestprep.com&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;p4&quot;&gt;&lt;span class=&quot;s2&quot;&gt;Contact Email: &lt;/span&gt;&lt;strong&gt;fox.edit@gmail.com&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;p3&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p2&quot;&gt;What some of Nathan&apos;s students have to say about him:&lt;/p&gt;
+&lt;p class=&quot;p1&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;em&gt;&amp;quot;I can&apos;t say enough great things about Nathan.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;em&gt;&amp;quot;I took his LSAT Prep course and my score went up by about 10 points&amp;hellip;&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;em&gt;&amp;quot;If you want to kick-butt on the LSAT Fox test prep is a must!&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;p7&quot;&gt;&lt;br /&gt;
+&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;em&gt;For more reviews, go to:&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;p6&quot;&gt;&lt;em&gt;http://www.yelp.com/biz/fox-test-prep-san-francisco&lt;/em&gt;&lt;/p&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$15.99</string>
+			<key>Icon</key>
+			<string>Pkg_PT61.png</string>
+			<key>Bought</key>
+			<false/>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pt61</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>383</string>
+				<string>346</string>
+				<string>200</string>
+				<string>347</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>LSAT Tutor Strategy Guide
+Pro Tutor: Nathan Fox 
+LSAT: October&apos;10 (PT 61)</string>
+			<key>ExamSectionName</key>
+			<string>ALL</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>The LR Practice Package</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;33 Logical Reasoning Practice Sets&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h4&gt;by Arcadia Prep&apos;s staff&lt;br /&gt;
+&lt;/h4&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LR.png&quot; /&gt;&lt;br /&gt;
+            &amp;nbsp;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$29.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg3&quot;&gt;&lt;input type=&quot;button&quot; value=&quot;Buy Now&quot; name=&quot;buy&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;33 Logical Reasoning practice sets from real and official questions from past LSATs, to deepen your mastery of LR question types:&lt;br /&gt;
+&lt;ol&gt;
+    &lt;li&gt;Parallel Flaw&lt;br /&gt;
+    &lt;/li&gt;
+    &lt;li&gt;Parallel Structure&lt;/li&gt;
+    &lt;li&gt;Principles&lt;/li&gt;
+    &lt;li&gt;Method / Function&lt;/li&gt;
+    &lt;li&gt;Flawed Reasoning&lt;/li&gt;
+    &lt;li&gt;Necessary Premise&lt;/li&gt;
+    &lt;li&gt;Drawing Conclusions&lt;/li&gt;
+    &lt;li&gt;Resolving and Explaining&lt;/li&gt;
+    &lt;li&gt;Weaker Argument&lt;/li&gt;
+    &lt;li&gt;Stronger Argument&lt;/li&gt;
+    &lt;li&gt;Disagree / Agree Dialog&lt;/li&gt;
+    &lt;li&gt;Main Point&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements&lt;br /&gt;
+&lt;/h3&gt;
+&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own whenever I had a few minutes. It is a much better value than the $2,000 I spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; Tiffany M.</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$29.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LR.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg3</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>190</string>
+				<string>221</string>
+				<string>222</string>
+				<string>350</string>
+				<string>351</string>
+				<string>352</string>
+				<string>353</string>
+				<string>354</string>
+				<string>355</string>
+				<string>356</string>
+				<string>357</string>
+				<string>358</string>
+				<string>359</string>
+				<string>360</string>
+				<string>361</string>
+				<string>362</string>
+				<string>363</string>
+				<string>364</string>
+				<string>365</string>
+				<string>366</string>
+				<string>367</string>
+				<string>368</string>
+				<string>369</string>
+				<string>370</string>
+				<string>371</string>
+				<string>372</string>
+				<string>373</string>
+				<string>374</string>
+				<string>375</string>
+				<string>376</string>
+				<string>377</string>
+				<string>378</string>
+				<string>379</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>LR Practice Package
+33 Logical Reasoning Practice Sets</string>
+			<key>ExamSectionName</key>
+			<string>LR</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>LG Practice Package</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;font size=&quot;3&quot;&gt;10 LG Practice Sets&lt;br /&gt;
+&lt;/font&gt;&lt;/h3&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;img width=&quot;99&quot; height=&quot;81&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; alt=&quot;&quot; /&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$14.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg6&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;Buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;font size=&quot;3&quot;&gt;10 Logic Games practice sets from real and o&lt;/font&gt;&lt;font size=&quot;3&quot;&gt;fficial questions from past LSATs are packaged together, so you can deepen your mastery of &lt;/font&gt;&lt;font size=&quot;3&quot;&gt;Logic Games.&lt;br /&gt;
+&lt;/font&gt;&lt;/p&gt;
+&lt;h3&gt;Endorsements for the Course&lt;br /&gt;
+&lt;/h3&gt;
+&lt;font size=&quot;3&quot;&gt;&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own   whenever I had a few minutes. It is a much better value than the $2,000  I  spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the   score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; &lt;/font&gt;&lt;font size=&quot;3&quot;&gt; Tiffany M.&lt;/font&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;font size=&quot;2&quot;&gt;&lt;/font&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$14.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LG.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg6</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>232</string>
+				<string>234</string>
+				<string>238</string>
+				<string>239</string>
+				<string>242</string>
+				<string>243</string>
+				<string>247</string>
+				<string>248</string>
+				<string>250</string>
+				<string>251</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>The LG Practice Package
+10 LG Practice Sets</string>
+			<key>ExamSectionName</key>
+			<string>LG</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>RC Practice Package</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;&lt;font size=&quot;3&quot;&gt;16 Practice Sets&lt;/font&gt;&lt;/h3&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;img width=&quot;99&quot; height=&quot;81&quot; alt=&quot;&quot; src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_RC.png&quot; /&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$29.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg8&quot;&gt;&lt;input type=&quot;button&quot; value=&quot;Buy Now&quot; name=&quot;Buy&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;p&gt;&lt;font size=&quot;3&quot;&gt;16 Reading and Comprehension practice sets from past LSATs are packaged in this bundle, so you can practice conveniently and deepen your mastery.&lt;/font&gt;&lt;/p&gt;
+&lt;p&gt;&lt;font size=&quot;3&quot;&gt;&lt;br /&gt;
+&lt;/font&gt;&lt;/p&gt;
+&lt;font size=&quot;2&quot;&gt;&lt;/font&gt;
+&lt;h3&gt;Endorsements for the Course&lt;br /&gt;
+&lt;/h3&gt;
+&lt;font size=&quot;3&quot;&gt;&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own   whenever I had a few minutes. It is a much better value than the $2,000  I  spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the   score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; &lt;/font&gt;&lt;font size=&quot;3&quot;&gt; Tiffany M.&lt;/font&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;font size=&quot;2&quot;&gt;&lt;/font&gt;</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$29.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_RC.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg8</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>184</string>
+				<string>183</string>
+				<string>182</string>
+				<string>168</string>
+				<string>329</string>
+				<string>330</string>
+				<string>180</string>
+				<string>331</string>
+				<string>332</string>
+				<string>333</string>
+				<string>334</string>
+				<string>335</string>
+				<string>386</string>
+				<string>337</string>
+				<string>338</string>
+				<string>339</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>The RC Practice Package
+16 Practice Sets</string>
+			<key>ExamSectionName</key>
+			<string>RC</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Complete Section Package (LR)</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;8 LR Sections&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;img src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LR.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+            &amp;nbsp;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$19.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg4&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;8 Logical Reasoning sections from past LSATs: PTs 58, 59, 60, and 62&lt;br /&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements&lt;br /&gt;
+&lt;/h3&gt;
+&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own whenever I had a few minutes. It is a much better value than the $2,000 I spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; Tiffany M.</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$19.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LR.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg4</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>340</string>
+				<string>341</string>
+				<string>342</string>
+				<string>343</string>
+				<string>344</string>
+				<string>345</string>
+				<string>348</string>
+				<string>349</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Complete Section Package
+8 LR Sections: PT&apos;s 58, 59, 60, 62</string>
+			<key>ExamSectionName</key>
+			<string>LR</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Complete Section Package (RG)</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;4 LG Sections&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;img src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_LG.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+            &amp;nbsp;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$8.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg7&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;4 Logic Games sections from past LSATs: PTs 58, 59, 60, and 62&lt;br /&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements&lt;br /&gt;
+&lt;/h3&gt;
+&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own whenever I had a few minutes. It is a much better value than the $2,000 I spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; Tiffany M.</string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$8.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_LG.png</string>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg7</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>203</string>
+				<string>202</string>
+				<string>201</string>
+				<string>385</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Complete Section Package
+4 LG Sections:PT&apos;s 58, 59, 60, 62</string>
+			<key>ExamSectionName</key>
+			<string>LG</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+	<dict>
+		<key>Attributes</key>
+		<dict>
+			<key>EvaluationAndImprovementPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>IdentifyingAndSolvingPage</key>
+			<dict>
+				<key>Title</key>
+				<string></string>
+				<key>Text</key>
+				<string></string>
+			</dict>
+			<key>Local</key>
+			<false/>
+			<key>WebAppUnlocked</key>
+			<false/>
+			<key>Difficulty</key>
+			<string>mix</string>
+			<key>Price</key>
+			<string>$8.99</string>
+			<key>Bought</key>
+			<false/>
+			<key>Icon</key>
+			<string>Pkg_RC.png</string>
+			<key>AboutPage</key>
+			<dict>
+				<key>Title</key>
+				<string>Complete Section Package (RC)</string>
+				<key>Text</key>
+				<string>&lt;h3&gt;4 RC Sections&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;
+&lt;table width=&quot;200&quot; cellspacing=&quot;1&quot; cellpadding=&quot;1&quot; border=&quot;0&quot; align=&quot;&quot; summary=&quot;&quot;&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;img src=&quot;http://www.arcadiaprep.com/_upload/questions/Pkg_RC.png&quot; alt=&quot;&quot; /&gt;&lt;br /&gt;
+            &amp;nbsp;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&amp;nbsp;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;$8.99&lt;/strong&gt;&lt;/td&gt;
+            &lt;td align=&quot;center&quot;&gt;&lt;strong&gt;&lt;a href=&quot;http://www.arcadiaprep.com/_upload/questions/buy?pkg9&quot;&gt;&lt;input type=&quot;button&quot; name=&quot;buy&quot; value=&quot;Buy Now&quot; /&gt;&lt;br /&gt;
+            &lt;/a&gt;&lt;/strong&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;/h3&gt;
+&lt;h3&gt;Description&lt;/h3&gt;
+&lt;div&gt;4 Reading Comprehension sections from past LSATs: PTs 58, 59, 60, and 62&lt;br /&gt;
+&lt;/div&gt;
+&lt;h3&gt;Endorsements&lt;br /&gt;
+&lt;/h3&gt;
+&lt;em&gt;&amp;quot;I bought all modules of Arcadia Prep. I was able to study on my own whenever I had a few minutes. It is a much better value than the $2,000 I spent on Princeton Review&apos;s classes. Arcadia Prep helped me get the score (170) I needed to get into the law school I wanted&amp;quot;.&lt;/em&gt; Joseph P.&lt;br /&gt;
+&lt;em&gt;&lt;br /&gt;
+&amp;quot;As a working student, I appreciate the flexibility and the affordability of Arcadia Prep&apos;s mobile prep course.&amp;quot;&lt;/em&gt; Tiffany M.</string>
+			</dict>
+		</dict>
+		<key>Data</key>
+		<dict>
+			<key>PackageSetName</key>
+			<string>pkg9</string>
+			<key>ProblemSets</key>
+			<array>
+				<string>380</string>
+				<string>381</string>
+				<string>382</string>
+				<string>384</string>
+			</array>
+		</dict>
+		<key>Name</key>
+		<dict>
+			<key>ProblemSetName</key>
+			<string>Complete Section Package
+4 RC Sections: PT&apos;s 58, 59, 60, 62</string>
+			<key>ExamSectionName</key>
+			<string>RC</string>
+			<key>ExamName</key>
+			<string>LSAT</string>
+		</dict>
+	</dict>
+</array>
+</plist>
