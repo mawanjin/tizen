@@ -1,2 +1,30 @@
 body {
 }
+
+#div_head{
+	background-image: url('./images/top_bar.jpg');
+	background-repeat:repeat;
+	height:40px;
+}
+
+#btn_login{
+	width:80px;
+	height:30px;
+}
+
+#div_head table tr td{
+	height: 10px; width: 14%
+}
+#category_bar_container{	
+}
+
+.category_bar{
+	width:100%;
+	float:left;
+	background-color:#6e8cff;
+}
+.category_bar_selected{
+	width:100%;
+	float:left;
+	background-color:#06456d;
+}

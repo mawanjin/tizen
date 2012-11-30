@@ -7,4 +7,9 @@
 <feature name="http://tizen.org/api/download" required="true"/>
     <feature name="http://tizen.org/api/filesystem" required="true"/>
     <feature name="http://tizen.org/api/tizen" required="true"/>
+<access origin="*" subdomains="true"/>
+    <feature name="http://tizen.org/api/application.launch" required="true"/>
+    <feature name="http://tizen.org/api/application" required="true"/>
+    <feature name="http://tizen.org/api/mediacontent" required="true"/>
+<tizen:setting screen-orientation="landscape" contextmenu="enable"/>
 </widget>

@@ -2,6 +2,7 @@
 var init = function() {
 	// TODO:: Do your initialization job
 	console.log("init() called");
+	
 };
 $(document).ready(init);
 
@@ -65,9 +66,9 @@ $(document).ready(init);
 	// db.dropDB();
 	db.exists();
 })();
-
+var parser = new XMLParser();
 function startup() {
-	var parser = new XMLParser();
+	
 //	parser.getProblemPackages(function(problempackage){
 ////		alert(problempackage[0].Attributes.AboutPage.Title);
 ////		alert(problempackage[0].Attributes.Bought);
@@ -89,5 +90,68 @@ function startup() {
 //	 for ( var i = 0; i < array.length; i++)
 //	 alert(array[i].name);
 //	 });
-
+	
+	bindEvent();
+	generateCategoryBar();
 }
+
+//======================
+//index.html
+//======================
+function bindEvent(){
+	$("#btn_login").click(function(){
+		alert("good");
+	});
+	$("#info").click(function(){
+		alert("info");
+	});
+	$("#perfdata").click(function(){
+		alert("perfdata");
+	});
+	$("#disc_no_text").click(function(){
+		alert("disc_no_text");
+	});
+	$("#bookmark").click(function(){
+		alert("bookmark");
+	});
+	$("#mail").click(function(){
+		alert("mail");
+	});
+	$("#search_icon").click(function(){
+		alert("search_icon");
+	});
+	$("#btnVisit").click(function(){
+		alert("btnVisit");
+	});
+}
+
+function generateCategoryBar(){
+	parser = new XMLParser();
+	var h;
+		parser
+			.getmoduleinfo(function(moduleinfo) {
+				h = '<div id="category_bar_container" data-corners="true" data-role="navbar"><ul>';
+				var c = moduleinfo.examSection.length;
+				for ( var i = 0; i < c; i++) {
+					var vo = moduleinfo.examSection[i];
+					// alert(vo.secName + ";" + vo.secNameShort + ";" +
+					if(SystemOrientation.orientation==0){
+						h+='<li><a href="#" data-theme="a">'+vo.secNameShort+'</a></li>';
+					}else
+						h+='<li><a href="#" data-theme="a">'+vo.secName+'</a></li>';
+
+				}
+				h+='</ul></div>';
+				$("#category_bar_container").html(h); 
+				$("#category_bar_container").trigger("create");
+			});
+	
+	
+	h+='<li><a href="#" data-theme="a">Two1</a></li><li><a href="#" data-theme="a">Two1</a></li><li><a href="#" data-theme="a">Two</a></li>';
+	
+	
+//	alert(html);
+//	$("#category_bar_container").html(html);
+}
+
+
