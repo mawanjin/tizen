@@ -281,9 +281,9 @@ function createListItemMyQuestions(data){
 	}
 	//test begin
 	//....test in progress
-	data.progress='In progress: 10/25';
-	data.progressMax=25; 
-	data.progressCount=10;
+//	data.progress='In progress: 10/25';
+//	data.progressMax=25; 
+//	data.progressCount=10;
 	//....test Last score
 //	data.progress='Last Score:0%';
 //	data.finish="true";
@@ -317,7 +317,7 @@ function update(recommendations,myquestions){
 		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>MY Question Sets</strong></li>';
 		for(var i=0;i<myquestions.length;i++){
 			var o = myquestions[i];
-			html+='<li>'+createListItemMyQuestions(o)+'</li>';
+			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+'); style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
 		}
 			
 	}
@@ -352,3 +352,46 @@ function showInforContent(which){
 		},2000);
 	}
 }
+
+function showProblemSetInforContent(position){
+		$("#btnReview").show();
+		$("#btnResume").show();
+		$("#btnBegin").show();
+		
+		var o = ListItemMyQuestions[position];
+		var info = o.info.replaceAll('\\\\','');
+		var title = o.title+':'+info;
+		var exAppId = o.exAppId;
+		
+	    db.findProblemSetIntroductionByExAppId(exAppId,function(data){
+	    	var content = data;
+	    	$("#problemIntro_title").html('<h3>'+title+"</h3>");
+			$("#thelist_problemSetinfo").html('<li>'+content+'</li>');
+			$("#thelist_problemSetinfo").trigger("create");
+			
+			setTimeout(function () {
+				myProblemIntroScroll.refresh();
+			},2000);
+	    });
+		
+		db.getNumOfQuestions(exAppId,function(count){
+			if(!count||count==0||count<1){
+				$("#btnReview").hide();
+				$("#btnResume").hide();
+				$("#btnBegin").hide();
+			}else{
+				db.GetExamResultInfoByExAppIDs(exAppId,function(info){
+			    	if(!info||info.length==0){
+			    		$("#btnReview").hide();
+						$("#btnResume").hide();
+			    	}else if(!info[0].finish){
+			    		$("#btnReview").hide();
+			    	}else if(info[0].finish){
+			    		$("#btnResume").hide();
+			    	}
+			    });
+			}
+		});
+}
+
+

@@ -45,11 +45,19 @@ SystemOrientation = new function() {
 			if($("#listview_css")){
 				$("#listview_css").attr("href","./css/listview-portrait.css");
 			}
+			
+			if($("#scroll_css")){
+				$("#scroll_css").attr("href","./css/scroll-portrait.css");
+			}
+			
 		}else{
 			if($("#main_css"))
 				$("#main_css").attr("href","./css/style.css");
 			if($("#listview_css")){
 				$("#listview_css").attr("href","./css/listview.css");
+			}
+			if($("#scroll_css")){
+				$("#scroll_css").attr("href","./css/scroll.css");
 			}
 		}
 		generateCategoryBar(function(){

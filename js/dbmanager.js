@@ -49,6 +49,10 @@ function DBManager() {
 	self.selectMyQuestionSets = '';
 	self.selectGetExamResultInfoByExAppIDsStatement='select * from exam_result_info where ex_app_id in (?) order by start_time desc';
 	self.selectGetQuestionResultInfoByExAppIDsStatement='select * from question_exam_result_info where ex_app_id in (?)';
+	self.selectFindProblemSetIntroductionByExAppId='';
+	self.selectFindExAppPageByExAppIDStatement='select * from iphone_ex_app_pages where ex_app_id=?';
+	
+	self.getNumOfQuestionsStatement = 'select count(*) as c from iphone_questions where ex_app_id = ?';
 	
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
@@ -176,6 +180,21 @@ function DBManager() {
 		});
 	};
 	
+	
+	
+	self.getNumOfQuestions = function(ex_app_id,callback){
+			
+			self.db.transaction(function(tx) {
+				
+				tx.executeSql(self.getNumOfQuestionsStatement,[ex_app_id], function(tx,
+						result) {
+					var dataset = result.rows;
+					
+					callback(dataset.item(0)['c']);
+				}, self.onError);
+			});
+		};
+	
 	self.findExAppsBySection = function(section,callback){
 		
 		self.db.transaction(function(tx) {
@@ -197,6 +216,45 @@ function DBManager() {
 			}, self.onError);
 		});
 	};
+	
+	self.findProblemSetIntroductionByExAppId = function(exAppID,callback){
+		
+		self.findExAppPageByExAppID(exAppID,function(data){
+			var exAppsPages = data;
+			var find = false;
+			for(var i=0;i<exAppsPages.length;i++){
+				
+				if(exAppsPages[i].solving==1){
+					find = true;
+					callback(exAppsPages[i].content);
+				}
+			}
+			if(!find){
+				callback(main_moduleinfo.IntroPage);
+			}
+		});
+		
+	};
+	
+	
+	self.findExAppPageByExAppID = function(exAppID,callback){
+			
+			self.db.transaction(function(tx) {
+				
+				tx.executeSql(self.selectFindExAppPageByExAppIDStatement,[exAppID], function(tx,
+						result) {
+					var rs = new Array();
+					var dataset = result.rows;
+					
+					for(var i=0;i<dataset.length;i++){
+						var o = dataset.item(i);
+						rs.push(new self.ExAppsPages(o['id'], exAppID, o['content'], o['idx'], o['date'], o['solving']));
+					}
+					callback(rs);
+				}, self.onError);
+			});
+		};
+	
 	
 	self.GetExamResultInfoByExAppIDs = function(ids,callback){
 		
@@ -905,6 +963,17 @@ function DBManager() {
 		this.correctChoice = correctChoice;
 		this.mark = mark;
 	};
+	
+	self.ExAppsPages = function(id,exAppID,content,idx,date,solving){
+		this.id = id;
+		this.exAppID = exAppID;
+		this.content = content;
+		this.idx = idx;
+		this.date = date;
+		this.solving = solving;
+	};
+	
+	
 	
 	/*
 	 * self.db = openDatabase("ShoppingListDb", "0.1", "Shopping List DB", 2 *

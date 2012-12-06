@@ -33,7 +33,7 @@
 
 .wrapper {
 	position:absolute; z-index:1;
-	top:100px; bottom:10px; left:0;
+	top:100px; bottom:0px; left:0;
 	width:100%;
 	background:#aaa;
 	overflow:auto;
@@ -62,3 +62,9 @@
 	background-color:#fafafa;
 	font-size:14px;
 }
+
+#wrapper_problemIntro{
+	top:50px;
+	height:70%; 
+}
+
