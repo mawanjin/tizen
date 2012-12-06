@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width target-densitydpi=device-dpi initial-scale=1 maximum-scale=1 user-scalable=0" />
+<link rel="stylesheet" href="./css/jquery.mobile-1.1.0.css" />
+<script type="text/javascript" src="./js/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="./js/jquery.mobile-1.1.0.js"></script>
+<script src="./js/config.js"></script>
+
+<link id="listview_css" rel="stylesheet" href="./css/listview-portrait.css" />
+<script>
+	var init = function() {
+		console.log("init() called");
+	};
+	$(document).ready(init);
+	
+	function createListItemMyQuestions(data){
+		
+		var img = '<img src="./css/images/'+data.logoImg+'" />';
+		var title ='<div><strong>'+data.title+'</strong></div>';
+		if(data.info){
+			title+='<div>'+data.info+'</div>';
+		}
+		var img_arrow = '<img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" />';
+		var status = '';
+		
+		var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td align="right">'+img_arrow+'</td></tr></table>';
+		return html;
+	}
+	
+	function createListItemRecommendation(data){
+		var img = '<img name="recommend_logo" src="./css/images/'+data.icon+'" />';
+		var title ='<div><strong>'+data.title+'</strong></div>';
+		var price = data.price;
+		
+		var img_arrow = '<img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" />';
+		var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="price" align="right">'+price+'&nbsp;'+img_arrow+'</td></tr></table>';
+		return html;
+	}
+	
+	function update(recommendations,myquestions){
+		
+		if(parent.SystemOrientation.orientation==0){//portrait mode
+			$("#listview_css").attr("href","./css/listview-portrait.css");
+		}else{
+			$("#listview_css").attr("href","./css/listview.css");
+		}
+		var html='';
+		if(myquestions&&myquestions.length>0){
+			
+			html+='<li data-role="list-divider">MY Question Sets</li>';
+			for(var i=0;i<myquestions.length;i++){
+				var o = myquestions[i];
+				html+='<li onclick="parent.showProblemSetIntro();">'+createListItemMyQuestions(o)+'</li>';
+			}
+				
+		}
+		
+		if(recommendations&&recommendations.length>0){
+			html+='<li data-role="list-divider">Recommendations</li>';
+			for(var i=0;i<recommendations.length;i++){
+				var o = recommendations[i];
+				html+='<li data-icon="arrow-r" data-iconpos="right" >'+createListItemRecommendation(o)+'</li>';
+			}
+		}
+		//html = '<li id="storage-info" style="font-size:5px;">Storage</li>'+html;
+		$("#list").html(html);
+		$("#list").trigger("create");
+		$('#list').listview('refresh');
+	}
+</script>
+</head>
+
+<body>
+	
+	<div id="mpage" data-role="page">
+		<div data-role="content" id="content">
+			<ul id="list" data-role="listview" data-dividertheme="b">
+				
+			</ul>
+		</div>
+		
+		
+		<!-- /content -->
+		<div data-role="footer" id="footer"></div>
+	</div>
+	<!-- /page -->
+</body>
+</html>

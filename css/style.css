@@ -1,10 +1,39 @@
-body {
+body,.ui-page {
+background-image: url('./images/background.png');
+font-size:12px;
+	-webkit-user-select:none;
+    -webkit-text-size-adjust:none;
+	font-family:helvetica;
+}
+
+
+#div_content{
+	height:40%;
+	text-align:center;
+	border:3px solid gray;
+	margin:0px 5px 5px 5px;
+}
+
+#btnVisit{
+opacity:1;
+}
+
+#div_main_logo{
+	margin-top:5px;
+	opacity:1;
+	/*background-image: url('./images/background.png');*/
+	text-align:center;
+}
+
+#div_main_logo img{
+	width:40%;
+	height: 45px;
 }
 
 #div_head{
 	background-image: url('./images/top_bar.jpg');
 	background-repeat:repeat;
-	height:40px;
+	text-align:center;
 }
 
 #btn_login{
@@ -13,9 +42,16 @@ body {
 }
 
 #div_head table tr td{
-	height: 10px; width: 14%
+
+	height: 10px; width: 14%;
+	vertical-align:bottom;
 }
-#category_bar_container{	
+#category_bar_container{
+	border:0px; 
+	/*
+	padding:0px 20px 5px 20px;*/
+	background-color:white;
+	/*background-image: url('./images/background.png');*/	
 }
 
 .category_bar{

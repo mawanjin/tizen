@@ -1,6 +1,6 @@
 var SystemOrientation = {};
 SystemOrientation = new function() {
-	self = this;
+	var self = this;
 	self.orientation=0;
 	
 	self.setOrientation = function() {
@@ -8,7 +8,8 @@ SystemOrientation = new function() {
 		self.orientation = orientation;
 		switch (orientation) {
 		case 0:
-			generateCategoryBar();
+			self.refresh();
+			//generateCategoryBar();
 			// portrait mode
 			// document.getElementById('sl_style').href='css/sl_portrait.css';
 			// document.getElementById('editlist_view_style').href='css/editlist_view_portrait.css';
@@ -21,7 +22,8 @@ SystemOrientation = new function() {
 
 		case 90: // landscape mode, screen turned to the left
 		case -90: // landscape mode, screen turned to the right
-			generateCategoryBar();
+			self.refresh();
+			//generateCategoryBar();
 			// document.getElementById('sl_style').href='css/sl_landscape.css';
 			// document.getElementById('editlist_view_style').href='css/editlist_view_landscape.css';
 			// document.getElementById('edititem_view_style').href='css/edititem_view_landscape.css';
@@ -34,6 +36,30 @@ SystemOrientation = new function() {
 
 	};
 
+	self.refresh = function(callback){
+		
+		if(self.orientation==0){//portrait mode
+			if($("#main_css")){
+				$("#main_css").attr("href","./css/style-portrait.css");
+			}
+			if($("#listview_css")){
+				$("#listview_css").attr("href","./css/listview-portrait.css");
+			}
+		}else{
+			if($("#main_css"))
+				$("#main_css").attr("href","./css/style.css");
+			if($("#listview_css")){
+				$("#listview_css").attr("href","./css/listview.css");
+			}
+		}
+		generateCategoryBar(function(){
+			refreshMainListViewHeight();
+			if(callback)
+				callback();
+		});
+		
+	};
+	
 	// register for the orientation event changes
 	//
 	if ('onorientationchange' in window) {

@@ -43,7 +43,13 @@ function DBManager() {
 	self.dropExamResultInfoStatement = 'DROP TABLE exam_result_info';
 	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
 	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
-
+	
+	//select
+	self.selectIphoneExAppsStatement = 'select problemset.id pid, problemset.* from iphone_ex_apps problemset  where problemset.section= ? order by name';
+	self.selectMyQuestionSets = '';
+	self.selectGetExamResultInfoByExAppIDsStatement='select * from exam_result_info where ex_app_id in (?) order by start_time desc';
+	self.selectGetQuestionResultInfoByExAppIDsStatement='select * from question_exam_result_info where ex_app_id in (?)';
+	
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
 	self.updateItemFavoriteStatement = "UPDATE items SET favorite = ? WHERE _id = ?";
@@ -169,6 +175,92 @@ function DBManager() {
 					}, self.onError);
 		});
 	};
+	
+	self.findExAppsBySection = function(section,callback){
+		
+		self.db.transaction(function(tx) {
+			
+			tx.executeSql(self.selectIphoneExAppsStatement,[section], function(tx,
+					result) {
+				var rs = new Array();
+				var dataset = result.rows;
+				
+				for(var i=0;i<dataset.length;i++){
+					var o = dataset.item(i);
+					
+					if(o['price']==0.0||new UserService().getProfile()>=5||main_moduleinfo.Developer){
+						rs.push(new self.ExApps(o['pid'], o['section'], o['subsection'], o['name'], o['date'], o['duration'], o['solving_title'], o['evaluation_title'], o['price'], o['total_time'], o['difficulty'], o['video_url']));
+					}
+						
+				}
+				callback(rs);
+			}, self.onError);
+		});
+	};
+	
+	self.GetExamResultInfoByExAppIDs = function(ids,callback){
+		
+		self.db.transaction(function(tx) {
+			
+			tx.executeSql(self.selectGetExamResultInfoByExAppIDsStatement,[ids], function(tx,
+					result) {
+				var rs = new Array();
+				var dataset = result.rows;
+				var ids = '';
+				
+				for(var i=0;i<dataset.length;i++){
+					var o = dataset.item(i);
+					rs.push(new self.ExamResultInfo(o['id'], o['section'], o['ex_app_id'], o['ex_app_name'], o['score'], o['finish'], o['progress'], o['startTime'], o['endTime'], o['questionCount'], new Array()));
+					ids +=o['ex_app_id']+",";
+				}
+				if(ids!=''){
+					ids = ids.substring(0, ids.length-1);
+					self.GetQuestionResultInfoByExAppIDs(ids, function(questionExamStatuss){
+						
+						if(questionExamStatuss&&questionExamStatuss.length>1){
+							
+							for(var k=0;k<questionExamStatuss.length;k++){
+							
+								var questionExamStatus = questionExamStatuss[k];
+								
+								for(var j=0;j<rs.length;j++){
+									if(questionExamStatus.exAppID==rs[j].exAppID){
+										rs[j].QuestionExamStatus.push(rs[j]);
+										break;
+									}
+								}
+							}
+						}
+						
+						callback(rs);
+					});
+				}else{
+					callback(rs);
+				}
+				
+				
+			}, self.onError);
+		});
+	};
+	
+	self.GetQuestionResultInfoByExAppIDs = function(ids,callback){
+			
+			self.db.transaction(function(tx) {
+				
+				tx.executeSql(self.selectGetQuestionResultInfoByExAppIDsStatement,[ids], function(tx,
+						result) {
+					var rs = new Array();
+					var dataset = result.rows;
+					
+					for(var i=0;i<dataset.length;i++){
+						var o = dataset.item(i);
+						rs.push(new self.QuestionExamStatus(o['id'], o['ex_app_id'], o['question_id'], o['choice'], o['correctChoice'], o['mark']));
+					}
+					callback(rs);
+				}, self.onError);
+			});
+		};
+	
 
 	self.selectListNameStatement = "SELECT name, color FROM lists WHERE name = ?";
 	self.selectListName = function(name, callback) {
@@ -544,6 +636,70 @@ function DBManager() {
 			}, self.onError);
 		});
 	};
+	
+	
+	self.findMyQuestionSets = function(section,callback) {
+		self.findExAppsBySection(section, function(exApps){
+			
+			var rs = new Array();
+			//generate ids
+			var ids = '';
+			
+			for(var i=0;i<exApps.length;i++){
+				var exapp = exApps[i];
+				ids +=exapp.id+",";
+			}
+			if(ids!=''){
+				ids = ids.substring(0, ids.length-1);
+			}
+			//generate over
+			
+			self.GetExamResultInfoByExAppIDs(ids, function(examResultInfos){
+				for(var i=0;i<exApps.length;i++){
+					var exapp = exApps[i];
+					var item = new self.ListItemMyQuestionVO(exapp.id, exapp.section, self.convertImg(exapp.difficulty), exapp.name.split(":")[0], exapp.name.split(":")[1], "", "false", "0", 100, 0, "", false, "0", ""); 
+					item.totalTime = exapp.totalTime;
+					for(var j=0;j<examResultInfos.length;j++){
+						var examinfo = examResultInfos[j];
+						if(examinfo.exAppID == exapp.id){
+							if(examinfo.finish=="true"){
+								item.progress = "Last Score: "+examinfo.ScoreView;
+							}else{
+								item.progressMax = examinfo.questionCount;
+								item.progressCount = examinfo.progress;
+								item.progress = "In progress: "+examinfo.progress+"/"+examinfo.questionCount;
+							}
+						}
+					}
+					rs.push(item);
+				}
+				callback(rs);
+			});
+			
+			
+			
+		});
+	};
+//	var kkk=0;
+	self.convertImg = function(difficult){
+//		if(kkk<5)
+//		alert(difficult);
+//		kkk++;
+		if(!difficult||difficult==""){
+			return "difficult0.png";
+		}else if(difficult==0){
+			return "difficult5.png";
+		}else if(difficult==1){
+			return "difficult1.png";
+		}else if(difficult==2){
+			return "difficult2.png";
+		}else if(difficult==3){
+			return "difficult3.png";
+		}else if(difficult==4){
+			return "difficult4.png";
+		}else 
+			return "difficult0.png";
+	};
 
 	self.data_count_iphone_ex_apps = 0;
 	self.data_count_IphoneExAppPages = 0;
@@ -661,12 +817,115 @@ function DBManager() {
 		});
 	};
 
-	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);
-	return self;
+	/**
+	 * 
+	 * @param exAppId
+	 * @param section
+	 * @param logoImg
+	 * @param title
+	 * @param info
+	 * @param progress
+	 * @param finish if true show Last Score:xx% otherwise in progress:x/xx and progress legend
+	 * @param progressCount
+	 * @param progressMax default-100
+	 * @param resume 0 false 1 true
+	 * @param totalTime
+	 * @param isRecommends indicate type:myquestionset or recommendations
+	 * @param recommendId
+	 * @param packageSetName
+	 */
+	self.ListItemMyQuestionVO = function(exAppId,section,logoImg,title,info,progress,finish,progressCount,progressMax,resume,totalTime,isRecommends,recommendId,packageSetName){
+		this.exAppId = exAppId; 
+		this.section = section;
+		this.logoImg = logoImg;
+		this.title = title;
+		this.info = info;
+		this.progress = progress;
+		this.finish = finish;
+		this.progressCount = progressCount;
+		this.progressMax = progressMax;
+		this.resume = resume;
+		this.totalTime = totalTime;
+		this.isRecommends = isRecommends;
+		this.recommendId = recommendId;
+		this.packageSetName = packageSetName;
+	};
+	
+	/**
+	 * 
+	 * @param id
+	 * @param section
+	 * @param exAppID
+	 * @param exAppName
+	 * @param score
+	 * @param finish
+	 * @param progress
+	 * @param startTime
+	 * @param endTime
+	 * @param questionCount
+	 * @param QuestionExamStatus Array
+	 */
+	self.ExamResultInfo = function(id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus){
+		this.id = id;
+		this.section = section;
+		this.exAppID = exAppID;
+		this.exAppName = exAppName;
+		this.score = score;
+		this.finish = finish;
+		this.progress = progress;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.questionCount = questionCount;
+		this.QuestionExamStatus = QuestionExamStatus;
+		this.ScoreView = (function(){
+			if(this.score>0&&this.questionCount>0){
+				var f = this.score/this.questionCount;
+				if(f==1)return "100";
+				else return (100*f);
+			}else{
+				return "0";
+			}
+		})();
+	};
+	
+	/**
+	 * 
+	 * @param id
+	 * @param exAppID
+	 * @param questionId
+	 * @param choice  0-A 1-B 2-C 3-D 4-E 5-F -1 no choice default is -1
+	 * @param correctChoice  0-A 1-B 2-C 3-D 4-E 5-F
+	 * @param mark
+	 */
+	self.QuestionExamStatus = function(id,exAppID,questionId,choice,correctChoice,mark){
+		this.id = id;
+		this.exAppID = exAppID;
+		this.questionId = questionId;
+		this.choice = choice;
+		this.correctChoice = correctChoice;
+		this.mark = mark;
+	};
+	
 	/*
 	 * self.db = openDatabase("ShoppingListDb", "0.1", "Shopping List DB", 2 *
 	 * 1024 * 1024); self.createTables(); self.itemOrderMode =
 	 * self.orderItemsByName;
 	 */
 
+	self.ExApps = function(id,section,subSection,name,date,duration,solvingTitle,evaluationTitle,price,totalTime,difficulty,videoUrl){
+		this.id = id;
+		this.section=section;
+		this.subSection=subSection;
+		this.name=name;
+		this.date=date;
+		this.duration=duration;
+		this.solvingTitle=solvingTitle;
+		this.evaluationTitle=evaluationTitle;
+		this.price=price;
+		this.totalTime=totalTime;
+		this.difficulty=difficulty;
+		this.videoUrl=videoUrl;
+	};
+	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);	
+	return self;
 }

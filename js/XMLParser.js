@@ -53,7 +53,7 @@ function XMLParser() {
 
 	self.moduleinfo = function(examType, examSection, resetPassURL, ServerURL,
 			SecureServerURL, appCode, moduleColor, mainMenu, websiteName,
-			websiteURL, IntroPage) {
+			websiteURL, IntroPage,Developer) {
 		this.examType = examType;
 		this.examSection = examSection;
 		this.resetPassURL = resetPassURL;
@@ -65,6 +65,7 @@ function XMLParser() {
 		this.websiteName = websiteName;
 		this.websiteURL = websiteURL;
 		this.IntroPage = IntroPage;
+		this.Developer = Developer;
 	};
 
 	self.getProblemPackages = function(callback) {
@@ -135,6 +136,7 @@ function XMLParser() {
 													Bought = $(this).next()[0].tagName; 
 												}
 											});
+											
 											Attributes = new self.ppEntityAttributes(EvaluationAndImprovementPage, IdentifyingAndSolvingPage, AboutPage, Local, WebAppUnlocked, Difficulty, Price, Icon, Bought);
 										}else if(node=="Data"){
 											var PackageSetName,ProblemSets = new Array();
@@ -248,6 +250,11 @@ function XMLParser() {
 																				.text();
 																	} else if (nowTxt == "IntroPage") {
 																		IntroPage = $(
+																				this)
+																				.next()
+																				.text();
+																	}else if (nowTxt == "Developer") {
+																		Developer = $(
 																				this)
 																				.next()
 																				.text();
