@@ -13,8 +13,10 @@
 <title>Tizen Web IDE - Tizen - jQuery Mobile - Single-Page</title>
 <link rel="stylesheet" href="./css/scroll.css" />
 <link rel="stylesheet" href="./css/jquery.mobile-1.1.0.css" />
-<link id="listview_css1" rel="stylesheet"
+<link id="listview_css" rel="stylesheet"
 	href="./css/listview-portrait.css" />
+	
+<script type="text/javascript" src="./js/util.js"></script>
 <script type="text/javascript" src="./js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="./js/jquery.mobile-1.1.0.js"></script>
 <!--<script type="text/javascript" src="./js/iscroll.js"></script>-->
@@ -92,12 +94,10 @@
 						<!-- category bar -->
 						<div id="category_bar_container" data-corners="true"
 							data-role="navbar"></div>
-
-						<div data-role="navbar"></div>
 					</td>
 				</tr>
 			</table>
-			<div >
+			<div id="list_container">
 				<div id="wrapper">
 					<div id="scroller">
 						<ul id="thelist" >

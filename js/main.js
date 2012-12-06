@@ -258,12 +258,27 @@ function createListItemMyQuestions(data){
 	var img = '<img src="./css/images/'+data.logoImg+'" />';
 	var title ='<div><strong>'+data.title+'</strong></div>';
 	if(data.info){
-		title+='<div>'+data.info+'</div>';
+		var info = data.info;
+		info = info.replaceAll('\\\\','');
+		title+='<div>'+info+'</div>';
 	}
-	var img_arrow = '<img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" />';
-	var status = '';
-	
-	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td align="right">'+img_arrow+'</td></tr></table>';
+	//test begin
+	//....test in progress
+	data.progress='In progress: 10/25';
+	data.progressMax=25; 
+	data.progressCount=10;
+	//....test Last score
+//	data.progress='Last Score:0%';
+//	data.finish="true";
+	//test end
+	var img_arrow = '<div style="float:left;width:100%;height:100%;border:0px solid blue;text-align:right;"><table border=0 height="100%" cellspacing=0 cellpadding=0><tr><td align="right" valign="middle"><img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" /></td></tr></table></div>';
+	var progress='';
+	if(data.progress!=''&&data.finish=="false")
+		progress = '<div><meter min="0" max="'+data.progressMax+'" value="'+data.progressCount+'" /></div>';
+	 
+	var status='<div style="float:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>'; 
+	 
+	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="td_last" align="right" valign="center"><table width="100%" border="0"><tr><td><div style="text-align:right;">'+status+'</div></td><td align="right">'+img_arrow+'</td></tr></table></td></tr></table>';
 	return html;
 }
 
@@ -273,7 +288,7 @@ function createListItemRecommendation(data){
 	var price = data.price;
 	
 	var img_arrow = '<img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" />';
-	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="price" align="right">'+price+'&nbsp;'+img_arrow+'</td></tr></table>';
+	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td >'+title+'</td><td name="price" align="right">'+price+'&nbsp;'+img_arrow+'</td></tr></table>';
 	return html;
 }
 
@@ -282,7 +297,7 @@ function update(recommendations,myquestions){
 	var html='';
 	if(myquestions&&myquestions.length>0){
 		
-		html+='<li data-role="list-divider">MY Question Sets</li>';
+		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>MY Question Sets</strong></li>';
 		for(var i=0;i<myquestions.length;i++){
 			var o = myquestions[i];
 			html+='<li>'+createListItemMyQuestions(o)+'</li>';
@@ -291,7 +306,7 @@ function update(recommendations,myquestions){
 	}
 	
 	if(recommendations&&recommendations.length>0){
-		html+='<li data-role="list-divider">Recommendations</li>';
+		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>Recommendations</strong></li>';
 		for(var i=0;i<recommendations.length;i++){
 			var o = recommendations[i];
 			html+='<li data-icon="arrow-r" data-iconpos="right" >'+createListItemRecommendation(o)+'</li>';

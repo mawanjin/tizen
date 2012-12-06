@@ -17,7 +17,7 @@
 
 
 #thelist td[name="price"]{
-	font-size:5px;
+	font-size:15px;
 }
 
 #thelist td[name="td_logo"]{
@@ -37,16 +37,29 @@
 	height:10px;
 }
 
+#thelist td[name="td_last"]{
+	word-wrap:break-word;
+	word-break:break-all;
+	align:right;
+	height:50px;
+	width:100px;
+	border:0px solid green;
+}
+
+#thelist meter{
+	width:80px;
+}
+
 #thelist table{
 	width:100%;
-	
 	border:0px solid red;
+	
 }
 
 #thelist table div{
 	font-size:15px;
-	text-align:left;
-	width:70%;word-wrap:break-word;word-break:break-all;
+	/*text-align:left;*/
+	word-wrap:break-word;word-break:break-all;
 }
 
 

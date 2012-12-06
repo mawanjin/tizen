@@ -60,3 +60,8 @@ opacity:1;
 	float:left;
 	background-color:#06456d;
 }
+
+#list_container{
+	padding-left:15px;
+	padding-right:20px;
+}

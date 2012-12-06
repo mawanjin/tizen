@@ -1,9 +1,5 @@
 body,.ui-page {
 background-image: url('./images/background.png');
-font-size:12px;
-	-webkit-user-select:none;
-    -webkit-text-size-adjust:none;
-	font-family:helvetica;
 }
 
 
