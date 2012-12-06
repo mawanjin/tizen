@@ -71,6 +71,7 @@ function prepare() {
 };
 var parser = new XMLParser();
 var main_moduleinfo;
+var informations;
 function startup() {
 	console.log("startup() called");
 	// parser.getProblemPackages(function(problempackage){
@@ -98,11 +99,12 @@ function startup() {
 //			refreshList(current_section_short,current_section);	
 		});
 	});
-	// ================================================
-	// parser.getInformation(function(array) {
-	// for ( var i = 0; i < array.length; i++)
-	// alert(array[i].name);
-	// });
+//	 ================================================
+	 parser.getInformation(function(array) {
+		 informations = array;
+//	 for ( var i = 0; i < array.length; i++)
+//	 alert(array[i].name);
+	 });
 
 	bindEvent();
 	//myScroll = new iScroll('wrapper', { checkDOMChanges: true , hScrollbar: false, vScrollbar: false});
@@ -113,11 +115,26 @@ function startup() {
 // ======================
 function bindEvent() {
 	console.log("bindEvent() called");
+	$("#info").click(function() {
+		if(informations&&informations.length>0){
+			$("#intro_list").html('');
+			for ( var i = 0; i < informations.length; i++){
+				if(i==informations.length-1){
+					$("#intro_list").append('<li><a href="#" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+				}else
+					$("#intro_list").append('<li><a href="#info_content" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+			}
+		}
+		if($('#intro_list')){
+			setTimeout(function(){
+				$('#intro_list').listview('refresh');
+			},0);
+		}
+			
+		
+	});
 	$("#btn_login").click(function() {
 		alert("good");
-	});
-	$("#info").click(function() {
-		alert("info");
 	});
 	$("#perfdata").click(function() {
 		alert("perfdata");
@@ -319,4 +336,19 @@ function update(recommendations,myquestions){
 	setTimeout(function () {
 		myScroll.refresh();
 	});
+}
+
+function showInforContent(which){
+	if(which == informations.length-1){
+		alert("invoke web browser.");
+	}else{
+		$("#infor_content_title").html('<h3>'+informations[which].name+"</h3>");
+		$("#thelist_info").html('<li>'+informations[which].content+'</li>');
+		$("#thelist_info").trigger("create");
+		
+		
+		setTimeout(function () {
+			myInfoScroll.refresh();
+		},2000);
+	}
 }

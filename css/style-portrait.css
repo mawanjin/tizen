@@ -25,11 +25,22 @@ opacity:1;
 	height: 45px;
 }
 
+.div_main_logo{
+	width:70%;
+	height: 45px;
+}
+
 
 #div_head{
 	background-image: url('./images/top_bar.jpg');
 	background-repeat:repeat;
 	text-align:center;
+}
+
+.head_bg{
+	background-image: url('./images/top_bar.jpg');
+	background-repeat:repeat;
+	padding-top:5px;
 }
 
 #btn_login{
@@ -64,4 +75,8 @@ opacity:1;
 #list_container{
 	padding-left:15px;
 	padding-right:20px;
+}
+#intro_list li{
+	text-align: center; 
+	width: 90%;
 }

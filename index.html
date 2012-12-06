@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="./css/jquery.mobile-1.1.0.css" />
 <link id="listview_css" rel="stylesheet"
 	href="./css/listview-portrait.css" />
-	
+
 <script type="text/javascript" src="./js/util.js"></script>
 <script type="text/javascript" src="./js/jquery-1.7.1.js"></script>
 <script type="text/javascript" src="./js/jquery.mobile-1.1.0.js"></script>
@@ -33,7 +33,9 @@
 <link id="main_css" rel="stylesheet" href="./css/style-portrait.css" />
 <script>
 	var myScroll;
+	var myInfoScroll;
 	function loaded() {
+		myInfoScroll = new iScroll('wrapper_info');
 		myScroll = new iScroll('wrapper');
 	}
 
@@ -46,7 +48,7 @@
 	 * Use this for high compatibility (iDevice + Android)
 	 *
 	 */
-	 document.addEventListener('DOMContentLoaded', loaded, false);
+	document.addEventListener('DOMContentLoaded', loaded, false);
 </script>
 </head>
 
@@ -56,8 +58,8 @@
 			<div id="div_head">
 				<table border=0 cellspacing=0 cellpadding="0" valign="center">
 					<tr>
-						<td><img id="info" src="./css/images/infoicon.png"
-							height="30px" /></td>
+						<td><a href="#info"><img id="info"
+								src="./css/images/infoicon.png" height="30px" /></a></td>
 						<td><img id="perfdata" src="./css/images/perfdata.png"
 							height="30px" /></td>
 						<td><img id="disc_no_text"
@@ -100,7 +102,7 @@
 			<div id="list_container">
 				<div id="wrapper">
 					<div id="scroller">
-						<ul id="thelist" >
+						<ul id="thelist">
 						</ul>
 					</div>
 				</div>
@@ -111,31 +113,59 @@
 
 	</div>
 	<!-- /page -->
-	<!-- page introduction of problemset -->
-	<!-- Start of second page: #two -->
+	
+	<!-- #information1 -->
 	<div data-role="page" id="info">
-		<div data-role="header" data-position="fixed">
-			<h1>Two</h1>
+		<div class="head_bg">
+			<!-- back button -->
+			<a href="#main"><img id="info" src="./css/images/back_button.png"
+				height="30px" /></a>
 		</div>
 		<!-- /header -->
-
-		<div data-role="content">
-			<h2>Two</h2>
-			<p>I have an id of "two" on my page container. I'm the second
-				page container in this multi-page template.</p>
-			<p>
-				<a href="#one" data-direction="reverse" data-role="button">Back
-					to page "one"</a>
-			</p>
+		<!-- Title LOGO -->
+		<div style="text-align: center; margin-top: 15px;">
+			<img class="div_main_logo" src="./css/images/logo_arcadia.png" />
+			<div>
+				<h3>Information</h3>
+			</div>
 		</div>
-		<!-- /content -->
-
-		<div data-role="footer" data-position="fixed">
-			<h4>Page Footer</h4>
-		</div>
-		<!-- /footer -->
+		<!-- List -->
+		<table width=100%>
+			<tr>
+				<td align=center>
+					<ul id="intro_list" data-role="listview">
+						
+					</ul>
+				</td>
+			</tr>
+		</table>
+	
 	</div>
-	<!-- /page two -->
+	<!-- /page information1 -->
+	
+	<!-- #information2 -->
+	<div data-role="page" id="info_content">
+		<div class="head_bg">
+			<!-- back button -->
+			<a href="#info"><img id="info" src="./css/images/normal_back_btn.png"
+				height="30px" /></a>
+		</div>
+		<!-- /header -->
+		<!-- Title-->
+		<div id="infor_content_title" style="text-align: center; margin-top: 15px;">
+						
+		</div>
+		<!-- content -->
+			<div id="wrapper_info" class="wrapper">
+					<div id="scroller_info" class="scroller">
+						<ul id="thelist_info">
+						</ul>
+					</div>
+				</div>
+	
+	</div>
+	<!-- /page information2 -->
+	
 	<!-- /page -->
 </body>
 </html>
