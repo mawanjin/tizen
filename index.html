@@ -36,11 +36,14 @@
 	var myInfoScroll;
 	var myProblemIntroScroll;
 	var myProblemIntroMenuScroll
+	var myPackageIntroScroll
+	
 	function loaded() {
 		myInfoScroll = new iScroll('wrapper_info');
 		myScroll = new iScroll('wrapper');
 		myProblemIntroScroll = new iScroll('wrapper_problemIntro');
 		myProblemIntroMenuScroll = new iScroll('wrapper_problemIntroMenu');
+		myPackageIntroScroll = new iScroll('wrapper_package_intro');
 	}
 
 	document.addEventListener('touchmove', function(e) {
@@ -180,13 +183,9 @@
 				<div><img id="btnMenu" onclick="showProblemMenuList();" src="./css/images/menu_button.png"
 				height="30px" width="80px" /></div>
 				
-					<div id="wrapper_problemIntroMenu" >
+					<div id="wrapper_problemIntroMenu" style="display:none;">
 						<div id="scrollerproblemIntroMenu">
 							<ul id="thelist_problemIntroMenu" class="thelist">
-								<li>sadfsdf</li>
-								<li>sadfsdf</li>
-								<li>sadfsdf</li>
-								<li>sadfsdf</li>
 							</ul>
 						</div>
 					</div>
@@ -220,6 +219,53 @@
 		</div>	
 	</div>
 	<!-- /page problemintroduction -->
+	
+	
+	<!-- #package_intro -->
+	<div data-role="page" id="package_intro">
+		<div class="head_bg" >
+			<table width=100% height=100% cellpadding=0 cellspacing=0 border=0 valign="top">
+				<tr>
+					<td width=80px><!-- back button -->
+				<div><a href="#main"><img  src="./css/images/done_button.png"
+				height="30px" width="80px" /></a></div>
+				</td>
+					<td align="center">
+						<div id="package_title" style="text-align:center;color:white;font-size:12px;">Market Place</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="package_intro_name" style="background-color:white;"></div>
+		<!-- /header -->
+		<!-- content -->
+			<div id="wrapper_package_intro" class="wrapper" >
+					<div class="scroller">
+						<ul id="thelist_package_intro">
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+							<li>asfds</li>
+						</ul>
+					</div>
+			</div>
+			
+		<div style="position:absolute;border:0px solid red; bottom:0;width:100%; left:0;height:48px;text-align:right;">
+		<table width=100% height=100% >
+			<tr><td valign="bottom" align=right><img id="btnResume" src="./css/images/buy_button.png"
+				height="30px" /></td></tr>
+		</table>
+			
+		</div>	
+	</div>
+	<!-- /page package_intro -->
 	
 	<!-- /page -->
 </body>

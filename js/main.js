@@ -355,7 +355,7 @@ function update(recommendations,myquestions){
 		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>Recommendations</strong></li>';
 		for(var i=0;i<recommendations.length;i++){
 			var o = recommendations[i];
-			html+='<li data-icon="arrow-r" data-iconpos="right" >'+createListItemRecommendation(o)+'</li>';
+			html+='<li data-icon="arrow-r" data-iconpos="right" ><a href="#package_intro" onclick="showPackageIntro('+i+');" style="color:black;text-decoration:none;">'+createListItemRecommendation(o)+'</a></li>';
 		}
 	}
 	$("#thelist").html(html);
@@ -365,6 +365,18 @@ function update(recommendations,myquestions){
 	setTimeout(function () {
 		myScroll.refresh();
 	});
+}
+
+function showPackageIntro(position){
+	var o = recommendations[position];
+	$("#package_intro_name").html(o.title);
+	
+	$("#thelist_package_intro").html('<li>'+o.text+'</li>');
+	
+	setTimeout(function () {
+		myPackageIntroScroll.refresh();
+	},1000);
+	
 }
 
 function showInforContent(which){
