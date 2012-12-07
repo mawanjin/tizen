@@ -309,6 +309,35 @@ function createListItemRecommendation(data){
 	return html;
 }
 
+function showProblemMenuList(){
+	if($("#wrapper_problemIntroMenu").is(":hidden"))
+		$("#wrapper_problemIntroMenu").show();
+	else
+		$("#wrapper_problemIntroMenu").hide();
+	
+	updateListView();
+}
+
+function updateListView(){
+	
+	var html='<li><a href="#main" style="color:black;text-decoration:none;"><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
+	if(ListItemMyQuestions&&ListItemMyQuestions.length>0){
+		
+		for(var i=0;i<ListItemMyQuestions.length;i++){
+			var o = ListItemMyQuestions[i];
+			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+'); style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
+		}
+			
+	}
+	
+	$("#thelist_problemIntroMenu").html(html);
+	$("#thelist_problemIntroMenu").trigger("create");
+	
+	setTimeout(function () {
+		myProblemIntroMenuScroll.refresh();
+	},2000);
+}
+
 function update(recommendations,myquestions){
 	
 	var html='';
@@ -359,19 +388,28 @@ function showProblemSetInforContent(position){
 		$("#btnBegin").show();
 		
 		var o = ListItemMyQuestions[position];
-		var info = o.info.replaceAll('\\\\','');
-		var title = o.title+':'+info;
+		var title = o.title;
+		if(o.info){
+			var info = o.info.replaceAll('\\\\','');
+			title = title+':'+info;
+		}
+		
+		
+		
 		var exAppId = o.exAppId;
 		
 	    db.findProblemSetIntroductionByExAppId(exAppId,function(data){
 	    	var content = data;
-	    	$("#problemIntro_title").html('<h3>'+title+"</h3>");
+	    	
+	    	$("#problemIntro_title").html(title);
 			$("#thelist_problemSetinfo").html('<li>'+content+'</li>');
 			$("#thelist_problemSetinfo").trigger("create");
 			
 			setTimeout(function () {
 				myProblemIntroScroll.refresh();
 			},2000);
+			
+			//$("#wrapper_problemIntro").hide();
 	    });
 		
 		db.getNumOfQuestions(exAppId,function(count){
