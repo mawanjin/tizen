@@ -8,4 +8,5 @@ Constant = new function(){
 	this.application_mail_subject = "ArcadiaPrep Android App";
 	this.application_mail_content = "Hello,";
 	this.DEFAULT_APP_CAPTURE_DIRECTORY="ArcadiaPrep/capture";
+	
 };

@@ -80,4 +80,40 @@ opacity:1;
 	text-align: center; 
 	width: 90%;
 }
+#div_attach{
+	position:absolute;border:2px solid gray;width:100%;height:50%;top:25%;z-index:998;display:none;
+}
+.div_attach{
+	position:absolute;border:2px solid gray;width:100%;height:50%;top:25%;z-index:998;display:none;
+}
+.div_center{
+	position:absolute;border:0px solid gray;
+	width:100%;height:50%;top:25%;z-index:999;
+	text-align:center;
+}
+
+#discussion_post_comment{
+	position:absolute; 
+	bottom:0;
+	width:100%; 
+	left:0;
+	border:2px solid gray;
+	font-family:"Times New Roman";
+	font-style:oblique;
+	background-color:white;
+	z-index:4;
+}
+
+#userinfo_content{
+	background-color:white;
+	position:absolute;border:4px solid gray;width:90%;height:80%;margin-left:10px;margin-top:20px;
+}
+
+#userinfo_inner_content{
+	border:1px solid gray;width:100%;height:85%;
+}
+
+#userinfo_bg{
+	background-color:white;position:absolute;width:100%;height:92%;
+}
 

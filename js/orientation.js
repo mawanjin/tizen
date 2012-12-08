@@ -49,6 +49,11 @@ SystemOrientation = new function() {
 			if($("#scroll_css")){
 				$("#scroll_css").attr("href","./css/scroll-portrait.css");
 			}
+			if($("#loading_css")){
+				$("#loading_css").attr("href","./css/loading-portrait.css");
+			}
+			if($("#reply_textarea"))
+				$("#reply_textarea").attr("rows",20);
 			
 		}else{
 			if($("#main_css"))
@@ -59,12 +64,24 @@ SystemOrientation = new function() {
 			if($("#scroll_css")){
 				$("#scroll_css").attr("href","./css/scroll.css");
 			}
+			if($("#loading_css")){
+				$("#loading_css").attr("href","./css/loading.css");
+			}
+			if($("#reply_textarea"))
+				$("#reply_textarea").attr("rows",10);
 		}
 		generateCategoryBar(function(){
 			refreshMainListViewHeight();
 			if(callback)
 				callback();
 		});
+		
+		generateCategoryBarForSta();
+		setTimeout(function () {
+			myDiscussionScroll.refresh();
+		},1000);
+		
+		
 		
 	};
 	

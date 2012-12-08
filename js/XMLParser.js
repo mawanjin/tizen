@@ -303,7 +303,6 @@ function XMLParser() {
 																});
 
 												c++;
-
 												self.moduleinfo = new self.moduleinfo(
 														examType, examSection,
 														resetPassURL,

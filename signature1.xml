@@ -103,6 +103,14 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>6fNqp6gQ81Wanb75BWK6TQKLxAUahr2qwTJXNxIzzl4=</DigestValue>
 </Reference>
+<Reference URI="css/images/cancel_button.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>prkao4cqsJ6LcMQgh7ocFxBFxp8S+v9y5Jyex1emGf8=</DigestValue>
+</Reference>
+<Reference URI="css/images/chat.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>MzNfx3+3CIAFfaqri7jDGjN/0ccQEnA9eYus/yRWcLA=</DigestValue>
+</Reference>
 <Reference URI="css/images/difficult0.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>ZQ+OSzOjRvnLkmGdzvcDee8JGW06AulBS0zg7tkKdok=</DigestValue>
@@ -171,6 +179,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>La4FkDWgv2JFlvM3y1O/ktxA5Cpu9uQAJOrJQVVMMD0=</DigestValue>
 </Reference>
+<Reference URI="css/images/post_button.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>IbqkMpNnd38OkVo33s6e3XI2NVxYglV0BNivSep0r8I=</DigestValue>
+</Reference>
 <Reference URI="css/images/resume_button.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>fBsikj5aQdCod0rNZBNjj59qZu3PJh3VMG3q/AVEVyU=</DigestValue>
@@ -203,21 +215,29 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>d4UfPaOE0cnUCuKHOYdTYtC5GKrxcjliOtqvI6T8T80=</DigestValue>
 </Reference>
+<Reference URI="css/loading-portrait.css">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ASVWBmyUeXStstBeFrB25NxRz156xDsaFh1vmQN9jQo=</DigestValue>
+</Reference>
+<Reference URI="css/loading.css">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>f1vPBegU3ykZ4w111DEog+Vvwm2xFnH8VxHdKB70chc=</DigestValue>
+</Reference>
 <Reference URI="css/scroll-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zhQ4QVNUtwzpiRnIAH40Qa41uuPcjMGdjGNUxL2ncAo=</DigestValue>
+<DigestValue>bPYpzCNxi8Rfi2Rk+cxwVbwnAs5buYvNV1cJTNQ+Ja4=</DigestValue>
 </Reference>
 <Reference URI="css/scroll.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zJqoInRymZDeyp99n8ErdkQAyAvQ09eQcUpD+rdZM3U=</DigestValue>
+<DigestValue>H3Cw8wnlrMhIuDgpWU6RDh0EW4jF70dgcDaorDaHobU=</DigestValue>
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>1OF6SC1H0QCUZRWfkhBISEKaCNV2jxmQJcZ/b1Z4jnc=</DigestValue>
+<DigestValue>KiF/ojvcHHAbABTg7OWop2dn3xe8/C/OB6tvKrb5r3s=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CaRUzq28qiDQdCWN5g1RQnRpRFeYelYfGvN7eG4QCsk=</DigestValue>
+<DigestValue>iSXDxuLDKufHrHWsCwp+noDZYyyqzFOR8g4TNGrrGi4=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -233,7 +253,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>fvtLP0nlS7RnDRQ2etjrDDXuBEjs/BNg3Fq5aKet3/s=</DigestValue>
+<DigestValue>vfSX9fpu+Utqvg0nhtNkWz0v0Q2KE4CNFKD27yS0tsA=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -249,7 +269,7 @@
 </Reference>
 <Reference URI="js/XMLParser.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Rrd/FtizRbgegsmy+zRD3x6vLh1AR12CRepclGTvC8w=</DigestValue>
+<DigestValue>epMJRnAayIrY8c58+IKOKTPO4MjgUW2qK2PUJu9UwcI=</DigestValue>
 </Reference>
 <Reference URI="js/config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -257,11 +277,15 @@
 </Reference>
 <Reference URI="js/constant.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>J3jGdOa3Q2HFOjI8ZLfYui4HhfMOcZehhd0dSL1uWfI=</DigestValue>
+<DigestValue>JKyLyXfEsDcm5a6KuKLws0SazAWnVpzLK34tN+M2hKY=</DigestValue>
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CuKDxuiABw7hXu0YVEsn8ECcNFA0G1gNAVLGzSPaTdo=</DigestValue>
+<DigestValue>GgE6S/VzSjfbhGtNOIfnASKrb+eMWwqi1d/fOZeURGI=</DigestValue>
+</Reference>
+<Reference URI="js/http.js">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>6twuqjICss7MG9s/2Tc79ibWnTp171YnkluhbBpAvlc=</DigestValue>
 </Reference>
 <Reference URI="js/iscroll-lite.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -285,11 +309,11 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vGYBUx4PRBEQwisHTUgX6yfp66KuU6VGiOHzYshizVg=</DigestValue>
+<DigestValue>vm6NHg+9/1Mz5c6hQHRVNqy3Il+JIvt+vbGNkd5Zyj8=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6zb1SvdSquWAwRsxT+9TN6JfVtipQtltwA3SN2osGLY=</DigestValue>
+<DigestValue>KDaQ6tglPrLgFhrMmk/an7AcZJ9ecm2EXv9b7GeJ+tg=</DigestValue>
 </Reference>
 <Reference URI="js/packages.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -301,7 +325,7 @@
 </Reference>
 <Reference URI="js/util.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>uNOVMVnm0FCrJ+9L0hYvijzyxkmNxinGEHn9qI8IYB8=</DigestValue>
+<DigestValue>ECZqvrSxDALRBdr2c7/aFG33nHrgoVrWFjb6k7eHuuQ=</DigestValue>
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3396,9 +3420,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-oG6yLMzEgCSXNj0z9eYPX/9G17n54Oy4VCPY3KdL+B0sn97lcXXTLAGVdTbdR8+iXF2nj0jgZrYs
-LOJWirNr9R/7f//Dc/fNPm0zOXuQsMkau/cXrWl8S3x/JFMOE34Yd6fhIcAidFez+hTj0fcj9IF1
-qch1XcQfYzy1zLeqQtk=
+dhb5li/0BHN7x57OWiBvwN3zB1QBsYQo7jrFF4xbW+6mwAjUtalNtVs0B9nIi3XxLEBuiLeRsMLL
+3Ja2lTE9MHn+ehMZjY66fxnemv+5dmkF4gbuuYiUUtEx2jjxC0qU+DS6Ysq5v3tdBacYvt2K7lQy
+feTPVTOgpGk9lOBKA6U=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

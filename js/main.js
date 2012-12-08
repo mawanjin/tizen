@@ -98,6 +98,7 @@ function startup() {
 			console.log("afert SystemOrientation.refresh() called");
 //			refreshList(current_section_short,current_section);	
 		});
+		initConstant();
 	});
 //	 ================================================
 	 parser.getInformation(function(array) {
@@ -130,20 +131,48 @@ function bindEvent() {
 				$('#intro_list').listview('refresh');
 			},0);
 		}
-			
 		
 	});
 	$("#btn_login").click(function() {
 		alert("good");
 	});
 	$("#perfdata").click(function() {
-		alert("perfdata");
+		generateCategoryBarForSta(function(){
+//			db.getExamStatsBySectionAndType()
+		});
 	});
 	$("#disc_no_text").click(function() {
-		alert("disc_no_text");
+		//show loading
+		$("#loading_discussion").html(util.getLoading());
+		$("#loading_discussion").show();
+		
+		//load data from server(HTTP).
+		http.findDiscussionsByExamType(function(data){
+			console.log("findDiscussionsByExamType() called");
+			var html='';
+			for(var i=0;i<data.length;i++){
+				var o = data[i];
+				var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
+				var title = o.uname;
+				var attach = o.attachIamge;
+				if(!attach)attach='';
+				else
+					attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
+				var content = o.message;
+				
+				html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><img src="./css/images/chat.png " /></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr></table></td></tr></table></li>';
+			}
+			$("#loading_discussion").hide();
+			$("#thelist_discussion").html(html);
+			$("#thelist_discussion").trigger("create");
+			
+			setTimeout(function () {
+				myDiscussionScroll.refresh();
+			},2000);
+		});
 	});
 	$("#bookmark").click(function() {
-		alert("bookmark");
+		updateBookmark('date');
 	});
 	$("#mail").click(function() {
 		alert("mail");
@@ -154,7 +183,93 @@ function bindEvent() {
 	$("#btnVisit").click(function() {
 		alert("btnVisit");
 	});
+	$("#post").click(function() {
+		//check the type of reply:plain or reply for one
+		
+		alert("post");
+	});
+	
 }
+/**
+ * 
+ * @param type 1-post new 2-for given question 3-reply
+ */
+function post(type){
+	//show loading
+	$("#loading_post").html(util.getLoading());
+	$("#loading_post").show();
+	//post data to server
+	//step 1 -  check user login status if not login show the login dialog
+	//step 2 - after login post to server
+	var user = new http.User("mwj@hotmail.com","123456",5); 
+	http.postNew(user,"tttttest....",function(data){
+		$("#loading_post").hide();
+		alert(data);
+	});
+	
+}
+
+function showUserInfo(userId,head,attach){
+	
+	http.getUserInfo(userId,function(data){
+		
+		$("#userinfo_content_head").html("<img src='"+head+"' />");
+		
+		$("#userinfo_content_title").html(data.uname);
+		$("#userinfo_content_name").html(data.uname);
+		$("#userinfo_content_post").html(data.post+" Posts");
+		$("#userinfo_content_aboutme").html(data.aboutme);
+		if(attach){
+			$("#attachImg_userinfo").html("<img width=50% height=30% src='"+attach+"' onclick=showBigAttachForUserInfo('"+attach+"'); />");
+			
+		}
+		
+		
+		
+	});
+}
+
+function showBigAttachForUserInfo(attachURL){
+	
+	$("#div_attach_userinfo").html('<img width=100% height=100% id="imgAttach" src="'+attachURL+'"  />');
+	$("#div_attach_userinfo").show();
+	
+	$("#div_attach_userinfo").bind("click",function(){
+		$("#div_attach_userinfo").hide();	
+	});
+}
+
+function showBigAttach(attachURL){
+	
+	$("#div_attach").html('<img width=100% height=100% id="imgAttach" src="'+attachURL+'"  />');
+	$("#div_attach").show();
+	
+	$("#div_attach").bind("click",function(){
+		$("#div_attach").hide();	
+	});
+}
+
+function updateBookmark(orderby){
+	//title
+	db.findAllBookMark(orderby,function(data){
+		
+		console.log("updateBookmark() called..date.length="+data.length);
+		var html='';
+		for(var i=0;i<data.length;i++){
+			var o = data[i];
+			var title = o.title;
+			var date = o.date;
+			html+='<li><a href="javascript:alert(11);" style="color:black;text-decoration:none;"><table width=100%><tr><td width=50%>'+title+'</td><td>'+date+'</td></tr></table></a></li>';
+		}
+		$("#thelist_bookmark").html(html);
+		$("#thelist_bookmark").trigger("create");
+		
+		setTimeout(function () {
+			mybookmarkScroll.refresh();
+		},2000);
+	});
+}
+
 var current_section,current_section_short;
 function generateCategoryBar(callback) {
 	console.log("generateCategoryBar() called");
@@ -200,6 +315,91 @@ function generateCategoryBar(callback) {
 				callback();
 			});
 }
+
+function initConstant(){
+	Constant.SERVER_URL = main_moduleinfo.ServerURL+"/";
+	if(!Constant.SERVER_URL.startWith("http"))Constant.SERVER_URL="http://"+Constant.SERVER_URL+"/";
+	Constant.GET_SERVER_URL_DISCUSSIONS_BY_QUESTION_ID=Constant.SERVER_URL+"jreq.php?discussions_question=1&q_id=";
+	Constant.GET_SERVER_URL_DISCUSSIONS_BY_EXAM = Constant.SERVER_URL+"jreq.php?discussions_recent=1&exam_type="+main_moduleinfo.examType;
+	Constant.GET_SERVER_URL_POST_A_NEW_DISCUSSION = Constant.SERVER_URL+"post_a_new_discussion_thread";
+	Constant.GET_SERVER_URL_POST_FOR_A_GIVEN_QUESTION = Constant.SERVER_URL+"index.php?qdiscussions_popup=$&question=";
+	Constant.GET_SERVER_URL_POST_REPLY = Constant.SERVER_URL+"post_reply/";
+	Constant.GET_SERVER_URL_USER_INFO = Constant.SERVER_URL+"jreq.php?user_info=1&user_id=";
+}
+
+var current_section_for_sta;
+function generateCategoryBarForSta(callback) {
+	console.log("generateCategoryBarForSta() called");
+	parser = new XMLParser();
+	var h;
+	parser
+			.getmoduleinfo(function(moduleinfo) {
+				h = '<div id="category_bar_sta_container" data-corners="true" data-role="navbar"><ul>';
+				var c = moduleinfo.examSection.length;
+				for ( var i = 0; i < c; i++) {
+					var vo = moduleinfo.examSection[i];
+					var selected='';
+					if(i==0){
+						selected='class="ui-btn-active"';
+						current_section = vo.secName;
+						current_section_short = vo.secNameShort;
+					}
+					
+					if (SystemOrientation.orientation == 0) {
+						
+						h += '<li><a '+selected+' onclick="refreshListSta(\'' + vo.secNameShort
+								+ '\',\'' + vo.secName
+								+ '\',1);"  >'
+								+ vo.secNameShort + '</a></li>';
+					} else
+						h += '<li><a '+selected+' href="#" onclick="javascript:refreshListSta(\''
+								+ vo.secNameShort
+								+ '\',\''
+								+ vo.secName
+								+ '\',1);" >'
+								+ vo.secName
+								+ '</a></li>';
+
+				}
+				h += '</ul></div>';
+				$("#perfdata_category").html(h);
+				$("#perfdata_category").trigger("create");
+				$("#perfdata_category").find("li").addClass("ui-btn-active");
+				
+				if(callback)
+					callback();
+			});
+}
+function refreshListStaByType(type){
+	refreshListSta('',current_section_for_sta,type);
+}
+function refreshListSta(sectionShortName, sectionName,type){
+	if(type==1){
+		$("#Last").addClass("ui-btn-active");
+		$("#Average").removeClass("ui-btn-active");
+		$("#Best").removeClass("ui-btn-active");
+	}
+	current_section_for_sta = sectionName;
+	console.log("refreshListSta() called");
+	db.getExamStatsBySectionAndType(sectionName,type,function(data){
+		var html = '<li><table width=100%><tr><td width=25% align=center>&nbsp;</td><td width=25% align=center>Per Question</td><td width=25% align=center>Total Time</td><td width=25% align=center>Score</td><tr><table></li>';
+		for(var i=0;i<data.length;i++){
+			var o = data[i];
+			var name = o.name;
+			var per = o.per;
+			var totalTime = o.totalTime;
+			var score = o.score;
+			html += '<li><table width=100%><tr><td width=25% align=center>'+name+'</td><td width=25% align=center>'+per+'</td><td width=25% align=center>'+totalTime+'</td><td width=25% align=center>'+score+'</td><tr><table></li>';
+		}
+		$("#thelist_sta").html(html);
+		$("#thelist_sta").trigger("create");
+		
+		setTimeout(function () {
+			myStaScroll.refresh();
+		});
+	});
+}
+
 
 var recommendations;
 var ListItemMyQuestions;
@@ -317,10 +517,15 @@ function showProblemMenuList(){
 	
 	updateListView();
 }
-
+function hideMenuList(){
+	setTimeout(function(){
+		$("#wrapper_problemIntroMenu").hide();	
+	},1000);
+	
+}
 function updateListView(){
 	
-	var html='<li><a href="#main" style="color:black;text-decoration:none;"><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
+	var html='<li><a href="#main" onclick="hideMenuList()" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
 	if(ListItemMyQuestions&&ListItemMyQuestions.length>0){
 		
 		for(var i=0;i<ListItemMyQuestions.length;i++){

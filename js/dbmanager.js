@@ -51,8 +51,10 @@ function DBManager() {
 	self.selectGetQuestionResultInfoByExAppIDsStatement='select * from question_exam_result_info where ex_app_id in (?)';
 	self.selectFindProblemSetIntroductionByExAppId='';
 	self.selectFindExAppPageByExAppIDStatement='select * from iphone_ex_app_pages where ex_app_id=?';
-	
 	self.getNumOfQuestionsStatement = 'select count(*) as c from iphone_questions where ex_app_id = ?';
+	self.selectFindAllBookMark = 'select k.* from bookmark k  order by ?';
+	self.selectGetExamResultInfosBySectionStatement = "select o.* from exam_result_info o  where finish='true' and section=? order by start_time desc";
+	self.selectGetAverageExamResultInfosBySectionStatement = "select o.ex_app_id ex_app_id ,o.ex_app_name ex_app_name,avg(o.score) score,avg(o.end_time) time, avg(o.end_time)/o.question_count per, o.question_count question_count from exam_result_info o  where finish='true' and section=? group by ex_app_id  order by start_time desc";
 	
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
@@ -194,6 +196,23 @@ function DBManager() {
 				}, self.onError);
 			});
 		};
+		
+	self.getExamResultInfosBySection = function(sectionName,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("getExamResultInfosBySection() called");
+					tx.executeSql(self.selectGetExamResultInfosBySectionStatement,[sectionName], function(tx,
+							result) {
+						var rs = new Array();
+						var dataset = result.rows;
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							rs.push(new self.ExamResultInfo(o['id'], o['section'], o['exAppID'], o['exAppName'], o['score'], o['finish'], o['progress'], o['startTime'], o['endTime'], o['questionCount'], o['QuestionExamStatus']));	
+						}
+						callback(rs);
+					}, self.onError);
+				});
+			};
 	
 	self.findExAppsBySection = function(section,callback){
 		
@@ -254,7 +273,53 @@ function DBManager() {
 				}, self.onError);
 			});
 		};
+		
 	
+	self.findAllBookMark = function(orderby,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findAllBookMark() called");
+					tx.executeSql(self.selectFindAllBookMark,[orderby], function(tx,
+							result) {
+						var rs = new Array();
+						var dataset = result.rows;
+						rs.push(new self.BookMark("1", "exappid", "questionId", 1, "title", "2012-12-07 19:45:21"));
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							rs.push(new self.BookMark(o['id'], o['exappid'], o['questionId'], o['position'], o['title'], o['date']));
+						}
+						callback(rs);
+					}, self.onError);
+				});
+			};
+
+	self.getTime = function(second){
+		var min = parseInt(second/60);
+		if(min<10)min="0"+min;
+		var sec = parseInt(second % 60);
+		if(sec<10)sec="0"+sec;
+		var hour = parseInt(min / 60);
+		if(hour<10)hour="0"+hour;
+		return hour+":"+min+":"+sec;
+	};		
+			
+	self.getAverageExamResultInfosBySection = function(section,callback){
+					
+					self.db.transaction(function(tx) {
+						console.log("getAverageExamResultInfosBySection() called");
+						tx.executeSql(self.selectGetAverageExamResultInfosBySectionStatement,[section], function(tx,
+								result) {
+							var rs = new Array();
+							rs.push(new self.ListItemExamStatVO(89, 'Main Point: Intro Set', '20%', self.getTime(126), self.getTime(12), 15));
+							var dataset = result.rows;
+							for(var i=0;i<dataset.length;i++){
+								var o = dataset.item(i);
+								rs.push(new self.ListItemExamStatVO(o['ex_app_id'], o['ex_app_name'], o['score'], self.getTime(o['time']), self.getTime(o['per']), o['question_count']));
+							}
+							callback(rs);
+						}, self.onError);
+					});
+				};
 	
 	self.GetExamResultInfoByExAppIDs = function(ids,callback){
 		
@@ -947,6 +1012,69 @@ function DBManager() {
 	};
 	
 	/**
+	 * type 1 - last 2 - average 3 - best 
+	 */
+	self.getExamStatsBySectionAndType = function(section,type,callback){
+		
+		self.getExamResultInfosBySection(section, function(ExamResultInfos){
+			console.log("getExamResultInfosBySection() called");
+			var exappids = new Array();
+			
+			var rs = new Array();
+			rs.push(new self.ListItemExamStatVO(89, 'Main Point: Intro Set', '20%', self.getTime(126), self.getTime(12), 15));
+			if(type==1){
+				for(var i=0;i<ExamResultInfos.length;i++){
+					var exists = false;
+					for(var j=0;j<exappids.length;j++){
+						if(exappids[j]==ExamResultInfos[i].exAppID){
+							exists = true;
+							break;
+						}
+					}
+					if(!exists){
+						var per=0;
+						var score=0;
+						if(ExamResultInfos[i].questionCount>0){
+							per = self.getTime(ExamResultInfos[i].endTime/ExamResultInfos[i].questionCount);
+							score = (ExamResultInfos[i].score*100/ExamResultInfos[i].questionCount)+"%";
+						}
+						
+						rs.push(new self.ListItemExamStatVO(ExamResultInfos[i].exAppID, ExamResultInfos[i].exAppName, score, self.getTime(ExamResultInfos[i].endTime), per, ExamResultInfos[i].questionCount));
+						exappids.push(ExamResultInfos[i].exAppID);
+					}
+				}
+				callback(rs);
+			}else if(type==2){
+				self.getAverageExamResultInfosBySection(section, function(data){
+					callback(data);
+				});
+			}else if(type==3){
+				ExamResultInfos.sort(function(a,b){
+					return (a.score<b.score)?1:-1;
+				});
+				for(var i=0;i<ExamResultInfos.length;i++){
+					var exists = false;
+					for(var j=0;j<exappids.length;j++){
+						if(exappids[j]==ExamResultInfos[i].exAppID){
+							exists = true;
+							break;
+						}
+					}
+					if(!exists){
+						var per=0;
+						if(ExamResultInfos[i].questionCount>0)
+							per = self.getTime(ExamResultInfos[i].endTime/ExamResultInfos[i].questionCount);
+						rs.push(new self.ListItemExamStatVO(ExamResultInfos[i].exAppID, ExamResultInfos[i].exAppName, ExamResultInfos[i].score, self.getTime(ExamResultInfos[i].endTime), per, ExamResultInfos[i].questionCount));
+						exappids.push(ExamResultInfos[i].exAppID);
+					}
+				}
+				callback(rs);
+			}
+		});
+//		getExamResultInfosBySection
+	};
+	
+	/**
 	 * 
 	 * @param id
 	 * @param exAppID
@@ -973,7 +1101,23 @@ function DBManager() {
 		this.solving = solving;
 	};
 	
+	self.BookMark = function(id,exappid,questionId,position,title,date){
+		this.id = id;
+		this.exappid = exappid;
+		this.questionId = questionId;
+		this.position = position;
+		this.date = date;
+		this.title = title;
+	};
 	
+	self.ListItemExamStatVO = function(exAppID,name,score,totalTime,per,numQuestion){
+		this.exAppID = exAppID;
+		this.name = name;
+		this.score = score;
+		this.totalTime = totalTime;
+		this.per = per;
+		this.numQuestion = numQuestion;
+	};
 	
 	/*
 	 * self.db = openDatabase("ShoppingListDb", "0.1", "Shopping List DB", 2 *
