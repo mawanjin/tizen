@@ -35,32 +35,32 @@ http = new function() {
 		this.profile = profile;
 	};
 
-	self.postNew = function(user, message,callback) {
+	self.postNew = function(user, message, callback) {
 		var server_url = Constant.GET_SERVER_URL_POST_A_NEW_DISCUSSION;
 		var subject = '';
-		if(message.length>32)subject =message.substring(0,32); 
+		if (message.length > 32)
+			subject = message.substring(0, 32);
 		$.ajax({
 			url : server_url,
 			type : "POST",
-			//fileElementId : 'pic',
+			// fileElementId : 'pic',
 			data : {
-				abc : new Date(),
-				login_user : user.userName,
-				login_pass : user.password,
-				login : "login",
-				step : "2",
-				cod : new Date(),
-				type : "1",
-				play_time : "0",
-				message : message,
-				subject : subject
+				"login_user" : user.userName,
+				"login_pass" : user.password,
+				"login" : "login",
+				"step" : "2",
+				"cod" : "123",
+				"type" : "1",
+				"play_time" : "0",
+				"message" : message,
+				"subject" : subject	
 			},
-//			dataType : "json",
+			// dataType : "json",
 			success : function(data) {
 				callback("1");
 			},
-			error:function(obj,message){
-				callback("0"+message);
+			error : function(obj, message) {
+				callback("0" + message);
 			}
 		});
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/arcadiaprep" version="1.0" viewmodes="fullscreen">
     <icon src="icon.png"/>
-    <content src="index.html"/>
+    <content src="moduleinfo.html"/>
 <name>arcadiaprep</name>
 <tizen:application id="0zE9nn6hMI" required_version="1.0"/>
 <feature name="http://tizen.org/api/download" required="true"/>

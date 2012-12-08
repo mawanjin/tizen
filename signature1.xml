@@ -5,7 +5,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>MnXhthqtCCpwnssUPK6B+d7BJUJfaofqPFCqdxJ8QFs=</DigestValue>
+<DigestValue>CK0xolKS5QOlMscqjITpG1/Y6K0Thw/RcwN+AMVC5bI=</DigestValue>
 </Reference>
 <Reference URI="css/images/LSAT2011.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -285,7 +285,7 @@
 </Reference>
 <Reference URI="js/http.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6twuqjICss7MG9s/2Tc79ibWnTp171YnkluhbBpAvlc=</DigestValue>
+<DigestValue>2t/i2KFV56SEEKOQb3AJT1wh0wZZSSO85685DruQUl8=</DigestValue>
 </Reference>
 <Reference URI="js/iscroll-lite.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -334,6 +334,10 @@
 <Reference URI="listView.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>54I10zwcTr7C8MdNBo1UR40VKa7F++P56+ENL+F5mm0=</DigestValue>
+</Reference>
+<Reference URI="moduleinfo.html">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>8c8LBZu2YbT0eceYIDdazlUEmMBnpGXm98ezPGHCg0A=</DigestValue>
 </Reference>
 <Reference URI="moduleinfo.plist">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3420,9 +3424,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-dhb5li/0BHN7x57OWiBvwN3zB1QBsYQo7jrFF4xbW+6mwAjUtalNtVs0B9nIi3XxLEBuiLeRsMLL
-3Ja2lTE9MHn+ehMZjY66fxnemv+5dmkF4gbuuYiUUtEx2jjxC0qU+DS6Ysq5v3tdBacYvt2K7lQy
-feTPVTOgpGk9lOBKA6U=
+P4C+56MsDZNEguwEvQvJNsyBZCeM7bEa1VxLZP+u+9fnjQsgTy7y3nML19u2AweDQVhFg3GQkw9J
+pQIku+tEckNXZcMZPEyLfu2/MGLpaLv0S87ei4g6PenMGURcFTS9O1LzGbxmMQGyJYziTsNdr8Nj
+JaN7W4NGwE3/zkozH3I=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
