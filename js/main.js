@@ -108,7 +108,7 @@ function startup() {
 	 });
 
 	bindEvent();
-	//myScroll = new iScroll('wrapper', { checkDOMChanges: true , hScrollbar: false, vScrollbar: false});
+	
 }
 
 // ======================
@@ -116,30 +116,44 @@ function startup() {
 // ======================
 function bindEvent() {
 	console.log("bindEvent() called");
-	$("#info").click(function() {
-		if(informations&&informations.length>0){
-			$("#intro_list").html('');
-			for ( var i = 0; i < informations.length; i++){
-				if(i==informations.length-1){
-					$("#intro_list").append('<li><a href="#" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
-				}else
-					$("#intro_list").append('<li><a href="#info_content" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
-			}
-		}
-		if($('#intro_list')){
-			setTimeout(function(){
-				$('#intro_list').listview('refresh');
-			},0);
-		}
+	
+	$("#btnInfo").click(function() {
 		
+		setTimeout(function(){
+			if(informations&&informations.length>0){
+				$("#intro_list").html('');
+				for ( var i = 0; i < informations.length; i++){
+					if(i==informations.length-1){
+						$("#intro_list").append('<li><a href="#" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+					}else
+						$("#intro_list").append('<li><a href="#info_content" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+				}
+			}
+			if($('#intro_list')){
+				setTimeout(function(){
+					$('#intro_list').listview('refresh');
+				},500);
+			}
+		});
 	});
 	$("#btn_login").click(function() {
+		
+		
+		if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){
+			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
+			$("#btn_login").trigger('create');
+			http.publicUser.userName="";
+			http.publicUser.password="";
+			http.publicUser.profile="";
+		}
+		/*
 		//check log status
 		if(http.User){//log out
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
 		}else{//log in
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
 		}
+		*/
 	});
 	$("#perfdata").click(function() {
 		generateCategoryBarForSta(function(){
@@ -391,6 +405,8 @@ function initConstant(){
 	Constant.GET_SERVER_URL_POST_FOR_A_GIVEN_QUESTION = Constant.SERVER_URL+"index.php?qdiscussions_popup=$&question=";
 	Constant.GET_SERVER_URL_POST_REPLY = Constant.SERVER_URL+"post_reply/";
 	Constant.GET_SERVER_URL_USER_INFO = Constant.SERVER_URL+"jreq.php?user_info=1&user_id=";
+	Constant.GET_SERVER_URL_USER_LOGIN = Constant.SERVER_URL+"jsonlogin/";
+	Constant.GET_SERVER_URL_USER_REGISTER = Constant.SERVER_URL+"jsonregister/";
 }
 
 var current_section_for_sta;
@@ -715,4 +731,47 @@ function showProblemSetInforContent(position){
 		});
 }
 
+function login(){
+	//show loading
+	$("#loading_login").html(util.getLoading());
+	$("#loading_login").show();
+	var login_name = $("#login_name").val();
+	var login_pass = $("#login_pass").val();
+	http.login(login_name,login_pass,function(data){
+		$("#loading_login").hide();
+		if(data==-1){
+			alert("Invalid Log-in or Password...");
+		}else{
+			//alert(http.User.profile);
+			http.publicUser = data;
+			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			$( "#popupBasic" ).popup( "close" );
+		}
+	});
+}
+
+function register(){
+	//show loading
+	$("#loading_login").html(util.getLoading());
+	$("#loading_login").show();
+	
+	var fname = $("#fname").val();
+	var lname = $("#lname").val();
+	var email = $("#email").val();
+	var pass = $("#pass").val();
+	var r_pass = $("#r_pass").val();
+	var exam = "";
+	//fname,lname,email,pass,r_pass,exam,callback
+	http.register(fname,lname,email,pass,r_pass,exam,function(data){
+		$("#loading_login").hide();
+		if(data==-1){
+			alert("please try later");
+		}else if(data.userName){//register success and login success
+			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			$( "#popupRegister" ).popup( "close" );
+		}else{
+			alert(data);
+		}
+	});
+}
 

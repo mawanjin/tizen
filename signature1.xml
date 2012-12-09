@@ -265,11 +265,11 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>t5/LdHxWjhZGzIPeOAJrCdKZ/IRhlJ0nVxwcs5sBujk=</DigestValue>
+<DigestValue>S5dPcBrg6Ed0IX8RqyqyKOgQTj62tdNoBmqxU3tdN+I=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>2NFh96DxYJ3QpzbF2tOzjdVdcB2Zo19tOek0Wh9uFDk=</DigestValue>
+<DigestValue>Qt3rjj3gNxtK106FQA07ge87aOtAw/UbFMlr9oBj158=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -285,7 +285,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>wLUMnq0dOPvm1lX1zbKqYBa1Cfo3ZCQa+r8Pzc6CpXU=</DigestValue>
+<DigestValue>J0ZwRMe2DwPbPE2HnfQD20h+5DvyyA4GvZR7R9242w0=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -317,7 +317,7 @@
 </Reference>
 <Reference URI="js/http.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Gp24YcJAs/7hjk4tQg1Sk13Wz2Dw3vegqlWOSMPNXQE=</DigestValue>
+<DigestValue>UTkOry6L0Pb7W9SpFt1zQR1z+XupwB5CQEznbVCmRkI=</DigestValue>
 </Reference>
 <Reference URI="js/iscroll-lite.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -357,7 +357,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WRt73xtPF/3nHeUYNzyYeV88FmnkY1moiboauhAhH0c=</DigestValue>
+<DigestValue>NZf1+0ajgiYnM2sX4sYBtsQX8S9++6C/RYD1tqtI4n0=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3476,9 +3476,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-ldU+1yKDjrq0yOqHFBpY9A4oUA55TjC3OrEtzArWQAXLkZl8bdpPGiWgXHCZWECGW0zUYG/ywzhq
-4FI3OrSaiAvLiuRR7ovOn6z/dnlwT0+0/FQM6+PuFNrVCD9AeE885+A0NKV+szmYbha03eiY4d9f
-VHDmkTLMrdxAYhBRukw=
+DkluDWlaM/EWUr5hCL+/oYjXqv22jFKGxNm0x5a/OYVPxnHefsQMstkCHrogCb+RvIjxD9w36R9v
+HwbKTC/eOdr0Qf6TPp0P8Kfx4NUxlKhsQViMKuGfh3GdgIBesG3bgJ/e47L0wE0+P8CdqW/jCTJB
+Td8+SjzeNH6gxJVC7X8=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

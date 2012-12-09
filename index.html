@@ -71,12 +71,14 @@
 </head>
 
 <body>
+
 	<div data-role="page" id="main">
+	
 		<div data-role="none" data-id="foo" id="header">
 			<div id="div_head">
 				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="center">
 					<tr>
-						<td><a href="#info"><img id="info"
+						<td><a href="#info"><img id="btnInfo"
 								src="./css/images/infoicon.png" height="30px" /></a></td>
 						<td><a href="#perfdata"><img id="perfdata"
 								src="./css/images/perfdata.png" height="30px" /></a></td>
@@ -87,7 +89,9 @@
 						<td><img id="mail" src="./css/images/mail.png" height="30px" /></td>
 						<td><img id="search_icon" src="./css/images/search_icon.png"
 							height="30px" /></td>
-						<td><a id="btn_login" href="#popupBasic" data-rel="popup">
+						<td>
+						<!-- <div data-role="popup" id="popupBasic">This is a completely basic popup, no options set.</div>-->
+						 <a id="btn_login" href="#popupBasic" data-rel="popup" data-position-to="window" >
 								<input type="image" width=100% height=25px
 									src="./css/images/bttn_no_txt.png" data-role="none" /></a>
 							</td>
@@ -125,11 +129,79 @@
 						</ul>
 					</div>
 				</div>
-			</div>
+			</div>  
 			<!-- /content -->
-			<div data-role="popup" id="popupBasic">
-				<p>This is a completely basic popup, no options set.<p>
+			<!-- Popup -login -->
+			<div data-role="popup" id="popupBasic" data-theme="b"
+				data-position-to="origin">
+
+				<div style="padding: 5px 0px;">
+					<font>&nbsp;<b>Login to ArcadiaPrep.com</b></font>
+					<hr>
+					<table>
+						<tr>
+							<td>Login</td>
+							<td><input type="text" name="user" id="login_name" value=""
+								placeholder="Enter an e-mail."></td>
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td><input type="password" name="user" id="login_pass" value=""
+								placeholder="Enter a pass."></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=right><div onclick="login();"
+									style="width: 50%;" data-role="button">Login</div></td>
+						</tr>
+					</table>
+					<hr>
+					<div style="font-color: white; font-size: 10px;">Don't have
+						an AcrediaPrep.com log-in?</div>
+					<a href="#popupRegister" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div data-role="button" data-theme="b">Register</div></a>
+				</div>
 			</div>
+			<!-- Popup -register -->
+			<div data-role="popup" id="popupRegister" data-theme="b"
+				data-position-to="origin">
+
+				<div style="padding: 5px 0px;">
+					<font>&nbsp;<b>Register</b></font>
+					<hr>
+					<table>
+						<tr>
+							<!-- photo -->
+							<td>
+								<div style="background-color:gray;">Set Photo</div>
+							</td>
+							<td>
+								<input type="text"  id="fname" value="" placeholder="First Name*">
+								<input type="text"  id="lname" value="" placeholder="Last Name*">
+							</td>
+						</tr>
+						<tr>
+							<td colspan=2><input type="text"  id="email" value=""
+								placeholder="Email(Used as Username)*"></td>
+						</tr>
+						<tr>
+							<td colspan=2><input type="password"  id="pass" value=""
+								placeholder="Password*"></td>
+						</tr>
+						<tr>
+							<td colspan=2><input type="password"  id="r_pass" value=""
+								placeholder="Password Again*"></td>
+						</tr>
+						<tr>
+							<td><a href="#popupBasic" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div 
+									data-role="button">Cancel</div></a></td>
+							<td><div onclick="register();" 
+									data-role="button" data-theme="b">Register</div></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<!-- loading -->
+		<div id="loading_login" class='div_center'></div>
 		</div>
 		<!-- /header -->
 
@@ -541,5 +613,7 @@
 	</div>
 	<!-- /page reply -->
 	<!-- /page -->
+	
+	
 </body>
 </html>

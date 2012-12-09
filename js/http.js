@@ -33,10 +33,15 @@ http = new function() {
 			}
 		});
 	};
+	
+	self.publicUser;
+	
 	self.User = function(userName, password, profile) {
+		var self = this;
 		this.userName = userName;
 		this.password = password;
 		this.profile = profile;
+		return self;
 	};
 
 	self.postNew = function(user, message, callback) {
@@ -192,6 +197,67 @@ http = new function() {
 			}
 		});
 	};
+	
+	/**
+	 * return entity(http.User) if success otherwise it would be -1
+	 */
+	self.login = function(username,password,callback){
+		var server_url = Constant.GET_SERVER_URL_USER_LOGIN;
+		
+		$.ajax({
+			url : server_url,
+			type: "POST",
+			dataType : "json",
+			timeout : Constant.ajax_timeout,
+			data : {"login_user":username,"login_pass":password,"login":"login"},
+			success : function(data) {
+				var login = data.login;
+				if(login=="Yes"){
+					
+					self.publicUser = new self.User(username, password, data.profile);
+					
+//					self.User = new self.User(username, password, data.profile);
+					callback(self.publicUser);
+				}else
+					callback(-1);	
+				
+			},
+			error : function(obj, message) {
+				callback(-1);
+			}
+		});
+	};
+	
+	/**
+	 * @param exam now it is empty 
+	 */
+	self.register = function(fname,lname,email,pass,r_pass,exam,callback){
+		var server_url = Constant.GET_SERVER_URL_USER_REGISTER;
+		
+		$.ajax({
+			url : server_url,
+			type: "POST",
+			dataType : "json",
+			timeout : Constant.ajax_timeout,
+			data : {"fname":fname,"lname":lname,"email":email,"pass":pass,"r_pass":r_pass,"exam":exam},
+			success : function(data) {
+				var register = data.register;
+				if(register=="Yes"){
+					//process login...
+					self.login(email,pass,function(data){
+						callback(data);
+					});
+//					http.User = new self.User(username, password, data.profile);
+//					callback(self.User);
+				}else
+					callback(data.error);	
+				
+			},
+			error : function(obj, message) {
+				callback(-1);
+			}
+		});
+	};
 
 	self.DiscussionUserVO = function(userID, uname, extra, location, aboutme,
 			post, imgAttach, head) {
@@ -225,6 +291,6 @@ http = new function() {
 		this.questionId = questionId;
 
 	};
-
+	
 	return self;
 }
