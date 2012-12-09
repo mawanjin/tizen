@@ -9,4 +9,5 @@ Constant = new function(){
 	this.application_mail_content = "Hello,";
 	this.DEFAULT_APP_CAPTURE_DIRECTORY="ArcadiaPrep/capture";
 	
+	this.ajax_timeout = 10000;
 };

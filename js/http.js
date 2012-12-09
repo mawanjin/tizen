@@ -14,6 +14,7 @@ http = new function() {
 				abc : new Date()
 			},
 			dataType : "json",
+			timeout : Constant.ajax_timeout,
 			success : function(data) {
 				var rs = new Array();
 				var discussions = data.discussions;
@@ -26,6 +27,9 @@ http = new function() {
 							o.question_id));
 				}
 				callback(rs);
+			},
+			error : function(){
+				callback(-1);
 			}
 		});
 	};
@@ -37,13 +41,48 @@ http = new function() {
 
 	self.postNew = function(user, message, callback) {
 		var server_url = Constant.GET_SERVER_URL_POST_A_NEW_DISCUSSION;
-		var subject = '';
+		var subject = message;
 		if (message.length > 32)
 			subject = message.substring(0, 32);
 		$.ajax({
 			url : server_url,
 			type : "POST",
 			// fileElementId : 'pic',
+			timeout : Constant.ajax_timeout,
+			data : {
+				"login_user" : user.userName,
+				"login_pass" : user.password,
+				"login" : "login",
+				"step" : "2",
+				"cod" : "123",
+				"type" : "1",
+				"play_time" : "0",
+				"message" : message,
+				"subject" : subject	
+			},
+			// dataType : "json",
+			success : function(data) {
+				$("#div_test").text(data);
+				//callback("1");
+				
+			},
+			error : function(obj, message) {
+				callback(-1);
+			}
+		});
+
+	};
+	
+	self.postForAGivenQuestion = function(user,questionId, message, callback) {
+		var server_url = (Constant.GET_SERVER_URL_POST_FOR_A_GIVEN_QUESTION+questionId).replace("$",questionId);
+		var subject = message;
+		if (message.length > 32)
+			subject = message.substring(0, 32);
+		$.ajax({
+			url : server_url,
+			type : "POST",
+			// fileElementId : 'pic',
+			timeout : Constant.ajax_timeout,
 			data : {
 				"login_user" : user.userName,
 				"login_pass" : user.password,
@@ -60,7 +99,39 @@ http = new function() {
 				callback("1");
 			},
 			error : function(obj, message) {
-				callback("0" + message);
+				callback(-1);
+			}
+		});
+
+	};
+	//
+	self.postReply = function(user,discussionId, message, callback) {
+		var server_url = (Constant.Constant.GET_SERVER_URL_POST_REPLY+discussionId);
+		var subject = message;
+		if (message.length > 32)
+			subject = message.substring(0, 32);
+		$.ajax({
+			url : server_url,
+			type : "POST",
+			// fileElementId : 'pic',
+			timeout : Constant.ajax_timeout,
+			data : {
+				"login_user" : user.userName,
+				"login_pass" : user.password,
+				"login" : "login",
+				"step" : "2",
+				"cod" : "123",
+				"type" : "1",
+				"play_time" : "0",
+				"message" : message,
+				"subject" : subject	
+			},
+			// dataType : "json",
+			success : function(data) {
+				callback("1");
+			},
+			error : function(obj, message) {
+				callback(-1);
 			}
 		});
 
@@ -72,6 +143,7 @@ http = new function() {
 		$.ajax({
 			url : server_url,
 			dataType : "json",
+			timeout : Constant.ajax_timeout,
 			success : function(data) {
 				var rs = new Array();
 				var discussions = data.discussions;
@@ -84,6 +156,9 @@ http = new function() {
 							o.question_id));
 				}
 				callback(rs);
+			},
+			error : function(obj, message) {
+				callback(-1);
 			}
 		});
 	};
@@ -93,6 +168,7 @@ http = new function() {
 		$.ajax({
 			url : server_url,
 			dataType : "json",
+			timeout : Constant.ajax_timeout,
 			success : function(data) {
 				var uname = '';
 				var extra = '';
@@ -110,6 +186,9 @@ http = new function() {
 						location, aboutme, post, imgAttach, head);
 
 				callback(rs);
+			},
+			error : function(obj, message) {
+				callback(-1);
 			}
 		});
 	};

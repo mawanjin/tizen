@@ -134,7 +134,12 @@ function bindEvent() {
 		
 	});
 	$("#btn_login").click(function() {
-		alert("good");
+		//check log status
+		if(http.User){//log out
+			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
+		}else{//log in
+			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+		}
 	});
 	$("#perfdata").click(function() {
 		generateCategoryBarForSta(function(){
@@ -149,18 +154,28 @@ function bindEvent() {
 		//load data from server(HTTP).
 		http.findDiscussionsByExamType(function(data){
 			console.log("findDiscussionsByExamType() called");
+			if(data==-1){
+				$("#loading_discussion").hide();
+				alert("time out ,please try later.");
+				return;
+			}
 			var html='';
 			for(var i=0;i<data.length;i++){
 				var o = data[i];
 				var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
+				var questionID = o.questionId;
+				var date = '<font color=blue size=1>'+o.date+'</font>';
 				var title = o.uname;
 				var attach = o.attachIamge;
+				var go = '';
+				if(questionID!=0)
+					go = '<font color=blue size=1>Go to problemset</font>';
 				if(!attach)attach='';
 				else
 					attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
 				var content = o.message;
 				
-				html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><img src="./css/images/chat.png " /></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr></table></td></tr></table></li>';
+				html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
 			}
 			$("#loading_discussion").hide();
 			$("#thelist_discussion").html(html);
@@ -185,33 +200,88 @@ function bindEvent() {
 	});
 	$("#post").click(function() {
 		//check the type of reply:plain or reply for one
-		
-		alert("post");
+		current_post_type = 1;
+		$("#reply_textarea").html("");
 	});
 	
 }
+
+function postForQuestion(questionId){
+	current_question_id = questionId;
+	current_post_type = 2;
+	$("#reply_textarea").html("");
+	//post(2);
+}
+
+var current_post_type;
+var current_question_id;
+var current_discussion_id;
 /**
  * 
  * @param type 1-post new 2-for given question 3-reply
- */
-function post(type){
-	//show loading
-	$("#loading_post").html(util.getLoading());
-	$("#loading_post").show();
+ */ 
+function post(){
+	
+	console.log("bindEvent() called,and type="+current_post_type);
+	
 	//post data to server
 	//step 1 -  check user login status if not login show the login dialog
 	//step 2 - after login post to server
-	var user = new http.User("mwj@hotmail.com","123456",5); 
-	http.postNew(user,"tttttest....",function(data){
+	var user = new http.User("mwj@hotmail.com","123456",5);
+	var message = $("#reply_textarea").val();
+	if(message==""){
+		alert("Please input something.");
+		return;
+	}
+	//show loading
+	$("#loading_post").html(util.getLoading());
+	$("#loading_post").show();
+	
+	if(current_post_type==1){
+		http.postNew(user,message,function(data){
+			$("#loading_post").hide();
+			if(data==-1){
+				$("#loading_post").hide();
+				alert("time out ,please try later.");
+				return;
+			}else
+				$("#disc_no_text").trigger("click");
+		});
+	}else if(current_post_type==2){
+		http.postForAGivenQuestion(user,current_question_id, message,function(data){
+			$("#loading_post").hide();
+			if(data==-1){
+				$("#loading_post").hide();
+				alert("time out ,please try later.");
+				return;
+			}else
+				$("#disc_no_text").trigger("click");
+		});
+	}else if(current_post_type==3){
+		http.postReply(user,current_discussion_id, message,function(data){
+			$("#loading_post").hide();
+			if(data==-1){
+				$("#loading_post").hide();
+				alert("time out ,please try later.");
+				return;
+			}else
+				$("#disc_no_text").trigger("click");
+		});
+	}else {
 		$("#loading_post").hide();
-		alert(data);
-	});
+		alert("invalid type");
+	}
+	
 	
 }
 
 function showUserInfo(userId,head,attach){
 	
 	http.getUserInfo(userId,function(data){
+		if(data==-1){
+			alert("time out ,please try later.");
+			return;
+		}
 		
 		$("#userinfo_content_head").html("<img src='"+head+"' />");
 		
@@ -219,13 +289,9 @@ function showUserInfo(userId,head,attach){
 		$("#userinfo_content_name").html(data.uname);
 		$("#userinfo_content_post").html(data.post+" Posts");
 		$("#userinfo_content_aboutme").html(data.aboutme);
-		if(attach){
+		if(attach&&attach!=undefined&&attach!="undefined"){
 			$("#attachImg_userinfo").html("<img width=50% height=30% src='"+attach+"' onclick=showBigAttachForUserInfo('"+attach+"'); />");
-			
 		}
-		
-		
-		
 	});
 }
 
