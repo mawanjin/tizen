@@ -218,6 +218,14 @@ function bindEvent() {
 		$("#reply_textarea").html("");
 	});
 	
+	$("#popupPhotoPicker").bind({
+		popupafterclose: function(event, ui) {setTimeout(showPopupRegister,100);}
+	});
+	
+}
+
+function showPopupRegister(){
+	$("#popupRegister").popup("open");
 }
 
 function postForQuestion(questionId){

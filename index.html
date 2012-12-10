@@ -170,8 +170,8 @@
 					<table>
 						<tr>
 							<!-- photo -->
-							<td>
-								<div style="background-color:gray;">Set Photo</div>
+							<td style="background-color:gray;">
+								<a href="#popupPhotoPicker" style="text-decoration:none;" data-rel="popup" data-position-to="window">Set Photo</a>
 							</td>
 							<td>
 								<input type="text"  id="fname" value="" placeholder="First Name*">
@@ -202,6 +202,14 @@
 
 			<!-- loading -->
 		<div id="loading_login" class='div_center'></div>
+		</div>
+		<!-- popup -photo picker -->
+		<div data-role="popup" id="popupPhotoPicker" data-theme="b"
+				data-position-to="window">
+				<ul data-role="listview" data-icon="arrow-r">
+					<li><a href="#">Select from gallery</a></li>
+					<li><a href="#">Take photo</a></li>
+				</ul>
 		</div>
 		<!-- /header -->
 
