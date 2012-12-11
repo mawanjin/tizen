@@ -295,18 +295,18 @@ function DBManager() {
 				});
 			};
 	
-			self.findQuestionsByExAppID = function(orderby,callback){
+			self.findQuestionsByExAppID = function(exAppId,callback){
 				
 				self.db.transaction(function(tx) {
 					console.log("findQuestionsByExAppID() called");
-					tx.executeSql(self.selectFindQuestionsByExAppIDStatement,[orderby], function(tx,
+					tx.executeSql(self.selectFindQuestionsByExAppIDStatement,[exAppId], function(tx,
 							result) {
 						var rs = new Array();
 						var dataset = result.rows;
-						rs.push(new self.BookMark("1", "exappid", "questionId", 1, "title", "2012-12-07 19:45:21"));
+						
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);
-							rs.push(new self.BookMark(o['id'], o['exappid'], o['questionId'], o['position'], o['title'], o['date']));
+							rs.push(new self.Questions(o['id'], exAppId, o['name'], o['difficulty'], o['text_block1a'], o['text_block1b'], o['text_block1c'], o['text_block1d'], o['image'], o['question_stem_a'], "", "", "", o['answer1_a'], o['answer2_a'], o['answer3_a'], o['answer4_a'], o['answer5_a'], o['answer6_a'], o['solution'], o['solution_text'], o['solution_text1'], o['solution_text2'], o['solution_text3'], o['solution_text4'], o['solution_text5'], o['date'],o['idx'] , o['pt_id'], o['pt_section'], o['pt_qid'], o['pt_group_first'], o['video1'],  o['video2']));
 						}
 						callback(rs);
 					}, self.onError);
@@ -1228,13 +1228,14 @@ function DBManager() {
 		};
 		
 		this.getAnswerLetters = function(){
+			//alert(this.answer1A+";"+this.answer2A+this.answer3A+";"+this.answer4A+";"+this.answer5A+";"+this.answer6A);
 			var rs = new Array();
 			if(this.answer1A&&this.answer1A!="")rs.push("A");
-			else if(this.answer2A&&this.answer2A!="")rs.push("B");
-			else if(this.answer3A&&this.answer3A!="")rs.push("C");
-			else if(this.answer4A&&this.answer4A!="")rs.push("D");
-			else if(this.answer5A&&this.answer5A!="")rs.push("E");
-			else if(this.answer6A&&this.answer6A!="")rs.push("F");
+			if(this.answer2A&&this.answer2A!="")rs.push("B");
+			if(this.answer3A&&this.answer3A!="")rs.push("C");
+			if(this.answer4A&&this.answer4A!="")rs.push("D");
+			if(this.answer5A&&this.answer5A!="")rs.push("E");
+			if(this.answer6A&&this.answer6A!="")rs.push("F");
 			return rs;
 		};
 		

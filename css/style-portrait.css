@@ -118,3 +118,26 @@ opacity:1;
 	background-color:white;position:absolute;width:100%;height:92%;
 }
 
+#choice_bg{
+	position: absolute; bottom: 0; width: 100%; left: 0; height: 150px;text-align:center;
+}
+
+#choice_bg img{
+	width:60%;
+	height:70%;
+}
+
+#choicePanelContainer{
+	position: absolute; bottom: 0px; width: 100%; left: 0; height: 80px;text-align:center;
+}
+
+#choicePanelContainer img{
+	width:40px;
+}
+.choicePanelMarginTd{
+	width:35%;
+}
+.choice_panel_img_two_btn{
+	width:100%;
+	height:30px;
+}

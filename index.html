@@ -34,6 +34,7 @@
 <script type="text/javascript" src="./js/XMLParser.js"></script>
 <script type="text/javascript" src="./js/user.js"></script>
 <script type="text/javascript" src="./js/orientation.js"></script>
+<script type="text/javascript" src="./js/choice_panel.js"></script>
 <script type="text/javascript" src="./js/packages.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 
@@ -667,15 +668,49 @@
 		</div>
 		<!-- /header -->
 		<!-- content -->
-		<div id="wrapper_problemIntro" class="wrapper">
-			<div class="scroller">
-				<ul id="thelist_problemSetinfo">
-				</ul>
-			</div>
+		<div id="workspace" >
+			
 		</div>
 		<!-- choice panel -->
-		<div id="choicePanelContainer" style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;text-align:center;">
-			
+		<div id="choice_bg" >
+			<table width=100% height=100% border=0>
+				<tr>
+					<td valign="bottom">
+						<img width=60% src="./css/images/answerpannel.png" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="choicePanelContainer">
+			<table width=100% height=100% border=0>
+				<tr>
+					<td class="choicePanelMarginTd"></td>
+					<td valign=top>
+						<img width="60px" src="./css/images/answer_a.png" />
+					</td>
+					<td valign="top">
+						<img width="60px" src="./css/images/answer_b.png" />
+					</td>
+					<td valign="top">
+						<img width="60px" src="./css/images/answer_c.png" />
+					</td>
+					<td valign="top">
+						<img width="60px" src="./css/images/answer_d.png" />
+					</td>
+					<td valign="top">
+						<img width="60px" src="./css/images/answer_e.png" />
+					</td>
+					<td valign="top">
+						<img width="60px" src="./css/images/answer_f.png" />
+					</td>
+					<td class="choicePanelMarginTd"></td>
+				</tr>
+				<tr>
+					<td colspan=4 align="right"><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
+					<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<!-- /page qeustionview -->
