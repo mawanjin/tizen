@@ -22,8 +22,11 @@
 <link id="loading_css" rel="stylesheet" href="./css/loading-portrait.css" />
 <link id="listview_css" rel="stylesheet" href="./css/listview-portrait.css" />
 
+<script type="text/javascript" src="./js/base64.js"></script>
+<script type="text/javascript" src="./js/sha1.js"></script>
 <script type="text/javascript" src="./js/http.js"></script>
 <script type="text/javascript" src="./js/util.js"></script>
+<script type="text/javascript" src="./js/encryptionUtil.js"></script>
 
 <script type="text/javascript" src="./js/iscroll-lite.js?v4"></script>
 <script id="constant_js" type="text/javascript" src="./js/constant.js"></script>
@@ -207,7 +210,7 @@
 		<div data-role="popup" id="popupPhotoPicker" data-theme="b"
 				data-position-to="window">
 				<ul data-role="listview" data-icon="arrow-r">
-					<li><a href="#">Select from gallery</a></li>
+					<li><a href="#" onclick="showGallery();">Select from gallery</a></li>
 					<li><a href="#">Take photo</a></li>
 				</ul>
 		</div>
@@ -318,8 +321,8 @@
 				<tr>
 					<td width=50% valign="middle"><img id="btnResume"
 						src="./css/images/resume_button.png" height="30px" /></td>
-					<td width=50% align=right valign="middle"><img id="btnBegin"
-						src="./css/images/begin_button.png" height="30px" /></td>
+					<td width=50% align=right valign="middle"><a href="#qeustionview"> <img id="btnBegin"
+						src="./css/images/begin_button.png" height="30px" onclick="beginPractice()" /></a></td>
 				</tr>
 			</table>
 		</div>
@@ -620,6 +623,63 @@
 		</form>
 	</div>
 	<!-- /page reply -->
+	
+	<!-- #qeustionview -->
+	<div data-role="page" id="qeustionview">
+		<div class="head_bg">
+		<table width=100% height=100% cellpadding=0 cellspacing=0 border=0
+				valign="top">
+				<tr>
+					<td width=80px align=center valign="middle">
+						<!-- back button -->
+							<div style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:19px;color:white;">10/26</div>
+							<img id="btnMenu" onclick="showProblemMenuList();"
+								src="./css/images/btn.png" height="30px" width="80px" />
+					</td>
+					<td></td>
+					<td align=center>
+						<img id="btnBackward" onclick="void(0);"
+								src="./css/images/backward.png" height="30px" />
+					</td>
+					<td align=center>
+						<img id="btnBackward" onclick="void(0);"
+								src="./css/images/forward.png" height="30px" />
+					</td>
+					<td align=center>
+						<div style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:25px;color:red;">0</div>
+						<img id="btnDiscussion" onclick="void(0);"
+								src="./css/images/disc_no_text.png" height="30px" />
+					</td>
+					<td align=center>
+						<img id="btnBackward" onclick="void(0);"
+								src="./css/images/bookmark.png" height="30px" />
+					</td>
+					
+					<td align="right">
+						<div id="problemIntro_btnReview">
+							<img id="btnReview" src="./css/images/menu_button.png"
+								width="80px" height="30px" />
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+		<!-- /header -->
+		<!-- content -->
+		<div id="wrapper_problemIntro" class="wrapper">
+			<div class="scroller">
+				<ul id="thelist_problemSetinfo">
+				</ul>
+			</div>
+		</div>
+		<!-- choice panel -->
+		<div id="choicePanelContainer" style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;text-align:center;">
+			
+		</div>
+	</div>
+	<!-- /page qeustionview -->
+	
 	<!-- /page -->
 	
 	

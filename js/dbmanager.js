@@ -55,6 +55,8 @@ function DBManager() {
 	self.selectFindAllBookMark = 'select k.* from bookmark k  order by ?';
 	self.selectGetExamResultInfosBySectionStatement = "select o.* from exam_result_info o  where finish='true' and section=? order by start_time desc";
 	self.selectGetAverageExamResultInfosBySectionStatement = "select o.ex_app_id ex_app_id ,o.ex_app_name ex_app_name,avg(o.score) score,avg(o.end_time) time, avg(o.end_time)/o.question_count per, o.question_count question_count from exam_result_info o  where finish='true' and section=? group by ex_app_id  order by start_time desc";
+	self.selectFindQuestionsByExAppIDStatement = "select * from iphone_questions where ex_app_id=? order by pt_qid";
+	
 	
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
@@ -292,6 +294,25 @@ function DBManager() {
 					}, self.onError);
 				});
 			};
+	
+			self.findQuestionsByExAppID = function(orderby,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findQuestionsByExAppID() called");
+					tx.executeSql(self.selectFindQuestionsByExAppIDStatement,[orderby], function(tx,
+							result) {
+						var rs = new Array();
+						var dataset = result.rows;
+						rs.push(new self.BookMark("1", "exappid", "questionId", 1, "title", "2012-12-07 19:45:21"));
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							rs.push(new self.BookMark(o['id'], o['exappid'], o['questionId'], o['position'], o['title'], o['date']));
+						}
+						callback(rs);
+					}, self.onError);
+				});
+			};
+					
 
 	self.getTime = function(second){
 		var min = parseInt(second/60);
@@ -1139,6 +1160,191 @@ function DBManager() {
 		this.difficulty=difficulty;
 		this.videoUrl=videoUrl;
 	};
+	
+	self.Questions = function(id,exAppID,name,difficulty,textBlock1A,textBlock1B,textBlock1C,textBlock1D,image,questionStemA,questionStemB,questionStemC,questionStemD,answer1A,answer2A,answer3A,answer4A,answer5A,answer6A,solution,solutionText,solutionText1,solutionText2,solutionText3,solutionText4,solutionText5,date,idx,ptId,ptSection,ptQid,ptGroupFirst,video1,video2){
+		this.id = id;
+		this.exAppID = exAppID;
+		this.name = name;
+		this.difficulty = difficulty;
+		this.textBlock1A = textBlock1A;
+		this.textBlock1B =textBlock1B;
+		this.textBlock1C = textBlock1C;
+		this.textBlock1D = textBlock1D;
+		this.image = image;
+		this.questionStemA = questionStemA;
+		this.questionStemB = questionStemB;
+		this.questionStemC = questionStemC;
+		this.questionStemD = questionStemD;
+		this.answer1A = answer1A;
+		this.answer2A = answer2A;
+		this.answer3A = answer3A;
+		this.answer4A = answer4A;
+		this.answer5A = answer5A;
+		this.answer6A = answer6A;
+		this.solution = solution;
+		this.solutionText = solutionText;
+		this.solutionText1 = solutionText1;
+		this.solutionText2 = solutionText2;
+		this.solutionText3 = solutionText3;
+		this.solutionText4 = solutionText4;
+		this.solutionText5 = solutionText5;
+		this.date = date;
+		this.idx = idx;
+		this.ptId = ptId;
+		this.ptSection = ptSection;
+		this.ptQid = ptQid;
+		this.ptGroupFirst = ptGroupFirst;
+		this.video1 = video1;
+		this.video2 = video2;
+		
+		this.setTextBlock1A = function(textBlock1A){
+			var result;
+			var code;
+			code = "a"+1+"r"+5+"c"+0+"p?";
+			try{
+				result = EncryptionUtil.dencrypt(textBlock1A,false,code);
+			}catch(error){
+				this.questionStemA = "";
+				console.log("[ERR] DBmanager:EncryptionUtil.dencrypt error:: " + error.message);
+			}
+			this.questionStemA.replaceAll("[\\r\\n]", " ");
+		};
+		
+		this.getSolution = function(){
+			var rs = "";
+			if(this.solution.length>0){
+				for(var i in this.solution){
+					if(this.solution[i]=='a'||this.solution[i]=='A')rs+="0";
+					else if(this.solution[i]=='b'||this.solution[i]=='B')rs+="1";
+					else if(this.solution[i]=='c'||this.solution[i]=='C')rs+="2";
+					else if(this.solution[i]=='d'||this.solution[i]=='D')rs+="3";
+					else if(this.solution[i]=='e'||this.solution[i]=='E')rs+="4";
+					else if(this.solution[i]=='f'||this.solution[i]=='F')rs+="5";
+					else if(this.solution[i]=='g'||this.solution[i]=='G')rs+="6";
+					else if(this.solution[i]=='h'||this.solution[i]=='H')rs+="7";
+				}
+			}
+			return rs;
+		};
+		
+		this.getAnswerLetters = function(){
+			var rs = new Array();
+			if(this.answer1A&&this.answer1A!="")rs.push("A");
+			else if(this.answer2A&&this.answer2A!="")rs.push("B");
+			else if(this.answer3A&&this.answer3A!="")rs.push("C");
+			else if(this.answer4A&&this.answer4A!="")rs.push("D");
+			else if(this.answer5A&&this.answer5A!="")rs.push("E");
+			else if(this.answer6A&&this.answer6A!="")rs.push("F");
+			return rs;
+		};
+		
+		this.getAnswers = function(){
+			var a, b, c, d, e, f;
+			var a2,b2,c2,d2,e2,f2;
+			var rs = "[";
+			
+			if (this.answer1A&&this.answer1A!="") {
+				a = this.answer1A.replaceAll("\'", "\\\\'");
+			} else {
+				rs += "]";
+				return rs;
+			}
+			
+			if (this.solutionText1&&this.solutionText1!="") {
+				a2 = this.solutionText1.replaceAll("\'", "\\\\'");
+			} else {
+				a2 = "";
+			}
+			rs += "{text:'" + a + "',tip:'" + a2 + "'},";
+			
+			if (this.answer2A&&this.answer2A!="") {
+				b = this.answer2A.replaceAll("\'", "\\\\'");
+			} else {
+				b = "";
+				rs = rs.substring(0, rs.length() - 1);
+				rs += "]"
+				return rs;
+			}
+			
+			if (this.solutionText2&&this.solutionText2!="") {
+				b2 = this.solutionText2.replaceAll("\'", "\\\\'");
+			} else {
+				b2 = "";
+			}
+			
+			rs += "{text:'" + b + "',tip:'" + b2 + "'},";
+			
+			if (this.answer3A&&this.answer3A!="") {
+				c = this.answer3A.replaceAll("\'", "\\\\'");
+			} else {
+				rs = rs.substring(0, rs.length() - 1);
+				rs += "]"
+				return rs;
+			}
+			
+			if (this.solutionText3&&this.solutionText3!="") {
+				c2 = this.solutionText3.replaceAll("\'", "\\\\'");
+			} else {
+				c2 = "";
+			}
+			rs += "{text:'" + c + "',tip:'" + c2 + "'},";
+			
+			if (this.answer4A&&this.answer4A!="") {
+				d = this.answer4A.replaceAll("\'", "\\\\'");
+			} else {
+				rs = rs.substring(0, rs.length() - 1);
+				rs += "]";
+				return rs;
+			}
+			
+			if (this.solutionText4&&this.solutionText4!="") {
+				d2 = this.solutionText4.replaceAll("\'", "\\\\'");
+			} else {
+				d2 = "";
+			}
+			rs += "{text:'" + d + "',tip:'" + d2 + "'},";
+			
+			if (this.answer5A &&this.answer5A!="") {
+				e = this.answer5A.replaceAll("\'", "\\\\'");
+			} else {
+				rs = rs.substring(0, rs.length() - 1);
+				rs += "]";
+				return rs;
+			}
+			
+			if (this.solutionText5&&this.solutionText5!="") {
+				e2 = this.solutionText5.replaceAll("\'", "\\\\'");
+			} else {
+				e2 = "";
+			}
+			rs += "{text:'" + e + "',tip:'" + e2 + "'},";
+			
+			if (this.answer6A &&this.answer6A!="") {
+				f = this.answer6A.replaceAll("\'", "\\\\'");
+			} else {
+				rs = rs.substring(0, rs.length() - 1);
+				rs += "]";
+				return rs;
+			}
+			
+			f2 = "";
+			rs += "{text:'" + f + "',tip:'" + f2 + "'}";
+			rs += "]";
+			return rs;
+		};
+		
+		this.getHintCount = function(){
+			var c = 0;
+			if (this.textBlock1B&&this.textBlock1B!="")
+				c++;
+			if (this.textBlock1C&&this.textBlock1C!="")
+				c++;
+			if (this.textBlock1D&&this.textBlock1D!="")
+				c++;
+			return c;
+		};
+	};
+	
 	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);	
 	return self;
 }

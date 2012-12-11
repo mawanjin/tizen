@@ -6,6 +6,10 @@ var init = function() {
 };
 $(document).ready(init);
 
+function exit(){
+	tizen.application.exit();
+//	window.application.exit();
+}
 
 var db;
 /**
@@ -108,7 +112,10 @@ function startup() {
 	 });
 
 	bindEvent();
-	
+//	this.questionStemA.replaceAll("[\\r\\n]", " ");
+	var code = "a"+1+"r"+5+"c"+0+"p?";
+	var rr = EncryptionUtil.dencrypt("0b8cdf3b8f94bea2549e8f643893a278e5200b10VwxWBwQCBQIHBlMGBQBRA1xUUFViXVFSCkFWXwFEC1NFRltREVQMDVhXQFhZBhYFXENbABFaVREEQgVfWEVUVBYEGVAKAEQ4b1NQV0RAAhVRGFNURAJED0NCXgtfGF9XRRYOVRVaSlUHExlYCkQTXQxRWxRFWgZBUlFbXERBVxRWFjpuQlBfRgtCB0QVQVBUQgdcQhANElQJDQtSBwZQWQ0LVgMAWVNTAQYHBgAI",false,code)
+	alert(rr.replaceAll("[\\r\\n]", " "));
 }
 
 // ======================
@@ -688,7 +695,8 @@ function showInforContent(which){
 		},2000);
 	}
 }
-
+var current_exAppId;
+var current_exAppName;
 function showProblemSetInforContent(position){
 		$("#btnReview").show();
 		$("#btnResume").show();
@@ -704,6 +712,9 @@ function showProblemSetInforContent(position){
 		
 		
 		var exAppId = o.exAppId;
+		
+		current_exAppId = exAppId;
+		current_exAppName = title;
 		
 	    db.findProblemSetIntroductionByExAppId(exAppId,function(data){
 	    	var content = data;
@@ -782,4 +793,25 @@ function register(){
 		}
 	});
 }
+
+function showGallery(){
+	
+}
+
+function beginPractice(){
+//	current_exAppId
+//  current_exAppName
+// generate choice pancel
+	generateChoicePancel();
+}
+
+function generateChoicePancel(){
+	var html='';
+	
+	
+	
+	
+	$("#choicePanelContainer").html(html);
+}
+
 
