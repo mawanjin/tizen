@@ -361,11 +361,11 @@
 </Reference>
 <Reference URI="css/scroll-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>bPYpzCNxi8Rfi2Rk+cxwVbwnAs5buYvNV1cJTNQ+Ja4=</DigestValue>
+<DigestValue>QOxhIjLffQ39YcauqDGeLSb4xgykCUYDGT65HhtzbDo=</DigestValue>
 </Reference>
 <Reference URI="css/scroll.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>H3Cw8wnlrMhIuDgpWU6RDh0EW4jF70dgcDaorDaHobU=</DigestValue>
+<DigestValue>axHvd5+GGN69LiB0TIq2MrWrAoR273ikJZ5aSKBCyOo=</DigestValue>
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -393,7 +393,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>pXQyKBItf8jLB5IL/b8CtrCO9BVU3O/flk2dtFOumU4=</DigestValue>
+<DigestValue>xwTQBun04Kkh80UGk1htMrAo7qEaZ3omcTZZx/RCM4c=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -429,7 +429,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>svnzZWHLtlkyYEaBbJyOxnt21lP2/XJ1S152ddNOQ6M=</DigestValue>
+<DigestValue>ERMEgq5zJsMw2IffvxVWAd2mk7BSwEbuLCfAvZmse/8=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -481,7 +481,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>XeDT1vDvdOozowsbycpojIn1UxuyPV7BVudyl60YvHk=</DigestValue>
+<DigestValue>c5Qwe+Zr7Q93czl1o5hwxX+y30XGFEglJ66GDDPyflw=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -509,7 +509,7 @@
 </Reference>
 <Reference URI="js/util.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SPUT0nunGSJhmvcAUTIiu+CFrpru8U25uGZQoBMX0h0=</DigestValue>
+<DigestValue>TULTcyOEJDdwDa6fMMyOHMWcv8G3p+7K1fwAw/ALQFM=</DigestValue>
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3612,9 +3612,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-WD2DbUebW8LQTjgk30S8xelxCm2bECuSWqltKtAeVVBhQLgrsGbFnRZzgsCnHPfEYmw4OhIZ5gQP
-zLUYVaBPVW5V5fLveIpi6uh1D1z7OQP357RrjR9rkLhY1lD5QoTm4P6y76/N1o6tJsORfo3nNIvo
-BaUqjpTOfLN/42gcZIs=
+lAWkSomTT+VniK7ugnYpOnJUYXnkCpJPPeG07zySm8Sx958BxFD2rKhNKx8wFAovfNuhVZsfVxMG
+kcGgTYJoMJa6fSPYjl9gfM0WZycXbUK9sBCiTNhHoFryzK+KrzW5m+S/WiPdrzOsHpQxKASQ0tWy
+G1Y0+6F1X3CkqpDg+Fg=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

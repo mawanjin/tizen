@@ -35,6 +35,10 @@ function DBManager() {
 	self.insertExamResultInfoStatement = 'insert into exam_result_info(ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section) values(?,?,?,?,?,?,?,?,?);';
 	self.insertquestionExamResultInfoStatement = 'insert into  question_exam_result_info(ex_app_id,question_id,choice,correctChoice,mark) values(?,?,?,?,?);';
 	self.insertQuestionWorkSpaceNoteStatement = 'insert into question_workspace_notes (ex_app_id,question_id,note) values(?,?,?);';
+	
+	self.saveBookMarkStatement = 'insert into bookmark(ex_app_id,question_id,position,title,date) values(?,?,?,?,?)';
+	
+	
 	// drop statement
 	self.dropIphoneExAppsStatement = 'DROP TABLE iphone_ex_apps';
 	self.dropExAppPagesStatement = 'DROP TABLE iphone_ex_app_pages';
@@ -52,7 +56,9 @@ function DBManager() {
 	self.selectFindProblemSetIntroductionByExAppId='';
 	self.selectFindExAppPageByExAppIDStatement='select * from iphone_ex_app_pages where ex_app_id=?';
 	self.getNumOfQuestionsStatement = 'select count(*) as c from iphone_questions where ex_app_id = ?';
-	self.selectFindAllBookMark = 'select k.* from bookmark k  order by ?';
+	self.selectFindAllBookMark = 'select k.* from bookmark k  order by ? desc';
+	self.selectFindBookMarkByExappIdStatement = 'select k.* from bookmark k  where ex_app_id = ?';
+	self.selectFindBookMarkByQuestionIdStatement = 'select k.* from bookmark k  where question_id = ?';
 	self.selectGetExamResultInfosBySectionStatement = "select o.* from exam_result_info o  where finish='true' and section=? order by start_time desc";
 	self.selectGetAverageExamResultInfosBySectionStatement = "select o.ex_app_id ex_app_id ,o.ex_app_name ex_app_name,avg(o.score) score,avg(o.end_time) time, avg(o.end_time)/o.question_count per, o.question_count question_count from exam_result_info o  where finish='true' and section=? group by ex_app_id  order by start_time desc";
 	self.selectFindQuestionsByExAppIDStatement = "select * from iphone_questions where ex_app_id=? order by pt_qid";
@@ -61,6 +67,9 @@ function DBManager() {
 	// update
 	self.updateItemBoughtStatement = "UPDATE items SET bought = ? WHERE _id = ?";
 	self.updateItemFavoriteStatement = "UPDATE items SET favorite = ? WHERE _id = ?";
+	
+	// delete
+	self.deleteBookMarkStatement = 'delete from bookmark where ex_app_id=? and question_id=?';
 
 	self.selectAllItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.bought), 0) AS boughtcount, COUNT(*) AS totalcount FROM items";
 	self.selectAllFavoriteItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.favorite), 0) AS totalcount FROM items";
@@ -148,14 +157,14 @@ function DBManager() {
 		});
 	};
 
-	self.insertBookmark = function(ex_app_id, question_id, position, title,
-			date) {
-		self.db.transaction(function(tx) {
-			tx.executeSql(self.insertBookmarkStatement, [ ex_app_id,
-					question_id, position, title, date ], self.onSuccess,
-					self.onError);
-		});
-	};
+//	self.insertBookmark = function(ex_app_id, question_id, position, title,
+//			date) {
+//		self.db.transaction(function(tx) {
+//			tx.executeSql(self.insertBookmarkStatement, [ ex_app_id,
+//					question_id, position, title, date ], self.onSuccess,
+//					self.onError);
+//		});
+//	};
 
 	self.insertquestionExamResultInfo = function(ex_app_id, question_id,
 			choice, correctChoice, mark) {
@@ -173,6 +182,29 @@ function DBManager() {
 					self.onError);
 		});
 	};
+
+	self.insertBookMark = function(ex_app_id, question_id,position,title,date, callback) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.saveBookMarkStatement, [ ex_app_id, question_id,position,title,date], function() {
+				callback(1);
+			}, function() {
+				callback(0);
+			});
+		});
+	};
+	
+	self.saveBookMark = function(ex_app_id, question_id,position,title,date, callback){
+		self.deleteBookMark(ex_app_id, question_id, function(rs){
+			if(rs==1){
+				self.insertBookMark(ex_app_id, question_id, position, title, date, function(rs){
+					callback(rs);
+				});
+			}else{
+				callback(0);
+			}
+		});
+	};
+	
 
 	self.selectListData = function(callback) {
 		self.db.transaction(function(tx) {
@@ -285,13 +317,53 @@ function DBManager() {
 							result) {
 						var rs = new Array();
 						var dataset = result.rows;
-						rs.push(new self.BookMark("1", "exappid", "questionId", 1, "title", "2012-12-07 19:45:21"));
+						//rs.push(new self.BookMark("1", "exappid", "questionId", 1, "title", "2012-12-07 19:45:21"));
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);
-							rs.push(new self.BookMark(o['id'], o['exappid'], o['questionId'], o['position'], o['title'], o['date']));
+							rs.push(new self.BookMark(o['id'], o['ex_app_id'], o['question_id'], o['position'], o['title'], o['date']));
 						}
 						callback(rs);
 					}, self.onError);
+				});
+			};
+			
+			self.findBookMarkByExappId = function(id,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findBookMarkByExappIds() called");
+					tx.executeSql(self.selectFindBookMarkByExappIdStatement,[id], function(tx,
+							result) {
+						var rs = new Array();
+						var dataset = result.rows;
+						
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							rs.push(new self.BookMark(o['id'], o['ex_app_id'], o['question_id'], o['position'], o['title'], o['date']));
+						}
+						callback(rs);
+					}, function(){
+						callback(rs);
+					});
+				});
+			};
+
+			self.findBookMarkByQuestionId = function(id,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findBookMarkByQuestionId() called");
+					tx.executeSql(self.selectFindBookMarkByQuestionIdStatement,[id], function(tx,
+							result) {
+						var dataset = result.rows;
+						
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							//callback (new self.BookMark(o['id'], o['ex_app_id'], o['question_id'], o['position'], o['title'], o['date']));
+							callback(1);
+						}
+						
+					}, function(){
+						callback(0);
+					});
 				});
 			};
 	
@@ -551,6 +623,17 @@ function DBManager() {
 						var dataset = result.rows;
 						callback(dataset);
 					}, self.onError);
+		});
+	};
+	
+	self.deleteBookMark = function(ex_app_id,question_id,callback) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.deleteBookMarkStatement, [ ex_app_id,question_id ],
+					function(){
+				callback(1);
+			}, function(){
+				callback(0);
+			});
 		});
 	};
 

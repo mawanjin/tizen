@@ -49,6 +49,8 @@
 	var mybookmarkScroll;
 	var myStaScroll;
 	var myDiscussionScroll;
+	var myQuestionMenuScroll;
+	var myQuestionListScroll;
 
 	function loaded() {
 		myInfoScroll = new iScroll('wrapper_info');
@@ -59,6 +61,13 @@
 		mybookmarkScroll = new iScroll('wrapper_bookmark');
 		myStaScroll = new iScroll('wrapper_sta');
 		myDiscussionScroll = new iScroll('wrapper_discussion');
+		myQuestionMenuScroll = new iScroll('wrapper_question_menu', { fixedScrollbar: false,bounce:false});
+		myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
+		
+		setTimeout(function(){
+			myQuestionMenuScroll.refresh();
+			myQuestionListScroll.refresh();
+		},2000);
 	}
 
 	document.addEventListener('touchmove', function(e) {
@@ -633,8 +642,8 @@
 				<tr>
 					<td width=80px align=center valign="middle">
 						<!-- back button -->
-							<div style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:19px;color:white;">10/26</div>
-							<img id="btnMenu" onclick="showProblemMenuList();"
+							<div onclick="showQuestionList();" id="questionview_number_indicator" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:19px;color:white;">10/26</div>
+							<img  onclick="showQuestionList();"
 								src="./css/images/btn.png" height="30px" width="80px" />
 					</td>
 					<td></td>
@@ -652,14 +661,14 @@
 								src="./css/images/disc_no_text.png" height="30px" />
 					</td>
 					<td align=center>
-						<img id="btnBackward" onclick="void(0);"
+						<img id="btnBookmark" onclick="updateBookMark();"
 								src="./css/images/bookmark.png" height="30px" />
 					</td>
 					
 					<td align="right">
-						<div id="problemIntro_btnReview">
-							<img id="btnReview" src="./css/images/menu_button.png"
-								width="80px" height="30px" />
+						<div>
+							<img  src="./css/images/menu_button.png"
+								width="80px" height="30px" onclick="showQuestionMenu();" />
 						</div>
 					</td>
 				</tr>
@@ -671,6 +680,29 @@
 		<div id="workspace" >
 			
 		</div>
+		<!-- Menu -->
+		<div id="wrapper_question_menu" style="display: none;">
+			<div id="scrollerquestionMenu">
+				<ul class="thelist">
+					<li style="background-color:black;color:white;">Exam option</li>
+					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()">Exit the Exam</a></li>
+					<li><a href="#main" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
+					<li><a href="#" onclick="report()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
+					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()">Cancel</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Question List -->
+		
+		<div id="wrapper_question_list" style="display: none;">
+			<div id="scrollerQuestionList">
+					<ul id="thelist_question_list" class="thelist">
+					</ul>
+			</div>
+		</div>
+		
+		
+		
 		<!-- choice panel -->
 		<div id="choice_bg" >
 			<table width=100% height=100% border=0>

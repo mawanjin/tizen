@@ -353,15 +353,16 @@ function updateBookmark(orderby){
 		for(var i=0;i<data.length;i++){
 			var o = data[i];
 			var title = o.title;
-			var date = o.date;
-			html+='<li><a href="javascript:alert(11);" style="color:black;text-decoration:none;"><table width=100%><tr><td width=50%>'+title+'</td><td>'+date+'</td></tr></table></a></li>';
+			var date = util.formateDate(o.date);
+			
+			html+='<li><a href="javascript:alert(11);" style="color:black;text-decoration:none;"><table width=100%><tr><td width=50% align=center>'+title+'</td><td align=center>'+date+'</td></tr></table></a></li>';
 		}
 		$("#thelist_bookmark").html(html);
 		$("#thelist_bookmark").trigger("create");
 		
 		setTimeout(function () {
 			mybookmarkScroll.refresh();
-		},2000);
+		},100);
 	});
 }
 
@@ -698,6 +699,7 @@ function showInforContent(which){
 var current_exAppId;
 var current_exAppName;
 var current_questions;
+var current_question_position;
 function showProblemSetInforContent(position){
 		$("#btnReview").show();
 		$("#btnResume").show();
@@ -804,19 +806,135 @@ function beginPractice(){
 //  current_exAppName
 // current_questions	
 // generate choice pancel
-	console.log("beginPractice() called");
-	db.findQuestionsByExAppID(current_exAppId,function(questions){
-		current_questions = questions;
-		console.log("current_questions.length="+current_questions.length);
-		
-		mChoicePanel.generateChoicePancel(current_questions[0],function(which){
-			console.log("option is "+which+" onclick...");
-		},function(){
-			console.log("generateChoicePancel() successed");
+// current_question_position
+	setTimeout(function(){
+		current_question_position = 0;
+		console.log("beginPractice() called");
+		db.findQuestionsByExAppID(current_exAppId,function(questions){
+			current_questions = questions;
+			console.log("current_questions.length="+current_questions.length);
+			//update the number indicator of questions 
+			$("#questionview_number_indicator").html("1/"+current_questions.length);
+			updateQuestionList();
+			mChoicePanel.generateChoicePancel(current_questions[0],function(which){
+				console.log("option is "+which+" onclick...");
+				console.log("start show circle picture for choice");
+			},function(){
+				console.log("generateChoicePancel() successed");
+			});
 		});
+		
+		setTimeout(function () {
+			checkBookMark();
+		},1000);
+		
+		setTimeout(function () {
+			myQuestionListScroll.refresh();
+		},1000);
+	});
+}
+
+function checkBookMark(){
+	db.findBookMarkByQuestionId(current_questions[current_question_position].id,function(rs){
+		if(rs==1){
+			$("#btnBookmark").attr("src","./css/images/bookmark2.png");
+			$("#btnBookmark").trigger("create");
+		}
+	});
+}
+
+function updateQuestionList(){
+	console.log("updateQuestionList() called");
+	db.findBookMarkByExappId(current_exAppId,function(bookmarks){
+		console.log("findBookMarkByExappId() called,and exAppId="+current_exAppId);
+		console.log("bookmarks's length = "+bookmarks.length);
+		var html = '<li style="background-color:black;color:white;">'+current_exAppName+'</li>';
+		var f = false;
+		for(var i=0;i<current_questions.length;i++){
+			f = false;
+			var bookmark='';
+			for(var j=0;j<bookmarks.length;j++){
+				if(current_questions[i].id==bookmarks[j].questionId){
+					f = true;
+					break;
+				}
+			}
+			if(f)bookmark='<img src="./css/images/bookmark2.png"  style="height:30px;" />'; 
+
+										html += '<li><a href="javascript:onclick="changePage('
+									+ i
+									+ ')";" style="color:black;text-decoration:none;">'
+									+'<table width=100% border=0><tr><td width=30% >'+bookmark+'</td><td align="left">'
+									+ 'Question '
+									+ (i + 1) + '</td></tr></table></a></li>';
+		}
+		
+		$("#thelist_question_list").html(html);
+		$("#thelist_question_list").trigger("create");
 	});
 	
+	setTimeout(function () {
+		myQuestionListScroll.refresh();
+	},100);
+}
+
+function updateBookMark(){
+	if(util.contains($("#btnBookmark").attr("src"),"bookmark.png")){//mark the question and save it into database.
+		console.log("save bookmark...");
+		$("#btnBookmark").attr("src","./css/images/bookmark2.png");
+		$("#btnBookmark").trigger("create");
+//		ex_app_id, question_id,position,title,date, callback
+		db.saveBookMark(current_exAppId,current_questions[current_question_position].id,current_question_position,current_exAppName,util.currentTimeMillis(),function(rs){
+			//rs ==1 success 0 fail
+		});
+	}else{//delete from db
+		console.log("delete bookmark...");
+		$("#btnBookmark").attr("src","./css/images/bookmark.png");
+		$("#btnBookmark").trigger("create");
+		db.deleteBookMark(current_exAppId,current_questions[current_question_position].id,function(rs){
+			//rs ==1 success 0 fail
+		});
+	}
 }
 
 
+function showQuestionList(){
+	if($("#wrapper_question_list").is(":hidden")){
+		$("#wrapper_question_list").show();
+		updateQuestionList();
+		setTimeout(function () {
+			myQuestionListScroll.refresh();
+		},100);
+	}
+	else
+		$("#wrapper_question_list").hide();	
+}
 
+function showQuestionMenu(){
+	if($("#wrapper_question_menu").is(":hidden"))
+		$("#wrapper_question_menu").show();
+	else
+		$("#wrapper_question_menu").hide();	
+}
+
+function exitExam(){
+	alert("exit");
+	$("#wrapper_question_menu").hide();
+}
+
+function finishExam(){
+	alert("finishExam");
+	$("#wrapper_question_menu").hide();
+}
+
+function report(){
+	alert("report");
+}
+
+function dismissQuestionMenu(){
+	$("#wrapper_question_menu").hide();
+}
+
+function changePage(position){
+	alert(position);
+}
