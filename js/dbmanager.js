@@ -56,7 +56,8 @@ function DBManager() {
 	self.selectFindProblemSetIntroductionByExAppId='';
 	self.selectFindExAppPageByExAppIDStatement='select * from iphone_ex_app_pages where ex_app_id=?';
 	self.getNumOfQuestionsStatement = 'select count(*) as c from iphone_questions where ex_app_id = ?';
-	self.selectFindAllBookMark = 'select k.* from bookmark k  order by ? desc';
+	self.selectFindAllBookMarkOrderByDate = 'select k.* from bookmark k  order by date desc';
+	self.selectFindAllBookMarkOrderByTitle = 'select k.* from bookmark k  order by date ';
 	self.selectFindBookMarkByExappIdStatement = 'select k.* from bookmark k  where ex_app_id = ?';
 	self.selectFindBookMarkByQuestionIdStatement = 'select k.* from bookmark k  where question_id = ?';
 	self.selectGetExamResultInfosBySectionStatement = "select o.* from exam_result_info o  where finish='true' and section=? order by start_time desc";
@@ -313,7 +314,13 @@ function DBManager() {
 				
 				self.db.transaction(function(tx) {
 					console.log("findAllBookMark() called");
-					tx.executeSql(self.selectFindAllBookMark,[orderby], function(tx,
+					var statment = self.selectFindAllBookMarkOrderByDate;
+					if(orderby=="date"){
+						statment = self.selectFindAllBookMarkOrderByDate;
+					}else
+						statment = self.selectFindAllBookMarkOrderByTitle;
+					
+					tx.executeSql(statment,[], function(tx,
 							result) {
 						var rs = new Array();
 						var dataset = result.rows;
