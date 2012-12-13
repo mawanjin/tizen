@@ -168,10 +168,11 @@ function bindEvent() {
 		});
 	});
 	$("#disc_no_text").click(function() {
+		fromQuestionView = false;
 		//show loading
 		$("#loading_discussion").html(util.getLoading());
 		$("#loading_discussion").show();
-		
+		$("#discussion_back").attr("href","#main");
 		//load data from server(HTTP).
 		http.findDiscussionsByExamType(function(data){
 			console.log("findDiscussionsByExamType() called");
@@ -221,7 +222,10 @@ function bindEvent() {
 	});
 	$("#post").click(function() {
 		//check the type of reply:plain or reply for one
-		current_post_type = 1;
+		if(fromQuestionView)
+			current_post_type = 2;
+		else
+			current_post_type = 1;
 		$("#reply_textarea").html("");
 	});
 	
@@ -237,7 +241,7 @@ function showPopupRegister(){
 
 function postForQuestion(questionId){
 	current_question_id = questionId;
-	current_post_type = 2;
+	current_post_type = 3;
 	$("#reply_textarea").html("");
 	//post(2);
 }
@@ -245,6 +249,7 @@ function postForQuestion(questionId){
 var current_post_type;
 var current_question_id;
 var current_discussion_id;
+var current_examResultInfo;
 /**
  * 
  * @param type 1-post new 2-for given question 3-reply
@@ -273,8 +278,16 @@ function post(){
 				$("#loading_post").hide();
 				alert("time out ,please try later.");
 				return;
-			}else
-				$("#disc_no_text").trigger("click");
+			}else{
+				if(fromQuestionView){
+					$("#discussionForQ").trigger("click");
+					showDiscussionForQuestion();
+				}else{
+					$("#disc_no_text").trigger("click");
+				}
+					
+			}
+				
 		});
 	}else if(current_post_type==2){
 		http.postForAGivenQuestion(user,current_question_id, message,function(data){
@@ -283,8 +296,16 @@ function post(){
 				$("#loading_post").hide();
 				alert("time out ,please try later.");
 				return;
-			}else
-				$("#disc_no_text").trigger("click");
+			}else{
+				if(fromQuestionView){
+					$("#discussionForQ").trigger("click");
+					showDiscussionForQuestion();
+				}else{
+					$("#disc_no_text").trigger("click");
+				}
+					
+			}
+				
 		});
 	}else if(current_post_type==3){
 		http.postReply(user,current_discussion_id, message,function(data){
@@ -293,8 +314,15 @@ function post(){
 				$("#loading_post").hide();
 				alert("time out ,please try later.");
 				return;
-			}else
-				$("#disc_no_text").trigger("click");
+			}else{
+				if(fromQuestionView){
+					$("#discussionForQ").trigger("click");
+					showDiscussionForQuestion();
+				}else{
+					$("#disc_no_text").trigger("click");
+				}
+					
+			}
 		});
 	}else {
 		$("#loading_post").hide();
@@ -700,6 +728,8 @@ var current_exAppId;
 var current_exAppName;
 var current_questions;
 var current_question_position;
+var fromQuestionView=false;
+
 function showProblemSetInforContent(position){
 		$("#btnReview").show();
 		$("#btnResume").show();
@@ -822,6 +852,11 @@ function beginPractice(){
 			},function(){
 				console.log("generateChoicePancel() successed");
 			});
+			//get examResultInfo
+			db.getExamResultInfoNew(current_exAppId,current_exAppName,questions,function(info){
+				current_examResultInfo = info;
+				examResultInfo.startTime = util.currentTimeMillis;
+			});
 		});
 		
 		setTimeout(function () {
@@ -831,10 +866,57 @@ function beginPractice(){
 		setTimeout(function () {
 			myQuestionListScroll.refresh();
 		},1000);
+		
+		setTimeout(function () {
+			updateDiscussionNumber();
+		},1000);
+	});
+}
+
+function updateDiscussionNumber(){
+	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
+		$("#discussion_num").html(data.length);
+	});
+}
+
+function showDiscussionForQuestion(){
+	fromQuestionView = true;
+	//show loading
+	$("#loading_discussion").html(util.getLoading());
+	$("#loading_discussion").show();
+	$("#discussion_back").attr("href","#qeustionview");
+	$("#discussion_back").trigger("create");
+	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
+		var html='';
+		for(var i=0;i<data.length;i++){
+			var o = data[i];
+			var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
+			var questionID = o.questionId;
+			var date = '<font color=blue size=1>'+o.date+'</font>';
+			var title = o.uname;
+			var attach = o.attachIamge;
+			var go = '';
+			if(questionID!=0)
+				go = '<font color=blue size=1>Go to problemset</font>';
+			if(!attach)attach='';
+			else
+				attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
+			var content = o.message;
+			
+			html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
+		}
+		$("#loading_discussion").hide();
+		$("#thelist_discussion").html(html);
+		$("#thelist_discussion").trigger("create");
+		
+		setTimeout(function () {
+			myDiscussionScroll.refresh();
+		},2000);
 	});
 }
 
 function checkBookMark(){
+	
 	db.findBookMarkByQuestionId(current_questions[current_question_position].id,function(rs){
 		if(rs==1){
 			$("#btnBookmark").attr("src","./css/images/bookmark2.png");
@@ -935,6 +1017,11 @@ function dismissQuestionMenu(){
 	$("#wrapper_question_menu").hide();
 }
 
-function changePage(position){
-	alert(position);
+function changePage(i){
+	if(current_questions.length==0)return;
+	if(i>current_questions.length)i=current_questions.length-1;
+	else if(i<0)i=0;
+	current_question_position = i;
+	//reset choice panel
+	
 }

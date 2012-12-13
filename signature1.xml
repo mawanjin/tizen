@@ -11,6 +11,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>UxU0SkFBhxPmsm8qIZUPUFDeYZ34JRy5Darap/HWeeE=</DigestValue>
 </Reference>
+<Reference URI="circle.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ZhunljZtXDKH4iKQ2jtnk4bhGscxfBJhLZ2VHyj7/Dc=</DigestValue>
+</Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>qK0FSYKnLiILcQb5FGTvKluWQ3hyIaty0SqDObVVZhc=</DigestValue>
@@ -311,6 +315,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>oiEP2PY2OddL/oMAy12xnTim2OgMnmi7zR8hUT/PKGo=</DigestValue>
 </Reference>
+<Reference URI="css/images/ws_tile.jpg">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>U5ZfCm0g91WNla/qXcucATi3q3jEk1XTAbXJyie3jW8=</DigestValue>
+</Reference>
 <Reference URI="css/jqm-docs.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>bHJ1XHdpZMNiWOrjCEVrVHOMSRugvNMIR0qMXRbpz7o=</DigestValue>
@@ -369,11 +377,11 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>3rLGAegm9oDV1BWyBqSOq+oMQOkmeEd0LRxZy4l+0QU=</DigestValue>
+<DigestValue>u8leOY7raAeiQaGO/HRJDNET8YjSKACFcgfhYlHCbO0=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>0AWMZ6Bzbdu6cI6oJYKRgsek7rIKxGmIikKTXaYtkMw=</DigestValue>
+<DigestValue>GFC42mkL7Lac3i8suLGPP0te/yaxOTNRh8Mq3ELIuOU=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -393,7 +401,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>xwTQBun04Kkh80UGk1htMrAo7qEaZ3omcTZZx/RCM4c=</DigestValue>
+<DigestValue>LHTO5stWwas9wrImgja7cC+wBMiJzJwmnqioHc6gBDQ=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -429,7 +437,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ERMEgq5zJsMw2IffvxVWAd2mk7BSwEbuLCfAvZmse/8=</DigestValue>
+<DigestValue>KNN8NdkmXwVzDhU4kZHUFv4NnOomd/KaAK0dhoLzRlc=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -441,7 +449,7 @@
 </Reference>
 <Reference URI="js/http.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>UTkOry6L0Pb7W9SpFt1zQR1z+XupwB5CQEznbVCmRkI=</DigestValue>
+<DigestValue>U8BbX9sDyvfS6PJyeZfsZm582KHi4v4Wi36VILEfVCY=</DigestValue>
 </Reference>
 <Reference URI="js/iscroll-lite.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -481,7 +489,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>c5Qwe+Zr7Q93czl1o5hwxX+y30XGFEglJ66GDDPyflw=</DigestValue>
+<DigestValue>DdFEa6uJguej2zhGi7a7pIznSjHoRZLSrLzEl/dmqJA=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -531,9 +539,21 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>sV0N+SwYZ7tqE+zYy5bw0Tamq1gTMN5+4YpHJsod088=</DigestValue>
 </Reference>
+<Reference URI="problemfull.html">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>78GdsIoibud1h1v2ODJWyUt6e25ucjkxqptwj3Wiv14=</DigestValue>
+</Reference>
 <Reference URI="problempackages.plist">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Sz21GrtMDjD0e1+cylUzjvxHc6Yec/5bJW1afgVILMA=</DigestValue>
+</Reference>
+<Reference URI="select.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>/nuFNlCLbEBMFKxsgoKqczvCfGDWr0uv3UUQd5e6FG0=</DigestValue>
+</Reference>
+<Reference URI="strike.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>jClElKMZuHiriOPfkD3t9LIf6JPlKNtkemLQ7zbTRi4=</DigestValue>
 </Reference>
 <Reference URI="tizen-web-ui-fw/latest/js/cultures/globalize.culture.af-ZA.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3603,6 +3623,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>XwVPpjz5d/7AM/FVNSk0gsDzLojkBFpgFFsGWAyKAIU=</DigestValue>
 </Reference>
+<Reference URI="wtrmrk.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ZU1SoHphdKYJy9Q+XcT1Z5VRKL5urHdbHnQjyObIKtM=</DigestValue>
+</Reference>
 <Reference URI="#prop">
 <Transforms>
 <Transform Algorithm="http://www.w3.org/2006/12/xml-c14n11"></Transform>
@@ -3612,9 +3636,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-lAWkSomTT+VniK7ugnYpOnJUYXnkCpJPPeG07zySm8Sx958BxFD2rKhNKx8wFAovfNuhVZsfVxMG
-kcGgTYJoMJa6fSPYjl9gfM0WZycXbUK9sBCiTNhHoFryzK+KrzW5m+S/WiPdrzOsHpQxKASQ0tWy
-G1Y0+6F1X3CkqpDg+Fg=
+PyWp06zGobEqrhlScNW1uLFdefIx2tG4HUpHBOuwAqqDSYl1K9yMuuKcWsr8X2hR8TsIWepsEYRn
+H0k5wVcUTCKBn7a3v/RDje1oLdxHGKc9HDGjad2a0RTezvRU3916mMYihXow8g0O7T+tq1wdHlm9
+vbpbPhlC1DIRwcSIz0A=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

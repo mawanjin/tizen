@@ -495,7 +495,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main"><img src="./css/images/normal_back_btn.png"
+							<a id="discussion_back" href="#main"><img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -598,7 +598,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#discussion"><img
+							<a id="reply_cancel" href="#discussion"><img
 								src="./css/images/cancel_button.png" height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -656,9 +656,9 @@
 								src="./css/images/forward.png" height="30px" />
 					</td>
 					<td align=center>
-						<div style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:25px;color:red;">0</div>
-						<img id="btnDiscussion" onclick="void(0);"
-								src="./css/images/disc_no_text.png" height="30px" />
+						<div id="discussion_num" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:25px;color:red;">0</div>
+						<a id="discussionForQ" href="#discussion" onclick="showDiscussionForQuestion();"><img id="btnDiscussion"
+								src="./css/images/disc_no_text.png" height="30px" /></a>
 					</td>
 					<td align=center>
 						<img id="btnBookmark" onclick="updateBookMark();"
@@ -677,8 +677,8 @@
 		</div>
 		<!-- /header -->
 		<!-- content -->
-		<div id="workspace" >
-			
+		<div id="workspace">
+			<iframe id="i_workspace" src="problemfull.html" ></iframe>
 		</div>
 		<!-- Menu -->
 		<div id="wrapper_question_menu" style="display: none;">

@@ -67,8 +67,8 @@ http = new function() {
 			},
 			// dataType : "json",
 			success : function(data) {
-				$("#div_test").text(data);
-				//callback("1");
+				//$("#div_test").text(data);
+				callback("1");
 				
 			},
 			error : function(obj, message) {
@@ -111,7 +111,7 @@ http = new function() {
 	};
 	//
 	self.postReply = function(user,discussionId, message, callback) {
-		var server_url = (Constant.Constant.GET_SERVER_URL_POST_REPLY+discussionId);
+		var server_url = (Constant.GET_SERVER_URL_POST_REPLY+discussionId);
 		var subject = message;
 		if (message.length > 32)
 			subject = message.substring(0, 32);
@@ -149,7 +149,7 @@ http = new function() {
 			url : server_url,
 			dataType : "json",
 			timeout : Constant.ajax_timeout,
-			success : function(data) {
+			success : function(data) { 
 				var rs = new Array();
 				var discussions = data.discussions;
 				for ( var i = 0; i < discussions.length; i++) {

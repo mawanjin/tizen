@@ -141,3 +141,16 @@ opacity:1;
 	width:100%;
 	height:30px;
 }
+#workspace{
+	background-image: url('./images/ws_tile.jpg');
+	background-repeat:repeat;
+	position:absolute;width:100%;height:100%;border:2px solid gray;margin-top:0px;
+	margin-right:10px;
+}
+#i_workspace{
+	width:100%;
+	background-color:white;
+	border:0px solid gray;
+	margin-top:10px;
+	margion-left:10px;
+}

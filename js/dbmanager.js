@@ -1251,6 +1251,42 @@ function DBManager() {
 		this.videoUrl=videoUrl;
 	};
 	
+	/**
+	 * 
+	 * @param exAppID
+	 * @param exAppName
+	 * @param questions <Array of question list>
+	 */
+	self.getExamResultInfoNew = function(exAppID,exAppName,questions,callabck){
+		var info = new self.ExamResultInfo("", "", exAppID, exAppName, "", false, -1, util.currentTimeMillis, 0, questions.length, new Array());
+		
+		for(var i=0;i<questions.length;i++){
+			var qes = new self.QuestionExamStatus("", exAppID, questions[i].id, "-1", questions[i].solution, false);
+			info.QuestionExamStatus.push(qes);
+		}
+		
+		self.GetQuestionResultInfoByExAppIDs(exAppID,function(questionExamStatuss){
+			if(questionExamStatuss&&questionExamStatuss.length>1){
+				
+				for(var k=0;k<questionExamStatuss.length;k++){
+				
+					var questionExamStatus = questionExamStatuss[k];
+					//
+					for(var m=0;m<info.QuestionExamStatus.length;m++){
+						if(info.QuestionExamStatus[m].id ==questionExamStatus.id){
+							info.QuestionExamStatus[m] = questionExamStatus;
+							break;
+						}
+					}
+					 
+				}
+			}
+			callabck(info);
+		});
+		
+		
+	};
+	
 	self.Questions = function(id,exAppID,name,difficulty,textBlock1A,textBlock1B,textBlock1C,textBlock1D,image,questionStemA,questionStemB,questionStemC,questionStemD,answer1A,answer2A,answer3A,answer4A,answer5A,answer6A,solution,solutionText,solutionText1,solutionText2,solutionText3,solutionText4,solutionText5,date,idx,ptId,ptSection,ptQid,ptGroupFirst,video1,video2){
 		this.id = id;
 		this.exAppID = exAppID;
