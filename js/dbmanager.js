@@ -30,11 +30,11 @@ function DBManager() {
 	self.insertIphoneExAppsStatement = 'insert into iphone_ex_apps values(?,?,?,?,?,?,?,?,?,?,?,?)';
 	self.insertIphoneExAppPagesStatement = 'insert into iphone_ex_app_pages values(?,?,?,?,?,?);';
 	self.insertIphoneQuestionsStatement = 'insert into iphone_questions values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-
 	self.insertBookmarkStatement = "insert into  bookmark(ex_app_id,question_id,position,title,date) values (?,?,?,?,?);";
 	self.insertExamResultInfoStatement = 'insert into exam_result_info(ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section) values(?,?,?,?,?,?,?,?,?);';
 	self.insertquestionExamResultInfoStatement = 'insert into  question_exam_result_info(ex_app_id,question_id,choice,correctChoice,mark) values(?,?,?,?,?);';
 	self.insertQuestionWorkSpaceNoteStatement = 'insert into question_workspace_notes (ex_app_id,question_id,note) values(?,?,?);';
+	
 	
 	self.saveBookMarkStatement = 'insert into bookmark(ex_app_id,question_id,position,title,date) values(?,?,?,?,?)';
 	
@@ -71,12 +71,11 @@ function DBManager() {
 	
 	// delete
 	self.deleteBookMarkStatement = 'delete from bookmark where ex_app_id=? and question_id=?';
-
 	self.selectAllItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.bought), 0) AS boughtcount, COUNT(*) AS totalcount FROM items";
 	self.selectAllFavoriteItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.favorite), 0) AS totalcount FROM items";
-
 	self.selectItemsFromListStatement = "SELECT * FROM items WHERE list = ? AND items.name LIKE 'pattern%'";
-
+	self.deleteExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
+	
 	self.orderItemsByName = " ORDER BY LOWER(items.name)";
 	self.orderItemsByStoreThenName = " ORDER BY LOWER(items.store), LOWER(items.name)";
 	self.orderItemsByTypeThenName = " ORDER BY LOWER(items.type), LOWER(items.name)";
@@ -150,11 +149,15 @@ function DBManager() {
 	};
 
 	self.insertExamResultInfo = function(ex_app_id, ex_app_name, score, finish,
-			progress, start_time, end_time, question_count, section) {
+			progress, start_time, end_time, question_count, section,callback) {
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.insertExamResultInfoStatement, [ ex_app_id,
 					ex_app_name, score, finish, progress, start_time, end_time,
-					question_count, section ], self.onSuccess, self.onError);
+					question_count, section ], function(){
+				callback(1);
+			}, function(){
+				callback(0);
+			});
 		});
 	};
 
@@ -192,6 +195,36 @@ function DBManager() {
 				callback(0);
 			});
 		});
+	};
+	
+	self.deleteExamResultInfoByExappId = function(ex_app_id,callback) {
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.deleteExamResultInfoStatment, [ ex_app_id], function() {
+				callback(1);
+			}, function() {
+				callback(0);
+			});
+		});
+	};
+
+	
+	self.saveExamResultInfo = function(examResultInfo,callback){
+		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
+		self.deleteExamResultInfoByExappId(examResultInfo.exAppID,function(rs){
+			console.log("deleteExamResultInfoByExappId() called. rs="+rs);
+			
+			if(rs==1){
+				self.insertExamResultInfo(examResultInfo.exAppID, examResultInfo.exAppName, examResultInfo.score, examResultInfo.finish, examResultInfo.progress, examResultInfo.startTime, examResultInfo.endTime, examResultInfo.questionCount, examResultInfo.section,function(rs){
+					console.log("insertExamResultInfo() called. rs="+rs);
+					callback(rs);
+					return;
+				});
+			}else{
+				callback(rs);
+				return;
+			}
+		});
+		
 	};
 	
 	self.saveBookMark = function(ex_app_id, question_id,position,title,date, callback){
@@ -361,6 +394,8 @@ function DBManager() {
 					tx.executeSql(self.selectFindBookMarkByQuestionIdStatement,[id], function(tx,
 							result) {
 						var dataset = result.rows;
+						
+						if(dataset.length==0)callback(0);
 						
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);

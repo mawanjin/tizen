@@ -861,16 +861,15 @@ function beginPractice(){
 		});
 		
 		setTimeout(function () {
-			checkBookMark();
-		},1000);
-		
-		setTimeout(function () {
 			myQuestionListScroll.refresh();
 		},1000);
 		
-		setTimeout(function () {
-			updateDiscussionNumber();
-		},1000);
+		//start count 
+		start_timer_date = timer.start();
+		
+//		setTimeout(function () {
+//			updateDiscussionNumber();
+//		},1000);
 	});
 }
 
@@ -924,6 +923,9 @@ function checkBookMark(){
 		if(rs==1){
 			$("#btnBookmark").attr("src","./css/images/bookmark2.png");
 			$("#btnBookmark").trigger("create");
+		}else{
+			$("#btnBookmark").attr("src","./css/images/bookmark.png");
+			$("#btnBookmark").trigger("create");
 		}
 	});
 }
@@ -946,9 +948,9 @@ function updateQuestionList(){
 			}
 			if(f)bookmark='<img src="./css/images/bookmark2.png"  style="height:30px;" />'; 
 
-										html += '<li><a href="javascript:onclick="changePage('
+										html += '<li><a href="javascript:onclick=changePage('
 									+ i
-									+ ')";" style="color:black;text-decoration:none;">'
+									+ ');" style="color:black;text-decoration:none;">'
 									+'<table width=100% border=0><tr><td width=30% >'+bookmark+'</td><td align="left">'
 									+ 'Question '
 									+ (i + 1) + '</td></tr></table></a></li>';
@@ -1008,8 +1010,8 @@ function exitExam(){
 }
 
 function finishExam(){
-	alert("finishExam");
 	$("#wrapper_question_menu").hide();
+	saveExamStatus(true);
 }
 
 function report(){
@@ -1025,29 +1027,42 @@ function whenChoiceOnClick(which){
 	console.log("start show circle picture for choice");
 }
 
+var start_timer_date;
+
 /**
  * when i=true,current_question_position will ++,false --.other numbers is the value of current_question_position 
  * @param i
  */
 function changePage(i){
+	$("#wrapper_question_list").hide();
 	
-	if(i==true||i=="true"){
-		i = current_question_position+1;
-	}else if(i==false||i=="false"){
-		i = current_question_position-1;
-	}
+	
+	
+	if(i=="true"){
+		current_question_position = current_question_position+1;
+	}else if(i=="false"){
+		current_question_position = current_question_position-1;
+	}else
+		current_question_position = i;
 	
 	if(current_questions.length==0)return;
-	if(i>current_questions.length-1)i=current_questions.length-1;
-	else if(i<0)i=0;
-	current_question_position = i;
-	
+	if(current_question_position>current_questions.length-1)current_question_position=current_questions.length-1;
+	else if(current_question_position<0)current_question_position=0;
+	 
 	
 	//update the number indicator of questions 
 	$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
 	
 	//set correct choice
 	current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_questions[current_question_position].solution;
+	
+	setTimeout(function () {
+		checkBookMark();
+	});
+	
+	setTimeout(function () {
+		updateDiscussionNumber();
+	});
 	
 	//load content
 	loadContent(false);
@@ -1059,6 +1074,8 @@ function changePage(i){
 	
 	//set privious selection
 	//mChoicePanel.setChoice(current_examResultInfo.QuestionExamStatus[current_question_position].choice);
+	
+	
 	
 }
 /**
@@ -1115,4 +1132,41 @@ function freshPassageStemChoices(passage,stem,answers,solution,solutionText){
 	
 	//invoke js method in iframe
 	window.frames["i_workspace"].freshPassageStemChoices(false,passage.replaceAll("\'", "\\\\'"),stem.replaceAll("\'", "\\\\'"),answers,solution,solutionText.replaceAll("\'", "\\\\'"));
+}
+
+/**
+ * keep exam status into DB when Finish or exit exam action is triggered.
+ */
+function saveExamStatus(finish){
+	
+	console.log("saveExamStatus() called. finish="+finish);
+	var totalTime = timer.stop();
+	//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
+	current_examResultInfo.endTime = totalTime;
+	current_examResultInfo.startTime = start_timer_date;
+	if(current_examResultInfo.progress<current_question_position)
+		current_examResultInfo.progress = current_question_position;
+	
+	var choiceCount = 0;
+	current_examResultInfo.finish = finish;
+	
+	var c = 0;
+	for(var i=0;i<current_examResultInfo.QuestionExamStatus.length;i++){
+		var o = current_examResultInfo.QuestionExamStatus[i];
+		//id,exAppID,questionId,choice,correctChoice,mark
+		if(o.choice==o.correctChoice)c=c+1;
+		if(o.choice!=-1)choiceCount=choiceCount+1;
+	}
+	
+	if(choiceCount>current_examResultInfo.progress)current_examResultInfo.progress =choiceCount;
+	current_examResultInfo.score = c;
+	current_examResultInfo.questionCount = current_questions.length;
+	current_examResultInfo.section = current_section;
+	
+	//save into db
+	db.saveExamResultInfo(current_examResultInfo,function(rs){
+		
+		if(finish){};
+		//redirect to exam review page. 
+	});
 }

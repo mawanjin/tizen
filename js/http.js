@@ -152,14 +152,17 @@ http = new function() {
 			success : function(data) { 
 				var rs = new Array();
 				var discussions = data.discussions;
-				for ( var i = 0; i < discussions.length; i++) {
-					var o = discussions[i];
-					rs.push(new self.DiscussionVO(o.id, o.discussion_id,
-							o.user_id, o.subject, o.message, o.date,
-							o.replied_to, o.pseudonym, o.cid, o.profile,
-							o.profile_pic, o.uname, o.member, o.attach_image,
-							o.question_id));
+				if(discussions&&discussions.length>0){
+					for ( var i = 0; i < discussions.length; i++) {
+						var o = discussions[i];
+						rs.push(new self.DiscussionVO(o.id, o.discussion_id,
+								o.user_id, o.subject, o.message, o.date,
+								o.replied_to, o.pseudonym, o.cid, o.profile,
+								o.profile_pic, o.uname, o.member, o.attach_image,
+								o.question_id));
+					}
 				}
+				
 				callback(rs);
 			},
 			error : function(obj, message) {
