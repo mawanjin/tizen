@@ -729,6 +729,7 @@ var current_exAppName;
 var current_questions;
 var current_question_position;
 var fromQuestionView=false;
+var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
 		$("#btnReview").show();
@@ -846,17 +847,17 @@ function beginPractice(){
 			//update the number indicator of questions 
 			$("#questionview_number_indicator").html("1/"+current_questions.length);
 			updateQuestionList();
-			mChoicePanel.generateChoicePancel(current_questions[0],function(which){
-				console.log("option is "+which+" onclick...");
-				console.log("start show circle picture for choice");
-			},function(){
+			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
 				console.log("generateChoicePancel() successed");
 			});
 			//get examResultInfo
 			db.getExamResultInfoNew(current_exAppId,current_exAppName,questions,function(info){
 				current_examResultInfo = info;
-				examResultInfo.startTime = util.currentTimeMillis;
+				current_examResultInfo.startTime = util.currentTimeMillis;
+				
+				changePage(current_question_position);
 			});
+			
 		});
 		
 		setTimeout(function () {
@@ -874,12 +875,14 @@ function beginPractice(){
 }
 
 function updateDiscussionNumber(){
+	console.log("updateDiscussionNumber() called");
 	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
 		$("#discussion_num").html(data.length);
 	});
 }
 
 function showDiscussionForQuestion(){
+	console.log("showDiscussionForQuestion() called");
 	fromQuestionView = true;
 	//show loading
 	$("#loading_discussion").html(util.getLoading());
@@ -1017,11 +1020,99 @@ function dismissQuestionMenu(){
 	$("#wrapper_question_menu").hide();
 }
 
+function whenChoiceOnClick(which){
+	console.log("option is "+which+" onclick...");
+	console.log("start show circle picture for choice");
+}
+
+/**
+ * when i=true,current_question_position will ++,false --.other numbers is the value of current_question_position 
+ * @param i
+ */
 function changePage(i){
+	
+	if(i==true||i=="true"){
+		i = current_question_position+1;
+	}else if(i==false||i=="false"){
+		i = current_question_position-1;
+	}
+	
 	if(current_questions.length==0)return;
-	if(i>current_questions.length)i=current_questions.length-1;
+	if(i>current_questions.length-1)i=current_questions.length-1;
 	else if(i<0)i=0;
 	current_question_position = i;
-	//reset choice panel
 	
+	
+	//update the number indicator of questions 
+	$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
+	
+	//set correct choice
+	current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_questions[current_question_position].solution;
+	
+	//load content
+	loadContent(false);
+	
+	//reset choice panel
+	mChoicePanel.generateChoicePancel(current_questions[current_question_position],whenChoiceOnClick,function(){
+		console.log("generateChoicePancel() successed");
+	});
+	
+	//set privious selection
+	//mChoicePanel.setChoice(current_examResultInfo.QuestionExamStatus[current_question_position].choice);
+	
+}
+/**
+ * 
+ * @param showSolution true|false
+ */
+function loadContent(showSolution){
+	console.log("loadContent() called");
+	
+	var question =  current_questions[current_question_position];
+	console.log(question.id);
+	  
+	var solution = current_questions[current_question_position].solution;
+	var s = "[";
+	for(var i=0;i<solution.length;i++ ){
+		if(i==solution.length-1)
+			s+=solution.charAt(i);
+		else
+			s+=solution.charAt(i)+",";
+	}
+	s+="]";
+	
+	freshPassageStemChoices(question.textBlock1A,question.questionStemA,question.getAnswers(),s,question.solutionText);
+	
+	//set choice
+	var choice = current_examResultInfo.QuestionExamStatus[current_question_position].choice;
+	
+	if(choice!=-1&&choice!=""){
+		var s="";
+		for(var i=0;i<choice.length;i++ ){
+			choice(choice.charAt(i));
+		}
+	}
+	
+	//set solution
+	if(showSolution&&showSolution==true){
+		showSolution();
+	}
+}
+
+function showSolution(){
+	window.frames["i_workspace"].showSolution();
+}
+
+function choice(option){
+	window.frames["i_workspace"].choice(option);
+}
+
+function freshPassageStemChoices(passage,stem,answers,solution,solutionText){
+	
+	console.log("freshPassageStemChoices() called,and parames=[passage="+passage+"],stem=["+stem+"],answers=["+answers+"],solution=["+solution+"],solutionText="+solutionText+"]");
+	//var json_answers = "[{text:'Analysis of fossilized pollen is a useful means  of supplementing and in some cases correcting  other sources of information regarding changes  in the Irish landscape.',tip:'<b>Correct:</b> Use the \"Reduce\" button to see the sections of the passage that support this answer choice. <br><br> Note how closely this choice tracks the author\\'s thesis.'},{text:'Analyses of historical documents, together with  pollen evidence, have led to the revision of  some previously accepted hypotheses regarding  changes in the Irish landscape.',tip:'<b>Wrong: Not supported by the passage.</b><br> The passage does not discuss using pollen analysis to make determinations about changes in the landscape.'},{text:'Analysis of fossilized pollen has proven to be a  valuable tool in the identification of ancient  plant species.',tip:'<b>Wrong: Not supported by the passage.</b><br>'},{text:'Analysis of fossilized pollen has provided new  evidence that the cultivation of such crops as  cereal grains, flax, and madder had a  significant impact on the landscape of Ireland.',tip:'<b>Wrong: Not supported by the passage.</b><br>'},{text:'While pollen evidence can sometimes  supplement other sources of historical  information, its applicability is severely  limited, since it cannot be used to identify  plant species.',tip:'<b>Wrong: Not supported by the passage.</b><br> The passage doesn\\'t say that the use of pollen analysis is \"severely limited.\"'}]";
+	answers = util.strToJson(answers);
+	
+	//invoke js method in iframe
+	window.frames["i_workspace"].freshPassageStemChoices(false,passage.replaceAll("\'", "\\\\'"),stem.replaceAll("\'", "\\\\'"),answers,solution,solutionText.replaceAll("\'", "\\\\'"));
 }

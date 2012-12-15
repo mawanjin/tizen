@@ -377,11 +377,11 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>u8leOY7raAeiQaGO/HRJDNET8YjSKACFcgfhYlHCbO0=</DigestValue>
+<DigestValue>BLOK1aXeDXxjSWNBCwyNl+M1O6LztRmi4R+noCp/XL0=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GFC42mkL7Lac3i8suLGPP0te/yaxOTNRh8Mq3ELIuOU=</DigestValue>
+<DigestValue>zFzRpRQnq0w3K5jM9D/ds9Arv1Ts0spwQ6UT6zK7crE=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -401,7 +401,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>LHTO5stWwas9wrImgja7cC+wBMiJzJwmnqioHc6gBDQ=</DigestValue>
+<DigestValue>L8QS1VvOnq+2fuVEEdtC5EFeidHbkLejOaez8eecLnE=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -421,11 +421,11 @@
 </Reference>
 <Reference URI="js/base64.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ufcuAFhdgr18+U9+mg/nPS8uPlTIWb4MRsSasRUW84Y=</DigestValue>
+<DigestValue>eZv08DOIeVpNejVdqWiUyUG9+D8bUVlGJRcx42jm7OE=</DigestValue>
 </Reference>
 <Reference URI="js/choice_panel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Pc3i/wS68uWcBPxWUgdFF4Y6CLfoGgrhjsElhsURKRg=</DigestValue>
+<DigestValue>eEOSje7vWaGecr0G6XK8evCfwe00KCoU8SY3IYIG6pE=</DigestValue>
 </Reference>
 <Reference URI="js/config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -437,11 +437,11 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>KNN8NdkmXwVzDhU4kZHUFv4NnOomd/KaAK0dhoLzRlc=</DigestValue>
+<DigestValue>R002p49vcD3nBcKXLBiApc/bIQ/rVzk0vG9Jz7VhLiU=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>fRUrlHAsXya3V8S4S+gcUOeZ04wJOx5jRSLWsVLcwnM=</DigestValue>
+<DigestValue>eWpGMU0j42uyQOG5V3Dx4aiJJyuDhdPyjGvJyRWJn+4=</DigestValue>
 </Reference>
 <Reference URI="js/fileUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -489,7 +489,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>DdFEa6uJguej2zhGi7a7pIznSjHoRZLSrLzEl/dmqJA=</DigestValue>
+<DigestValue>uKzPIYp0M3o9wkNHGQQeztAzoZcwAK7YlRU602XxAZA=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -517,7 +517,7 @@
 </Reference>
 <Reference URI="js/util.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>TULTcyOEJDdwDa6fMMyOHMWcv8G3p+7K1fwAw/ALQFM=</DigestValue>
+<DigestValue>KCA7Dd5LT9rLKFqbZLS434BHZDcXN8Woa+vYhEUERMA=</DigestValue>
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -541,7 +541,7 @@
 </Reference>
 <Reference URI="problemfull.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>78GdsIoibud1h1v2ODJWyUt6e25ucjkxqptwj3Wiv14=</DigestValue>
+<DigestValue>h6G52EhOl8HEHesNZydC6aAE9S9iYtA8pjCnt1agz9A=</DigestValue>
 </Reference>
 <Reference URI="problempackages.plist">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3636,9 +3636,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-PyWp06zGobEqrhlScNW1uLFdefIx2tG4HUpHBOuwAqqDSYl1K9yMuuKcWsr8X2hR8TsIWepsEYRn
-H0k5wVcUTCKBn7a3v/RDje1oLdxHGKc9HDGjad2a0RTezvRU3916mMYihXow8g0O7T+tq1wdHlm9
-vbpbPhlC1DIRwcSIz0A=
+T3H3+YCPKNef652fS4+rKU73CbaX7gLSL0UVU9VZ37fsloqyrqhSBdjNkt18/RZ+RowkE0msRPOM
+YX3kLNvosTzsePz0V6gUZ3pB3/zQgWCFbOnmDgfvqxG1usaVkVJcVTG5Ru0mOHqRlcJuYHjTbl28
+doXRrsXmgJF0Dav9Iak=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

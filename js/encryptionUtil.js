@@ -19,8 +19,13 @@ EncryptionUtil = new function() {
 		var result = new Array();
 		var keyBytes = util.getBytes(key);
 
-		for (var n = 0; n < len; n++)
-            result[n] = (bytes[n] ^ keyBytes[n % 40]);
+		for (var n = 0; n < len; n++){
+			var b = (bytes[n] ^ keyBytes[n % 40]);
+			if(b!=194)
+				result[n] = b;
+//			result[n] = (bytes[n] ^ keyBytes[n % 40]);
+		}
+            
 
 			
 		var subArray;

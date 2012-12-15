@@ -385,7 +385,10 @@ function DBManager() {
 						
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);
-							rs.push(new self.Questions(o['id'], exAppId, o['name'], o['difficulty'], o['text_block1a'], o['text_block1b'], o['text_block1c'], o['text_block1d'], o['image'], o['question_stem_a'], "", "", "", o['answer1_a'], o['answer2_a'], o['answer3_a'], o['answer4_a'], o['answer5_a'], o['answer6_a'], o['solution'], o['solution_text'], o['solution_text1'], o['solution_text2'], o['solution_text3'], o['solution_text4'], o['solution_text5'], o['date'],o['idx'] , o['pt_id'], o['pt_section'], o['pt_qid'], o['pt_group_first'], o['video1'],  o['video2']));
+							var q = new self.Questions(o['id'], exAppId, o['name'], o['difficulty'], o['text_block1a'], o['text_block1b'], o['text_block1c'], o['text_block1d'], o['image'], o['question_stem_a'], "", "", "", o['answer1_a'], o['answer2_a'], o['answer3_a'], o['answer4_a'], o['answer5_a'], o['answer6_a'], o['solution'], o['solution_text'], o['solution_text1'], o['solution_text2'], o['solution_text3'], o['solution_text4'], o['solution_text5'], o['date'],o['idx'] , o['pt_id'], o['pt_section'], o['pt_qid'], o['pt_group_first'], o['video1'],  o['video2']);
+							q.setTextBlock1A(q.textBlock1A);
+							q.setQuestionStemA(q.questionStemA);
+							rs.push(q);
 						}
 						callback(rs);
 					}, self.onError);
@@ -1323,17 +1326,31 @@ function DBManager() {
 		this.video1 = video1;
 		this.video2 = video2;
 		
-		this.setTextBlock1A = function(textBlock1A){
-			var result;
+		this.setQuestionStemA = function(questionStemA){
 			var code;
 			code = "a"+1+"r"+5+"c"+0+"p?";
 			try{
-				result = EncryptionUtil.dencrypt(textBlock1A,false,code);
+				this.questionStemA = EncryptionUtil.dencrypt(questionStemA,false,code);
 			}catch(error){
 				this.questionStemA = "";
 				console.log("[ERR] DBmanager:EncryptionUtil.dencrypt error:: " + error.message);
 			}
+			
 			this.questionStemA.replaceAll("[\\r\\n]", " ");
+			
+		};
+		
+		this.setTextBlock1A = function(textBlock1A){
+			var code;
+			code = "a"+1+"r"+5+"c"+0+"p?";
+			try{
+				this.textBlock1A = EncryptionUtil.dencrypt(textBlock1A,false,code);
+			}catch(error){
+				this.textBlock1A = "";
+				console.log("[ERR] DBmanager:EncryptionUtil.dencrypt error:: " + error.message);
+			}
+			
+			this.textBlock1A.replaceAll("[\\r\\n]", " ");
 		};
 		
 		this.getSolution = function(){
@@ -1371,68 +1388,73 @@ function DBManager() {
 			var rs = "[";
 			
 			if (this.answer1A&&this.answer1A!="") {
-				a = this.answer1A.replaceAll("\'", "\\\\'");
+				a = this.answer1A.replaceAll("\'", "\\'");
 			} else {
 				rs += "]";
 				return rs;
 			}
 			
 			if (this.solutionText1&&this.solutionText1!="") {
-				a2 = this.solutionText1.replaceAll("\'", "\\\\'");
-			} else {
+				a2 = this.solutionText1.replaceAll("\'", "\\'");
+			} else { 
 				a2 = "";
 			}
-			rs += "{text:'" + a + "',tip:'" + a2 + "'},";
+			
+			rs += "{text:'" + a + "',tip:'" + a2 + "'}";
 			
 			if (this.answer2A&&this.answer2A!="") {
-				b = this.answer2A.replaceAll("\'", "\\\\'");
+				 rs +=",";
+				 b = this.answer2A.replaceAll("\'", "\\'");
 			} else {
 				b = "";
-				rs = rs.substring(0, rs.length() - 1);
-				rs += "]"
+				//rs = rs.substring(0, rs.length() - 1);
+				rs += "]";
 				return rs;
 			}
 			
 			if (this.solutionText2&&this.solutionText2!="") {
-				b2 = this.solutionText2.replaceAll("\'", "\\\\'");
+				b2 = this.solutionText2.replaceAll("\'", "\\'");
 			} else {
 				b2 = "";
 			}
 			
-			rs += "{text:'" + b + "',tip:'" + b2 + "'},";
+			rs += "{text:'" + b + "',tip:'" + b2 + "'}";
 			
 			if (this.answer3A&&this.answer3A!="") {
-				c = this.answer3A.replaceAll("\'", "\\\\'");
+				rs +=",";
+				c = this.answer3A.replaceAll("\'", "\\'");
 			} else {
-				rs = rs.substring(0, rs.length() - 1);
-				rs += "]"
+				//rs = rs.substring(0, rs.length() - 1);
+				rs += "]";
 				return rs;
 			}
 			
 			if (this.solutionText3&&this.solutionText3!="") {
-				c2 = this.solutionText3.replaceAll("\'", "\\\\'");
+				c2 = this.solutionText3.replaceAll("\'", "\\'");
 			} else {
 				c2 = "";
 			}
-			rs += "{text:'" + c + "',tip:'" + c2 + "'},";
+			rs += "{text:'" + c + "',tip:'" + c2 + "'}";
 			
 			if (this.answer4A&&this.answer4A!="") {
-				d = this.answer4A.replaceAll("\'", "\\\\'");
+				rs +=",";
+				d = this.answer4A.replaceAll("\'", "\\'");
 			} else {
-				rs = rs.substring(0, rs.length() - 1);
+				//rs = rs.substring(0, rs.length() - 1);
 				rs += "]";
 				return rs;
 			}
 			
 			if (this.solutionText4&&this.solutionText4!="") {
-				d2 = this.solutionText4.replaceAll("\'", "\\\\'");
+				d2 = this.solutionText4.replaceAll("\'", "\\'");
 			} else {
 				d2 = "";
 			}
-			rs += "{text:'" + d + "',tip:'" + d2 + "'},";
+			rs += "{text:'" + d + "',tip:'" + d2 + "'}";
 			
 			if (this.answer5A &&this.answer5A!="") {
-				e = this.answer5A.replaceAll("\'", "\\\\'");
+				rs +=",";
+				e = this.answer5A.replaceAll("\'", "\\'");
 			} else {
 				rs = rs.substring(0, rs.length() - 1);
 				rs += "]";
@@ -1440,16 +1462,17 @@ function DBManager() {
 			}
 			
 			if (this.solutionText5&&this.solutionText5!="") {
-				e2 = this.solutionText5.replaceAll("\'", "\\\\'");
+				e2 = this.solutionText5.replaceAll("\'", "\\'");
 			} else {
 				e2 = "";
 			}
-			rs += "{text:'" + e + "',tip:'" + e2 + "'},";
+			rs += "{text:'" + e + "',tip:'" + e2 + "'}";
 			
 			if (this.answer6A &&this.answer6A!="") {
-				f = this.answer6A.replaceAll("\'", "\\\\'");
+				rs+=",";
+				f = this.answer6A.replaceAll("\'", "\\'");
 			} else {
-				rs = rs.substring(0, rs.length() - 1);
+				//rs = rs.substring(0, rs.length() - 1);
 				rs += "]";
 				return rs;
 			}
@@ -1457,6 +1480,7 @@ function DBManager() {
 			f2 = "";
 			rs += "{text:'" + f + "',tip:'" + f2 + "'}";
 			rs += "]";
+			
 			return rs;
 		};
 		

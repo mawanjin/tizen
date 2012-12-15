@@ -73,8 +73,10 @@ var Base64 = {
 			}
 
 		}
-
-		output = Base64._utf8_decode(output);
+		//I don't know why there will be one extra invalid code in the end of output.
+		//output = output.substring(0,output.length-1);
+			
+		//output = Base64._utf8_decode(output);
 
 		return output;
 

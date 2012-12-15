@@ -83,5 +83,20 @@ util = new function() {
 	    }
 	    return false;
 	};
+	
+	this.strToJson = function(str){
+//		var json = eval('(' + str + ')'); 
+//		return json;
+		//$("#div_test1").text(str);
+		var str = new String(str);
+		
+		try{
+			eval("var theJsonValue = "+str);
+		}catch(e){
+			alert(e.message);
+		}
+		
+		return theJsonValue;
+	} ;
 };
 

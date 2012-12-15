@@ -81,12 +81,14 @@ var correct_inxs = [];      // 多个正确答案的下标数组
  */
 function freshPassageHtml(html) {
 	document.getElementById("content1").innerHTML=html;
+	$("#content1").trigger("create");
 }
 /**
  * 更新问题的内容
  */
 function freshQuestionContent(content) {
 	document.getElementById("question").innerHTML=content;
+	$("#question").trigger("create");
 }
 /**
  * 设定问题的可选答案
@@ -123,7 +125,7 @@ function setChoices(choices, a_correct_inxs,solution_details) {
     
     document.getElementById(""+choicesID).innerHTML=innerHTML;
     document.getElementById("solution_details").innerHTML=solution_details;
-
+	$("#solution_details").trigger("create");
     createCircleIcon();
     createCorrectIcon();
 }
@@ -137,6 +139,8 @@ function freshPassageStemChoices(fscreen,passage,stem,choices, a_correct_inxs,so
 	freshPassageHtml(passage);
 	freshQuestionContent(stem);
 	setChoices(choices, a_correct_inxs,sol_details);
+	
+	
 }
 
 /**
@@ -385,7 +389,7 @@ function twoColumn() {
     </table>';
     
     $('#div_body').html(html);
-    
+    $("#div_body").trigger("create");
 }
 </script>
 

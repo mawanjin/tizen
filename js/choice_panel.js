@@ -5,6 +5,11 @@ mChoicePanel = new function(){
 	this.onChoiceClick;
 	this.question;
 	
+	this.setChoice = function(which){
+		console.log("setChoice() called");
+		this.changeButtonsBg(which);
+	};
+	
 	this.generateChoicePancel = function(question,onChoiceClick,callback){
 		console.log("beginPractice() called");
 		this.question = question;
@@ -36,7 +41,7 @@ mChoicePanel = new function(){
 			hint='<td colspan=4 align="right">&nbsp;&nbsp;</td>';
 		
 		html+='<tr>'+hint+'<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td></tr></table>';
-		console.log("start create choice panel::"+html);
+		//console.log("start create choice panel::"+html);
 		$("#choicePanelContainer").html(html);
 		$("#choicePanelContainer").trigger('create');
 		callback();

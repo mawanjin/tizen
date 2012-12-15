@@ -27,14 +27,14 @@
 <script type="text/javascript" src="./js/http.js"></script>
 <script type="text/javascript" src="./js/util.js"></script>
 <script type="text/javascript" src="./js/encryptionUtil.js"></script>
-
+<script type="text/javascript" src="./js/choice_panel.js"></script>
 <script type="text/javascript" src="./js/iscroll-lite.js?v4"></script>
 <script id="constant_js" type="text/javascript" src="./js/constant.js"></script>
 <script type="text/javascript" src="./js/dbmanager.js"></script>
 <script type="text/javascript" src="./js/XMLParser.js"></script>
 <script type="text/javascript" src="./js/user.js"></script>
 <script type="text/javascript" src="./js/orientation.js"></script>
-<script type="text/javascript" src="./js/choice_panel.js"></script>
+
 <script type="text/javascript" src="./js/packages.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 
@@ -648,11 +648,11 @@
 					</td>
 					<td></td>
 					<td align=center>
-						<img id="btnBackward" onclick="void(0);"
+						<img  onclick="changePage(false)"
 								src="./css/images/backward.png" height="30px" />
 					</td>
 					<td align=center>
-						<img id="btnBackward" onclick="void(0);"
+						<img  onclick="changePage(true)"
 								src="./css/images/forward.png" height="30px" />
 					</td>
 					<td align=center>
@@ -673,12 +673,12 @@
 					</td>
 				</tr>
 			</table>
-			
+			<div id="div_test1"></div>
 		</div>
 		<!-- /header -->
 		<!-- content -->
 		<div id="workspace">
-			<iframe id="i_workspace" src="problemfull.html" ></iframe>
+			<iframe id="i_workspace" name="i_workspace" src="problemfull.html" ></iframe>
 		</div>
 		<!-- Menu -->
 		<div id="wrapper_question_menu" style="display: none;">
