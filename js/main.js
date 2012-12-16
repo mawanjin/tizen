@@ -456,8 +456,11 @@ function initConstant(){
 var current_section_for_sta;
 function generateCategoryBarForSta(callback) {
 	console.log("generateCategoryBarForSta() called");
+	
 	parser = new XMLParser();
 	var h;
+	var first_section;
+	var first_section_short;
 	parser
 			.getmoduleinfo(function(moduleinfo) {
 				h = '<div id="category_bar_sta_container" data-corners="true" data-role="navbar"><ul>';
@@ -467,8 +470,8 @@ function generateCategoryBarForSta(callback) {
 					var selected='';
 					if(i==0){
 						selected='class="ui-btn-active"';
-						current_section = vo.secName;
-						current_section_short = vo.secNameShort;
+						first_section = vo.secName;
+						first_section_short = vo.secNameShort;
 					}
 					
 					if (SystemOrientation.orientation == 0) {
@@ -494,12 +497,19 @@ function generateCategoryBarForSta(callback) {
 				
 				if(callback)
 					callback();
+				
+				//load when create
+				refreshListSta(first_section_short,first_section,1);
 			});
+	
+	
 }
 function refreshListStaByType(type){
 	refreshListSta('',current_section_for_sta,type);
 }
 function refreshListSta(sectionShortName, sectionName,type){
+	
+	
 	if(type==1){
 		$("#Last").addClass("ui-btn-active");
 		$("#Average").removeClass("ui-btn-active");
@@ -515,8 +525,21 @@ function refreshListSta(sectionShortName, sectionName,type){
 			var per = o.per;
 			var totalTime = o.totalTime;
 			var score = o.score;
+			if(type!=2){
+				if(score!=0){
+					score = parseInt((score/o.numQuestion)*100)+"%";
+				}
+				else
+					score = score+"%";
+			}else{
+				score = parseInt(parseFloat(score/o.numQuestion)*100)+"%";
+			}
+				
+			
+			
 			html += '<li><table width=100%><tr><td width=25% align=center>'+name+'</td><td width=25% align=center>'+per+'</td><td width=25% align=center>'+totalTime+'</td><td width=25% align=center>'+score+'</td><tr><table></li>';
 		}
+		
 		$("#thelist_sta").html(html);
 		$("#thelist_sta").trigger("create");
 		
@@ -531,6 +554,10 @@ var recommendations;
 var ListItemMyQuestions;
 function refreshList(sectionShortName, sectionName) {
 	console.log("refreshList() called");
+	
+	current_section = sectionName;
+	current_section_short = sectionShortName; 
+	
 	if (!recommendations || recommendations.length == 0) {
 		getAllPackageItems(function(data) {
 			recommendations = data;
@@ -1005,13 +1032,18 @@ function showQuestionMenu(){
 }
 
 function exitExam(){
-	alert("exit");
 	$("#wrapper_question_menu").hide();
+	saveExamStatus(false,function(){
+		
+	});
 }
 
 function finishExam(){
 	$("#wrapper_question_menu").hide();
-	saveExamStatus(true);
+	saveExamStatus(true,function(){
+		showExam();
+	});
+	
 }
 
 function report(){
@@ -1022,9 +1054,18 @@ function dismissQuestionMenu(){
 	$("#wrapper_question_menu").hide();
 }
 
-function whenChoiceOnClick(which){
+function whenChoiceOnClick(which,select){
 	console.log("option is "+which+" onclick...");
+	console.log("rememeber this choice"); 
+	current_examResultInfo.QuestionExamStatus[current_question_position].choice=parseInt(which);
 	console.log("start show circle picture for choice");
+	if(select=="true")
+		choice(parseInt(which)+"");
+	else{
+		cancelchoice(parseInt(which)+"");
+		current_examResultInfo.QuestionExamStatus[current_question_position].choice=-1;
+	}
+		
 }
 
 var start_timer_date;
@@ -1035,8 +1076,6 @@ var start_timer_date;
  */
 function changePage(i){
 	$("#wrapper_question_list").hide();
-	
-	
 	
 	if(i=="true"){
 		current_question_position = current_question_position+1;
@@ -1049,7 +1088,6 @@ function changePage(i){
 	if(current_question_position>current_questions.length-1)current_question_position=current_questions.length-1;
 	else if(current_question_position<0)current_question_position=0;
 	 
-	
 	//update the number indicator of questions 
 	$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
 	
@@ -1075,6 +1113,14 @@ function changePage(i){
 	//set privious selection
 	//mChoicePanel.setChoice(current_examResultInfo.QuestionExamStatus[current_question_position].choice);
 	
+	//change button in pop
+	if(current_question_position==(current_questions.length-1)){
+		$("#btnPopFinish").show();
+		$("#btnPopNxt").hide();
+	}else{
+		$("#btnPopFinish").hide();
+		$("#btnPopNxt").show();
+	}
 	
 	
 }
@@ -1117,6 +1163,7 @@ function loadContent(showSolution){
 }
 
 function showSolution(){
+	$( "#popupConfirm" ).popup( "close" );
 	window.frames["i_workspace"].showSolution();
 }
 
@@ -1124,9 +1171,18 @@ function choice(option){
 	window.frames["i_workspace"].choice(option);
 }
 
+function cancelchoice(option){
+	window.frames["i_workspace"].cancelchoice(option);
+}
+
+function freshPassageHtml(content){
+	window.frames["i_workspace"].freshPassageHtml(content);
+}
+
+
 function freshPassageStemChoices(passage,stem,answers,solution,solutionText){
 	
-	console.log("freshPassageStemChoices() called,and parames=[passage="+passage+"],stem=["+stem+"],answers=["+answers+"],solution=["+solution+"],solutionText="+solutionText+"]");
+	//console.log("freshPassageStemChoices() called,and parames=[passage="+passage+"],stem=["+stem+"],answers=["+answers+"],solution=["+solution+"],solutionText="+solutionText+"]");
 	//var json_answers = "[{text:'Analysis of fossilized pollen is a useful means  of supplementing and in some cases correcting  other sources of information regarding changes  in the Irish landscape.',tip:'<b>Correct:</b> Use the \"Reduce\" button to see the sections of the passage that support this answer choice. <br><br> Note how closely this choice tracks the author\\'s thesis.'},{text:'Analyses of historical documents, together with  pollen evidence, have led to the revision of  some previously accepted hypotheses regarding  changes in the Irish landscape.',tip:'<b>Wrong: Not supported by the passage.</b><br> The passage does not discuss using pollen analysis to make determinations about changes in the landscape.'},{text:'Analysis of fossilized pollen has proven to be a  valuable tool in the identification of ancient  plant species.',tip:'<b>Wrong: Not supported by the passage.</b><br>'},{text:'Analysis of fossilized pollen has provided new  evidence that the cultivation of such crops as  cereal grains, flax, and madder had a  significant impact on the landscape of Ireland.',tip:'<b>Wrong: Not supported by the passage.</b><br>'},{text:'While pollen evidence can sometimes  supplement other sources of historical  information, its applicability is severely  limited, since it cannot be used to identify  plant species.',tip:'<b>Wrong: Not supported by the passage.</b><br> The passage doesn\\'t say that the use of pollen analysis is \"severely limited.\"'}]";
 	answers = util.strToJson(answers);
 	
@@ -1137,7 +1193,7 @@ function freshPassageStemChoices(passage,stem,answers,solution,solutionText){
 /**
  * keep exam status into DB when Finish or exit exam action is triggered.
  */
-function saveExamStatus(finish){
+function saveExamStatus(finish,callback){
 	
 	console.log("saveExamStatus() called. finish="+finish);
 	var totalTime = timer.stop();
@@ -1154,7 +1210,8 @@ function saveExamStatus(finish){
 	for(var i=0;i<current_examResultInfo.QuestionExamStatus.length;i++){
 		var o = current_examResultInfo.QuestionExamStatus[i];
 		//id,exAppID,questionId,choice,correctChoice,mark
-		if(o.choice==o.correctChoice)c=c+1;
+		
+		if(util.convertChoiceToStr(o.choice)==o.correctChoice)c=c+1;
 		if(o.choice!=-1)choiceCount=choiceCount+1;
 	}
 	
@@ -1165,8 +1222,105 @@ function saveExamStatus(finish){
 	
 	//save into db
 	db.saveExamResultInfo(current_examResultInfo,function(rs){
-		
+		callback();
 		if(finish){};
 		//redirect to exam review page. 
 	});
 }
+function showExam(){
+	console.log("showExam() called.");
+	
+	$("#exam_title").html(current_exAppName);
+	//get exam_result_info
+	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
+		examResultInfo = rs[0];
+		console.log("GetExamResultInfoByExAppIDs() called. exappid="+current_exAppId);
+		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
+		$("#exam_score").html(examResultInfo.score+"/"+parseInt(examResultInfo.questionCount));
+		$("#exam_totalTime").html(util.getTime(parseInt(examResultInfo.endTime)));
+		$("#exam_per").html(parseInt(util.getTime(parseInt(examResultInfo.endTime)/examResultInfo.questionCount)));
+		
+		//generate list
+		var html = '';
+		for(var i=0;i<examResultInfo.QuestionExamStatus.length;i++){
+			var o = examResultInfo.QuestionExamStatus[i];
+			//id,exAppID,questionId,choice,correctChoice,mark
+			var choice = o.choice;
+			if(choice==-1)choice="--";
+			
+			if(choice==0)choice='a';
+			else if(choice==1)choice='b';
+			else if(choice==2)choice='c'; 
+			else if(choice==3)choice='d';
+			else if(choice==4)choice='e';
+			else if(choice==5)choice='f';
+				
+			var correct = o.correctChoice;
+			if(correct==choice)
+				html +='<li><table width=100% border=0><tr><td width=40px><img src="./css/images/select.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>';
+			else
+				html +='<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>';
+		}
+		
+		$("#thelist_exam").html(html);
+		$("#thelist_exam").trigger("create");
+		setTimeout(function () {
+			myExamScroll.refresh();
+		},100);
+	});
+}
+
+function showExamIntro(){
+	console.log("showExamIntro() called.");
+	db.findProblemSetIntroductionForExamResultByExAppId(current_exAppId,function(data){
+		
+		$("#thelist_exam_intro").html('<li>'+data+'</li>');
+		$("#thelist_exam_intro").trigger("create");
+		setTimeout(function(){
+			myExamIntroScroll.refresh();
+		});
+	});
+}
+var current_hint_index = -1;
+function onHintClick(hintCount){
+	console.log("onHintClick() called.current_hint_index="+current_hint_index+";hintCount="+hintCount);
+	if(current_hint_index<hintCount){
+		if(current_hint_index==1){  
+			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));	
+		}else if(current_hint_index==2){
+			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
+		}
+		current_hint_index++;
+		if(current_hint_index==1)
+			$("#btnHint").attr("src","./css/images/hint.png");
+		else
+			$("#btnHint").attr("src","./css/images/hint"+current_hint_index+".png");
+		
+	}else if(current_hint_index==hintCount){
+		if(current_hint_index==1){
+			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));
+		}else if(current_hint_index==2){
+			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
+		}else if(current_hint_index==3)
+			freshPassageHtml(current_questions[current_question_position].textBlock1D.replaceAll("\'", "\\\\'"));
+		
+		current_hint_index++;
+		
+		$("#btnHint").attr("src","./css/images/passage.png");
+	}else if(current_hint_index>hintCount){
+		current_hint_index=1;
+		$("#btnHint").attr("src","./css/images/hint.png");
+		freshPassageHtml(current_questions[current_question_position].textBlock1A.replaceAll("\'", "\\\\'"));
+	}
+	
+	$("#btnHint").trigger("create");
+}
+
+function showNextQuestion(){
+	changePage('true');
+	$( "#popupConfirm" ).popup( "close" );
+}
+
+
+
+

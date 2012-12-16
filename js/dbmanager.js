@@ -74,7 +74,9 @@ function DBManager() {
 	self.selectAllItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.bought), 0) AS boughtcount, COUNT(*) AS totalcount FROM items";
 	self.selectAllFavoriteItemDataStatement = "SELECT '-1' as name, COALESCE(SUM(items.favorite), 0) AS totalcount FROM items";
 	self.selectItemsFromListStatement = "SELECT * FROM items WHERE list = ? AND items.name LIKE 'pattern%'";
-	self.deleteExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
+	//self.deleteExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
+	self.deleteQuestionExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
+	
 	
 	self.orderItemsByName = " ORDER BY LOWER(items.name)";
 	self.orderItemsByStoreThenName = " ORDER BY LOWER(items.store), LOWER(items.name)";
@@ -151,9 +153,10 @@ function DBManager() {
 	self.insertExamResultInfo = function(ex_app_id, ex_app_name, score, finish,
 			progress, start_time, end_time, question_count, section,callback) {
 		self.db.transaction(function(tx) {
+			console.log("insertExamResultInfo(). ex_app_id="+ex_app_id+";ex_app_name="+ex_app_name+";score="+score+";finish="+finish+";progress="+progress+";start_time="+start_time+";end_time="+end_time+";question_count="+question_count+";section="+section);
 			tx.executeSql(self.insertExamResultInfoStatement, [ ex_app_id,
 					ex_app_name, score, finish, progress, start_time, end_time,
-					question_count, section ], function(){
+					question_count, section ], function(){				
 				callback(1);
 			}, function(){
 				callback(0);
@@ -171,11 +174,13 @@ function DBManager() {
 //	};
 
 	self.insertquestionExamResultInfo = function(ex_app_id, question_id,
-			choice, correctChoice, mark) {
+			choice, correctChoice, mark,callback) {
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.insertquestionExamResultInfoStatement, [
 					ex_app_id, question_id, choice, correctChoice, mark ],
-					self.onSuccess, self.onError);
+					function(){
+				callback(1);
+			}, function(){callback(0);});
 		});
 	};
 
@@ -197,9 +202,10 @@ function DBManager() {
 		});
 	};
 	
-	self.deleteExamResultInfoByExappId = function(ex_app_id,callback) {
+	self.deleteQuestionExamResultInfoByExappId = function(ex_app_id,callback) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(self.deleteExamResultInfoStatment, [ ex_app_id], function() {
+			console.log("deleteQuestionExamResultInfoByExappId() called. ex_app_id="+ex_app_id);
+			tx.executeSql(self.deleteQuestionExamResultInfoStatment, [ ex_app_id], function() {
 				callback(1);
 			}, function() {
 				callback(0);
@@ -210,13 +216,27 @@ function DBManager() {
 	
 	self.saveExamResultInfo = function(examResultInfo,callback){
 		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
-		self.deleteExamResultInfoByExappId(examResultInfo.exAppID,function(rs){
-			console.log("deleteExamResultInfoByExappId() called. rs="+rs);
-			
+		self.deleteQuestionExamResultInfoByExappId(examResultInfo.exAppID,function(rs){
+			console.log("deleteQuestionExamResultInfoByExappId() called. rs="+rs);
 			if(rs==1){
 				self.insertExamResultInfo(examResultInfo.exAppID, examResultInfo.exAppName, examResultInfo.score, examResultInfo.finish, examResultInfo.progress, examResultInfo.startTime, examResultInfo.endTime, examResultInfo.questionCount, examResultInfo.section,function(rs){
 					console.log("insertExamResultInfo() called. rs="+rs);
-					callback(rs);
+					if(rs==1){
+						var count = 0;
+						var questionExamStatus = examResultInfo.QuestionExamStatus;
+						for(var i=0;i<questionExamStatus.length;i++){
+							var o = questionExamStatus[i];
+							console.log("insertquestionExamResultInfo() called.");
+							//id,exAppID,questionId,choice,correctChoice,mark
+							self.insertquestionExamResultInfo(o.exAppID, o.questionId, o.choice, o.correctChoice, o.mark,function(){
+								count = count+1;
+								if(count==questionExamStatus.length)callback(1);
+							});
+						}
+						
+					}
+					else
+						callback(rs);
 					return;
 				});
 			}else{
@@ -275,7 +295,7 @@ function DBManager() {
 						var dataset = result.rows;
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);
-							rs.push(new self.ExamResultInfo(o['id'], o['section'], o['exAppID'], o['exAppName'], o['score'], o['finish'], o['progress'], o['startTime'], o['endTime'], o['questionCount'], o['QuestionExamStatus']));	
+							rs.push(new self.ExamResultInfo(o['id'], o['section'], o['ex_app_id'], o['ex_app_name'], o['score'], o['finish'], o['progress'], o['start_time'], o['end_time'], o['question_count'], new Array()));	
 						}
 						callback(rs);
 					}, self.onError);
@@ -448,7 +468,6 @@ function DBManager() {
 						tx.executeSql(self.selectGetAverageExamResultInfosBySectionStatement,[section], function(tx,
 								result) {
 							var rs = new Array();
-							rs.push(new self.ListItemExamStatVO(89, 'Main Point: Intro Set', '20%', self.getTime(126), self.getTime(12), 15));
 							var dataset = result.rows;
 							for(var i=0;i<dataset.length;i++){
 								var o = dataset.item(i);
@@ -465,28 +484,31 @@ function DBManager() {
 			
 			tx.executeSql(self.selectGetExamResultInfoByExAppIDsStatement,[ids], function(tx,
 					result) {
+				
 				var rs = new Array();
 				var dataset = result.rows;
-				var ids = '';
+				
+				console.log("The result of GetExamResultInfoByExAppIDs ::"+dataset.length);
 				
 				for(var i=0;i<dataset.length;i++){
+					//ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section
 					var o = dataset.item(i);
-					rs.push(new self.ExamResultInfo(o['id'], o['section'], o['ex_app_id'], o['ex_app_name'], o['score'], o['finish'], o['progress'], o['startTime'], o['endTime'], o['questionCount'], new Array()));
-					ids +=o['ex_app_id']+",";
+					rs.push(new self.ExamResultInfo(o['id'], o['section'], o['ex_app_id'], o['ex_app_name'], o['score'], o['finish'], o['progress'], o['start_time'], o['end_time'], o['question_count'], new Array()));
+					console.log("ExamResultInfo :: id="+o['id']+",section=" +o['section']+",ex_app_id="+ o['ex_app_id']+",ex_app_name="+ o['ex_app_name']+",score="+ o['score']+",finish="+ o['finish']+",progress="+ o['progress']+",startTime="+ o['start_time']+",endTime="+ o['end_time']+",questionCount"+o['question_count']);
+					//ids +=o['ex_app_id']+",";
 				}
+				
 				if(ids!=''){
-					ids = ids.substring(0, ids.length-1);
+					//ids = ids.substring(0, ids.length-1);
 					self.GetQuestionResultInfoByExAppIDs(ids, function(questionExamStatuss){
 						
 						if(questionExamStatuss&&questionExamStatuss.length>1){
 							
 							for(var k=0;k<questionExamStatuss.length;k++){
-							
 								var questionExamStatus = questionExamStatuss[k];
-								
 								for(var j=0;j<rs.length;j++){
 									if(questionExamStatus.exAppID==rs[j].exAppID){
-										rs[j].QuestionExamStatus.push(rs[j]);
+										rs[j].QuestionExamStatus.push(questionExamStatus);
 										break;
 									}
 								}
@@ -1166,13 +1188,15 @@ function DBManager() {
 	self.getExamStatsBySectionAndType = function(section,type,callback){
 		
 		self.getExamResultInfosBySection(section, function(ExamResultInfos){
-			console.log("getExamResultInfosBySection() called");
+			console.log("getExamResultInfosBySection() called.section="+section+";type="+type);
+			console.log("ExamResultInfos.length="+ExamResultInfos.length);
 			var exappids = new Array();
 			
 			var rs = new Array();
-			rs.push(new self.ListItemExamStatVO(89, 'Main Point: Intro Set', '20%', self.getTime(126), self.getTime(12), 15));
+			
 			if(type==1){
 				for(var i=0;i<ExamResultInfos.length;i++){
+					console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";");
 					var exists = false;
 					for(var j=0;j<exappids.length;j++){
 						if(exappids[j]==ExamResultInfos[i].exAppID){
@@ -1184,10 +1208,12 @@ function DBManager() {
 						var per=0;
 						var score=0;
 						if(ExamResultInfos[i].questionCount>0){
-							per = self.getTime(ExamResultInfos[i].endTime/ExamResultInfos[i].questionCount);
-							score = (ExamResultInfos[i].score*100/ExamResultInfos[i].questionCount)+"%";
+							//per = self.getTime(ExamResultInfos[i].endTime/ExamResultInfos[i].questionCount);
+//							score = (ExamResultInfos[i].score*100/ExamResultInfos[i].questionCount)+"%";
+							score = ExamResultInfos[i].score;
+							per = self.getTime(parseInt(parseInt(ExamResultInfos[i].endTime)/parseInt(ExamResultInfos[i].questionCount)));
 						}
-						
+						console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";per="+per);
 						rs.push(new self.ListItemExamStatVO(ExamResultInfos[i].exAppID, ExamResultInfos[i].exAppName, score, self.getTime(ExamResultInfos[i].endTime), per, ExamResultInfos[i].questionCount));
 						exappids.push(ExamResultInfos[i].exAppID);
 					}
@@ -1529,6 +1555,22 @@ function DBManager() {
 				c++;
 			return c;
 		};
+		
+	};
+	
+	self.findProblemSetIntroductionForExamResultByExAppId = function(exAppID,callback){
+		
+		self.findExAppPageByExAppID(exAppID, function(data){
+			//id,exAppID,content,idx,date,solving
+			for(var i=0;i<data.length;i++){
+				var p = data[i];
+				console.log(p.content);
+				if(p.solving==0)return callback(p.content);
+			}
+			console.log("default");
+			callback("Congratulations for having the discipline to prepare yourself for this difficult test. 'Success is a journey, not a destination. The doing is often more important than the outcome.' - Arthur Ashe ");
+			
+		});
 	};
 	
 	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);	

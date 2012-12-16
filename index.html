@@ -53,6 +53,8 @@
 	var myDiscussionScroll;
 	var myQuestionMenuScroll;
 	var myQuestionListScroll;
+	var myExamScroll;
+	var myExamIntroScroll;
 
 	function loaded() {
 		myInfoScroll = new iScroll('wrapper_info');
@@ -65,6 +67,9 @@
 		myDiscussionScroll = new iScroll('wrapper_discussion');
 		myQuestionMenuScroll = new iScroll('wrapper_question_menu', { fixedScrollbar: false,bounce:false});
 		myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
+		myExamScroll = new iScroll('wrapper_exam', { fixedScrollbar: false,bounce:false});
+		myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:false});
+		
 		
 		setTimeout(function(){
 			myQuestionMenuScroll.refresh();
@@ -688,7 +693,7 @@
 				<ul class="thelist">
 					<li style="background-color:black;color:white;">Exam option</li>
 					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()">Exit the Exam</a></li>
-					<li><a href="#main" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
+					<li><a id="a_finish_review" href="#exam" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
 					<li><a href="#" onclick="report()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
 					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()">Cancel</a></li>
 				</ul>
@@ -703,7 +708,21 @@
 			</div>
 		</div>
 		
-		
+		<!-- Pop when click confirm -->
+		<div data-role="popup" id="popupConfirm" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
+			<div style="text-align:center">
+				<p>Finish this Question<p>
+			</div>
+			<div id="btnPopFinish" onclick='javascript:$("#a_finish_review").trigger("click");' data-role="button">
+				Finish & Review
+			</div>
+			<div id="btnPopNxt" onclick="showNextQuestion()" data-role="button">
+				Goto the Next Question
+			</div>
+			<div onclick="showSolution()" data-role="button">
+				Show Correct Answers
+			</div>
+		</div>
 		
 		<!-- choice panel -->
 		<div id="choice_bg" >
@@ -748,6 +767,104 @@
 		</div>
 	</div>
 	<!-- /page qeustionview -->
+	
+	
+	<!-- #Exam -->
+	<div data-role="page" id="exam">
+		<div class="head_bg">
+			<table width=100% height=100% cellpadding=0 cellspacing=0 border=0
+				valign="top">
+				<tr>
+					<td align="center">
+						<div id="exam_title"
+							style="text-align: center; color: white; font-size: 12px;"></div>
+					</td>
+					<td width=80px>
+						<!-- back button -->
+						<div>
+							<a href="#main"><img src="./css/images/normal_back_btn.png"
+								height="30px" width="80px" /></a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div width="100%">
+			<table width="100%" >
+				<tr>
+					<td align="center">Score:<span id="exam_score"></span></td>
+					<td align="center">Total Time:<span id="exam_totalTime"></span></td>
+				</tr>
+				<tr><td align="center" colspan=2 >Average Time Per Question:<span id="exam_per"></span></td></tr>
+			</table>
+		</div>
+		<!-- /header -->
+		<div width=100% style="padding-top:10px">
+			<table width=100% ><tr><td width=30px></td><td>NO.</td><td>Your Choice</td><td>Correct Answer</td><td width=19px></td></tr></table>
+		</div>
+		
+		<!-- content -->
+		<div id="wrapper_exam" >
+			<div class="scroller">
+				<ul id="thelist_exam">
+					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>1</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
+					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>2</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
+					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>3</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
+					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>4</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
+				</ul>
+			</div>
+		</div>
+
+		<div
+			style="position: absolute; border: 0px solid red; bottom: 0; width: 100%; left: 0; height: 48px; text-align: right;">
+			<table width=100% height=100%>
+				<tr>
+					<td valign="bottom" align=right><img id="btnResume"
+						src="./css/images/buy_button.png" height="30px" /></td>
+				</tr>
+			</table>
+
+		</div>
+		
+		<!-- Continue Button -->
+		<div
+			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
+			<table width=100% height=100%>
+				<tr>
+					<td width=100% align="right"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
+						src="./css/images/continue_button.png" height="30px" /></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- /page Exam -->
+	
+	<!-- #exam intro -->
+	<div data-role="page" id="exam_intro">
+		<div style="color:gray;padding-left:10px;padding-top:5px;" >
+			where to go from here
+		</div>
+		<!-- /header -->
+		<!-- content -->
+		<div id="wrapper_exam_intro">
+			<div class="scroller">
+				<ul id="thelist_exam_intro">
+				</ul>
+			</div>
+		</div>
+		<!-- Exit Button -->
+		<div
+			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
+			<table width=100% height=100%>
+				<tr>
+					<td width=100% align="right"><a href="#exam"><img id="btnExamExit"
+						src="./css/images/normal_back_btn.png" height="30px" /></a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- /page exam intro -->
 	
 	<!-- /page -->
 	

@@ -35,12 +35,17 @@ mChoicePanel = new function(){
 		html+='<td class="choicePanelMarginTd"></td></tr>';
 		var hintCount = question.getHintCount();
 		var hint='';
-		if(hintCount>0)
-			hint='<td colspan=4 align="right"><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>';
-		else
+		if(hintCount>0){
+			current_hint_index = 1;
+			hint='<td colspan=4 align="right"><img id="btnHint" class="choice_panel_img_two_btn" src="./css/images/hint.png" onclick="onHintClick('+hintCount+')" />&nbsp;&nbsp;</td>';
+		}
+		else{
+			current_hint_index =-1;
 			hint='<td colspan=4 align="right">&nbsp;&nbsp;</td>';
+		}
+			
 		
-		html+='<tr>'+hint+'<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td></tr></table>';
+		html+='<tr>'+hint+'<td colspan=4 align="left">&nbsp;&nbsp;<a href="#popupConfirm" data-rel="popup"><img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></a></td></tr></table>';
 		//console.log("start create choice panel::"+html);
 		$("#choicePanelContainer").html(html);
 		$("#choicePanelContainer").trigger('create');
@@ -72,12 +77,15 @@ mChoicePanel = new function(){
 			$("#imgChoiceBtn_"+i).attr("src","./css/images/answer_"+_w+".png");
 			$("#imgChoiceBtn_"+i).trigger("create");
 		}
-		
+		var select = "true";
 		if(!util.contains(currentSrc,"select",false)){
 			$("#imgChoiceBtn_"+which).attr("src","./css/images/answer_select_"+w+".png");
 			$("#imgChoiceBtn_"+which).trigger("create");
+			select = "true";
+		}else{
+			select = "false";
 		}
 		
-		this.onChoiceClick(which);
+		this.onChoiceClick(which,select);
 	};
 };

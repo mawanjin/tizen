@@ -98,5 +98,30 @@ util = new function() {
 		
 		return theJsonValue;
 	} ;
+	/**
+	 * convert second to "HH:mm:ss"
+	 * 
+	 * @param second
+	 */
+	this.getTime = function(second){
+		var min = parseInt(second / 60);
+		var sec = (second % 60);
+		var hour = parseInt(min / 60);
+		if(hour==0)hour="00";
+		if(min<10)min="0"+min;
+		if(sec<10)sec="0"+sec;
+		return hour+":"+min+":"+sec;
+	};
+	
+	this.convertChoiceToStr = function(i){
+		var _w='--';
+		if(i==0)_w='a';
+		else if(i==1)_w='b';
+		else if(i==2)_w='c';
+		else if(i==3)_w='d';
+		else if(i==4)_w='e';
+		else if(i==5)_w='f';
+		return _w;
+	};
 };
 
