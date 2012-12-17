@@ -481,13 +481,12 @@ function DBManager() {
 	self.GetExamResultInfoByExAppIDs = function(ids,callback){
 		
 		self.db.transaction(function(tx) {
-			
-			tx.executeSql(self.selectGetExamResultInfoByExAppIDsStatement,[ids], function(tx,
+			var sql = self.selectGetExamResultInfoByExAppIDsStatement.replace("?",ids);
+			tx.executeSql(sql,[], function(tx,
 					result) {
 				
 				var rs = new Array();
 				var dataset = result.rows;
-				
 				console.log("The result of GetExamResultInfoByExAppIDs ::"+dataset.length);
 				
 				for(var i=0;i<dataset.length;i++){
@@ -932,7 +931,7 @@ function DBManager() {
 	};
 	
 	
-	self.findMyQuestionSets = function(section,callback) {
+	self.findMyQuestionSets = function(section,callback) { 
 		self.findExAppsBySection(section, function(exApps){
 			
 			var rs = new Array();
@@ -947,8 +946,8 @@ function DBManager() {
 				ids = ids.substring(0, ids.length-1);
 			}
 			//generate over
-			
 			self.GetExamResultInfoByExAppIDs(ids, function(examResultInfos){
+				
 				for(var i=0;i<exApps.length;i++){
 					var exapp = exApps[i];
 					var item = new self.ListItemMyQuestionVO(exapp.id, exapp.section, self.convertImg(exapp.difficulty), exapp.name.split(":")[0], exapp.name.split(":")[1], "", "false", "0", 100, 0, "", false, "0", ""); 
@@ -957,12 +956,14 @@ function DBManager() {
 						var examinfo = examResultInfos[j];
 						if(examinfo.exAppID == exapp.id){
 							if(examinfo.finish=="true"){
-								item.progress = "Last Score: "+examinfo.ScoreView;
+								//score = parseInt((score/o.numQuestion)*100)+"%";
+								item.progress = "Last Score: "+parseInt((examinfo.score/examinfo.questionCount)*100)+"%";
 							}else{
 								item.progressMax = examinfo.questionCount;
 								item.progressCount = examinfo.progress;
-								item.progress = "In progress: "+examinfo.progress+"/"+examinfo.questionCount;
+								item.progress = "In progress: "+examinfo.progress+"/"+parseInt(examinfo.questionCount);
 							}
+							break;
 						}
 					}
 					rs.push(item);

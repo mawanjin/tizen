@@ -42,12 +42,12 @@
 	word-break:break-all;
 	align:right;
 	height:50px;
-	width:100px;
+	width:120px;
 	border:0px solid green;
 }
 
 #thelist meter{
-	width:80px;
+	width:100px;
 }
 
 #thelist table{

@@ -624,7 +624,6 @@ function showProblemSetIntro(){
 
 //List View
 function createListItemMyQuestions(data){
-	
 	var img = '<img src="./css/images/'+data.logoImg+'" />';
 	var title ='<div><strong>'+data.title+'</strong></div>';
 	if(data.info){
@@ -645,6 +644,7 @@ function createListItemMyQuestions(data){
 	var progress='';
 	if(data.progress!=''&&data.finish=="false")
 		progress = '<div><meter min="0" max="'+data.progressMax+'" value="'+data.progressCount+'" /></div>';
+	
 	 
 	var status='<div style="float:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>'; 
 	 
@@ -1034,7 +1034,8 @@ function showQuestionMenu(){
 function exitExam(){
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(false,function(){
-		
+		//refresh list
+		refreshList(current_section_short,current_section);
 	});
 }
 
@@ -1042,6 +1043,8 @@ function finishExam(){
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(true,function(){
 		showExam();
+		//refresh list
+		refreshList(current_section_short,current_section);
 	});
 	
 }
@@ -1054,14 +1057,20 @@ function dismissQuestionMenu(){
 	$("#wrapper_question_menu").hide();
 }
 
+var previous_choice=-1;
 function whenChoiceOnClick(which,select){
 	console.log("option is "+which+" onclick...");
 	console.log("rememeber this choice"); 
 	current_examResultInfo.QuestionExamStatus[current_question_position].choice=parseInt(which);
 	console.log("start show circle picture for choice");
-	if(select=="true")
+	if(select=="true"){
+		if(previous_choice!=-1){
+			cancelchoice(previous_choice);
+		}
 		choice(parseInt(which)+"");
-	else{
+		current_examResultInfo.QuestionExamStatus[current_question_position].which;
+		previous_choice = parseInt(which);
+	}else{
 		cancelchoice(parseInt(which)+"");
 		current_examResultInfo.QuestionExamStatus[current_question_position].choice=-1;
 	}
@@ -1105,6 +1114,10 @@ function changePage(i){
 	//load content
 	loadContent(false);
 	
+	//set progress
+	if(current_examResultInfo.progress<current_question_position+1)
+		current_examResultInfo.progress = current_question_position+1;
+	
 	//reset choice panel
 	mChoicePanel.generateChoicePancel(current_questions[current_question_position],whenChoiceOnClick,function(){
 		console.log("generateChoicePancel() successed");
@@ -1135,24 +1148,26 @@ function loadContent(showSolution){
 	console.log(question.id);
 	  
 	var solution = current_questions[current_question_position].solution;
+	
 	var s = "[";
 	for(var i=0;i<solution.length;i++ ){
 		if(i==solution.length-1)
-			s+=solution.charAt(i);
+			s+=util.convertChoiceToIndex(solution.charAt(i));
 		else
-			s+=solution.charAt(i)+",";
+			s+=util.convertChoiceToIndex(solution.charAt(i));+",";
 	}
 	s+="]";
 	
-	freshPassageStemChoices(question.textBlock1A,question.questionStemA,question.getAnswers(),s,question.solutionText);
+	freshPassageStemChoices(question.textBlock1A,question.questionStemA,question.getAnswers(),util.strToJson(s),question.solutionText);
 	
 	//set choice
-	var choice = current_examResultInfo.QuestionExamStatus[current_question_position].choice;
+	var c = current_examResultInfo.QuestionExamStatus[current_question_position].choice+"";
 	
-	if(choice!=-1&&choice!=""){
+	if(c!=-1&&c!=""){
 		var s="";
-		for(var i=0;i<choice.length;i++ ){
-			choice(choice.charAt(i));
+		for(var i=0;i<c.length;i++ ){
+			whenChoiceOnClick(c.charAt(i),"true");
+			//choice(c.charAt(i));
 		}
 	}
 	
@@ -1200,8 +1215,8 @@ function saveExamStatus(finish,callback){
 	//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
 	current_examResultInfo.endTime = totalTime;
 	current_examResultInfo.startTime = start_timer_date;
-	if(current_examResultInfo.progress<current_question_position)
-		current_examResultInfo.progress = current_question_position;
+//	if(current_examResultInfo.progress<current_question_position+1)
+//		current_examResultInfo.progress = current_question_position+1;
 	
 	var choiceCount = 0;
 	current_examResultInfo.finish = finish;
