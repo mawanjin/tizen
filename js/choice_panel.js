@@ -11,7 +11,7 @@ mChoicePanel = new function(){
 	};
 	
 	this.generateChoicePancel = function(question,onChoiceClick,callback){
-		console.log("beginPractice() called");
+		console.log("generateChoicePancel() called");
 		this.question = question;
 		this.onChoiceClick = onChoiceClick;
 		var html = '<table width=100% height=100% border=0>\

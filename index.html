@@ -315,9 +315,9 @@
 							style="text-align: center; color: white; font-size: 12px;"></div>
 					</td>
 					<td align="right">
-						<div id="problemIntro_btnReview">
+						<div id="problemIntro_btnReview"><a href="#exam" onclick="showExam();">
 							<img id="btnReview" src="./css/images/review_button.png"
-								width="80px" height="30px" />
+								width="80px" height="30px" /></a>
 						</div>
 					</td>
 				</tr>
@@ -336,8 +336,8 @@
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;">
 			<table width=100% height=100%>
 				<tr>
-					<td width=50% valign="middle"><img id="btnResume"
-						src="./css/images/resume_button.png" height="30px" /></td>
+					<td width=50% valign="middle"><a href="#qeustionview" onclick="resume()"><img id="btnResume"
+						src="./css/images/resume_button.png" height="30px" /></a></td>
 					<td width=50% align=right valign="middle"><a href="#qeustionview"> <img id="btnBegin"
 						src="./css/images/begin_button.png" height="30px" onclick="beginPractice()" /></a></td>
 				</tr>
@@ -647,7 +647,10 @@
 		<table width=100% height=100% cellpadding=0 cellspacing=0 border=0
 				valign="top">
 				<tr>
-					<td width=80px align=center valign="middle">
+					<td>
+						<div id="questionview_done" style="display:none;"><a href="#exam"><img  src="./css/images/done_button.png" width=80px height="30px" /></a></div>
+					</td>
+					<td width=80px align=left valign="middle">
 						<!-- back button -->
 							<div onclick="showQuestionList();" id="questionview_number_indicator" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:19px;color:white;">10/26</div>
 							<img  onclick="showQuestionList();"
@@ -673,7 +676,7 @@
 					</td>
 					
 					<td align="right">
-						<div>
+						<div id="questionview_menu">
 							<img  src="./css/images/menu_button.png"
 								width="80px" height="30px" onclick="showQuestionMenu();" />
 						</div>
@@ -782,7 +785,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main"><img src="./css/images/normal_back_btn.png"
+							<a href="#main" onclick="javascript:current_showsolution = false;"><img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -808,10 +811,7 @@
 		<div id="wrapper_exam" >
 			<div class="scroller">
 				<ul id="thelist_exam">
-					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>1</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
-					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>2</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
-					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>3</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
-					<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>4</td><td>--</td><td>(D)</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>
+					
 				</ul>
 			</div>
 		</div>

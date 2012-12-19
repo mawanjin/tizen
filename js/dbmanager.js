@@ -493,7 +493,7 @@ function DBManager() {
 					//ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section
 					var o = dataset.item(i);
 					rs.push(new self.ExamResultInfo(o['id'], o['section'], o['ex_app_id'], o['ex_app_name'], o['score'], o['finish'], o['progress'], o['start_time'], o['end_time'], o['question_count'], new Array()));
-					console.log("ExamResultInfo :: id="+o['id']+",section=" +o['section']+",ex_app_id="+ o['ex_app_id']+",ex_app_name="+ o['ex_app_name']+",score="+ o['score']+",finish="+ o['finish']+",progress="+ o['progress']+",startTime="+ o['start_time']+",endTime="+ o['end_time']+",questionCount"+o['question_count']);
+//					console.log("ExamResultInfo :: id="+o['id']+",section=" +o['section']+",ex_app_id="+ o['ex_app_id']+",ex_app_name="+ o['ex_app_name']+",score="+ o['score']+",finish="+ o['finish']+",progress="+ o['progress']+",startTime="+ o['start_time']+",endTime="+ o['end_time']+",questionCount"+o['question_count']);
 					//ids +=o['ex_app_id']+",";
 				}
 				
@@ -1197,7 +1197,7 @@ function DBManager() {
 			
 			if(type==1){
 				for(var i=0;i<ExamResultInfos.length;i++){
-					console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";");
+//					console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";");
 					var exists = false;
 					for(var j=0;j<exappids.length;j++){
 						if(exappids[j]==ExamResultInfos[i].exAppID){
@@ -1214,7 +1214,7 @@ function DBManager() {
 							score = ExamResultInfos[i].score;
 							per = self.getTime(parseInt(parseInt(ExamResultInfos[i].endTime)/parseInt(ExamResultInfos[i].questionCount)));
 						}
-						console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";per="+per);
+//						console.log("exAppID="+ExamResultInfos[i].exAppID+";exAppName="+ExamResultInfos[i].exAppName+";score="+score+";per="+per);
 						rs.push(new self.ListItemExamStatVO(ExamResultInfos[i].exAppID, ExamResultInfos[i].exAppName, score, self.getTime(ExamResultInfos[i].endTime), per, ExamResultInfos[i].questionCount));
 						exappids.push(ExamResultInfos[i].exAppID);
 					}

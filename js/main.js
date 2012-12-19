@@ -673,7 +673,7 @@ function showProblemMenuList(){
 function hideMenuList(){
 	setTimeout(function(){
 		$("#wrapper_problemIntroMenu").hide();	
-	},1000);
+	},100);
 	
 }
 function updateListView(){
@@ -681,7 +681,7 @@ function updateListView(){
 	var html='<li><a href="#main" onclick="hideMenuList()" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
 	if(ListItemMyQuestions&&ListItemMyQuestions.length>0){
 		
-		for(var i=0;i<ListItemMyQuestions.length;i++){
+		for(var i=0;i<ListItemMyQuestions.length;i++){ 
 			var o = ListItemMyQuestions[i];
 			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+'); style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
 		}
@@ -759,8 +759,9 @@ var fromQuestionView=false;
 var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
-		$("#btnReview").show();
-		$("#btnResume").show();
+		hideMenuList();
+		$("#btnReview").hide();
+		$("#btnResume").hide();
 		$("#btnBegin").show();
 		
 		var o = ListItemMyQuestions[position];
@@ -769,8 +770,6 @@ function showProblemSetInforContent(position){
 			var info = o.info.replaceAll('\\\\','');
 			title = title+':'+info;
 		}
-		
-		
 		
 		var exAppId = o.exAppId;
 		
@@ -799,13 +798,18 @@ function showProblemSetInforContent(position){
 			}else{
 				db.GetExamResultInfoByExAppIDs(exAppId,function(info){
 			    	if(!info||info.length==0){
-			    		$("#btnReview").hide();
-						$("#btnResume").hide();
-			    	}else if(!info[0].finish){
-			    		$("#btnReview").hide();
-			    	}else if(info[0].finish){
-			    		$("#btnResume").hide();
+			    		$("#btnBegin").hide();
+//			    		$("#btnReview").hide();
+//						$("#btnResume").hide();showExam()
+			    	}else if(info[0].finish=="false"){
+			    		$("#btnBegin").show();
+			    		$("#btnResume").show();
+			    	}else if(info[0].finish=="true"){
+			    		$("#btnBegin").show();
+			    		$("#btnReview").show();
 			    	}
+			    	
+			    	current_examResultInfo = info[0];
 			    });
 			}
 		});
@@ -860,6 +864,11 @@ function showGallery(){
 }
 
 function beginPractice(){
+	current_showsolution = false;
+	$("#questionview_done").hide();
+	$("#questionview_menu").show();
+	$("#choice_bg").show();
+	$("#choicePanelContainer").show();
 //	current_exAppId
 //  current_exAppName
 // current_questions	
@@ -898,6 +907,89 @@ function beginPractice(){
 //			updateDiscussionNumber();
 //		},1000);
 	});
+}
+var current_showsolution=false;
+function resume(callback){
+	$("#questionview_done").hide();
+	$("#questionview_menu").show();
+	$("#choice_bg").show();
+	$("#choicePanelContainer").show();
+	
+	
+	setTimeout(function(){
+		
+		current_question_position = 0;
+		console.log("beginPractice() called");
+		db.findQuestionsByExAppID(current_exAppId,function(questions){
+			current_questions = questions;
+			console.log("current_questions.length="+current_questions.length);
+			//update the number indicator of questions 
+			$("#questionview_number_indicator").html(current_examResultInfo.progress+"/"+current_questions.length);
+			updateQuestionList();
+			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
+				console.log("generateChoicePancel() successed");
+			});
+			current_question_position = current_examResultInfo.progress-1;
+			//current_examResultInfo.startTime = util.currentTimeMillis+(current_examResultInfo.endTime*1000);
+			
+			changePage(current_question_position);
+			if(callback)
+			callback();
+		});
+		
+		setTimeout(function () {
+			myQuestionListScroll.refresh();
+		},1000);
+		
+		//start count 
+		start_timer_date = timer.start();
+		
+	});
+}
+
+function resumeForExamReview(callback){
+	
+	setTimeout(function(){
+		
+		console.log("beginPractice() called");
+		db.findQuestionsByExAppID(current_exAppId,function(questions){
+			current_questions = questions;
+			console.log("current_questions.length="+current_questions.length);
+			//update the number indicator of questions 
+			$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
+			updateQuestionList();
+			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
+				console.log("generateChoicePancel() successed");
+			});
+			//current_examResultInfo.startTime = util.currentTimeMillis+(current_examResultInfo.endTime*1000);
+			
+			changePage(current_question_position);
+			if(callback)
+			callback();
+		});
+		
+		setTimeout(function () {
+			myQuestionListScroll.refresh();
+		},1000);
+		
+		//start count 
+		start_timer_date = timer.start();
+		
+	});
+}
+
+function exam_review(position){
+	$("#questionview_done").show();
+	$("#questionview_menu").hide();
+	$("#choice_bg").hide();
+	$("#choicePanelContainer").hide();
+	
+	current_question_position = position;
+	resumeForExamReview(function(){
+		showSolution();
+		current_showsolution = true;
+	});
+	
 }
 
 function updateDiscussionNumber(){
@@ -993,6 +1085,7 @@ function updateQuestionList(){
 }
 
 function updateBookMark(){
+	console.log("updateBookMark()...");
 	if(util.contains($("#btnBookmark").attr("src"),"bookmark.png")){//mark the question and save it into database.
 		console.log("save bookmark...");
 		$("#btnBookmark").attr("src","./css/images/bookmark2.png");
@@ -1084,6 +1177,10 @@ var start_timer_date;
  * @param i
  */
 function changePage(i){
+	
+	//rest
+	reset_user_choice();
+	
 	$("#wrapper_question_list").hide();
 	
 	if(i=="true"){
@@ -1112,7 +1209,7 @@ function changePage(i){
 	});
 	
 	//load content
-	loadContent(false);
+	loadContent(current_showsolution);
 	
 	//set progress
 	if(current_examResultInfo.progress<current_question_position+1)
@@ -1124,7 +1221,8 @@ function changePage(i){
 	});
 	
 	//set privious selection
-	//mChoicePanel.setChoice(current_examResultInfo.QuestionExamStatus[current_question_position].choice);
+	if(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)!=-1)
+		mChoicePanel.setChoice(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)+"");
 	
 	//change button in pop
 	if(current_question_position==(current_questions.length-1)){
@@ -1141,7 +1239,7 @@ function changePage(i){
  * 
  * @param showSolution true|false
  */
-function loadContent(showSolution){
+function loadContent(isShowSolution){
 	console.log("loadContent() called");
 	
 	var question =  current_questions[current_question_position];
@@ -1161,7 +1259,7 @@ function loadContent(showSolution){
 	freshPassageStemChoices(question.textBlock1A,question.questionStemA,question.getAnswers(),util.strToJson(s),question.solutionText);
 	
 	//set choice
-	var c = current_examResultInfo.QuestionExamStatus[current_question_position].choice+"";
+	var c = parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)+"";
 	
 	if(c!=-1&&c!=""){
 		var s="";
@@ -1172,12 +1270,19 @@ function loadContent(showSolution){
 	}
 	
 	//set solution
-	if(showSolution&&showSolution==true){
+	if(isShowSolution&&isShowSolution==true){
 		showSolution();
 	}
 }
 
+function reset_user_choice(){
+	console.log("reset_user_choice() called");
+	$( "#popupConfirm" ).popup( "close" );
+	window.frames["i_workspace"].reset_user_choice();
+}
+
 function showSolution(){
+	console.log("showSolution() called");
 	$( "#popupConfirm" ).popup( "close" );
 	window.frames["i_workspace"].showSolution();
 }
@@ -1249,6 +1354,7 @@ function showExam(){
 	//get exam_result_info
 	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
 		examResultInfo = rs[0];
+		current_examResultInfo = examResultInfo;
 		console.log("GetExamResultInfoByExAppIDs() called. exappid="+current_exAppId);
 		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
 		$("#exam_score").html(examResultInfo.score+"/"+parseInt(examResultInfo.questionCount));
@@ -1272,9 +1378,9 @@ function showExam(){
 				
 			var correct = o.correctChoice;
 			if(correct==choice)
-				html +='<li><table width=100% border=0><tr><td width=40px><img src="./css/images/select.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>';
+				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')" ><table width=100% border=0><tr><td width=40px><img src="./css/images/select.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 			else
-				html +='<li><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></li>';
+				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')"><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 		}
 		
 		$("#thelist_exam").html(html);

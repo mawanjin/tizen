@@ -421,7 +421,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>W0Z+VWCsWHznIiXWPjXGF8/UaeIa0nYBlgOLC88HFEk=</DigestValue>
+<DigestValue>53I6B7ptm+N3A+m8YUzXrqO44oV4M3syd1NjEYif7Y8=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -445,7 +445,7 @@
 </Reference>
 <Reference URI="js/choice_panel.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>lRJDm/gYmbJVLVKLuzzCfuX0MFvC/gMRF6yFqaiKEi8=</DigestValue>
+<DigestValue>tHrRHu8iY/OvQwlUnhlL9umWCdRAevcYDwrK1qPhQ4E=</DigestValue>
 </Reference>
 <Reference URI="js/config.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -457,7 +457,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>uMzE7rHhQ2r70HFQt1SkMdLpCwGIeWLf/1mXyR6tWjA=</DigestValue>
+<DigestValue>vIipfZkdypJkkNBHgjbZe/6fK4ry3bAXu6yyMZvn9KU=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -509,7 +509,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>dCu0/hHf1da/61mdXDc8AVJWKUgvgP7g0VZvnQIUHOE=</DigestValue>
+<DigestValue>KcTLUyX07B1XVsg8H8pA1dhiDMC+X/rGmqZ0UrKjnZw=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -565,7 +565,7 @@
 </Reference>
 <Reference URI="problemfull.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>h6G52EhOl8HEHesNZydC6aAE9S9iYtA8pjCnt1agz9A=</DigestValue>
+<DigestValue>DpRCWWdFvmay3+nzUltOoBAvIyex8FHYdZlJCn+2tWg=</DigestValue>
 </Reference>
 <Reference URI="problempackages.plist">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3660,9 +3660,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-SUlUDIy7clhGJUVZSRv5Gy2ZLM0YK0c/43YPQ5v7ucGH6fFkmpz6g76mOkEqIdEzDz0lwZQlo3l+
-ftJfRFMmqn9aAG6lbVnfXS7ECE2xOck01uO/os5lKsUbYD1bP9OHpIz27CoKTGgNaJvyr9GH8Ld0
-nOECXIuTtNpfGPbtOMc=
+U9miT8l1c38GPDW5JSax7NgLZqHu9U0y5LvjMETOo2RNu68r3DaCA46Y6FoO4qwl653Qpz+BRlhK
+YNi1v+r4r9nM7yGt1lEpoIraBhZLucZDnpf8l5ZlwqjwKPDyBLYYLlLZ1f2TVTVleFioDZv7tYzZ
+pzdKp9bJWz4/V8F2chI=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
