@@ -2,6 +2,9 @@
 var init = function() {
 	// TODO:: Do your initialization job
 	console.log("init() called");
+	//show loading
+	$("#loading_login").html(util.getLoading());
+	$("#loading_login").show();
 	prepare();
 };
 $(document).ready(init);
@@ -25,15 +28,10 @@ function prepare() {
 	db = new DBManager();
 	// var xmlParser = new XMLParser();
 	function prepareDatabase() {
+		console.log("prepareDatabase() called");
 		db.createTables(afterCreateTable);
 	}
-
-	function afterCreateTable() {
-		console.log("After createTables ,now filling the data...");
-		db.fillData();
-		timer_check_data_exist = setInterval(func_check_data_exist, 1000);
-	}
-
+	
 	var timer_check_table_exist = null;
 	var timer_check_data_exist = null;
 
@@ -41,10 +39,13 @@ function prepare() {
 		db.getIphoneExAppPagesCount();
 		db.getIphoneExAppsCount();
 		db.getIphoneQuestionsCount();
-
+//		console.log("db.data_count_iphone_ex_apps = "+db.data_count_iphone_ex_apps);
+//		console.log("db.data_count_IphoneExAppPages ="+db.data_count_IphoneExAppPages);
+//		console.log("db.data_count_iphoneQuestions = "+db.data_count_iphoneQuestions);
 		if (db.data_count_iphone_ex_apps == 152
 				&& db.data_count_IphoneExAppPages == 42
 				&& db.data_count_iphoneQuestions == 1510) {
+			//&& db.data_count_iphoneQuestions == 1510) {
 			console.log("fill data complete");
 			// Filling data complete
 			clearInterval(timer_check_data_exist);
@@ -53,10 +54,20 @@ function prepare() {
 		}
 	};
 
+	function afterCreateTable() {
+		console.log("After createTables ,now filling the data...");
+		setTimeout(db.fillData(startup));
+//		setTimeout(function(){timer_check_data_exist = setInterval(func_check_data_exist, 2000);},1000);
+	}
+
 	var func_check_table_exist = function() {
+		
+		console.log("func_check_table_exist() called.");
+		
 		if (db.exists_iphone_ex_apps == 1 || db.exists_IphoneExAppPages == 1
 				|| db.exists_iphoneQuestions == 1) {
 			// table not exists
+			console.log("tables don't exist.");
 			clearInterval(timer_check_table_exist);
 			prepareDatabase();
 		} else if (db.exists_iphone_ex_apps == 0
@@ -116,6 +127,7 @@ function startup() {
 //	var code = "a"+1+"r"+5+"c"+0+"p?";
 //	var rr = EncryptionUtil.dencrypt("0b8cdf3b8f94bea2549e8f643893a278e5200b10VwxWBwQCBQIHBlMGBQBRA1xUUFViXVFSCkFWXwFEC1NFRltREVQMDVhXQFhZBhYFXENbABFaVREEQgVfWEVUVBYEGVAKAEQ4b1NQV0RAAhVRGFNURAJED0NCXgtfGF9XRRYOVRVaSlUHExlYCkQTXQxRWxRFWgZBUlFbXERBVxRWFjpuQlBfRgtCB0QVQVBUQgdcQhANElQJDQtSBwZQWQ0LVgMAWVNTAQYHBgAI",false,code)
 //	alert(rr.replaceAll("[\\r\\n]", " "));
+	$("#loading_login").hide();
 }
 
 // ======================
@@ -642,11 +654,13 @@ function createListItemMyQuestions(data){
 	//test end
 	var img_arrow = '<div style="float:left;width:100%;height:100%;border:0px solid blue;text-align:right;"><table border=0 height="100%" cellspacing=0 cellpadding=0><tr><td align="right" valign="middle"><img name="arrow" src="./css/images/arrow.png" width="15px" height="10px;" /></td></tr></table></div>';
 	var progress='';
-	if(data.progress!=''&&data.finish=="false")
-		progress = '<div><meter min="0" max="'+data.progressMax+'" value="'+data.progressCount+'" /></div>';
+	var status='';
 	
-	 
-	var status='<div style="float:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>'; 
+	if(data.progress!=''&&data.finish=="false"){
+		progress = '<div><meter min="0" max="'+data.progressMax+'" value="'+data.progressCount+'" /></div>';
+	}
+	status='<div style="float:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>';
+	
 	 
 	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="td_last" align="right" valign="center"><table width="100%" border="0"><tr><td><div style="text-align:right;">'+status+'</div></td><td align="right">'+img_arrow+'</td></tr></table></td></tr></table>';
 	return html;
@@ -798,7 +812,7 @@ function showProblemSetInforContent(position){
 			}else{
 				db.GetExamResultInfoByExAppIDs(exAppId,function(info){
 			    	if(!info||info.length==0){
-			    		$("#btnBegin").hide();
+//			    		$("#btnBegin").hide();
 //			    		$("#btnReview").hide();
 //						$("#btnResume").hide();showExam()
 			    	}else if(info[0].finish=="false"){

@@ -457,7 +457,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vIipfZkdypJkkNBHgjbZe/6fK4ry3bAXu6yyMZvn9KU=</DigestValue>
+<DigestValue>jjiuHAZVkY0e0GkSGzIFNt/R57upE8PL6zLq4rRJezU=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -509,7 +509,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>KcTLUyX07B1XVsg8H8pA1dhiDMC+X/rGmqZ0UrKjnZw=</DigestValue>
+<DigestValue>q2sa1jDSy7f5gL19f9s1ELZyU8tNb1WFJGJ7d0dG6Kc=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3660,9 +3660,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-U9miT8l1c38GPDW5JSax7NgLZqHu9U0y5LvjMETOo2RNu68r3DaCA46Y6FoO4qwl653Qpz+BRlhK
-YNi1v+r4r9nM7yGt1lEpoIraBhZLucZDnpf8l5ZlwqjwKPDyBLYYLlLZ1f2TVTVleFioDZv7tYzZ
-pzdKp9bJWz4/V8F2chI=
+VXkouWTOnbSlarG5N63Kk/Nf7deBfmsCNL0FJdtcNgK8QetitGpG4Ao8oBnz7hVTuVgmh3RPX397
+OvkNi65+R0GbvwpBRp5esiEimMLF2RKKd8a07rqkTBf6ZPIKxv7iPDDCEuvQTRDccr1Npw7Z7Z1D
+KJ0b5kcT7Bo2k8RYpKA=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

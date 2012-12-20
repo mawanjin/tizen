@@ -892,7 +892,6 @@ function DBManager() {
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.exsitsStatement, [], function(tx, result) {
 				var dataset = result.rows;
-				// alert(dataset.item(0)['c']);
 				callback(dataset);
 			}, error);
 		});
@@ -958,10 +957,12 @@ function DBManager() {
 							if(examinfo.finish=="true"){
 								//score = parseInt((score/o.numQuestion)*100)+"%";
 								item.progress = "Last Score: "+parseInt((examinfo.score/examinfo.questionCount)*100)+"%";
+								item.finish = "true";
 							}else{
 								item.progressMax = examinfo.questionCount;
 								item.progressCount = examinfo.progress;
 								item.progress = "In progress: "+examinfo.progress+"/"+parseInt(examinfo.questionCount);
+								item.finish = "false";
 							}
 							break;
 						}
@@ -1005,28 +1006,36 @@ function DBManager() {
 	self.exists_iphoneQuestions = -1;
 
 	self.exists = function() {
+		console.log("exists() called.check if db exists");
 
 		self.checkExists(function(data) {
 			self.exists_iphone_ex_apps = 0;
-		}, function() {
+			console.log("table iphone_ex_apps exist");
+		}, function(tx,e) {
+			console.log("exists_iphone_ex_apps() called.,error::"+e.message);
 			self.exists_iphone_ex_apps=1;
 		});
 
 		self.checkIphoneExAppPagesExists(function(data) {
+			console.log("table IphoneExAppPages exist.");
 			self.exists_iphone_ex_apps=0;
-		}, function() {
+		}, function(tx,e) {
+			console.log("error::"+e.message);
 			self.exists_iphone_ex_apps=1;
 		});
 
 		self.checkiphoneQuestionsExists(function(data) {
+			console.log("table iphoneQuestions exist.");
 			self.exists_iphone_ex_apps=0;
-		}, function() {
+		}, function(tx,e) {
+			console.log("error::"+e.message);
 			self.exists_iphone_ex_apps = 1;
 		});
 
 	};
 
 	self.insertTest = function() {
+		console.log("insertTest() called.");
 		self.insertBookmark("1", "1", "1", "title", "" + new Date());
 		self.insertExamResultInfo("1", "name", "10", "true", "1", "start_time",
 				"end_time", "20", "section name");
@@ -1061,20 +1070,28 @@ function DBManager() {
 
 	};
 
-	self.executeSQL = function(sql) {
+	self.executeSQL = function(sql,callback) {
 		self.db.transaction(function(tx) {
-			tx.executeSql(sql, [], self.onSuccess, self.onError);
+			tx.executeSql(sql, [], callback, self.onError);
 		});
 	};
-	self.fillData = function() {
+	self.fillData = function(callback) {
 		$.ajax({
 			url : "database.xml",
 			type : 'GET',
 			dataType : 'xml',
 			success : function(xml) {
-
+				var len = $(xml).find("sql").length;
+				var i =0;
 				$(xml).find("sql").each(function() {
-					self.executeSQL($(this).text());
+//					console.log("insert called."+$(this).text());
+					self.executeSQL($(this).text(),function(){
+						i++;
+						console.log(i+";"+len);
+						if(i==len){
+							callback();
+						}
+					});
 				});
 			}
 		});
@@ -1573,7 +1590,7 @@ function DBManager() {
 			
 		});
 	};
-	
-	self.db = openDatabase("db", "0.1", "arcadiaprep DB", 15 * 1024 * 1024);	
+	console.log("open database");
+	self.db = openDatabase("arcadiaprep", "0.1", "arcadiaprep DB", 2 * 1024 * 1024);
 	return self;
 }
