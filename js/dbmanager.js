@@ -279,7 +279,6 @@ function DBManager() {
 				tx.executeSql(self.getNumOfQuestionsStatement,[ex_app_id], function(tx,
 						result) {
 					var dataset = result.rows;
-					
 					callback(dataset.item(0)['c']);
 				}, self.onError);
 			});
@@ -921,6 +920,7 @@ function DBManager() {
 	
 	self.getIphoneQuestionsCount = function(callback) {
 		self.db.transaction(function(tx) {
+			console.log("getIphoneQuestionsCount() called");
 			tx.executeSql(self.exsitsiphoneQuestionsStatement, [], function(tx,
 					result) {
 				var dataset = result.rows;

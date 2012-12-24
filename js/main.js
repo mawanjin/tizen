@@ -791,7 +791,7 @@ function showProblemSetInforContent(position){
 		current_exAppName = title;
 		
 	    db.findProblemSetIntroductionByExAppId(exAppId,function(data){
-	    	var content = data;
+	    	var content = data.replaceAll('\\\\','');;
 	    	
 	    	$("#problemIntro_title").html(title);
 			$("#thelist_problemSetinfo").html('<li>'+content+'</li>');
@@ -805,12 +805,14 @@ function showProblemSetInforContent(position){
 	    });
 		
 		db.getNumOfQuestions(exAppId,function(count){
+			
 			if(!count||count==0||count<1){
 				$("#btnReview").hide();
 				$("#btnResume").hide();
 				$("#btnBegin").hide();
 			}else{
 				db.GetExamResultInfoByExAppIDs(exAppId,function(info){
+					
 			    	if(!info||info.length==0){
 //			    		$("#btnBegin").hide();
 //			    		$("#btnReview").hide();
@@ -1247,8 +1249,53 @@ function changePage(i){
 		$("#btnPopNxt").show();
 	}
 	
+	//load video
+	loadVideo();
 	
 }
+
+var current_video_content;
+var video_is_playing=false;
+function loadVideo(){
+
+	$("#video_container").show();
+	var video1 = current_questions[current_question_position].video1.replaceAll('\\\\','');
+	var video2 = current_questions[current_question_position].video2.replaceAll('\\\\','');
+	if(video1&&video1.length>10){
+		$("#video1").show();
+		$("#videoReplay").show();
+	}else{
+		$("#video1").hide();
+		$("#videoReplay").hide();
+	}
+	if(video2&&video2.length>10){
+		$("#video2").show();
+	}else
+		$("#video2").hide();
+	
+	$("#video1").bind("click",function(){current_video_content=video1;setVideoContent(video1);video_is_playing=true;});
+	$("#video2").bind("click",function(){current_video_content=video2;setVideoContent(video2);video_is_playing=true;});
+	
+	
+	$("#videoReplay").bind("click",function(){
+		if(video_is_playing==false)
+			$("#popupVideo").popup("open");
+		setVideoContent(current_video_content);});
+	
+	
+	$("#popupVideo").bind({
+		   popupafterclose: function(event, ui) {
+			   video_is_playing=false;
+			   $("#popContent").html("");
+		   }
+	});
+}
+
+function setVideoContent(content){
+	
+	$("#popContent").html(content);
+}
+
 /**
  * 
  * @param showSolution true|false
@@ -1456,6 +1503,15 @@ function showNextQuestion(){
 	$( "#popupConfirm" ).popup( "close" );
 }
 
+function showPainterController(){
+	$("#painter_controller").hide();
+	$("#painter_controller_up").show();
+	$("#painter_controller_content").show();
+}
 
-
+function hidePainterController(){
+	$("#painter_controller").show();
+	$("#painter_controller_content").hide();
+	$("#painter_controller_up").hide();
+}
 

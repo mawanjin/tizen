@@ -683,12 +683,36 @@
 					</td>
 				</tr>
 			</table>
-			<div id="div_test1"></div>
 		</div>
 		<!-- /header -->
+		
+		<div id="painter_controller">
+			<img onclick="showPainterController()"  src="./css/images/down.png" onclick="javascript:alert(1);" />
+		</div>
+		
+		<div id="painter_controller_content">
+		<div style="position:absolute;">
+			<img  src="./css/images/painter_control_bg.png"  onclick="javascript:alert(1);" />
+		</div>
+			<div style="position:absolute;">
+				<div><img  src="./css/images/penmodeoff.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/draw_off.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/text_off.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/eraser_off.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/erase_all.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/undo_arrow.png"  onclick="javascript:alert(1);" /></div>
+				<div><img  src="./css/images/redo_arrow.png"  onclick="javascript:alert(1);" /></div>
+			</div>
+			
+		</div>
+		<div id="painter_controller_up">
+			<img  src="./css/images/up.png"  onclick="hidePainterController()" />
+		</div>
+		
+		
 		<!-- content -->
 		<div id="workspace">
-			<iframe id="i_workspace" name="i_workspace" src="problemfull.html" ></iframe>
+			<iframe id="i_workspace" name="i_workspace" scrolling="no" src="problemfull.html" ></iframe>
 		</div>
 		<!-- Menu -->
 		<div id="wrapper_question_menu" style="display: none;">
@@ -725,6 +749,22 @@
 			<div onclick="showSolution()" data-role="button">
 				Show Correct Answers
 			</div>
+		</div>
+		
+		<div data-role="popup" id="popupVideo" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false" >
+			<div id="popContent" ><video controls height="100%" id="vid" onclick="this.play();" poster="http://view.vzaar.com/928797/image" preload="none" src="http://view.vzaar.com/928797/video" width="100%"></video></div>
+		</div>
+		
+		<!-- video_container -->
+		<div id="video_container">
+			<table width=100%>
+				<tr>
+					<td>&nbsp;</td>
+					<td width=10px><img id="videoReplay" src="./css/images/replay_button.png" width=100px height=30px style="display:none;" /></td>
+					<td width=10px><a href="#popupVideo" id="video1" data-rel="popup" data-position-to="window" style="display:none;"><img src="./css/images/movie_button.png" width=100px height=30px /></a></td>
+					<td width=10px><a href="#popupVideo" id="video2" data-rel="popup" data-position-to="window" style="display:none;"><img src="./css/images/movie_button.png" width=100px height=30px /></a></td>
+				</tr>
+			</table>
 		</div>
 		
 		<!-- choice panel -->
