@@ -500,11 +500,13 @@ function DBManager() {
 					//ids = ids.substring(0, ids.length-1);
 					self.GetQuestionResultInfoByExAppIDs(ids, function(questionExamStatuss){
 						
-						if(questionExamStatuss&&questionExamStatuss.length>1){
+						if(questionExamStatuss&&questionExamStatuss.length>0){
 							
 							for(var k=0;k<questionExamStatuss.length;k++){
+								
 								var questionExamStatus = questionExamStatuss[k];
 								for(var j=0;j<rs.length;j++){
+									
 									if(questionExamStatus.exAppID==rs[j].exAppID){
 										rs[j].QuestionExamStatus.push(questionExamStatus);
 										break;

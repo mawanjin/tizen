@@ -1170,20 +1170,32 @@ var previous_choice=-1;
 function whenChoiceOnClick(which,select){
 	console.log("option is "+which+" onclick...");
 	console.log("rememeber this choice"); 
-	current_examResultInfo.QuestionExamStatus[current_question_position].choice=parseInt(which);
-	console.log("start show circle picture for choice");
-	if(select=="true"){
-		if(previous_choice!=-1){
-			cancelchoice(previous_choice);
+	
+	if(current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice.length>1){
+		if(select=="false"){
+			current_examResultInfo.QuestionExamStatus[current_question_position].choice = (""+current_examResultInfo.QuestionExamStatus[current_question_position].choice).replaceAll(which, "");
+			cancelchoice(parseInt(which)+"");
+			if(current_examResultInfo.QuestionExamStatus[current_question_position].choice =="")current_examResultInfo.QuestionExamStatus[current_question_position].choice =-1;
+		}else{
+			if(current_examResultInfo.QuestionExamStatus[current_question_position].choice==-1)current_examResultInfo.QuestionExamStatus[current_question_position].choice="";
+			choice(parseInt(which)+"");
+			current_examResultInfo.QuestionExamStatus[current_question_position].choice =current_examResultInfo.QuestionExamStatus[current_question_position].choice+""+ which;
 		}
-		choice(parseInt(which)+"");
-		current_examResultInfo.QuestionExamStatus[current_question_position].which;
-		previous_choice = parseInt(which);
 	}else{
-		cancelchoice(parseInt(which)+"");
-		current_examResultInfo.QuestionExamStatus[current_question_position].choice=-1;
+		current_examResultInfo.QuestionExamStatus[current_question_position].choice=parseInt(which);
+		console.log("start show circle picture for choice");
+		if(select=="true"){
+			if(previous_choice!=-1){
+				cancelchoice(previous_choice);
+			}
+			choice(parseInt(which)+"");
+			//current_examResultInfo.QuestionExamStatus[current_question_position].choice;
+			previous_choice = parseInt(which);
+		}else{
+			cancelchoice(parseInt(which)+"");
+			current_examResultInfo.QuestionExamStatus[current_question_position].choice=-1;
+		}
 	}
-		
 }
 
 var start_timer_date;
@@ -1313,7 +1325,7 @@ function loadContent(isShowSolution){
 		if(i==solution.length-1)
 			s+=util.convertChoiceToIndex(solution.charAt(i));
 		else
-			s+=util.convertChoiceToIndex(solution.charAt(i));+",";
+			s+=util.convertChoiceToIndex(solution.charAt(i))+",";
 	}
 	s+="]";
 	
@@ -1334,6 +1346,9 @@ function loadContent(isShowSolution){
 	if(isShowSolution&&isShowSolution==true){
 		showSolution();
 	}
+	
+	//refresh scroll
+	window.frames["i_workspace"].refreshList();
 }
 
 function reset_user_choice(){
@@ -1346,6 +1361,8 @@ function showSolution(){
 	console.log("showSolution() called");
 	$( "#popupConfirm" ).popup( "close" );
 	window.frames["i_workspace"].showSolution();
+	//refresh scroll
+	window.frames["i_workspace"].refreshList();
 }
 
 function choice(option){
@@ -1358,6 +1375,8 @@ function cancelchoice(option){
 
 function freshPassageHtml(content){
 	window.frames["i_workspace"].freshPassageHtml(content);
+	//refresh scroll
+	window.frames["i_workspace"].refreshList();
 }
 
 
@@ -1427,15 +1446,31 @@ function showExam(){
 		for(var i=0;i<examResultInfo.QuestionExamStatus.length;i++){
 			var o = examResultInfo.QuestionExamStatus[i];
 			//id,exAppID,questionId,choice,correctChoice,mark
-			var choice = o.choice;
-			if(choice==-1)choice="--";
+			var choice = parseInt(o.choice)+"";
 			
-			if(choice==0)choice='a';
-			else if(choice==1)choice='b';
-			else if(choice==2)choice='c'; 
-			else if(choice==3)choice='d';
-			else if(choice==4)choice='e';
-			else if(choice==5)choice='f';
+			if(choice!="-1"&&choice.length>1){
+				var _c ="";
+				for(var i=0;i<choice.length;i++){
+					if(choice.charAt(i)==0)_c=_c+'a';
+					else if(choice.charAt(i)==1)_c=_c+'b';
+					else if(choice.charAt(i)==2)_c=_c+'c';
+					else if(choice.charAt(i)==3)_c=_c+'d';
+					else if(choice.charAt(i)==4)_c=_c+'e';
+					else if(choice.charAt(i)==5)_c=_c+'f';
+					
+					if(i!=choice.length-1)_c=_c+',';
+				}
+				if(_c!="")choice=_c;
+				
+			}else{
+				if(choice=="-1")choice="--";
+				else if(choice==0)choice='a';
+				else if(choice==1)choice='b';
+				else if(choice==2)choice='c'; 
+				else if(choice==3)choice='d';
+				else if(choice==4)choice='e';
+				else if(choice==5)choice='f';
+			}
 				
 			var correct = o.correctChoice;
 			if(correct==choice)
@@ -1507,11 +1542,13 @@ function showPainterController(){
 	$("#painter_controller").hide();
 	$("#painter_controller_up").show();
 	$("#painter_controller_content").show();
+	window.frames["i_workspace"].showCanvas();
 }
 
 function hidePainterController(){
 	$("#painter_controller").show();
 	$("#painter_controller_content").hide();
 	$("#painter_controller_up").hide();
+	window.frames["i_workspace"].hideCanvas();
 }
 

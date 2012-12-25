@@ -63,20 +63,23 @@ mChoicePanel = new function(){
 		
 		var currentSrc = $("#imgChoiceBtn_"+which).attr("src");
 		
-		//reset all option's bg
-		var len = this.question.getAnswerLetters().length;
-			
-		for(var i=0;i<len;i++){
-			var _w='a';
-			if(i==0)_w='a';
-			else if(i==1)_w='b';
-			else if(i==2)_w='c';
-			else if(i==3)_w='d';
-			else if(i==4)_w='e';
-			else if(i==5)_w='f';
-			$("#imgChoiceBtn_"+i).attr("src","./css/images/answer_"+_w+".png");
-			$("#imgChoiceBtn_"+i).trigger("create");
+		if(this.question.solution.length==1){
+			//reset all option's bg
+			var len = this.question.getAnswerLetters().length;
+				
+			for(var i=0;i<len;i++){
+				var _w='a';
+				if(i==0)_w='a';
+				else if(i==1)_w='b';
+				else if(i==2)_w='c';
+				else if(i==3)_w='d';
+				else if(i==4)_w='e';
+				else if(i==5)_w='f';
+				$("#imgChoiceBtn_"+i).attr("src","./css/images/answer_"+_w+".png");
+				$("#imgChoiceBtn_"+i).trigger("create");
+			}
 		}
+		
 		var select = "true";
 		if(!util.contains(currentSrc,"select",false)){
 			$("#imgChoiceBtn_"+which).attr("src","./css/images/answer_select_"+w+".png");
