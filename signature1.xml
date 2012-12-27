@@ -17,7 +17,7 @@
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>qK0FSYKnLiILcQb5FGTvKluWQ3hyIaty0SqDObVVZhc=</DigestValue>
+<DigestValue>OeqwAcni5wdCvH5yl7onQcYU1zubg4LniCyT3wE6Dgw=</DigestValue>
 </Reference>
 <Reference URI="css/images/LSAT2011.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -710,6 +710,10 @@
 <Reference URI="strike.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>jClElKMZuHiriOPfkD3t9LIf6JPlKNtkemLQ7zbTRi4=</DigestValue>
+</Reference>
+<Reference URI="test.html">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>siLByZDT1Q+NSe2bdXbCVdm0xpywY/d5D1HxC4BuDuU=</DigestValue>
 </Reference>
 <Reference URI="tizen-web-ui-fw/latest/js/cultures/globalize.culture.af-ZA.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3792,9 +3796,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Nq6FEO4mNBXmPCDnVNWh7fTOnlOt1NgDSwR36h0iLhnEi6BSaLTMu8ST1lJusO3KvWEt8mk0c6Qe
-SF8nC+7hWaiV2FWta28LoNSM59NHuEI6TuRaJW51cQHdWgrwt90knUndS+OMc2EuwioVkKcS7oSX
-dmDoqwquG3uNwOfHZbE=
+j5+myx3t8rMsyADFOf09RfxHoLtx+7a3Z+jKD6DxooxE7iycxaYZhCi7nwVYAqvaASq+9S+X506M
+59WK9UHA8R7Yuw0QTUWmbGcViz/cHwXC6CloGZNbjLSumIrYKZ5QLp/DzeAIDB2/XpXerzyp1/Cj
+miJjIxbHzO+oeMLiKwA=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
