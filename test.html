@@ -99,13 +99,14 @@
 			this.toolbarspos ={}; 
 			this.bindEvent(); 
 			this.ResetDrawToolbar(); 
+			this.lastIndex=0;
 		},
 		bindEvent:function(){
 			console.log("bindEvent() called."); 
 			var self = this; 
 			
 			$("#can").bind("vmousemove",function(e){
-				console.log("vmousemove..");
+				//console.log("vmousemove..");
 				var xy = getBodyOffset(e);
 				var x = xy.x-this.offsetLeft, 
 				y = xy.y-this.offsetTop;
@@ -138,7 +139,7 @@
 			});
 		},
 		onMouseMove:function(pos){ 
-			console.log("onMouseMove() called.x="+pos.x+";y="+pos.y);
+			//console.log("onMouseMove() called.x="+pos.x+";y="+pos.y);
 			if(this.isButtonDown){ 
 				var p = this.toolbarspos; 
 				for(var i in p){  
@@ -152,6 +153,14 @@
 					this.context.stroke(); 	
 				}else if(this.curDrawingType == this.type_eraser){	
 					this.context.clearRect(pos.x,pos.y,5,5);
+				}else if(this.curDrawingType == this.type_clear){
+					this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
+					return;
+				}else if(this.curDrawingType == this.type_text){
+					updateCanTxtPos(pos);
+					this.lastX = pos.x; 
+					this.lastY = pos.y;
+					return;
 				} 
 				
 				this.lastX = pos.x; 
@@ -161,15 +170,19 @@
 		},
 		onMouseDown:function(event,pos){ 
 		console.log("onMouseDown() called.");
+		
+			if(this.curDrawingType == this.type_clear){
+					return;
+			} 
 			 
 			var p = this.toolbarspos; 
 			for(var i in p){ 
-			if(pos.x >= p[i].x 
-			&& pos.x <= p[i].x+p[i].w 
-			&& pos.y >= p[i].y 
-			&& pos.y <= p[i].y+p[i].h){ 
-			return; 
-			} 
+				if(pos.x >= p[i].x 
+				&& pos.x <= p[i].x+p[i].w 
+				&& pos.y >= p[i].y 
+				&& pos.y <= p[i].y+p[i].h){ 
+					return; 
+				} 
 			} 
 			this.isButtonDown = true; 
 			
@@ -183,6 +196,10 @@
 			 
 		},onMouseUp:function(event,pos){ 
 		console.log("onMouseUp() called.");
+			
+			if(this.curDrawingType == this.type_clear||this.curDrawingType == this.type_text){
+					return;
+			}  
 			 
 			var p = this.toolbarspos; 
 			for(var i in p){ 
@@ -192,21 +209,131 @@
 				&& pos.y <= p[i].y+p[i].h){return;} 
 			} 
 			this.isButtonDown = false; 
+			
 			this.historyStroker.push(this.curStroker); 
 			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:0}; 
 			
 		},
 		ResetDrawAll:function(){ 
-		console.log("ResetDrawAll() called.");
-			
-			this.context.clearRect(0,0,500,500); 
+		//console.log("ResetDrawAll() called.");
+			this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height")); 
 			this.ResetDrawCentre(); 
 			this.ResetDrawToolbar(); 
 		}, 
-		ResetDrawCentre:function(){ 
-			var p = this.historyStroker,p2, 
+		ResetDrawCentre:function(){
+		//console.log("ResetDrawCentre() called.");  
+			var p = this.historyStroker,p2,
+			curColor = this.context.strokeStyle;
+			var strokers = new Array();
+			var data =  new Array();
+			for(var i=0; i< p.length;i++){
+				if(p[i].type == this.type_back){
+					strokers.pop();						
+				}else if(p[i].type == this.type_forward){
+					data =  new Array();
+					var count_back = 0;
+					var count_forward = 0;
+					var index_content = 0;
+					for(var k=i;k>=0;k--){
+						if(p[k].type == this.type_back){
+							count_back++;	
+						}else if(p[k].type == this.type_forward){
+							count_forward++;	
+						}else{
+							index_content =k;
+							break;
+						}
+					}
+					
+					for(var j=0;j<=index_content;j++){
+						data.push(p[j]);
+					}
+					
+					var c = count_back-count_forward;
+					
+					index_content = index_content + 1;
+					for(var m =0;m<c;m++){
+						data.push(p[m+index_content]);
+					}
+					strokers = this.executeDraw(data);
+					//strokers = strokers.reverse();
+					//alert(strokers.length);
+					continue;
+				}else{
+					strokers.push(p[i]);
+				}
+				this.ResetDrawCentreForDisplay(strokers);
+			} 
+			this.context.strokeStyle = curColor; 
+		},
+		executeDraw:function(data){
+		//console.log("executeDraw called.data.length="+data.length);  
+		if(data.length==0)this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
+			var p = data,p2,
+			curColor = this.context.strokeStyle;
+			var strokers = new Array();
+			
+			var _data = new Array();
+			for(var i=0; i< p.length;i++){
+				if(p[i].type == this.type_back){
+					strokers.pop();						
+				}else if(p[i].type == this.type_forward){
+					_data = new Array();
+					var count_back = 0;
+					var count_forward = 0;
+					var index_content = 0;
+					for(var k=i;k>=0;k--){
+						if(p[k].type == this.type_back){
+							count_back++;	
+						}else if(p[k].type == this.type_forward){
+							count_forward++;	
+						}else{
+							index_content =k;
+							break;
+						}
+					}
+					
+					for(var j=0;j<=index_content;j++){
+						_data.push(p[j]);
+					}
+					var c = count_back-count_forward;
+					
+					index_content = index_content + 1;
+					for(var m =0;m<c;m++){
+						_data.push(p[m+index_content]);
+					}
+					
+					var ch = this.executeDraw(_data);
+					strokers = ch;
+					/*
+					for(var n=0;n<ch.length;n++){
+						strokers.push(ch[n]);
+					}*/
+					continue;
+				}else{
+					strokers.push(p[i]);
+				}
+				this.ResetDrawCentreForDisplay(strokers);
+			} 
+			this.context.strokeStyle = curColor;
+			return strokers; 
+		}
+		,
+		ResetDrawCentreForDisplay:function(data){
+//		console.log("ResetDrawCentreForDisplay() called.data.length="+data.length);
+		this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));  
+			var p = data,p2, 
 			curColor = this.context.strokeStyle; 
-			for(var i=0; i< p.length;i++){ 
+			for(var i=0; i< p.length;i++){
+				
+				if(p[i].type == this.type_clear){
+					this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
+					continue;
+				}else if(p[i].type == this.type_text){
+					this.context.fillText(p[i].text,p[i].position.x,p[i].position.y);
+					continue;
+				}
+			 
 				this.context.strokeStyle = p[i].color; 
 				this.context.beginPath(); 
 				for(var t=0; t<p[i].path.length;t++){ 
@@ -219,18 +346,20 @@
 						}else if(p[i].type == this.type_eraser){
 							this.context.clearRect(p2.x,p2.y,5,5);
 							this.context.stroke();  
+						}else if(p[i].type == this.type_text){
+							//console.log(p[i].text+";"+p[i].position.x+";"+p[i].position.y);
+							this.context.fillText(p[i].text,p[i].position.x,p[i].position.y);
 						}					 
-					 
-					
 				}
-				this.context.closePath(); 
 				this.context.beginPath(); 
 			} 
-			this.context.strokeStyle = curColor; 
+			this.context.strokeStyle = curColor;
+			
 		},
 		ResetDrawToolbar:function(){
-		console.log("ResetDrawToolbar() called."); 
+		//console.log("ResetDrawToolbar() called."); 
 			var curcolor = this.context.fillStyle; 
+			
 			for(var i=0; i<this.option.colors.length;i++){ 
 				this.context.fillStyle = this.option.colors[i]; 
 				if(this.curColor == this.context.fillStyle){ 
@@ -242,7 +371,8 @@
 				} 
 				this.context.stroke(); 
 			} 
-			this.context.fillStyle = curcolor; 
+			this.context.fillStyle = curcolor;
+			
 		},
 		onClick:function(pos){
 			console.log("onClick() called.");
@@ -252,22 +382,189 @@
 			&& pos.x <= p[i].x+p[i].w 
 			&& pos.y >= p[i].y 
 			&& pos.y <= p[i].y+p[i].h){ 
-			this.curColor = this.option.colors[i];
-			this.curDrawingType = this.type_line;
-			this.context.strokeStyle = this.curColor; 
-			this.ResetDrawAll(); 
+				this.curColor = this.option.colors[i];
+				this.curDrawingType = this.type_line;
+				this.context.strokeStyle = this.curColor; 
+				this.ResetDrawAll(); 
 				} 
 			} 
 		},
+		onPen:function(){
+			console.log("onPen called.");
+			this.curDrawingType = this.type_line;
+			this.context.strokeStyle = this.curColor; 
+			this.ResetDrawAll();
+		}
+		,
 		onEraser:function(){
 			console.log("onEraser called.");
 			this.curDrawingType = this.type_eraser;
-		} 
+		},
+		onClear:function(){
+			console.log("onClear called.");
+			this.context.beginPath();
+			this.curDrawingType = this.type_clear;
+			this.curStroker.type = this.curDrawingType;
+			this.curStroker.time = util.currentTimeMillis();
+			this.historyStroker.push(this.curStroker);
+			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time};
+			this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
+			this.ResetDrawToolbar();
+			//this.ResetDrawAll();
+		},
+		onUndo:function(){
+			console.log("onUndo called.");
+			
+			if(!this.checkUndo())return;
+			
+			this.curDrawingType = this.type_back;
+			this.curStroker.type = this.curDrawingType;
+			this.curStroker.time = util.currentTimeMillis();
+			this.historyStroker.push(this.curStroker);
+			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time};
+			this.ResetDrawAll();
+		},
+		onRedo: function(){
+			console.log("onRedo called.");
+			
+			if(!this.checkRedo())return;
+			
+			this.curDrawingType = this.type_forward;
+			this.curStroker.type = this.curDrawingType;
+			this.curStroker.time = util.currentTimeMillis();
+			this.historyStroker.push(this.curStroker);
+			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time};
+			this.ResetDrawAll();
+		},
+		onInputTxt: function(){
+			console.log("onInputTxt called.");
+			this.curDrawingType = this.type_text;
+			this.curStroker.type = this.curDrawingType;
+			this.curStroker.time = util.currentTimeMillis();
+			//this.historyStroker.push(this.curStroker);
+			//this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time,position:{x:0,y:0},text:""};
+		},
+		onExecuteInputText: function(){
+			console.log("onExecuteInputText called.");
+			
+			this.context.fillText($("#c_input_txt").html(),this.lastX,this.lastY);
+			this.curStroker.position = {x:this.lastX,y:this.lastY};
+			this.curStroker.text = $("#c_input_txt").html();
+			console.log("gggggg==::"+this.curStroker.text+";"+this.curStroker.position.x+";"+this.curStroker.position.y);
+			this.historyStroker.push(this.curStroker);
+			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time,position:{x:0,y:0},text:""};
+		}
+		,
+		checkUndo: function(){
+			var p = this.historyStroker;
+			var count_back=0;
+			var count_content=0;
+			var f_back = false;
+			var f_content = false;
+			
+			for(var i=p.length-1; i>=0;i--){
+				if(p[i].type == this.type_back&&!f_content){
+					count_back++;
+				}else if(p[i].type == this.type_back&&f_content){
+					break;
+				}else if(p[i].type == this.type_forward){
+					count_back--;
+				}else{
+					f_content=true;
+					if(!f_back)
+						count_content++;
+				}
+			}
+			
+			if(count_back<count_content)
+				return true;
+			else
+				return false;
+		},
+		checkRedo: function(){
+			var p = this.historyStroker;
+			var count_back=0;
+			var count_forward=0;
+			var count_content=0;
+			var f_forward = false;
+			var f_back = false;
+			var f_content = false;
+			
+			for(var i=p.length-1; i>=0;i--){
+				if(p[i].type == this.type_forward&&!f_forward){
+					count_forward++;
+				}else if(p[i].type == this.type_back){
+					count_back++;
+					f_forward=true;
+				}else{
+					break;
+				}
+			}
+			if(count_forward<=count_back)
+				return true;
+			else
+				return false;
+		}
 	};
 	
 	function eraserOn(){
 		console.log("eraserOn() called.");
 		drawer.onEraser();
+	}
+	
+	function clear(){
+		console.log("clear() called.");
+		drawer.onClear();
+	}
+	
+	function undo(){
+		console.log("undo() called.");
+		drawer.onUndo();
+	}
+	
+	function redo(){
+		console.log("redo() called.");
+		drawer.onRedo();
+	}
+	
+	function putText(){
+		console.log("putText() called.");
+		$("#div_can_txt").show();
+	}
+	
+	function fireCanTxt(){
+		console.log("fireCanTxt() called.");
+		$("#c_input_txt_container").show();
+		drawer.onInputTxt();		
+		$("#c_input_txt").html($("#can_txt").val());
+		$("#div_can_txt").hide();
+	}
+	
+	function updateCanTxtPos(xy){
+		$("#c_input_txt_container").css("left",xy.x);
+		$("#c_input_txt_container").css("top",xy.y);
+	}
+	
+	function cancelCanTxt(){
+		console.log("cancelCanTxt() called.");
+		$("#div_can_txt").hide();
+	}
+	
+	function cancelInputTxt(){
+		$("#c_input_txt_container").hide();
+		$("#div_can_txt").show();
+	}
+	
+	function executeInputTxt(){
+		$("#c_input_txt_container").hide();
+		drawer.onExecuteInputText();
+		$("#c_input_txt").val("");
+		$("#can_txt").val("");
+	}
+	
+	function penOn(){
+		console.log("penOn() called.");
+		drawer.onPen();
 	}
 	
 </script>
@@ -276,7 +573,25 @@
 	<h2 style="padding-left: 20px">canvas</h2>
 	<canvas id="can" width="300" height="500" ></canvas>
 	<div>
+		<a href="javascript:penOn();"> <img src="./css/images/draw_off.png" /></a>
 		<a href="javascript:eraserOn();"> <img src="./css/images/eraser_off.png" /></a>
+		<a href="javascript:clear();"> <img src="./css/images/erase_all.png" /></a>
+		<a href="javascript:undo();"> <img src="./css/images/undo_arrow.png" /></a>
+		<a href="javascript:redo();"> <img src="./css/images/redo_arrow.png" /></a>
+		<a href="javascript:putText();"> <img src="./css/images/text_off.png" /></a>
+	</div>
+	<div id="div_can_txt" style="display:none;">
+		<input type="text" id="can_txt" name="can_txt" />
+		<input type="button" value="ok" onclick="fireCanTxt()" />
+		<input type="button" value="cancel" onclick="cancelCanTxt()"  />
+	</div>
+	<div id="c_input_txt_container" style="position:absolute;display:none;">
+		<div id="c_input_txt"></div>
+		<div>[put here?]</div>
+		<div>
+			<input type="button" value="ok" onclick="executeInputTxt()" />
+			<input type="button" value="cancel" onclick="cancelInputTxt()"  />
+		</div>
 	</div>
 </body>
 </html>

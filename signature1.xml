@@ -713,7 +713,7 @@
 </Reference>
 <Reference URI="test.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>siLByZDT1Q+NSe2bdXbCVdm0xpywY/d5D1HxC4BuDuU=</DigestValue>
+<DigestValue>Ec+fxeTc8XpArA6K/od6FzFDY2iBXd72/vROATpzTCc=</DigestValue>
 </Reference>
 <Reference URI="tizen-web-ui-fw/latest/js/cultures/globalize.culture.af-ZA.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3796,9 +3796,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-j5+myx3t8rMsyADFOf09RfxHoLtx+7a3Z+jKD6DxooxE7iycxaYZhCi7nwVYAqvaASq+9S+X506M
-59WK9UHA8R7Yuw0QTUWmbGcViz/cHwXC6CloGZNbjLSumIrYKZ5QLp/DzeAIDB2/XpXerzyp1/Cj
-miJjIxbHzO+oeMLiKwA=
+Ao5+XBvy37phGutQnVeXqMfEoEop2RsathiN1ML3Yv1sXZZMPuKc4w5pSMZH/NeDritMv6c7X8qR
+WlY2CBCcCdFFOCBUHoOzb7hxIHwjKiPUuvWLW8GDikCU8jVBeTb2AAWy2NF8vCYRzsCxp6YnIdYy
+NgvBA5+5vggWjZZK6aI=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
