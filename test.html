@@ -43,7 +43,63 @@
 	}*/
 	var drawer;
 	function init(){
+		//parseStrokerXML();
 		drawer = new Drawing('can');
+		$( "#slider-mini-pen" ).on( 'slidestop', function( event ) {
+			updatePenSettingPreview();
+		});
+		
+		$( "#slider-mini-eraser" ).on( 'slidestop', function( event ) {
+			updateEraserSettingPreview();
+		});
+		
+		$("#slider-mini-text").on( 'slidestop', function( event ) {
+			updateTextSettingPreview();
+		});
+		
+		
+		
+		$("#div_pen_settings").bind({
+   		popupafteropen: function(event, ui) {
+   			updatePenSettingPreview();
+   		}
+		});
+	
+		$("#div_pen_settings").bind({
+			popupafterclose: function(event, ui) {
+				drawer.onPen();
+			}
+			});
+		
+		$("#div_eraser_settings").bind({
+   		popupafteropen: function(event, ui) {
+   			updateEraserSettingPreview();
+   		}
+		});
+		
+		$("#div_eraser_settings").bind({
+			popupafterclose: function(event, ui) {
+				drawer.onEraser();
+			}
+			});	
+			
+		$("#div_text_settings").bind({
+			popupafterclose: function(event, ui) {
+				
+				setTimeout(function(){
+					$('#div_can_txt').popup('open');
+				},100);
+				//$('#div_can_txt').popup('open');
+			}
+			});
+			
+		$("#div_text_settings").bind({
+   		popupafteropen: function(event, ui) {
+   			updateTextSettingPreview();
+   		}
+		});	
+			
+			
 	}
 	$(document).ready(init);
 	
@@ -91,15 +147,18 @@
 			this.context.lineCep = 'round'; 
 			this.isButtonDown = false;
 			this.historyStroker = []; 
-			this.curStroker = {color:'#000000',path:[],type:this.type_line,time:util.currentTimeMillis()}; 
+			this.curStroker = {color:'#000000',path:[],type:this.type_line,time:util.currentTimeMillis(),lineWidth:5,eraserSize:5}; 
 			this.lastX = 0; 
 			this.lastY = 0; 
-			this.curColor = '#000000'; 
+			this.curColor = '#000000';
+			this.lineWidth = 5; 
 			this.curDrawingType=this.type_line;
 			this.toolbarspos ={}; 
 			this.bindEvent(); 
 			this.ResetDrawToolbar(); 
 			this.lastIndex=0;
+			this.allstrokers=new Array();
+			this.index=0;
 		},
 		bindEvent:function(){
 			console.log("bindEvent() called."); 
@@ -151,8 +210,8 @@
 				if(this.curDrawingType == this.type_line){
 					this.context.lineTo(pos.x,pos.y); 
 					this.context.stroke(); 	
-				}else if(this.curDrawingType == this.type_eraser){	
-					this.context.clearRect(pos.x,pos.y,5,5);
+				}else if(this.curDrawingType == this.type_eraser){
+					this.context.clearRect(pos.x,pos.y,curEraserSize,curEraserSize);
 				}else if(this.curDrawingType == this.type_clear){
 					this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
 					return;
@@ -191,7 +250,8 @@
 			this.context.beginPath(); 
 			this.context.moveTo(this.lastX,this.lastY);
 			this.curStroker.type = this.curDrawingType;
-			this.curStroker.color = this.curColor; 
+			this.curStroker.color = this.curColor;
+			this.curStroker.lineWidth = this.lineWidth; 
 			this.curStroker.path.push(pos); 
 			 
 		},onMouseUp:function(event,pos){ 
@@ -209,9 +269,9 @@
 				&& pos.y <= p[i].y+p[i].h){return;} 
 			} 
 			this.isButtonDown = false; 
-			
-			this.historyStroker.push(this.curStroker); 
-			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:0}; 
+			this.curStroker.eraserSize = curEraserSize; 
+			this.historyStroker.push(this.curStroker);
+			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:0,lineWidth:5}; 
 			
 		},
 		ResetDrawAll:function(){ 
@@ -220,13 +280,19 @@
 			this.ResetDrawCentre(); 
 			this.ResetDrawToolbar(); 
 		}, 
-		ResetDrawCentre:function(){
+		ResetDrawCentre:function(interval){
 		//console.log("ResetDrawCentre() called.");  
 			var p = this.historyStroker,p2,
 			curColor = this.context.strokeStyle;
 			var strokers = new Array();
 			var data =  new Array();
+			var index = 0;
+			
+			var allstrokers = new Array();
+			
 			for(var i=0; i< p.length;i++){
+				var temp = new Array();
+				
 				if(p[i].type == this.type_back){
 					strokers.pop();						
 				}else if(p[i].type == this.type_forward){
@@ -255,18 +321,38 @@
 					for(var m =0;m<c;m++){
 						data.push(p[m+index_content]);
 					}
-					strokers = this.executeDraw(data);
-					//strokers = strokers.reverse();
-					//alert(strokers.length);
-					continue;
+					strokers = this.executeDraw(data,interval);
+					
 				}else{
 					strokers.push(p[i]);
 				}
-				this.ResetDrawCentreForDisplay(strokers);
-			} 
+				
+				for(var k in strokers){
+					temp.push(strokers[k]);
+				}
+				
+				allstrokers.push(temp);
+				//this.ResetDrawCentreForDisplay(strokers,interval);
+			}
+			drawer.allstrokers =allstrokers;
+			drawer.index = 0;
+			if(interval){
+				var sh = setInterval(function(){
+				var s = drawer.allstrokers[drawer.index];
+				//alert(drawer.index+";"+s.length);
+				drawer.ResetDrawCentreForDisplay(s,interval);
+				drawer.index=drawer.index+1;
+				if(drawer.index>=drawer.allstrokers.length){
+					clearInterval(sh);
+				}
+			},interval);	
+			}else{
+				drawer.ResetDrawCentreForDisplay(allstrokers[allstrokers.length-1]);
+			}			
+			
 			this.context.strokeStyle = curColor; 
 		},
-		executeDraw:function(data){
+		executeDraw:function(data,interval){
 		//console.log("executeDraw called.data.length="+data.length);  
 		if(data.length==0)this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
 			var p = data,p2,
@@ -303,7 +389,7 @@
 						_data.push(p[m+index_content]);
 					}
 					
-					var ch = this.executeDraw(_data);
+					var ch = this.executeDraw(_data,interval);
 					strokers = ch;
 					/*
 					for(var n=0;n<ch.length;n++){
@@ -313,38 +399,42 @@
 				}else{
 					strokers.push(p[i]);
 				}
-				this.ResetDrawCentreForDisplay(strokers);
+				//this.ResetDrawCentreForDisplay(strokers,interval);
 			} 
 			this.context.strokeStyle = curColor;
 			return strokers; 
 		}
 		,
-		ResetDrawCentreForDisplay:function(data){
+		ResetDrawCentreForDisplay:function(data,interval){
 //		console.log("ResetDrawCentreForDisplay() called.data.length="+data.length);
+		
 		this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));  
 			var p = data,p2, 
 			curColor = this.context.strokeStyle; 
 			for(var i=0; i< p.length;i++){
-				
+				this.context.beginPath(); 
 				if(p[i].type == this.type_clear){
 					this.context.clearRect(0,0,$("#can").attr("width"),$("#can").attr("height"));
 					continue;
 				}else if(p[i].type == this.type_text){
+					//alert(p[i].text+";"+p[i].position.x+";"+p[i].position.y);
+					this.context.fillStyle=p[i].color;
+					this.context.font = p[i].lineWidth+"px Times New Roman";
 					this.context.fillText(p[i].text,p[i].position.x,p[i].position.y);
 					continue;
 				}
 			 
 				this.context.strokeStyle = p[i].color; 
-				this.context.beginPath(); 
+				this.context.lineWidth = p[i].lineWidth;
+				//this.context.beginPath(); 
 				for(var t=0; t<p[i].path.length;t++){ 
 					p2 = p[i].path[t]; 
 					if(t==0) this.context.moveTo(p2.x,p2.y);
-					 
 						if(p[i].type == this.type_line){
 							this.context.lineTo(p2.x,p2.y); 
 							this.context.stroke();  	
 						}else if(p[i].type == this.type_eraser){
-							this.context.clearRect(p2.x,p2.y,5,5);
+							this.context.clearRect(p2.x,p2.y,p[i].eraserSize,p[i].eraserSize);
 							this.context.stroke();  
 						}else if(p[i].type == this.type_text){
 							//console.log(p[i].text+";"+p[i].position.x+";"+p[i].position.y);
@@ -392,13 +482,16 @@
 		onPen:function(){
 			console.log("onPen called.");
 			this.curDrawingType = this.type_line;
-			this.context.strokeStyle = this.curColor; 
-			this.ResetDrawAll();
+			this.curColor = curPenColor;
+			this.lineWidth = curPenSize;
+			this.context.strokeStyle = this.curColor;
+			this.context.lineWidth = this.lineWidth; 
 		}
 		,
 		onEraser:function(){
 			console.log("onEraser called.");
 			this.curDrawingType = this.type_eraser;
+			this.context.eraserSize = curEraserSize;
 		},
 		onClear:function(){
 			console.log("onClear called.");
@@ -447,14 +540,19 @@
 		onExecuteInputText: function(){
 			console.log("onExecuteInputText called.");
 			
+			this.curStroker.color =curTextColor;
+			this.curStroker.lineWidth =curTextSize;
+			
+			this.context.fillStyle=this.curStroker.color;
+			this.context.font = this.curStroker.lineWidth+"px Times New Roman";
 			this.context.fillText($("#c_input_txt").html(),this.lastX,this.lastY);
+			
 			this.curStroker.position = {x:this.lastX,y:this.lastY};
 			this.curStroker.text = $("#c_input_txt").html();
-			console.log("gggggg==::"+this.curStroker.text+";"+this.curStroker.position.x+";"+this.curStroker.position.y);
+			
 			this.historyStroker.push(this.curStroker);
 			this.curStroker = {color:this.curColor,path:[],type:this.curDrawingType,time:this.curStroker.time,position:{x:0,y:0},text:""};
-		}
-		,
+		},
 		checkUndo: function(){
 			var p = this.historyStroker;
 			var count_back=0;
@@ -504,12 +602,23 @@
 				return true;
 			else
 				return false;
+		},
+		replay:function(strokers,interval){
+			this.historyStroker = strokers;
+			this.ResetDrawCentre(interval);
 		}
 	};
 	
 	function eraserOn(){
 		console.log("eraserOn() called.");
-		drawer.onEraser();
+		
+		if(util.contains((""+$("#a_eraser_settings").html()),"off",false)){
+			$("#a_eraser_settings").html('<img src="./css/images/eraser_on.png" />');
+			$("#a_eraser_settings").trigger("create");
+			drawer.onEraser();
+		}else{
+			$("#div_eraser_settings").popup('open');
+		}
 	}
 	
 	function clear(){
@@ -529,15 +638,20 @@
 	
 	function putText(){
 		console.log("putText() called.");
-		$("#div_can_txt").show();
+		
+		if(util.contains((""+$("#a_text_settings").html()),"off",false)){
+			$("#a_text_settings").html('<img src="./css/images/text_on.png" />');
+			$("#a_text_settings").trigger("create");
+		}
+		$('#div_can_txt').popup('open');
 	}
 	
 	function fireCanTxt(){
 		console.log("fireCanTxt() called.");
+		$("#div_can_txt").popup("close");
 		$("#c_input_txt_container").show();
 		drawer.onInputTxt();		
 		$("#c_input_txt").html($("#can_txt").val());
-		$("#div_can_txt").hide();
 	}
 	
 	function updateCanTxtPos(xy){
@@ -547,7 +661,6 @@
 	
 	function cancelCanTxt(){
 		console.log("cancelCanTxt() called.");
-		$("#div_can_txt").hide();
 	}
 	
 	function cancelInputTxt(){
@@ -564,23 +677,181 @@
 	
 	function penOn(){
 		console.log("penOn() called.");
-		drawer.onPen();
+		if(util.contains((""+$("#a_pen_settings").html()),"off",false)){
+			$("#a_pen_settings").html('<img src="./css/images/draw_on.png" />');
+			$("#a_pen_settings").trigger("create");
+			drawer.onPen();
+		}else{	
+			$('#div_pen_settings').popup('open');
+		}
+	}
+	
+	function updateEraserSettingPreview(){
+		console.log("updateEraserSettingPreview() called.");
+		var canvas = document.getElementById("canvas_eraser_setting");
+		var context = canvas.getContext('2d');
+		
+		context.clearRect(0,0,canvas.width,canvas.height);
+		//context.strokeStyle = curPenColor;
+		context.lineWidth = $("#slider-mini-eraser").val();
+		context.beginPath();
+		context.moveTo(canvas.width/2-10,canvas.height/2);
+		context.lineTo(canvas.width/2+context.lineWidth,canvas.height/2); 
+		context.stroke();
+		curEraserSize = $("#slider-mini-eraser").val();
+	}
+	
+	function updatePenSettingPreview(){
+		console.log("updatePenSettingPreview() called.");
+		var canvas = document.getElementById("canvas_pen_setting");
+		var context = canvas.getContext('2d');
+		
+		context.clearRect(0,0,canvas.width,canvas.height);
+		context.strokeStyle = curPenColor;
+		context.lineWidth = $("#slider-mini-pen").val();
+		context.beginPath();
+		context.moveTo(10,canvas.height/2);
+		context.lineTo(canvas.width-10,canvas.height/2); 
+		context.stroke();
+		curPenSize = $("#slider-mini-pen").val();
+	}
+	
+	function updateTextSettingPreview(){
+		console.log("updateTextSettingPreview() called.");
+		var canvas = document.getElementById("canvas_text_setting");
+		var context = canvas.getContext('2d');
+		context.clearRect(0,0,canvas.width,canvas.height);
+		context.strokeStyle = curTextColor;
+		context.lineWidth = $("#slider-mini-text").val();
+		
+		context.fillStyle=curTextColor;
+		context.font = context.lineWidth+"px Times New Roman";
+		context.fillText("ABC abc",5,canvas.height-10);
+		curTextSize = context.lineWidth;
+	}
+	
+	var curPenColor="#000000";
+	var curPenSize =5;
+	var curEraserSize=10;
+	var curTextColor="#000000";;
+	var curTextSize=5;
+	
+	function updateCurPenColor(color){
+		curPenColor = color;
+		curPenSize = $("#slider-mini-pen").val();
+		updatePenSettingPreview();
+	}
+	
+	function updateCurTextColor(color){
+		curTextColor = color;
+		curTextSize = $("#slider-mini-text").val();
+		updateTextSettingPreview();
+	}
+	
+	function saveToImg(){
+		//convert to xml
+		//alert(drawer.historyStroker.length);
+		var xml = convertStrokerToXML(drawer.historyStroker);
+		
+		var data = drawer.canvas.toDataURL();
+		//save original data and xml into db
+		var img = data.substring(22);
+		$("#rs_img").html('<img src="'+data+'"/>');
+	}
+	
+	function convertStrokerToXML(strokers){
+		var xml = '<?xml version="1.0" encoding="UTF-8" ?>';
+		 xml+='<strokers>';
+		for(var i=0;i<strokers.length;i++){
+			xml+='<stroker>';
+			xml+='<color>'+strokers[i].color+'</color>';
+			xml+='<type>'+strokers[i].type+'</type>';
+			xml+='<time>'+strokers[i].time+'</time>';
+			xml+='<lineWidth>'+strokers[i].lineWidth+'</lineWidth>';
+			xml+='<eraserSize>'+strokers[i].eraserSize+'</eraserSize>';
+			xml+='<position>'+strokers[i].position+'</position>';
+			xml+='<text>'+strokers[i].text+'</text>';
+			xml+='<paths>';
+			for(var j=0;j<strokers[i].path;j++){
+				xml+='<path>'+strokers[i].path[j]+'</path>';
+			}
+			xml+='</paths>';
+			
+			xml+='</stroker>';
+		}
+		xml+='</strokers>';
+	}
+	
+	
+	function replay(){
+		console.log("replay() called.");
+		parseStrokerXML(function(strokers){
+			console.log("parseStrokerXML() called.and stroker length is "+strokers.length);
+			drawer.replay(strokers,1000);
+		});
+	}
+	
+	function parseStrokerXML(callback){
+		/*
+		var xml = '<?xml version="1.0" encoding="UTF-8"?><strokers><stroker><color>#000000</color></stroker></strokers>';
+		$(xml).find("stroker").each(function(i){
+					var color=$(this).children("color");     
+		            var color_value=$(this).children("color").text();      
+		            alert(color_value);});*/
+		 var stokers = new Array();           
+		$.ajax({   
+		    url:'stroker_template.xml',   
+		    type: 'GET',   
+		    dataType: 'xml',   
+		    timeout: 1000,   
+		    error: function(xml){   
+		        alert('Error loading XML document'+xml);   
+		    },   
+		    success: function(xml){   
+		        $(xml).find("stroker").each(function(i){
+		        	var stroker = {color:'#000000',path:[],type:1,time:0,lineWidth:0,eraserSize:0,position:{x:0,y:0},text:''};;    
+		                  
+		            stroker.color = $(this).children("color").text();
+		            stroker.type = $(this).children("type").text();
+		            stroker.time = $(this).children("time").text();
+		            stroker.lineWidth = $(this).children("lineWidth").text();
+		            stroker.eraserSize = $(this).children("eraserSize").text();
+		            stroker.position = util.strToJson($(this).children("position").text());
+		            stroker.text = $(this).children("text").text();
+		            //parse path
+		            $(this).children("paths").find("path").each(
+		            	function(j){
+		            		stroker.path.push(util.strToJson($(this).text()));
+		            	}
+		            );
+		            
+		            stokers.push(stroker);
+		        });  
+		       callback(stokers);  
+		    }   
+	}); 
+
 	}
 	
 </script>
 </head>
 <body >
+	
 	<h2 style="padding-left: 20px">canvas</h2>
 	<canvas id="can" width="300" height="500" ></canvas>
 	<div>
-		<a href="javascript:penOn();"> <img src="./css/images/draw_off.png" /></a>
-		<a href="javascript:eraserOn();"> <img src="./css/images/eraser_off.png" /></a>
+		<a id="a_pen_settings" data-position-to="window" onclick="penOn()"> <img src="./css/images/draw_off.png" /></a>
+		<a id="a_eraser_settings"  data-rel="popup" data-position-to="window" onclick="eraserOn()"><img src="./css/images/eraser_off.png" /></a>
 		<a href="javascript:clear();"> <img src="./css/images/erase_all.png" /></a>
 		<a href="javascript:undo();"> <img src="./css/images/undo_arrow.png" /></a>
 		<a href="javascript:redo();"> <img src="./css/images/redo_arrow.png" /></a>
-		<a href="javascript:putText();"> <img src="./css/images/text_off.png" /></a>
+		<a id="a_text_settings" onclick="putText()"> <img src="./css/images/text_off.png" /></a>
+		<input type="button" value="save" onclick="saveToImg();" />
+		<input type="button" value="replay" onclick="replay();" />
+		
 	</div>
-	<div id="div_can_txt" style="display:none;">
+	<div data-role="popup" class="ui-content" id="div_can_txt" >
+		<label>put what you want&nbsp;&nbsp;&nbsp;&nbsp;<a id="a_text_settings" href="#div_text_settings" data-rel="popup" data-position-to="window" >setting</a></label>
 		<input type="text" id="can_txt" name="can_txt" />
 		<input type="button" value="ok" onclick="fireCanTxt()" />
 		<input type="button" value="cancel" onclick="cancelCanTxt()"  />
@@ -593,5 +864,86 @@
 			<input type="button" value="cancel" onclick="cancelInputTxt()"  />
 		</div>
 	</div>
+	<!-- Pen settings -->
+	<div data-role="popup" class="ui-content" id="div_pen_settings" >
+		<div>&nbsp;&nbsp;<b>Pen Settings</b></div>
+		<div id="pen_preview">
+			<canvas id="canvas_pen_setting" width=200 height=50 style="border:2px solid gray;"></canvas>
+		</div>
+		<div name="pen_slider" >
+			<input type="range"  id="slider-mini-pen" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
+		</div>
+		<div id="div_colors">
+			<table>
+				<tr>
+					<td width=20 height=20 style="background-color:#a7c3ff;" onclick="updateCurPenColor('#a7c3ff')"></td>
+					<td width=20 height=20 style="background-color:#d70000;" onclick="updateCurPenColor('#d70000')"></td>
+					<td width=20 height=20 style="background-color:#ceda00;" onclick="updateCurPenColor('#ceda00')"></td>
+					<td width=20 height=20 style="background-color:#7e005d;" onclick="updateCurPenColor('#7e005d')"></td>
+					<td width=20 height=20 style="background-color:#ff2fff;" onclick="updateCurPenColor('#ff2fff')"></td>
+					<td width=20 height=20 style="background-color:#5bff77;" onclick="updateCurPenColor('#5bff77')"></td>
+					<td width=20 height=20 style="background-color:#0a32a5;" onclick="updateCurPenColor('#0a32a5')"></td>
+					<td width=20 height=20 style="background-color:#050658;" onclick="updateCurPenColor('#050658')"></td>
+				</tr>
+				<tr>
+					<td width=20 height=20 style="background-color:#ffb99f;" onclick="updateCurPenColor('#ffb99f')"></td>
+					<td width=20 height=20 style="background-color:#f9beff;" onclick="updateCurPenColor('#f9beff')"></td>
+					<td width=20 height=20 style="background-color:#85c500;" onclick="updateCurPenColor('#85c500')"></td>
+					<td width=20 height=20 style="background-color:#704700;" onclick="updateCurPenColor('#704700')"></td>
+					<td width=20 height=20 style="background-color:#7d009a;" onclick="updateCurPenColor('#7d009a')"></td>
+					<td width=20 height=20 style="background-color:#066565;" onclick="updateCurPenColor('#066565')"></td>
+					<td width=20 height=20 style="background-color:#000000;" onclick="updateCurPenColor('#000000')"></td>
+					<td width=20 height=20 style="background-color:#ff931f;" onclick="updateCurPenColor('#ff931f')"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- Text settings -->
+	<div data-role="popup" class="ui-content" id="div_text_settings">
+		<div>&nbsp;&nbsp;<b>Text Settings</b></div>
+		<div id="pen_preview">
+			<canvas id="canvas_text_setting" width=200 height=50 style="border:2px solid gray;"></canvas>
+		</div>
+		<div name="text_slider" >
+			<input type="range"  id="slider-mini-text" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
+		</div>
+		<div id="div_colors">
+			<table>
+				<tr>
+					<td width=20 height=20 style="background-color:#a7c3ff;" onclick="updateCurTextColor('#a7c3ff')"></td>
+					<td width=20 height=20 style="background-color:#d70000;" onclick="updateCurTextColor('#d70000')"></td>
+					<td width=20 height=20 style="background-color:#ceda00;" onclick="updateCurTextColor('#ceda00')"></td>
+					<td width=20 height=20 style="background-color:#7e005d;" onclick="updateCurTextColor('#7e005d')"></td>
+					<td width=20 height=20 style="background-color:#ff2fff;" onclick="updateCurTextColor('#ff2fff')"></td>
+					<td width=20 height=20 style="background-color:#5bff77;" onclick="updateCurTextColor('#5bff77')"></td>
+					<td width=20 height=20 style="background-color:#0a32a5;" onclick="updateCurTextColor('#0a32a5')"></td>
+					<td width=20 height=20 style="background-color:#050658;" onclick="updateCurTextColor('#050658')"></td>
+				</tr>
+				<tr>
+					<td width=20 height=20 style="background-color:#ffb99f;" onclick="updateCurTextColor('#ffb99f')"></td>
+					<td width=20 height=20 style="background-color:#f9beff;" onclick="updateCurTextColor('#f9beff')"></td>
+					<td width=20 height=20 style="background-color:#85c500;" onclick="updateCurTextColor('#85c500')"></td>
+					<td width=20 height=20 style="background-color:#704700;" onclick="updateCurTextColor('#704700')"></td>
+					<td width=20 height=20 style="background-color:#7d009a;" onclick="updateCurTextColor('#7d009a')"></td>
+					<td width=20 height=20 style="background-color:#066565;" onclick="updateCurTextColor('#066565')"></td>
+					<td width=20 height=20 style="background-color:#000000;" onclick="updateCurTextColor('#000000')"></td>
+					<td width=20 height=20 style="background-color:#ff931f;" onclick="updateCurTextColor('#ff931f')"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- Eraser Settidngs -->
+	<div data-role="popup" class="ui-content" id="div_eraser_settings">
+		<div>&nbsp;&nbsp;<b>Eraser Settings</b></div>
+		<div id="pen_preview">
+			<canvas id="canvas_eraser_setting" width=200 height=50 style="border:2px solid gray;"></canvas>
+		</div>
+		<div name="eraser_slider" >
+			<input type="range"  id="slider-mini-eraser" value="5" min="1" max="50" data-highlight="true" data-mini="true" />
+		</div>
+	</div>
+	
+	<div id="rs_img"></div>
+	
 </body>
 </html>

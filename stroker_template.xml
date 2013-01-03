@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strokers>
+	<stroker>
+		<color>#000000</color>
+		<type>1</type>
+		<time>231432</time>
+		<lineWidth>10</lineWidth>
+		<eraserSize>15</eraserSize>
+		<position>{x:10,y:10}</position>
+		<text>text...</text>
+		<paths>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+		</paths>
+	</stroker>
+	<stroker>
+		<color>#c0abff</color>
+		<type>1</type>
+		<time>231432</time>
+		<lineWidth>40</lineWidth>
+		<eraserSize>15</eraserSize>
+		<position>{x:10,y:50}</position>
+		<text>abc...</text>
+		<paths>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+			<path>{x:123,y:124}</path>
+		</paths>
+	</stroker>
+</strokers>

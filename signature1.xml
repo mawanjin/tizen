@@ -673,7 +673,7 @@
 </Reference>
 <Reference URI="js/util.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>jdZAVZrnakHWOLSz+O8ODya6bpZ6xJACGN6gBr00Zk8=</DigestValue>
+<DigestValue>FXKvESe+CdQCfDdeoeUquemZWLaoLkoO6HX72+VgUgA=</DigestValue>
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -711,9 +711,13 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>jClElKMZuHiriOPfkD3t9LIf6JPlKNtkemLQ7zbTRi4=</DigestValue>
 </Reference>
+<Reference URI="stroker_template.xml">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>A5CyiaWeJSiRoUpZF5PHK72ChgEIHfndnLKsTocvFIE=</DigestValue>
+</Reference>
 <Reference URI="test.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Ec+fxeTc8XpArA6K/od6FzFDY2iBXd72/vROATpzTCc=</DigestValue>
+<DigestValue>g9JmlIg519X7A2XODiaYIOtEjPxSJgCHMMT3Y672Qrk=</DigestValue>
 </Reference>
 <Reference URI="tizen-web-ui-fw/latest/js/cultures/globalize.culture.af-ZA.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3796,9 +3800,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Ao5+XBvy37phGutQnVeXqMfEoEop2RsathiN1ML3Yv1sXZZMPuKc4w5pSMZH/NeDritMv6c7X8qR
-WlY2CBCcCdFFOCBUHoOzb7hxIHwjKiPUuvWLW8GDikCU8jVBeTb2AAWy2NF8vCYRzsCxp6YnIdYy
-NgvBA5+5vggWjZZK6aI=
+VHQGCVF+JnppTsxxCFocvRNNjvPNueM3ymiyHJJPVOd5XIEAO4P/svpTl9itqiLSASPQ84WBz6rV
+CdTeuG9Ls/y1jx00nHLhwpTb6ArFAa3Fv1F/8mv2KQzBpbShHl7WgJxNEyFVJ2gwVHwYUtorCeS3
+KJpZ58xA3rmY9J0Yu9U=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
