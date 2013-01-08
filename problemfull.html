@@ -1,10 +1,16 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!doctype html>
 <html>
 <head>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="target-densitydpi=device-dpi" />
+<!-- <meta name="viewport" content="target-densitydpi=device-dpi" /> -->
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
 <link id="scroll_css" rel="stylesheet" href="./css/scroll-workspace-portrait.css" />
+<link rel="stylesheet" href="./css/jquery.mobile-1.2.0.min.css" />
 <style type="text/css">
     body {
         margin: 20px 5px 20px 5px;
@@ -67,10 +73,21 @@
 
 </style>
 
-<script src="./js/jquery-1.8.2.min.js"></script>
 <script src="./js/iscroll-lite.js?v4"></script>
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/jquery.mobile-1.2.0.min.js"></script>
+<script type="text/javascript" src="./js/util.js"></script>
+<script type="text/javascript" src="./js/drawer.js"></script>
+
 
 <script type="text/javascript">
+var drawer;
+var init = function() {
+	drawer = new Drawing('can');
+	drawer.initAfterReady();
+};	
+
+$(document).ready(init);
 var choicesID = 'choices';    // 可选答案element id
 var circleID = 'circle';      // 图标 圆的element id
 var correctID = 'correct';    // 图标 正确element id
@@ -431,15 +448,21 @@ document.addEventListener('DOMContentLoaded', loaded, false);
 function showCanvas(){
 	$("#canvas_container").show();
 	$("#canvas_container").css("z-index",2);
-	var canvas=document.getElementById('myCanvas');
-	var ctx=canvas.getContext('2d');
-	ctx.fillStyle='#FF0000';
-	ctx.fillRect(0,0,80,100);
 }
 
 function hideCanvas(){
 	$("#canvas_container").css("z-index",1);
 	$("#canvas_container").hide();
+}
+
+function switchPenOn(){
+	
+}
+
+function penOff(){
+	console.log("penOff() called.");
+	$("#canvas_container").css("z-index",-1);
+	$("#canvas_container").trigger('create');
 }
 
 </script>
@@ -452,18 +475,154 @@ function hideCanvas(){
 			<ul>
 				<li>
 					<div id="div_body"></div>
-					<!-- 
-					<div id="div_body"
-						style="position: absolute; left: 0px; top: 0px; margin: 20px 10px; border: 0px solid red; background: url('wtrmrk.png'); background-repeat: no-repeat; background-position: center;">
-					</div>
-					 -->
 				</li> 
 			</ul>
 		</div>
 	</div>
 
-	<div id="canvas_container" style="position: absolute;left:0px;top:0px;height:100%;">
-		<canvas id="myCanvas" style="width:100%;height:100%;">your browser does not support the canvas tag </canvas>
+	<div id="canvas_container" style="position: absolute;left:0px;top:0px;height:2000px;width:1000px;border:0px solid red;">
+		<canvas id="can" width=1000 height=2000 ></canvas>
+		<div data-role="popup" class="ui-content" id="div_can_txt">
+			<label>put what you want&nbsp;&nbsp;&nbsp;&nbsp;<a
+				id="a_text_settings" href="#div_text_settings" data-rel="popup"
+				data-position-to="window">setting</a></label> <input type="text"
+				id="can_txt" name="can_txt" /> <input type="button" value="ok"
+				onclick="fireCanTxt()" /> <input type="button" value="cancel"
+				onclick="cancelCanTxt()" />
+		</div>
+		<div id="c_input_txt_container"
+			style="position: absolute; display: none;">
+			<div id="c_input_txt"></div>
+			<div>[put here?]</div>
+			<div>
+				<input type="button" value="ok" onclick="executeInputTxt()" /> <input
+					type="button" value="cancel" onclick="cancelInputTxt()" />
+			</div>
+		</div>
+		<!-- Pen settings -->
+		<div data-role="popup" class="ui-content" id="div_pen_settings">
+			<div>
+				&nbsp;&nbsp;<b>Pen Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_pen_setting" width=200 height=50
+					style="border: 2px solid gray;"></canvas>
+			</div>
+			<div name="pen_slider">
+				<input type="range" id="slider-mini-pen" value="5" min="1" max="50"
+					data-highlight="true" data-mini="true" />
+			</div>
+			<div id="div_colors">
+				<table>
+					<tr>
+						<td width=20 height=20 style="background-color: #a7c3ff;"
+							onclick="updateCurPenColor('#a7c3ff')"></td>
+						<td width=20 height=20 style="background-color: #d70000;"
+							onclick="updateCurPenColor('#d70000')"></td>
+						<td width=20 height=20 style="background-color: #ceda00;"
+							onclick="updateCurPenColor('#ceda00')"></td>
+						<td width=20 height=20 style="background-color: #7e005d;"
+							onclick="updateCurPenColor('#7e005d')"></td>
+						<td width=20 height=20 style="background-color: #ff2fff;"
+							onclick="updateCurPenColor('#ff2fff')"></td>
+						<td width=20 height=20 style="background-color: #5bff77;"
+							onclick="updateCurPenColor('#5bff77')"></td>
+						<td width=20 height=20 style="background-color: #0a32a5;"
+							onclick="updateCurPenColor('#0a32a5')"></td>
+						<td width=20 height=20 style="background-color: #050658;"
+							onclick="updateCurPenColor('#050658')"></td>
+					</tr>
+					<tr>
+						<td width=20 height=20 style="background-color: #ffb99f;"
+							onclick="updateCurPenColor('#ffb99f')"></td>
+						<td width=20 height=20 style="background-color: #f9beff;"
+							onclick="updateCurPenColor('#f9beff')"></td>
+						<td width=20 height=20 style="background-color: #85c500;"
+							onclick="updateCurPenColor('#85c500')"></td>
+						<td width=20 height=20 style="background-color: #704700;"
+							onclick="updateCurPenColor('#704700')"></td>
+						<td width=20 height=20 style="background-color: #7d009a;"
+							onclick="updateCurPenColor('#7d009a')"></td>
+						<td width=20 height=20 style="background-color: #066565;"
+							onclick="updateCurPenColor('#066565')"></td>
+						<td width=20 height=20 style="background-color: #000000;"
+							onclick="updateCurPenColor('#000000')"></td>
+						<td width=20 height=20 style="background-color: #ff931f;"
+							onclick="updateCurPenColor('#ff931f')"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- Text settings -->
+		<div data-role="popup" class="ui-content" id="div_text_settings">
+			<div>
+				&nbsp;&nbsp;<b>Text Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_text_setting" width=200 height=50
+					style="border: 2px solid gray;"></canvas>
+			</div>
+			<div name="text_slider">
+				<input type="range" id="slider-mini-text" value="5" min="1" max="50"
+					data-highlight="true" data-mini="true" />
+			</div>
+			<div id="div_colors">
+				<table>
+					<tr>
+						<td width=20 height=20 style="background-color: #a7c3ff;"
+							onclick="updateCurTextColor('#a7c3ff')"></td>
+						<td width=20 height=20 style="background-color: #d70000;"
+							onclick="updateCurTextColor('#d70000')"></td>
+						<td width=20 height=20 style="background-color: #ceda00;"
+							onclick="updateCurTextColor('#ceda00')"></td>
+						<td width=20 height=20 style="background-color: #7e005d;"
+							onclick="updateCurTextColor('#7e005d')"></td>
+						<td width=20 height=20 style="background-color: #ff2fff;"
+							onclick="updateCurTextColor('#ff2fff')"></td>
+						<td width=20 height=20 style="background-color: #5bff77;"
+							onclick="updateCurTextColor('#5bff77')"></td>
+						<td width=20 height=20 style="background-color: #0a32a5;"
+							onclick="updateCurTextColor('#0a32a5')"></td>
+						<td width=20 height=20 style="background-color: #050658;"
+							onclick="updateCurTextColor('#050658')"></td>
+					</tr>
+					<tr>
+						<td width=20 height=20 style="background-color: #ffb99f;"
+							onclick="updateCurTextColor('#ffb99f')"></td>
+						<td width=20 height=20 style="background-color: #f9beff;"
+							onclick="updateCurTextColor('#f9beff')"></td>
+						<td width=20 height=20 style="background-color: #85c500;"
+							onclick="updateCurTextColor('#85c500')"></td>
+						<td width=20 height=20 style="background-color: #704700;"
+							onclick="updateCurTextColor('#704700')"></td>
+						<td width=20 height=20 style="background-color: #7d009a;"
+							onclick="updateCurTextColor('#7d009a')"></td>
+						<td width=20 height=20 style="background-color: #066565;"
+							onclick="updateCurTextColor('#066565')"></td>
+						<td width=20 height=20 style="background-color: #000000;"
+							onclick="updateCurTextColor('#000000')"></td>
+						<td width=20 height=20 style="background-color: #ff931f;"
+							onclick="updateCurTextColor('#ff931f')"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- Eraser Settidngs -->
+		<div data-role="popup" class="ui-content" id="div_eraser_settings">
+			<div>
+				&nbsp;&nbsp;<b>Eraser Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_eraser_setting" width=200 height=50
+					style="border: 2px solid gray;"></canvas>
+			</div>
+			<div name="eraser_slider">
+				<input type="range" id="slider-mini-eraser" value="5" min="1"
+					max="50" data-highlight="true" data-mini="true" />
+			</div>
+		</div>
+
+		<div id="rs_img"></div>
 	</div>
 </body>
 </html>

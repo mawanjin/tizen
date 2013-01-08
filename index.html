@@ -695,13 +695,13 @@
 			<img  src="./css/images/painter_control_bg.png"  onclick="javascript:alert(1);" />
 		</div>
 			<div style="position:absolute;">
-				<div><img  src="./css/images/penmodeoff.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/draw_off.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/text_off.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/eraser_off.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/erase_all.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/undo_arrow.png"  onclick="javascript:alert(1);" /></div>
-				<div><img  src="./css/images/redo_arrow.png"  onclick="javascript:alert(1);" /></div>
+				<div id="a_mode" onclick="switchMode()" ><img  src="./css/images/penmodeoff.png"   /></div>
+				<div id="a_pen_settings" onclick="penOn()" ><img  src="./css/images/draw_off.png"  /></div>
+				<div id="a_text_settings" onclick="putText()"><img  src="./css/images/text_off.png"  /></div>
+				<div id="a_eraser_settings" onclick="eraserOn()"><img  src="./css/images/eraser_off.png"  /></div>
+				<div ><img  src="./css/images/erase_all.png"  onclick="clearOn()" /></div>
+				<div><img  src="./css/images/undo_arrow.png"  onclick="undo()" /></div>
+				<div><img  src="./css/images/redo_arrow.png"  onclick="redo()" /></div>
 			</div>
 			
 		</div>
@@ -808,6 +808,7 @@
 				</tr>
 			</table>
 		</div>
+		
 	</div>
 	<!-- /page qeustionview -->
 	
