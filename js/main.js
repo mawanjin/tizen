@@ -12,7 +12,6 @@ $(document).ready(init);
 
 function exit(){
 	tizen.application.exit();
-//	window.application.exit();
 }
 
 var db;
@@ -90,44 +89,21 @@ var main_moduleinfo;
 var informations;
 function startup() {
 	console.log("startup() called");
-	// parser.getProblemPackages(function(problempackage){
-	// // alert(problempackage[0].Attributes.AboutPage.Title);
-	// // alert(problempackage[0].Attributes.Bought);
-	// //
-	// alert(problempackage[0].Data.PackageSetName+";"+problempackage[0].Data.ProblemSets.length);
-	// //
-	// alert(problempackage[0].Data.PackageSetName+";"+problempackage[problempackage.length-1].Name.ProblemSetName);
-	//		
-	//		
-	// });
 	parser.getmoduleinfo(function(moduleinfo) {
-		// var c = moduleinfo.examSection.length;
-		// for ( var i = 0; i < c; i++) {
-		// var vo = moduleinfo.examSection[i];
-		// alert(vo.secName + ";" + vo.secNameShort + ";" + vo.secFile);
-		// }
-		// alert(moduleinfo.examType+"-"+moduleinfo.websiteURL+"::"+moduleinfo.examSection.length);
 		main_moduleinfo = moduleinfo;
 		console.log("afert getmoduleinfo() called");
 		//generateCategoryBar();
 		SystemOrientation.refresh(function (){
 			console.log("afert SystemOrientation.refresh() called");
-//			refreshList(current_section_short,current_section);	
 		});
 		initConstant();
 	});
 //	 ================================================
 	 parser.getInformation(function(array) {
 		 informations = array;
-//	 for ( var i = 0; i < array.length; i++)
-//	 alert(array[i].name);
 	 });
 
 	bindEvent();
-//	this.questionStemA.replaceAll("[\\r\\n]", " ");
-//	var code = "a"+1+"r"+5+"c"+0+"p?";
-//	var rr = EncryptionUtil.dencrypt("0b8cdf3b8f94bea2549e8f643893a278e5200b10VwxWBwQCBQIHBlMGBQBRA1xUUFViXVFSCkFWXwFEC1NFRltREVQMDVhXQFhZBhYFXENbABFaVREEQgVfWEVUVBYEGVAKAEQ4b1NQV0RAAhVRGFNURAJED0NCXgtfGF9XRRYOVRVaSlUHExlYCkQTXQxRWxRFWgZBUlFbXERBVxRWFjpuQlBfRgtCB0QVQVBUQgdcQhANElQJDQtSBwZQWQ0LVgMAWVNTAQYHBgAI",false,code)
-//	alert(rr.replaceAll("[\\r\\n]", " "));
 	$("#loading_login").hide();
 }
 
@@ -154,6 +130,8 @@ function bindEvent() {
 					$('#intro_list').listview('refresh');
 				},500);
 			}
+			//initialization for scroll
+			myInfoScroll = new iScroll('wrapper_info');
 		});
 	});
 	$("#btn_login").click(function() {
@@ -181,11 +159,16 @@ function bindEvent() {
 		});
 	});
 	$("#disc_no_text").click(function() {
+		destoryScroll();
+		myDiscussionScroll = new iScroll('wrapper_discussion');
 		fromQuestionView = false;
 		//show loading
 		$("#loading_discussion").html(util.getLoading());
 		$("#loading_discussion").show();
 		$("#discussion_back").attr("href","#main");
+		$("#discussion_back").bind("click",function(){
+			resetMainScroll();
+		});
 		//load data from server(HTTP).
 		http.findDiscussionsByExamType(function(data){
 			console.log("findDiscussionsByExamType() called");
@@ -221,7 +204,9 @@ function bindEvent() {
 			},2000);
 		});
 	});
-	$("#bookmark").click(function() {
+	$("#imgBookmark").click(function() {
+		destoryScroll();
+		mybookmarkScroll = new iScroll('wrapper_bookmark');
 		updateBookmark('date');
 	});
 	$("#mail").click(function() {
@@ -389,14 +374,15 @@ function updateBookmark(orderby){
 	//title
 	db.findAllBookMark(orderby,function(data){
 		
-		console.log("updateBookmark() called..date.length="+data.length);
+		//console.log("updateBookmark() called..date.length="+data.length);
 		var html='';
 		for(var i=0;i<data.length;i++){
 			var o = data[i];
 			var title = o.title;
 			var date = util.formateDate(o.date);
-			
-			html+='<li><a href="javascript:alert(11);" style="color:black;text-decoration:none;"><table width=100%><tr><td width=50% align=center>'+title+'</td><td align=center>'+date+'</td></tr></table></a></li>';
+			var questionPosition = o.position;
+			var exapp_id = o.exappid;
+			html+='<li><a href="#qeustionview" onclick="bookmark_review('+exapp_id+','+questionPosition+');" style="color:black;text-decoration:none;"><table width=100%><tr><td width=50% align=center>'+title+':#'+(questionPosition+1)+'</td><td align=center>'+date+'</td></tr></table></a></li>';
 		}
 		$("#thelist_bookmark").html(html);
 		$("#thelist_bookmark").trigger("create");
@@ -469,6 +455,8 @@ function initConstant(){
 var current_section_for_sta;
 function generateCategoryBarForSta(callback) {
 	console.log("generateCategoryBarForSta() called");
+	destoryScroll();
+	myStaScroll = new iScroll('wrapper_sta');
 	
 	parser = new XMLParser();
 	var h;
@@ -557,6 +545,7 @@ function refreshListSta(sectionShortName, sectionName,type){
 		$("#thelist_sta").trigger("create");
 		
 		setTimeout(function () {
+			if(myStaScroll)
 			myStaScroll.refresh();
 		});
 	});
@@ -693,7 +682,7 @@ function hideMenuList(){
 }
 function updateListView(){
 	
-	var html='<li><a href="#main" onclick="hideMenuList()" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
+	var html='<li><a href="#main" onclick="hideMenuList();resetMainScroll();" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
 	if(ListItemMyQuestions&&ListItemMyQuestions.length>0){
 		
 		for(var i=0;i<ListItemMyQuestions.length;i++){ 
@@ -707,8 +696,9 @@ function updateListView(){
 	$("#thelist_problemIntroMenu").trigger("create");
 	
 	setTimeout(function () {
-		myProblemIntroMenuScroll.refresh();
-	},2000);
+		if(myProblemIntroMenuScroll)
+			myProblemIntroMenuScroll.refresh();
+	},1000);
 }
 
 function update(recommendations,myquestions){
@@ -736,11 +726,18 @@ function update(recommendations,myquestions){
 	//$('#thelist').listview('refresh');
 	
 	setTimeout(function () {
-		myScroll.refresh();
+		if(myScroll)
+			myScroll.refresh();
+		else {
+			myScroll = new iScroll('wrapper');
+			myScroll.refresh();
+		}
+			
 	});
 }
 
 function showPackageIntro(position){
+	resetPackageIntroScroll();
 	var o = recommendations[position];
 	$("#package_intro_name").html(o.title);
 	
@@ -774,6 +771,14 @@ var fromQuestionView=false;
 var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
+	
+		//initialization for scroll
+		destoryScroll();
+		if(!myProblemIntroScroll)
+			myProblemIntroScroll = new iScroll('wrapper_problemIntro');
+		if(!myProblemIntroMenuScroll)
+			myProblemIntroMenuScroll = new iScroll('wrapper_problemIntroMenu');
+	
 		hideMenuList();
 		$("#btnReview").hide();
 		$("#btnResume").hide();
@@ -799,7 +804,8 @@ function showProblemSetInforContent(position){
 			$("#thelist_problemSetinfo").trigger("create");
 			
 			setTimeout(function () {
-				myProblemIntroScroll.refresh();
+				if(myProblemIntroScroll)
+					myProblemIntroScroll.refresh();
 			},2000);
 			
 			//$("#wrapper_problemIntro").hide();
@@ -886,11 +892,13 @@ function beginPractice(){
 	$("#questionview_menu").show();
 	$("#choice_bg").show();
 	$("#choicePanelContainer").show();
-//	current_exAppId
-//  current_exAppName
-// current_questions	
-// generate choice pancel
-// current_question_position
+
+	resetQuestionViewScroll();
+	/*
+	destoryScroll();
+	if(!myQuestionListScroll) myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
+	*/
+	
 	setTimeout(function(){
 		current_question_position = 0;
 		console.log("beginPractice() called");
@@ -928,15 +936,17 @@ function beginPractice(){
 var current_showsolution=false;
 function resume(callback){
 	$("#questionview_done").hide();
+	/*
 	$("#questionview_menu").show();
 	$("#choice_bg").show();
-	$("#choicePanelContainer").show();
-	
+	$("#choicePanelContainer").show();*/
+	resetQuestionViewScroll();
+	current_showsolution = false;
 	
 	setTimeout(function(){
 		
 		current_question_position = 0;
-		console.log("beginPractice() called");
+		console.log("resume() called");
 		db.findQuestionsByExAppID(current_exAppId,function(questions){
 			current_questions = questions;
 			console.log("current_questions.length="+current_questions.length);
@@ -955,7 +965,8 @@ function resume(callback){
 		});
 		
 		setTimeout(function () {
-			myQuestionListScroll.refresh();
+			if(myQuestionListScroll)
+				myQuestionListScroll.refresh();
 		},1000);
 		
 		//start count 
@@ -968,7 +979,7 @@ function resumeForExamReview(callback){
 	
 	setTimeout(function(){
 		
-		console.log("beginPractice() called");
+		console.log("resumeForExamReview() called");
 		db.findQuestionsByExAppID(current_exAppId,function(questions){
 			current_questions = questions;
 			console.log("current_questions.length="+current_questions.length);
@@ -996,10 +1007,13 @@ function resumeForExamReview(callback){
 }
 
 function exam_review(position){
+	
 	$("#questionview_done").show();
 	$("#questionview_menu").hide();
 	$("#choice_bg").hide();
 	$("#choicePanelContainer").hide();
+	$("#questionview_done").html('<a href="#exam" onclick="resetExamScroll()" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").trigger('create');
 	
 	current_question_position = position;
 	resumeForExamReview(function(){
@@ -1007,6 +1021,65 @@ function exam_review(position){
 		current_showsolution = true;
 	});
 	
+}
+
+function bookmark_review(exapp_id,position){
+	resetQuestionViewScroll();
+	
+	$("#questionview_done").show();
+	$("#questionview_menu").hide();
+	$("#choice_bg").hide();
+	$("#choicePanelContainer").hide();
+	$("#imgPre").hide();
+	$("#imgNxt").hide();
+	
+	
+	$("#questionview_done").html('<a href="#bookmark" onclick="resetBookMarkScroll();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").trigger('create');
+	
+	current_exAppId = exapp_id;
+	current_question_position = position;
+	
+	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
+		examResultInfo = rs[0];
+		current_examResultInfo = examResultInfo;
+		resumeForBookmarkReview(function(){
+			setTimeout(function () {
+				if(myQuestionListScroll){
+					myQuestionListScroll.refresh();
+					showSolution();
+				}
+			},1000);
+			
+			current_showsolution = true;
+		});
+	});
+}
+
+function resumeForBookmarkReview(callback){
+	
+	setTimeout(function(){
+		
+		console.log("resumeForBookmarkReview() called");
+		db.findQuestionsByExAppID(current_exAppId,function(questions){
+			current_questions = questions;
+			console.log("current_questions.length="+current_questions.length);
+			//update the number indicator of questions 
+			$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
+			updateQuestionList();
+			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
+				console.log("generateChoicePancel() successed");
+			});
+			
+			changePage(current_question_position);
+			if(callback)
+			callback();
+		});
+		
+		//start count 
+		//start_timer_date = timer.start();
+		
+	});
 }
 
 function updateDiscussionNumber(){
@@ -1024,6 +1097,11 @@ function showDiscussionForQuestion(){
 	$("#loading_discussion").show();
 	$("#discussion_back").attr("href","#qeustionview");
 	$("#discussion_back").trigger("create");
+	$("#discussion_back").bind("click",function(){
+		resetQuestionViewScroll();
+	});
+	
+	
 	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
 		var html='';
 		for(var i=0;i<data.length;i++){
@@ -1097,7 +1175,8 @@ function updateQuestionList(){
 	});
 	
 	setTimeout(function () {
-		myQuestionListScroll.refresh();
+		if(myQuestionListScroll)
+			myQuestionListScroll.refresh();
 	},100);
 }
 
@@ -1142,6 +1221,7 @@ function showQuestionMenu(){
 }
 
 function exitExam(){
+	resetMainScroll();
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(false,function(){
 		//refresh list
@@ -1431,6 +1511,8 @@ function saveExamStatus(finish,callback){
 function showExam(){
 	console.log("showExam() called.");
 	
+	resetExamScroll();
+	
 	$("#exam_title").html(current_exAppName);
 	//get exam_result_info
 	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
@@ -1640,4 +1722,102 @@ function switchMode(){
 		
 	}
 	
+}
+
+function destoryScroll(){
+	if(myInfoScroll){
+		myInfoScroll.destroy();
+		myInfoScroll = null;
+	}
+	
+	if(myScroll){
+		myScroll.destroy();
+		myScroll = null;	
+	}
+	
+	if(myProblemIntroScroll){
+		myProblemIntroScroll.destroy();
+		myProblemIntroScroll = null;	
+	}
+
+	if(myProblemIntroMenuScroll){
+		myProblemIntroMenuScroll.destroy();
+		myProblemIntroMenuScroll = null;	
+	}
+	
+	if(myPackageIntroScroll){
+		myPackageIntroScroll.destroy();
+		myPackageIntroScroll = null;
+	}
+	
+	if(mybookmarkScroll){
+		mybookmarkScroll.destroy();
+		mybookmarkScroll = null;	
+	}
+	
+	if(myStaScroll){
+		myStaScroll.destroy();
+		myStaScroll = null;	
+	}
+	
+	if(myDiscussionScroll){
+		myDiscussionScroll.destroy();
+		myDiscussionScroll = null;	
+	}
+	
+	if(myQuestionMenuScroll){
+		myQuestionMenuScroll.destroy();
+		myQuestionMenuScroll = null;	
+	}
+	
+	if(myQuestionListScroll){
+		myQuestionListScroll.destroy();
+		myQuestionListScroll = null;
+	}
+	
+	if(myExamScroll){
+		myExamScroll.destroy();
+		myExamScroll = null;	
+	}
+	
+	if(myExamIntroScroll){
+		myExamIntroScroll.destroy();
+		myExamIntroScroll = null;
+	}
+	
+}
+
+function resetBookMarkScroll(){
+	destoryScroll();
+	mybookmarkScroll = new iScroll('wrapper_bookmark');
+}
+
+function resetMainScroll(){
+	destoryScroll();
+	/*myScroll = new iScroll('wrapper');*/
+	fireRefreshList();
+	setTimeout(function () {
+		myScroll.refresh();
+	},500);
+}
+function resetQuestionViewScroll(){
+	console.debug("resetQuestionViewScroll() called.");
+	$("#questionview_menu").show();
+	$("#choice_bg").show();
+	$("#choicePanelContainer").show();
+	$("#imgPre").show();
+	$("#imgNxt").show();
+	destoryScroll();
+	myQuestionMenuScroll = new iScroll('wrapper_question_menu', { fixedScrollbar: false,bounce:false});
+	myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
+}
+function resetExamScroll(){
+	destoryScroll();
+	myExamScroll = new iScroll('wrapper_exam', { fixedScrollbar: false,bounce:false});
+	myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:false});
+}
+
+function resetPackageIntroScroll(){
+	destoryScroll();
+	myPackageIntroScroll = new iScroll('wrapper_package_intro');
 }

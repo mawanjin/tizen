@@ -57,8 +57,10 @@
 	var myExamIntroScroll;
 
 	function loaded() {
-		myInfoScroll = new iScroll('wrapper_info');
+	
 		myScroll = new iScroll('wrapper');
+		/*
+		myInfoScroll = new iScroll('wrapper_info');
 		myProblemIntroScroll = new iScroll('wrapper_problemIntro');
 		myProblemIntroMenuScroll = new iScroll('wrapper_problemIntroMenu');
 		myPackageIntroScroll = new iScroll('wrapper_package_intro');
@@ -75,6 +77,7 @@
 			myQuestionMenuScroll.refresh();
 			myQuestionListScroll.refresh();
 		},2000);
+		*/
 	}
 
 	document.addEventListener('touchmove', function(e) {
@@ -104,7 +107,7 @@
 								src="./css/images/perfdata.png" height="30px" /></a></td>
 						<td><a href="#discussion"> <img id="disc_no_text"
 								src="./css/images/disc_no_text.png" height="30px" /></a></td>
-						<td><a href="#bookmark"><img id="bookmark"
+						<td><a href="#bookmark"><img id="imgBookmark"
 								src="./css/images/bookmark.png" height="30px" /></a></td>
 						<td><img id="mail" src="./css/images/mail.png" height="30px" /></td>
 						<td><img id="search_icon" src="./css/images/search_icon.png"
@@ -242,7 +245,7 @@
 	<div data-role="page" id="info">
 		<div class="head_bg">
 			<!-- back button -->
-			<a href="#main"><img id="info" src="./css/images/back_button.png"
+			<a href="#main" onclick="resetMainScroll()"><img id="info" src="./css/images/back_button.png"
 				height="30px" /></a>
 		</div>
 		<!-- /header -->
@@ -271,7 +274,7 @@
 	<div data-role="page" id="info_content">
 		<div class="head_bg">
 			<!-- back button -->
-			<a href="#info"><img id="info"
+			<a href="#info"  ><img id="info"
 				src="./css/images/normal_back_btn.png" height="30px" /></a>
 		</div>
 		<!-- /header -->
@@ -356,7 +359,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main"><img src="./css/images/done_button.png"
+							<a href="#main" onclick="resetMainScroll()"><img src="./css/images/done_button.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -401,7 +404,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main"><img src="./css/images/normal_back_btn.png"
+							<a href="#main" onclick="resetMainScroll()" ><img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -451,7 +454,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main"><img src="./css/images/done_button.png"
+							<a href="#main" onclick="resetMainScroll()"><img src="./css/images/done_button.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
@@ -658,11 +661,11 @@
 					</td>
 					<td></td>
 					<td align=center>
-						<img  onclick="changePage('false')"
+						<img id="imgPre"  onclick="changePage('false')"
 								src="./css/images/backward.png" height="30px" />
 					</td>
 					<td align=center>
-						<img  onclick="changePage('true')"
+						<img id="imgNxt" onclick="changePage('true')"
 								src="./css/images/forward.png" height="30px" />
 					</td>
 					<td align=center>
@@ -826,7 +829,7 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main" onclick="javascript:current_showsolution = false;"><img src="./css/images/normal_back_btn.png"
+							<a href="#main" onclick="javascript:current_showsolution = false;resetMainScroll();"><img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /></a>
 						</div>
 					</td>
