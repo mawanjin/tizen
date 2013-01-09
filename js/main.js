@@ -1625,13 +1625,18 @@ function showPainterController(){
 	$("#painter_controller").hide();
 	$("#painter_controller_up").show();
 	$("#painter_controller_content").show();
+	//hide video container if it is visible
+	$("#video_container").hide();
+	
 	//hide the choice panel
 	$("#choice_bg").hide();
 	$("#choicePanelContainer").hide();
 	window.frames["i_workspace"].showCanvas();
+	penOn(1);
 }
 
 function hidePainterController(){
+	$("#video_container").show();
 	$("#painter_controller").show();
 	$("#painter_controller_content").hide();
 	$("#painter_controller_up").hide();
@@ -1640,23 +1645,30 @@ function hidePainterController(){
 	$("#choicePanelContainer").show();
 }
 
-function penOn(){
+function penOn(on){
 	console.log("penOn() called.");
-	
-	if (util.contains(("" + $("#a_pen_settings").html()), "off", false)) {
+	if(on&&on==1){
 		resetDrawerToolsColor();
-		$("#a_pen_settings").html('<img src="./css/images/draw_on.png" />');
+		$("#a_pen_settings").html('<img src="./css/images/draw_on.png" width=40 height=40 />');
 		$("#a_pen_settings").trigger("create");
 		window.frames["i_workspace"].penOn(false);
-	} else {
-		window.frames["i_workspace"].penOn(true);
-	}	
+	}else{
+		if (util.contains(("" + $("#a_pen_settings").html()), "off", false)) {
+			resetDrawerToolsColor();
+			$("#a_pen_settings").html('<img src="./css/images/draw_on.png" width=40 height=40 />');
+			$("#a_pen_settings").trigger("create");
+			window.frames["i_workspace"].penOn(false);
+		} else {
+			window.frames["i_workspace"].penOn(true);
+		}
+	}
+		
 }
 
 function putText(){
 	resetDrawerToolsColor();
 	if (util.contains(("" + $("#a_text_settings").html()), "off", false)) {
-		$("#a_text_settings").html('<img src="./css/images/text_on.png" />');
+		$("#a_text_settings").html('<img src="./css/images/text_on.png" width=40 height=40 />');
 		$("#a_text_settings").trigger("create");
 	}
 	window.frames["i_workspace"].putText();
@@ -1664,10 +1676,11 @@ function putText(){
 
 function eraserOn() {
 	console.log("eraserOn() called.");
-	resetDrawerToolsColor();
+	
 	if (util.contains(("" + $("#a_eraser_settings").html()), "off", false)) {
+		resetDrawerToolsColor();
 		$("#a_eraser_settings")
-				.html('<img src="./css/images/eraser_on.png" />');
+				.html('<img src="./css/images/eraser_on.png" width=40 height=40 />');
 		$("#a_eraser_settings").trigger("create");
 		window.frames["i_workspace"].eraserOn(false);
 	} else {
@@ -1696,13 +1709,13 @@ function redo() {
 function resetDrawerToolsColor(){
 	window.frames["i_workspace"].cancelCanTxt();
 	
-	$("#a_pen_settings").html('<img  src="./css/images/draw_off.png"  />');
+	$("#a_pen_settings").html('<img  src="./css/images/draw_off.png" width=40 height=40 />');
 	$("#a_pen_settings").trigger('create');
 	
-	$("#a_text_settings").html('<img  src="./css/images/text_off.png"  />');
+	$("#a_text_settings").html('<img  src="./css/images/text_off.png" width=40 height=40 />');
 	$("#a_text_settings").trigger('create');
 	
-	$("#a_eraser_settings").html('<img  src="./css/images/eraser_off.png"  />');
+	$("#a_eraser_settings").html('<img  src="./css/images/eraser_off.png" width=40 height=40  />');
 	$("#a_eraser_settings").trigger('create');
 }
 
@@ -1711,12 +1724,12 @@ function switchMode(){
 	resetDrawerToolsColor();
 	
 	if (!util.contains(("" + $("#a_mode").html()), "off", false)) {
-		$("#a_mode").html('<img src="./css/images/penmodeoff.png" />');
+		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-		//window.frames["i_workspace"]..switchPenOn
+		window.frames["i_workspace"].switchPenOn();
 		
 	} else {
-		$("#a_mode").html('<img src="./css/images/penmode.png" />');
+		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
 		window.frames["i_workspace"].penOff();
 		

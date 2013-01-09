@@ -437,7 +437,17 @@ function refreshList(){
 	$("#div_body").trigger("create");
 	setTimeout(function(){
 			questionScroll.refresh();
+			updateCanvasWidthAndHieght(questionScroll.scrollerW,questionScroll.scrollerH);
 		},1000);
+}
+//note:once change this two attributes of canvas ,the canvas will be restructed and all the data will gone.
+//so just invoke this method properly.
+function updateCanvasWidthAndHieght(width,height){
+	
+	$("#can").attr("width",width);
+	$("#can").attr("height",height);
+	$("#canvas_container").css("width",width+"px");
+	$("#canvas_container").css("height",height+"px");
 }
 
 document.addEventListener('touchmove', function(e) {
@@ -446,23 +456,33 @@ document.addEventListener('touchmove', function(e) {
 document.addEventListener('DOMContentLoaded', loaded, false);
 
 function showCanvas(){
+	console.log("problemfull.html-->showCanvas() called.");
 	$("#canvas_container").show();
-	$("#canvas_container").css("z-index",2);
+	$("#canvas_container").css("z-index",999);
+	questionScroll.disable();
 }
 
 function hideCanvas(){
-	$("#canvas_container").css("z-index",1);
+	console.log("problemfull.html-->hideCanvas() called.");
 	$("#canvas_container").hide();
+	questionScroll.enable();
 }
 
 function switchPenOn(){
-	
+	drawer.offset = Math.abs(questionScroll.y);
+	//make scrolling disable
+	questionScroll.disable();
+	//make drawer disable.
+	drawer.enable = true;
+	showCanvas();
+	parent.penOn(1);
 }
 
 function penOff(){
-	console.log("penOff() called.");
-	$("#canvas_container").css("z-index",-1);
-	$("#canvas_container").trigger('create');
+	console.log("problemfull.html-->penOff() called.");
+	questionScroll.enable();
+	//make drawer disable.
+	drawer.enable = false;
 }
 
 </script>
@@ -475,8 +495,9 @@ function penOff(){
 			<ul>
 				<li>
 					<div id="div_body"></div>
-					<div id="canvas_container" style="position: absolute;left:0px;top:0px;height:2000px;width:1000px;border:0px solid red;">
-		<canvas id="can" width=1000 height=2000 ></canvas>
+					<div id="canvas_container" style="position: absolute;left:0px;top:0px;width:480px;height:500px; z-index:-1; border:0px solid red;">
+					
+		<canvas id="can" width=480 height=500 ></canvas>
 		<div data-role="popup" class="ui-content" id="div_can_txt">
 			<label>put what you want&nbsp;&nbsp;&nbsp;&nbsp;<a
 				id="a_text_settings" href="#div_text_settings" data-rel="popup"
@@ -555,7 +576,7 @@ function penOff(){
 			</div>
 			<div id="pen_preview">
 				<canvas id="canvas_text_setting" width=200 height=50
-					style="border: 2px solid gray;"></canvas>
+					></canvas>
 			</div>
 			<div name="text_slider">
 				<input type="range" id="slider-mini-text" value="5" min="1" max="50"

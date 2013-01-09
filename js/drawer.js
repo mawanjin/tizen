@@ -2,7 +2,7 @@ function getBodyOffset(e) {
 	var e = e || window.event;
 	var left = e.clientX + document.body.scrollLeft
 	+ document.documentElement.scrollLeft,top = e.clientY + document.body.scrollTop
-	+ document.documentElement.scrollTop;
+	+ document.documentElement.scrollTop + drawer.offset;
 	
 	return {
 		x : left,
@@ -41,6 +41,8 @@ Drawing.prototype = {
 		}
 	},*/
 	init : function(canvas) {
+		this.enable = true;
+		this.offset = 0;
 		this.type_line = 0;
 		this.type_text = 1;
 		this.type_eraser = 2;
@@ -171,8 +173,8 @@ Drawing.prototype = {
 			console.log("vclick() called.");
 			var xy = getBodyOffset(e);
 			
-			//var x = xy.x - this.offsetLeft, y = xy.y - this.offsetTop;
 			var x = xy.x, y = xy.y;
+			
 			self.onClick({
 				x : x,
 				y : y
@@ -181,7 +183,7 @@ Drawing.prototype = {
 	},
 	onMouseMove : function(pos) {
 		// console.log("onMouseMove() called.x="+pos.x+";y="+pos.y);
-		if (this.isButtonDown) {
+		if (this.isButtonDown&&this.enable) {
 			/*
 			var p = this.toolbarspos;
 			for ( var i in p) {
@@ -212,6 +214,7 @@ Drawing.prototype = {
 		}
 	},
 	onMouseDown : function(event, pos) {
+		if(!this.enable)return;
 		console.log("onMouseDown() called.x="+pos.x+";y="+pos.y);
 
 		if (this.curDrawingType == this.type_clear) {
