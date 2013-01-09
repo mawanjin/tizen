@@ -1622,6 +1622,7 @@ function showNextQuestion(){
 }
 
 function showPainterController(){
+	
 	$("#painter_controller").hide();
 	$("#painter_controller_up").show();
 	$("#painter_controller_content").show();
@@ -1633,9 +1634,12 @@ function showPainterController(){
 	$("#choicePanelContainer").hide();
 	window.frames["i_workspace"].showCanvas();
 	penOn(1);
+	//draw if exits before
+	$("#canvas_replay_btn_container").show();
 }
 
 function hidePainterController(){
+	$("#canvas_replay_btn_container").hide();
 	$("#video_container").show();
 	$("#painter_controller").show();
 	$("#painter_controller_content").hide();
@@ -1834,3 +1838,47 @@ function resetPackageIntroScroll(){
 	destoryScroll();
 	myPackageIntroScroll = new iScroll('wrapper_package_intro');
 }
+
+function resetReplayBtn(){
+	$("#inperson_btn_2").hide();
+	$("#inperson_btn_play").show();
+	
+	$("#painter_controller").show();
+	$("#painter_controller_up").show();
+	$("#painter_controller_content").show();
+}
+
+function replayDrawing(){
+	hidePainterController1();
+	$("#inperson_btn_2").show();
+	$("#inperson_btn_play").hide();
+	window.frames["i_workspace"].replayDrawing(1000,resetReplayBtn);
+}
+
+function pauseDrawing(){
+	$("#inperson_pause_container").html('<img  src="./css/images/inperson_inner_pause.png" onclick="resumeDrawing()" />');
+	$("#inperson_pause_container").trigger('create');
+	window.frames["i_workspace"].pauseDrawing();
+}
+
+function resumeDrawing(){
+	$("#inperson_pause_container").html('<img  src="./css/images/inperson_pause1.png" onclick="pauseDrawing()" />');
+	$("#inperson_pause_container").trigger('create');
+	window.frames["i_workspace"].resumeReplay(resetReplayBtn);
+}
+
+function stopDrawing(){
+	window.frames["i_workspace"].stopReplay();
+	resetReplayBtn();
+}
+
+function hidePainterController1(){
+	$("#painter_controller").hide();
+	$("#painter_controller_up").hide();
+	$("#painter_controller_content").hide();
+}
+
+
+
+
+

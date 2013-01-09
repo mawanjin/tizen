@@ -182,5 +182,10 @@ opacity:1;
 	display:none;
 }
 
+#canvas_replay_btn_container{
+	position: absolute; bottom: 0;  left: 0; height: 150px;
+	z-index:2;
+	display:none;
+}
 
 

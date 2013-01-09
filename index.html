@@ -690,7 +690,7 @@
 		<!-- /header -->
 		
 		<div id="painter_controller">
-			<img onclick="showPainterController()"  src="./css/images/down.png" onclick="javascript:alert(1);" />
+			<img onclick="showPainterController()"  src="./css/images/down.png"  />
 		</div>
 		
 		<div id="painter_controller_content">
@@ -711,6 +711,15 @@
 			<img  src="./css/images/up.png"  onclick="hidePainterController()" />
 		</div>
 		
+		<!-- replay canvas -->
+		<div id="canvas_replay_btn_container">
+			<div id="inperson_btn_play" style="position:absolute;"><img  src="./css/images/inperson_play_bg.png" onclick="replayDrawing()" /></div>
+			<div id="inperson_btn_2" style="position:absolute;display:none;" >
+			<table cellspacing=0 cellpadding=0>
+				<tr><td><div id="inperson_pause_container"><img  src="./css/images/inperson_pause1.png" onclick="pauseDrawing()" /></div></td><td><img  src="./css/images/inperson_stop1.png" onclick="stopDrawing()" /></td></tr>
+			</table>
+			</div>
+		</div>
 		
 		<!-- content -->
 		<div id="workspace">

@@ -1,3 +1,4 @@
+var sh ;
 function getBodyOffset(e) {
 	var e = e || window.event;
 	var left = e.clientX + document.body.scrollLeft
@@ -42,6 +43,12 @@ Drawing.prototype = {
 	},*/
 	init : function(canvas) {
 		this.enable = true;
+		this.callback;
+		this.interval = 1000;
+		this.isPlaying = false;
+		this.isPause = false;
+		this.isStop = false;
+		this.isResume = false;
 		this.offset = 0;
 		this.type_line = 0;
 		this.type_text = 1;
@@ -279,10 +286,16 @@ Drawing.prototype = {
 		var strokers = new Array();
 		var data = new Array();
 		var index = 0;
+		
+		if(this.isResume==true){
+			this.executeReplay(interval);
+			return;
+		}
 
 		var allstrokers = new Array();
 
 		for ( var i = 0; i < p.length; i++) {
+			
 			var temp = new Array();
 
 			if (p[i].type == this.type_back) {
@@ -327,24 +340,47 @@ Drawing.prototype = {
 			// this.ResetDrawCentreForDisplay(strokers,interval);
 		}
 		drawer.allstrokers = allstrokers;
+		this.executeReplay(interval);
+
+		this.context.strokeStyle = curColor;
+	},
+	executeReplay: function(interval){
 		drawer.index = 0;
 		if (interval) {
-			var sh = setInterval(function() {
+			sh = setInterval(function() {
 				var s = drawer.allstrokers[drawer.index];
 				// alert(drawer.index+";"+s.length);
+				
 				drawer.ResetDrawCentreForDisplay(s, interval);
 				drawer.index = drawer.index + 1;
 				if (drawer.index >= drawer.allstrokers.length) {
+					console.log("clear interval");
+					clearInterval(sh);
+					drawer.callback();
+				}else if(drawer.isPause==true){
 					clearInterval(sh);
 				}
 			}, interval);
 		} else {
 			drawer
-					.ResetDrawCentreForDisplay(allstrokers[allstrokers.length - 1]);
+					.ResetDrawCentreForDisplay(drawer.allstrokers[drawer.allstrokers.length - 1]);
 		}
-
-		this.context.strokeStyle = curColor;
 	},
+	resumeReplay:function(callback){//invoke callback when complete the work
+		 drawer.isPause = false;
+		 sh = setInterval(function() {
+			var s = drawer.allstrokers[drawer.index];
+			drawer.ResetDrawCentreForDisplay(s, drawer.interval);
+			drawer.index = drawer.index + 1;
+			if (drawer.index >= drawer.allstrokers.length) {
+				clearInterval(sh);
+				callback();
+			}else if(drawer.isPause==true){
+				clearInterval(sh);
+			}
+		}, drawer.interval);
+	}
+	,
 	executeDraw : function(data, interval) {
 		// console.log("executeDraw called.data.length="+data.length);
 		if (data.length == 0)
@@ -468,7 +504,8 @@ Drawing.prototype = {
 		}
 		this.context.fillStyle = curcolor;
 
-	},
+	}
+	,
 	onClick : function(pos) {
 		console.log("onClick() called.");
 		/*
@@ -639,7 +676,8 @@ Drawing.prototype = {
 			return false;
 	},
 	replay : function(strokers, interval) {
-		this.historyStroker = strokers;
+		if(strokers&&strokers!=-1)
+			this.historyStroker = strokers;
 		this.ResetDrawCentre(interval);
 	}
 };
@@ -809,6 +847,11 @@ function convertStrokerToXML(strokers) {
 	xml += '</strokers>';
 }
 
+function replayDrawing(interval,callback){
+	drawer.callback = callback;
+	drawer.replay(-1, interval);
+}
+
 function replay() {
 	console.log("replay() called.");
 	parseStrokerXML(function(strokers) {
@@ -816,6 +859,23 @@ function replay() {
 				+ strokers.length);
 		drawer.replay(strokers, 1000);
 	});
+}
+
+function pauseDrawing(){
+	drawer.isPause = true;
+}
+
+function resumeReplay(callback){
+	drawer.resumeReplay(callback);
+}
+
+function stopReplay(){
+	drawer.isPlaying = false;
+	drawer.isPause = false;
+	drawer.isStop = false;
+	drawer.isResume = false;
+	clearInterval(sh);
+	drawer.ResetDrawCentre();
 }
 
 function parseStrokerXML(callback) {

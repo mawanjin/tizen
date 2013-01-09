@@ -17,7 +17,7 @@
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>8HMkujww8wfMqxo+BtBh9Uuatig6dZUL4NcAZe/TL0w=</DigestValue>
+<DigestValue>WNtG+93HiQBEYcOXJqlmph8UOfKeltn1PzHuOl/PIT0=</DigestValue>
 </Reference>
 <Reference URI="css/images/LSAT2011.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -307,6 +307,34 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>hbvyXiPFy9nULqvUTsdr/qmjIwO0vDikMIia8tHEZeM=</DigestValue>
 </Reference>
+<Reference URI="css/images/inperson_inner_pause.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>MgZq28cf07ank5lIBG85AYl3HrU2P1+SKrkkx2nhVrI=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_pause1.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>yFQaQLPDTv9JG7o9Z5shcj/bRcranATj968ZtwFyP28=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_pause_play.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>LwIMVnD1wMAIrMvHS/YUB6I0gqtE0gNCWWTrqHtnU4c=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_play_bg.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>22Er0cG7l9pyqEKHTdJvknWBcWkLoU9/9b2z4EGhGjs=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_play_bttn.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>7cCbHbrxx+WCK9F7CbXnek6DApLt6bziPQPEQ7pOVVI=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_stop.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ehK/6MF9sYPHrsY+gnW/VGovzTsevz/uFoJxrdpjghk=</DigestValue>
+</Reference>
+<Reference URI="css/images/inperson_stop1.png">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>W4weTsQ0TmI+OTdFgbdpjb+QaXSHk7RgCCdNVxDnsKQ=</DigestValue>
+</Reference>
 <Reference URI="css/images/logo_arcadia.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>pbyXxS5J4BMCUWLU/5z/CLyZ2p7LxjucCCtQooJwHbs=</DigestValue>
@@ -465,7 +493,7 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>YDSFonjPSQ2RUKkaK/nhgPjZVxq/tJpA+gxUgg7twIg=</DigestValue>
+<DigestValue>UZ3LrxCT0mhWhbxyz9h/4Xfusu6a6KwTpUuhmY7ZnYU=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -553,7 +581,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WOPo2bEq5w4P8r9rV/4/Ki21ReDO8X22zVfIPJ7u98k=</DigestValue>
+<DigestValue>ibgKeUoSf2h/+ajXgz1VWAmbyVG5o7Kzq/tTPBzCW2s=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -593,7 +621,7 @@
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>UHqgXJ3fsVMnstFtN6/V0wxpvQJM+BRKS7ZkSBWkO6c=</DigestValue>
+<DigestValue>ILe29U02Hl4tF7KHdFJwWevjTBYXRP/ROJtSMwpf51k=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -645,7 +673,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>LdXE0ZCdFEQfcUSLQbsJ3o7HPs65DEHnSfJACM5Y1/4=</DigestValue>
+<DigestValue>LWy8+YGe4D8tLu4g8JhblSiwAF0BHG9VHQAS6LerPDo=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3804,9 +3832,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-M49MEkthox8U4u5XECtpMqafIRooQ3C4/xv8zB5ZAhKp9cEluaVqnPpnqdkkJttahW+jFNvICNIC
-dodKsVNEzGYuVjRTpbilGZLyY4WaSSYYTGFpzdh4LqYvZ9wTH538Py9I52SP17PucazqsLFaNb7r
-YAuDvLqKj9C65HHS+0A=
+jUV+9w4rA3Mmit5KfEHIb+gscpC2NI3vgeUVAyP0qqRmd91pfQgBy/r+zICwJJkSnjKKGGbV+4/o
+vvO63NgcUZ9VWtY/7fQj4HTD9ouf63A6008NfWuo3Hg2m6o2+0GuPqHCoQ15FF6JAmUWI0u3tV07
+HqCeI4QgJxEQJdksTU8=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
