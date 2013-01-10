@@ -21,6 +21,7 @@ function DBManager() {
 	self.createBookmark = 'CREATE TABLE bookmark( id integer primary key,ex_app_id integer,question_id integer,position integer,title text,date text);';
 	self.createExamResultInfo = 'CREATE TABLE exam_result_info( id integer primary key,ex_app_id integer,ex_app_name text,score integer,finish text,progress integer,start_time text,end_time text, question_count text,section text);';
 	self.createquestionExamResultInfo = 'CREATE TABLE question_exam_result_info( id integer primary key,ex_app_id integer,question_id integer,choice text,correctChoice text,mark text);';
+	self.createInpersonStatement='CREATE TABLE inperson(ex_app_id integer ,question_id integer primary key,_base64,_xml,date text);';
 	// self.createQuestionWorkspaceNotes = 'CREATE TABLE
 	// question_workspace_notes( id integer primary key,ex_app_id integer,
 	// question_id integer, note text);';
@@ -34,6 +35,8 @@ function DBManager() {
 	self.insertExamResultInfoStatement = 'insert into exam_result_info(ex_app_id,ex_app_name,score,finish,progress,start_time,end_time,question_count,section) values(?,?,?,?,?,?,?,?,?);';
 	self.insertquestionExamResultInfoStatement = 'insert into  question_exam_result_info(ex_app_id,question_id,choice,correctChoice,mark) values(?,?,?,?,?);';
 	self.insertQuestionWorkSpaceNoteStatement = 'insert into question_workspace_notes (ex_app_id,question_id,note) values(?,?,?);';
+	self.insertInpersonStatement = 'insert into inperson (ex_app_id,question_id,_base64,_xml,date) values(?,?,?,?,?);';
+	
 	
 	
 	self.saveBookMarkStatement = 'insert into bookmark(ex_app_id,question_id,position,title,date) values(?,?,?,?,?)';
@@ -47,6 +50,7 @@ function DBManager() {
 	self.dropExamResultInfoStatement = 'DROP TABLE exam_result_info';
 	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
 	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
+	self.dropInpersonStatement = 'DROP TABLE inperson';
 	
 	//select
 	self.selectIphoneExAppsStatement = 'select problemset.id pid, problemset.* from iphone_ex_apps problemset  where problemset.section= ? order by name';
@@ -63,6 +67,7 @@ function DBManager() {
 	self.selectGetExamResultInfosBySectionStatement = "select o.* from exam_result_info o  where finish='true' and section=? order by start_time desc";
 	self.selectGetAverageExamResultInfosBySectionStatement = "select o.ex_app_id ex_app_id ,o.ex_app_name ex_app_name,avg(o.score) score,avg(o.end_time) time, avg(o.end_time)/o.question_count per, o.question_count question_count from exam_result_info o  where finish='true' and section=? group by ex_app_id  order by start_time desc";
 	self.selectFindQuestionsByExAppIDStatement = "select * from iphone_questions where ex_app_id=? order by pt_qid";
+	self.selectInpersonByQuestionIdStatement = "select * from inperson where question_id =?";
 	
 	
 	// update
@@ -76,7 +81,7 @@ function DBManager() {
 	self.selectItemsFromListStatement = "SELECT * FROM items WHERE list = ? AND items.name LIKE 'pattern%'";
 	//self.deleteExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
 	self.deleteQuestionExamResultInfoStatment = "delete from question_exam_result_info where ex_app_id = ?";
-	
+	self.deleteInpersonStatement = 'delete from inperson where question_id=?';
 	
 	self.orderItemsByName = " ORDER BY LOWER(items.name)";
 	self.orderItemsByStoreThenName = " ORDER BY LOWER(items.store), LOWER(items.name)";
@@ -91,7 +96,32 @@ function DBManager() {
 	};
 
 	self.createTables = function(callback) {
+		
 		self.db.transaction(function(tx) {
+			
+
+			tx.executeSql(self.createIphoneExAppsStatement, [], function(){
+				tx.executeSql(self.createExAppPages, [], function(){
+					tx.executeSql(self.createQuestionsStatement, [], function(){
+						tx.executeSql(self.createBookmark, [], function(){
+							tx.executeSql(self.createExamResultInfo, [], function(){
+								tx.executeSql(self.createquestionExamResultInfo, [], function(){
+									tx.executeSql(self.createInpersonStatement, [], callback,
+											self.onError);
+								},
+										self.onError);
+							},
+									self.onError);
+						},
+								self.onError);
+					},
+							self.onError);
+				},
+						self.onError);
+			},
+					self.onError);
+			
+			/*
 			tx.executeSql(self.createIphoneExAppsStatement, [], self.onSuccess,
 					self.onError);
 			tx.executeSql(self.createExAppPages, [], self.onSuccess,
@@ -105,6 +135,8 @@ function DBManager() {
 					self.onError);
 			tx.executeSql(self.createquestionExamResultInfo, [], callback,
 					self.onError);
+			tx.executeSql(self.createInpersonStatement, [], callback,
+					self.onError);*/
 			// tx.executeSql(self.createQuestionWorkspaceNotes, [],
 			// self.onSuccess, self.onError);
 		});
@@ -201,6 +233,25 @@ function DBManager() {
 			});
 		});
 	};
+	//insertInpersonStatement
+	self.insertInperson = function(ex_app_id, question_id,_base64,_xml,date, callback) {
+		self.db.transaction(function(tx) {
+			//console.log("insertInperson() called."+ex_app_id+";"+question_id+";"+_base64+";"+_xml+";"+date);
+			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
+				tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
+					console.log("insert inperson success.");
+					callback(1);
+				}, function(tx,err) {
+					callback(0);
+					self.onError(tx,err);
+				});
+			}, function(tx,err) {
+				callback(0);
+				self.onError(tx,err);
+			});
+			
+		});
+	};
 	
 	self.deleteQuestionExamResultInfoByExappId = function(ex_app_id,callback) {
 		self.db.transaction(function(tx) {
@@ -212,7 +263,18 @@ function DBManager() {
 			});
 		});
 	};
-
+	
+	self.deleteInpersonByQuestionId = function(question_id,callback) {
+		self.db.transaction(function(tx) {
+			console.log("deleteInpersonByQuestionId() called. question_id="+question_id);
+			tx.executeSql(self.deleteInpersonStatement, [ question_id], function() {
+				callback(1);
+			}, function() {
+				callback(0);
+			});
+		});
+	};
+	
 	
 	self.saveExamResultInfo = function(examResultInfo,callback){
 		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
@@ -420,6 +482,28 @@ function DBManager() {
 							var o = dataset.item(i);
 							//callback (new self.BookMark(o['id'], o['ex_app_id'], o['question_id'], o['position'], o['title'], o['date']));
 							callback(1);
+						}
+						
+					}, function(){
+						callback(0);
+					});
+				});
+			};
+			
+			self.findInpersonByQuestionId = function(id,callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findInpersonByQuestionId() called");
+					tx.executeSql(self.selectInpersonByQuestionIdStatement,[id], function(tx,
+							result) {
+						var dataset = result.rows;
+						
+						if(dataset.length==0)callback(0);
+						
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							callback (new self.InpersonVO(o['ex_app_id'], o['question_id'], o['_base64'], o['_xml'], o['date']));
+							break;
 						}
 						
 					}, function(){
@@ -1129,6 +1213,12 @@ function DBManager() {
 					function(tx, result) {
 					});
 		});
+		
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.dropInpersonStatement, [],
+					function(tx, result) {
+					});
+		});
 	};
 
 	/**
@@ -1313,6 +1403,16 @@ function DBManager() {
 		this.per = per;
 		this.numQuestion = numQuestion;
 	};
+	
+	self.InpersonVO = function(exAppID,questionId,_base64,_xml,date){
+		this.exAppID = exAppID;
+		this.questionId = questionId;
+		this._base64 = _base64;
+		this._xml = _xml;
+		this.date = date;
+	};
+	
+	//Inperson
 	
 	/*
 	 * self.db = openDatabase("ShoppingListDb", "0.1", "Shopping List DB", 2 *

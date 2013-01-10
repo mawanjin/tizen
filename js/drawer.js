@@ -845,6 +845,7 @@ function convertStrokerToXML(strokers) {
 		xml += '</stroker>';
 	}
 	xml += '</strokers>';
+	return xml;
 }
 
 function replayDrawing(interval,callback){
@@ -910,7 +911,6 @@ function parseStrokerXML(callback) {
 							},
 							text : ''
 						};
-						;
 
 						stroker.color = $(this).children("color").text();
 						stroker.type = $(this).children("type").text();
@@ -934,5 +934,14 @@ function parseStrokerXML(callback) {
 			callback(stokers);
 		}
 	});
+}
 
+function getInpersonVO(){
+	//alert(123+";;"+drawer.historyStroker);
+	var xml = convertStrokerToXML(drawer.historyStroker);
+	
+	var data = drawer.canvas.toDataURL();
+	var inperson = {"xml":xml,"data":data};
+	
+	return inperson;
 }

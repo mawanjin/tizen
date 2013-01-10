@@ -5,6 +5,7 @@ var init = function() {
 	//show loading
 	$("#loading_login").html(util.getLoading());
 	$("#loading_login").show();
+	
 	prepare();
 	
 };
@@ -26,6 +27,7 @@ var db;
 function prepare() {
 	console.log("prepare() called");
 	db = new DBManager();
+	
 	// var xmlParser = new XMLParser();
 	function prepareDatabase() {
 		console.log("prepareDatabase() called");
@@ -997,8 +999,9 @@ function resumeForExamReview(callback){
 		});
 		
 		setTimeout(function () {
+			if(myQuestionListScroll)
 			myQuestionListScroll.refresh();
-		},1000);
+		},100);
 		
 		//start count 
 		start_timer_date = timer.start();
@@ -1227,6 +1230,7 @@ function exitExam(){
 		//refresh list
 		refreshList(current_section_short,current_section);
 	});
+	setTimeout(saveInperson);
 }
 
 function finishExam(){
@@ -1236,7 +1240,7 @@ function finishExam(){
 		//refresh list
 		refreshList(current_section_short,current_section);
 	});
-	
+	setTimeout(saveInperson);
 }
 
 function report(){
@@ -1286,7 +1290,8 @@ var start_timer_date;
  * @param i
  */
 function changePage(i){
-	
+	setTimeout(saveInperson);
+	current_question_id = current_questions[current_question_position].id; 
 	//rest
 	reset_user_choice();
 	
@@ -1879,6 +1884,20 @@ function hidePainterController1(){
 }
 
 
+function saveInperson(){
+	var inperson = window.frames["i_workspace"].getInpersonVO();
+	
+	if(inperson&&inperson.xml&&inperson.xml.length>60)
+		alert(current_question_id);
+	db.insertInperson(current_exAppId,current_question_id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+		
+	});
+}
 
+function getInperson(){
+	db.findInpersonByQuestionId(current_question_id,function(inperson){
+		//exAppID questionId _base64 _xml date
+	});
+}
 
 
