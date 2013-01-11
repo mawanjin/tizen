@@ -769,6 +769,7 @@ var current_exAppId;
 var current_exAppName;
 var current_questions;
 var current_question_position;
+var current_question;
 var fromQuestionView=false;
 var isQuestoinViewPage = false;
 
@@ -897,10 +898,6 @@ function beginPractice(){
 	$("#choicePanelContainer").show();
 
 	resetQuestionViewScroll();
-	/*
-	destoryScroll();
-	if(!myQuestionListScroll) myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
-	*/
 	
 	setTimeout(function(){
 		current_question_position = 0;
@@ -931,19 +928,12 @@ function beginPractice(){
 		//start count 
 		start_timer_date = timer.start();
 		
-//		setTimeout(function () {
-//			updateDiscussionNumber();
-//		},1000);
 	});
 }
 var current_showsolution=false;
 function resume(callback){
 	hasInperson = false;
 	$("#questionview_done").hide();
-	/*
-	$("#questionview_menu").show();
-	$("#choice_bg").show();
-	$("#choicePanelContainer").show();*/
 	resetQuestionViewScroll();
 	current_showsolution = false;
 	
@@ -961,7 +951,6 @@ function resume(callback){
 				console.log("generateChoicePancel() successed");
 			});
 			current_question_position = current_examResultInfo.progress-1;
-			//current_examResultInfo.startTime = util.currentTimeMillis+(current_examResultInfo.endTime*1000);
 			
 			changePage(current_question_position);
 			if(callback)
@@ -993,7 +982,6 @@ function resumeForExamReview(callback){
 			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
 				console.log("generateChoicePancel() successed");
 			});
-			//current_examResultInfo.startTime = util.currentTimeMillis+(current_examResultInfo.endTime*1000);
 			
 			changePage(current_question_position);
 			if(callback)
@@ -1017,10 +1005,11 @@ function exam_review(position){
 	$("#questionview_menu").hide();
 	$("#choice_bg").hide();
 	$("#choicePanelContainer").hide();
-	$("#questionview_done").html('<a href="#exam" onclick="resetExamScroll()" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").html('<a href="#exam" onclick="showExam();saveInperson();setInperson();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
 	$("#questionview_done").trigger('create');
 	
 	current_question_position = position;
+	
 	resumeForExamReview(function(){
 		showSolution();
 		current_showsolution = true;
@@ -1081,9 +1070,6 @@ function resumeForBookmarkReview(callback){
 			callback();
 		});
 		
-		//start count 
-		//start_timer_date = timer.start();
-		
 	});
 }
 
@@ -1137,8 +1123,8 @@ function showDiscussionForQuestion(){
 }
 
 function checkBookMark(){
-	
-	db.findBookMarkByQuestionId(current_questions[current_question_position].id,function(rs){
+//	db.findBookMarkByQuestionId(current_questions[current_question_position].id,function(rs){
+	db.findBookMarkByQuestionId(current_question.id,function(rs){
 		if(rs==1){
 			$("#btnBookmark").attr("src","./css/images/bookmark2.png");
 			$("#btnBookmark").trigger("create");
@@ -1191,15 +1177,17 @@ function updateBookMark(){
 		console.log("save bookmark...");
 		$("#btnBookmark").attr("src","./css/images/bookmark2.png");
 		$("#btnBookmark").trigger("create");
-//		ex_app_id, question_id,position,title,date, callback
-		db.saveBookMark(current_exAppId,current_questions[current_question_position].id,current_question_position,current_exAppName,util.currentTimeMillis(),function(rs){
+//		db.saveBookMark(current_exAppId,current_questions[current_question_position].id,current_question_position,current_exAppName,util.currentTimeMillis(),function(rs){
+		db.saveBookMark(current_exAppId,current_question.id,current_question_position,current_exAppName,util.currentTimeMillis(),function(rs){
 			//rs ==1 success 0 fail
 		});
 	}else{//delete from db
 		console.log("delete bookmark...");
 		$("#btnBookmark").attr("src","./css/images/bookmark.png");
 		$("#btnBookmark").trigger("create");
-		db.deleteBookMark(current_exAppId,current_questions[current_question_position].id,function(rs){
+		
+//		db.deleteBookMark(current_exAppId,current_questions[current_question_position].id,function(rs){
+		db.deleteBookMark(current_exAppId,current_question.id,function(rs){
 			//rs ==1 success 0 fail
 		});
 	}
@@ -1314,8 +1302,10 @@ function changePage(i){
 	//update the number indicator of questions 
 	$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
 	
+	current_question = current_questions[current_question_position];
+	
 	//set correct choice
-	current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_questions[current_question_position].solution;
+	current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_question.solution;
 	
 	setTimeout(function () {
 		checkBookMark();
@@ -1333,7 +1323,7 @@ function changePage(i){
 		current_examResultInfo.progress = current_question_position+1;
 	
 	//reset choice panel
-	mChoicePanel.generateChoicePancel(current_questions[current_question_position],whenChoiceOnClick,function(){
+	mChoicePanel.generateChoicePancel(current_question,whenChoiceOnClick,function(){
 		console.log("generateChoicePancel() successed");
 	});
 	
@@ -1354,7 +1344,7 @@ function changePage(i){
 	loadVideo();
 	//load inperson
 	
-	db.findInpersonByQuestionId(current_questions[current_question_position].id,function(inperson){
+	db.findInpersonByQuestionId(current_question.id,function(inperson){
 		setInperson(inperson);
 	});
 	
@@ -1365,8 +1355,12 @@ var video_is_playing=false;
 function loadVideo(){
 
 	$("#video_container").show();
-	var video1 = current_questions[current_question_position].video1.replaceAll('\\\\','');
-	var video2 = current_questions[current_question_position].video2.replaceAll('\\\\','');
+//	var video1 = current_questions[current_question_position].video1.replaceAll('\\\\','');
+//	var video2 = current_questions[current_question_position].video2.replaceAll('\\\\','');
+	var video1 = current_question.video1.replaceAll('\\\\','');
+	var video2 = current_question.video2.replaceAll('\\\\','');
+	
+	
 	if(video1&&video1.length>10){
 		$("#video1").show();
 		$("#videoReplay").show();
@@ -1409,7 +1403,8 @@ function setVideoContent(content){
 function loadContent(isShowSolution){
 	console.log("loadContent() called");
 	
-	var question =  current_questions[current_question_position];
+//	var question =  current_questions[current_question_position];
+	var question =   current_question;
 	console.log(question.id);
 	  
 	var solution = current_questions[current_question_position].solution;
@@ -1599,9 +1594,12 @@ function onHintClick(hintCount){
 	console.log("onHintClick() called.current_hint_index="+current_hint_index+";hintCount="+hintCount);
 	if(current_hint_index<hintCount){
 		if(current_hint_index==1){  
-			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));	
+//			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));
+			freshPassageHtml(current_question.textBlock1B.replaceAll("\'", "\\\\'"));
+			
 		}else if(current_hint_index==2){
-			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
+//			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
+			freshPassageHtml(current_question.textBlock1C.replaceAll("\'", "\\\\'"));
 		}
 		current_hint_index++;
 		if(current_hint_index==1)
@@ -1611,11 +1609,18 @@ function onHintClick(hintCount){
 		
 	}else if(current_hint_index==hintCount){
 		if(current_hint_index==1){
-			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));
+//			freshPassageHtml(current_questions[current_question_position].textBlock1B.replaceAll("\'", "\\\\'"));
+			freshPassageHtml(current_question.textBlock1B.replaceAll("\'", "\\\\'"));
+			
 		}else if(current_hint_index==2){
-			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
-		}else if(current_hint_index==3)
-			freshPassageHtml(current_questions[current_question_position].textBlock1D.replaceAll("\'", "\\\\'"));
+//			freshPassageHtml(current_questions[current_question_position].textBlock1C.replaceAll("\'", "\\\\'"));
+			freshPassageHtml(current_question.textBlock1C.replaceAll("\'", "\\\\'"));
+			
+		}else if(current_hint_index==3){
+//			freshPassageHtml(current_questions[current_question_position].textBlock1D.replaceAll("\'", "\\\\'"));
+			freshPassageHtml(current_question.textBlock1D.replaceAll("\'", "\\\\'"));
+		}
+			
 		
 		current_hint_index++;
 		
@@ -1623,7 +1628,9 @@ function onHintClick(hintCount){
 	}else if(current_hint_index>hintCount){
 		current_hint_index=1;
 		$("#btnHint").attr("src","./css/images/hint.png");
-		freshPassageHtml(current_questions[current_question_position].textBlock1A.replaceAll("\'", "\\\\'"));
+//		freshPassageHtml(current_questions[current_question_position].textBlock1A.replaceAll("\'", "\\\\'"));
+		freshPassageHtml(current_question.textBlock1A.replaceAll("\'", "\\\\'"));
+		
 	}
 	
 	$("#btnHint").trigger("create");
@@ -1857,8 +1864,15 @@ function resetQuestionViewScroll(){
 }
 function resetExamScroll(){
 	destoryScroll();
-	myExamScroll = new iScroll('wrapper_exam', { fixedScrollbar: false,bounce:false});
-	myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:false});
+	myExamScroll = new iScroll('wrapper_exam', { fixedScrollbar: false,bounce:true});
+	myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:true});
+	
+	setTimeout(function () {
+		console.log("myExamScroll.refresh() called.");
+		myExamScroll.refresh();
+		myExamIntroScroll.refresh();
+	},100);
+	
 }
 
 function resetPackageIntroScroll(){
