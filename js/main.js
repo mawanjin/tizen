@@ -889,6 +889,7 @@ function showGallery(){
 }
 
 function beginPractice(){
+	hasInperson = false;
 	current_showsolution = false;
 	$("#questionview_done").hide();
 	$("#questionview_menu").show();
@@ -937,6 +938,7 @@ function beginPractice(){
 }
 var current_showsolution=false;
 function resume(callback){
+	hasInperson = false;
 	$("#questionview_done").hide();
 	/*
 	$("#questionview_menu").show();
@@ -1290,8 +1292,9 @@ var start_timer_date;
  * @param i
  */
 function changePage(i){
-	setTimeout(saveInperson);
-	current_question_id = current_questions[current_question_position].id; 
+	hidePainterController();
+	hasInperson = false;
+	saveInperson();
 	//rest
 	reset_user_choice();
 	
@@ -1349,6 +1352,11 @@ function changePage(i){
 	
 	//load video
 	loadVideo();
+	//load inperson
+	
+	db.findInpersonByQuestionId(current_questions[current_question_position].id,function(inperson){
+		setInperson(inperson);
+	});
 	
 }
 
@@ -1640,6 +1648,20 @@ function showPainterController(){
 	window.frames["i_workspace"].showCanvas();
 	penOn(1);
 	//draw if exits before
+	updateCanvasReplayIcnonStatus();
+}
+
+function updateCanvasReplayIcnonStatus(){
+	if(hasInperson==true){
+		$("#canvas_replay_btn_container").show();
+		//window.frames["i_workspace"].replayDrawing(0,function(){});
+		window.frames["i_workspace"].stopReplay();
+	}
+	else
+		$("#canvas_replay_btn_container").hide();
+}
+
+function shoReplayIcon(){
 	$("#canvas_replay_btn_container").show();
 }
 
@@ -1853,11 +1875,14 @@ function resetReplayBtn(){
 	$("#painter_controller_content").show();
 }
 
-function replayDrawing(){
+function replayDrawing(interval){
 	hidePainterController1();
 	$("#inperson_btn_2").show();
 	$("#inperson_btn_play").hide();
-	window.frames["i_workspace"].replayDrawing(1000,resetReplayBtn);
+	if(!interval)
+		window.frames["i_workspace"].replayDrawing(1000,resetReplayBtn);
+	else
+		window.frames["i_workspace"].replayDrawing(interval,resetReplayBtn);
 }
 
 function pauseDrawing(){
@@ -1882,20 +1907,29 @@ function hidePainterController1(){
 	$("#painter_controller_up").hide();
 	$("#painter_controller_content").hide();
 }
-
+var hasInperson = false;
+function setInperson(inperson){
+	window.frames["i_workspace"].clearInperson();
+	console.log("setInperson() called.");
+	if(inperson&&inperson._xml&&inperson._xml.length>60){
+		window.frames["i_workspace"].setInperson(inperson);
+		hasInperson = true;
+	}else{
+		hasInperson = false;
+	}
+}
 
 function saveInperson(){
 	var inperson = window.frames["i_workspace"].getInpersonVO();
 	
 	if(inperson&&inperson.xml&&inperson.xml.length>60)
-		alert(current_question_id);
-	db.insertInperson(current_exAppId,current_question_id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
-		
-	});
+		db.insertInperson(current_exAppId,current_questions[current_question_position].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+			
+		});
 }
 
 function getInperson(){
-	db.findInpersonByQuestionId(current_question_id,function(inperson){
+	db.findInpersonByQuestionId(current_questions[current_question_position].id,function(inperson){
 		//exAppID questionId _base64 _xml date
 	});
 }

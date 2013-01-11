@@ -493,7 +493,7 @@ function DBManager() {
 			self.findInpersonByQuestionId = function(id,callback){
 				
 				self.db.transaction(function(tx) {
-					console.log("findInpersonByQuestionId() called");
+					console.log("findInpersonByQuestionId() called,and question_id="+id);
 					tx.executeSql(self.selectInpersonByQuestionIdStatement,[id], function(tx,
 							result) {
 						var dataset = result.rows;

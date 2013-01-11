@@ -617,11 +617,11 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>jN1NSUhElElf/nt2o5f6VAmd0TmIhEV2utJYkzFTvlo=</DigestValue>
+<DigestValue>r/xWcSD8dd6VXOqSak0PVYHFUbVAPT421dfKCX2Vlw4=</DigestValue>
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6XwtHHmOI+3WTJBk4jQwe0GmhV8PbSD914XIh8TYMfY=</DigestValue>
+<DigestValue>WO5D6jMW0y96S42LEymuGnVf57RH79KDgqIg6U9R4/c=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -673,7 +673,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>st8KV728Vvx8vECYXBtTZVRvYqcegoHlQzgUD2Y+/LA=</DigestValue>
+<DigestValue>lXnMs1XihZJ/r2ndbURUA3iy02VtuScQGdDxcAkZ1xM=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3832,9 +3832,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-gekGFoTg4EpKl6Ku0HyBfH2PU5vwwWwemysQNCcPXoW5yAP/5JKV3BP0NX0rvTita89qQWe+iPnS
-zg3PDq2EJheR003Zypsvym2m92OefJI9sw9qqWnW2ETsI35ER7zhwMteGhgWdXHF6Bt+bqa1MuRK
-CQHX2i0GEtkXJWIdwtM=
+Okxg86NyWQ2pszTtfuyNWrUejqXzwu/X+U/U5YjDsxNXhTSuChvD5ILbqPXFihMQ8zfpQ1G5Lw9O
+SWtgdNUGIH7KvzJO+aUCjfnJ62j/nawkmJjsNKn8WpwhbdRmIxd0/sSS1EqYuS99NGsOE1N0nG9F
+LmLLHlfgg8kSGPyCr1M=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

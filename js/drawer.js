@@ -199,9 +199,16 @@ Drawing.prototype = {
 					return;
 				}
 			}*/
+			
 			if (this.curDrawingType == this.type_line) {
 				this.context.lineTo(pos.x, pos.y);
 				this.context.stroke();
+				
+				if(hasFinishedDrawingCheck==false){
+					setTimeout(function(){
+						updateReplayIconWhenDrawing();	
+					});
+				}
 			} else if (this.curDrawingType == this.type_eraser) {
 				this.context.clearRect(pos.x, pos.y, curEraserSize,
 						curEraserSize);
@@ -212,6 +219,9 @@ Drawing.prototype = {
 				updateCanTxtPos(pos);
 				this.lastX = pos.x;
 				this.lastY = pos.y;
+				if(hasFinishedDrawingCheck==false){
+					updateReplayIconWhenDrawing();
+				}
 				return;
 			}
 
@@ -293,7 +303,7 @@ Drawing.prototype = {
 		}
 
 		var allstrokers = new Array();
-
+		
 		for ( var i = 0; i < p.length; i++) {
 			
 			var temp = new Array();
@@ -828,23 +838,29 @@ function convertStrokerToXML(strokers) {
 	var xml = '<?xml version="1.0" encoding="UTF-8" ?>';
 	xml += '<strokers>';
 	for ( var i = 0; i < strokers.length; i++) {
+		
 		xml += '<stroker>';
 		xml += '<color>' + strokers[i].color + '</color>';
 		xml += '<type>' + strokers[i].type + '</type>';
 		xml += '<time>' + strokers[i].time + '</time>';
 		xml += '<lineWidth>' + strokers[i].lineWidth + '</lineWidth>';
 		xml += '<eraserSize>' + strokers[i].eraserSize + '</eraserSize>';
-		xml += '<position>' + strokers[i].position + '</position>';
+		if(strokers[i].position)
+			xml += '<position>{"x":' + strokers[i].position.x + ',"y":'+strokers[i].position.y+'}</position>';
 		xml += '<text>' + strokers[i].text + '</text>';
 		xml += '<paths>';
-		for ( var j = 0; j < strokers[i].path; j++) {
-			xml += '<path>' + strokers[i].path[j] + '</path>';
+		if(strokers[i].path&&strokers[i].path.length>0){
+			for ( var j = 0; j < strokers[i].path.length; j++) {
+				xml += '<path>{"x":' + strokers[i].path[j].x + ',"y":'+strokers[i].path[j].y+'}</path>';
+			}
 		}
+		
 		xml += '</paths>';
 
 		xml += '</stroker>';
 	}
 	xml += '</strokers>';
+	
 	return xml;
 }
 
@@ -871,6 +887,7 @@ function resumeReplay(callback){
 }
 
 function stopReplay(){
+	console.log("stopReplay() called.");
 	drawer.isPlaying = false;
 	drawer.isPause = false;
 	drawer.isStop = false;
@@ -879,13 +896,52 @@ function stopReplay(){
 	drawer.ResetDrawCentre();
 }
 
-function parseStrokerXML(callback) {
+function parseStrokerXML(xml,callback) {
+	
+	 // var xml = '<?xml version="1.0" encoding="UTF-8"?><strokers><stroker><color>#000000</color></stroker></strokers>';
+//	  $(xml).find("stroker").each(function(i){ var
+//	  color=$(this).children("color"); var
+//	  color_value=$(this).children("color").text(); alert(color_value);});
+	var stokers = new Array();
+	$(xml).find("stroker").each(
+			function(i) {
+				var stroker = {
+					color : '#000000',
+					path : [],
+					type : 1,
+					time : 0,
+					lineWidth : 0,
+					eraserSize : 0,
+					position : {
+						x : 0,
+						y : 0
+					},
+					text : ''
+				};
+
+				stroker.color = $(this).children("color").text();
+				stroker.type = $(this).children("type").text();
+				stroker.time = $(this).children("time").text();
+				stroker.lineWidth = $(this).children("lineWidth")
+						.text();
+				stroker.eraserSize = $(this).children("eraserSize")
+						.text();
+				if($(this).children("position").text())
+				stroker.position = util.strToJson($(this).children(
+						"position").text());
+				stroker.text = $(this).children("text").text();
+				// parse path
+				$(this).children("paths").find("path").each(
+						function(j) {
+							stroker.path.push(util.strToJson($(this)
+									.text()));
+						});
+
+				stokers.push(stroker);
+			});
+	callback(stokers);
+	 
 	/*
-	 * var xml = '<?xml version="1.0" encoding="UTF-8"?><strokers><stroker><color>#000000</color></stroker></strokers>';
-	 * $(xml).find("stroker").each(function(i){ var
-	 * color=$(this).children("color"); var
-	 * color_value=$(this).children("color").text(); alert(color_value);});
-	 */
 	var stokers = new Array();
 	$.ajax({
 		url : 'stroker_template.xml',
@@ -933,15 +989,37 @@ function parseStrokerXML(callback) {
 					});
 			callback(stokers);
 		}
-	});
+	});*/
 }
 
 function getInpersonVO(){
-	//alert(123+";;"+drawer.historyStroker);
+	
+//	var xml = convertStrokerToXML(drawer.allstrokers);
 	var xml = convertStrokerToXML(drawer.historyStroker);
-	
 	var data = drawer.canvas.toDataURL();
+//	console.log(xml);
 	var inperson = {"xml":xml,"data":data};
-	
 	return inperson;
 }
+
+function setInperson(inperson){
+	
+	parseStrokerXML(inperson._xml,function(strokers) {
+		console.log("parseStrokerXML() called.and stroker length is "
+				+ strokers.length);
+		drawer.historyStroker = strokers;
+		drawer.allstrokers =  strokers;
+	});
+}
+function clearInperson(){
+	hasFinishedDrawingCheck = false;
+	drawer.historyStroker = new Array();
+	drawer.allstrokers =  new Array();
+}
+var hasFinishedDrawingCheck = false;
+function updateReplayIconWhenDrawing(){
+	parent.hasInperson = true;
+	parent.shoReplayIcon();
+	hasFinishedDrawingCheck = true;
+}
+
