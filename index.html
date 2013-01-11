@@ -36,11 +36,12 @@
 <script type="text/javascript" src="./js/XMLParser.js"></script>
 <script type="text/javascript" src="./js/user.js"></script>
 <script type="text/javascript" src="./js/orientation.js"></script>
+<script src="./js/slides.min.jquery.js"></script>
 
 <script type="text/javascript" src="./js/packages.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 
-
+<link rel="stylesheet" href="./css/slider.css">
 <link id="main_css" rel="stylesheet" href="./css/style-portrait.css" />
 <script>
 	var myScroll;
@@ -624,8 +625,10 @@
 			<table width=100%>
 				<tr>
 					<td>Comment:</td>
-					<td align="right"><font color=blue>Attach a screenshot
-							or photo</font></td>
+					<td align="right">
+					<a href="#popupChooseImg" id="video1" data-rel="popup" data-position-to="window" style="text-decoration:none;">
+					<font color=blue>Attach a screenshot
+							or photo</font></a></td>
 				</tr>
 			</table>
 		</div>
@@ -638,9 +641,46 @@
 			style="height: 50px; line-height: 50px; border: 0px solid red; text-align: center"></div>
 		<!-- loading -->
 		<div id="loading_post" class='div_center'></div>
-		<form action="#" method="post" enctype="multipart/form-data">
-			<input id="pic" type="file" name="picture">
-		</form>
+		<div data-role="popup" id="popupChooseImg" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
+			<div style="text-align:center">
+				<p>Attachment<p>
+				Choose the attachment to post:
+			</div>
+			<a  href="#pop_slider" data-rel="popup" data-position-to="window" onclick='showScreenshot();' >
+			<div id="btnPopFinish"  data-role="button">
+				Workspace Screenshot
+			</div></a>
+			<div id="btnPopNxt" onclick="showAlbum()" data-role="button">
+				Photo Album
+			</div>
+			<div onclick="closePopupChooseImg()" data-role="button">
+				Cancel
+			</div>
+		</div>
+		
+		<div id="pop_slider" data-role="popup" id="popupPhotoPicker" data-theme="b"
+				data-position-to="window">
+			<div id="slider_container">
+			<div id="slides">
+				<div id="ccc" class="slides_container">
+					<div>
+						<a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-1.jpg" width="380" height="270" alt="Slide 1"></a>
+					</div>
+					<div>
+						<a href="http://www.alixixi.com/" title="" target="_blank"><img src="./css/images/slide-2.jpg" width="380" height="270" alt="Slide 2"></a>
+					</div>
+					<div>
+						<a href="http://www.alixixi.com" title="" target="_blank"><img src="./css/images/slide-3.jpg" width="380" height="270" alt="Slide 3"></a>
+					</div>
+				
+				</div>
+				<a href="#" class="prev"><img src="./css/images/arrow-prev.png" width="24" height="43" alt="上一张"></a>
+				<a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="下一张"></a>
+			</div>
+			<img src="./css/images/example-frame.png"  alt="Example Frame" id="slider_frame">
+		</div>		
+		</div>
+		
 	</div>
 	<!-- /page reply -->
 	

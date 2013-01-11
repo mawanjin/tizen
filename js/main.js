@@ -1948,4 +1948,27 @@ function getInperson(){
 	});
 }
 
-
+function closePopupChooseImg(){
+	$( "#popupChooseImg" ).popup( "close" );
+}
+function showAlbum(){
+	alert("showAlbum()");
+}
+function showScreenshot(){
+	var html = '<div id="slides"><div id="ccc" class="slides_container">';
+	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-1.jpg" width="380" height="270" alt="Slide 1"></a></div>';
+	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-2.jpg" width="380" height="270" alt="Slide 1"></a></div>';
+	html+='</div><a href="#" class="prev"><img src="./css/images/arrow-prev.png" width="24" height="43" alt="prev"></a><a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="next"></a></div><img src="./css/images/example-frame.png"  alt="Example Frame" id="slider_frame"></div>';
+	$('#slider_container').html(html);
+	
+	$('#slider_container').trigger('create');
+	
+	
+	$('#slides').slides({
+		preload: false,
+		generatePagination: false,
+		pagination: false,
+		preloadImage: './css/images/loading.gif',
+		play: 0,
+	});
+}
