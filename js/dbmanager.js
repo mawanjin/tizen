@@ -68,6 +68,7 @@ function DBManager() {
 	self.selectGetAverageExamResultInfosBySectionStatement = "select o.ex_app_id ex_app_id ,o.ex_app_name ex_app_name,avg(o.score) score,avg(o.end_time) time, avg(o.end_time)/o.question_count per, o.question_count question_count from exam_result_info o  where finish='true' and section=? group by ex_app_id  order by start_time desc";
 	self.selectFindQuestionsByExAppIDStatement = "select * from iphone_questions where ex_app_id=? order by pt_qid";
 	self.selectInpersonByQuestionIdStatement = "select * from inperson where question_id =?";
+	self.selectInpersonStatement = "select * from inperson";
 	
 	
 	// update
@@ -509,6 +510,25 @@ function DBManager() {
 					}, function(){
 						callback(0);
 					});
+				});
+			};
+			
+			self.findAllInperson = function(callback){
+				
+				self.db.transaction(function(tx) {
+					console.log("findAllInperson() called");
+					tx.executeSql(self.selectInpersonStatement,[], function(tx,
+							result) {
+						var rs = new Array();
+						var dataset = result.rows;
+						
+						for(var i=0;i<dataset.length;i++){
+							var o = dataset.item(i);
+							rs.push(new self.InpersonVO(o['ex_app_id'], o['question_id'], o['_base64'], o['_xml'], o['date']));
+						}
+						callback (rs);
+						
+					}, self.onError);
 				});
 			};
 	

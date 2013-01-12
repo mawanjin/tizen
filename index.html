@@ -518,7 +518,7 @@
 		</div>
 		<!-- /header -->
 		<!-- content -->
-		<div id="wrapper_discussion" class="wrapper" style="top: 40px;">
+		<div id="wrapper_discussion" class="wrapper" >
 			<div class="scroller">
 				<ul id="thelist_discussion">
 
@@ -636,9 +636,15 @@
 			<textarea id="reply_textarea" data-role="none" rows="20"
 				style="margin-left: 5px; width: 95%; border: 1px solid gray; overflow: hidden;"></textarea>
 		</div>
-		<div style="text-align: right">Remove Attachment</div>
-		<div
-			style="height: 50px; line-height: 50px; border: 0px solid red; text-align: center"></div>
+		<div style="text-align: right"><div onclick="clearImg()"> Remove Attachment</div></div>
+		<!-- dialog for attach -->
+		<div id="screenshot_big" class="div_attach" ></div>
+		<div style="width:100%;text-align:center;border:0px solid red;">
+			<table width=100%><tr><td align="center">
+				<div id="thumb_nail" onclick="showBigScreenShot()"></div>
+			</td></tr></table>
+			 
+		</div>
 		<!-- loading -->
 		<div id="loading_post" class='div_center'></div>
 		<div data-role="popup" id="popupChooseImg" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
@@ -677,7 +683,7 @@
 				<a href="#" class="prev"><img src="./css/images/arrow-prev.png" width="24" height="43" alt="上一张"></a>
 				<a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="下一张"></a>
 			</div>
-			<img src="./css/images/example-frame.png"  alt="Example Frame" id="slider_frame">
+			
 		</div>		
 		</div>
 		

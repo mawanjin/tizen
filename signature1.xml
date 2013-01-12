@@ -533,11 +533,11 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>UZ3LrxCT0mhWhbxyz9h/4Xfusu6a6KwTpUuhmY7ZnYU=</DigestValue>
+<DigestValue>DqjgGtJ4+LfRZt9ruv9i2IgszLwYZ7lGCx9Fef4jl9Y=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CgbIYELq4RkuBxAvZzaSpgitytIEfjeqR/3IpYOAh3w=</DigestValue>
+<DigestValue>HfbIEQ4gg3GIQNhx9AD5egAxnkCTExu7Zv7oRKIo8Tk=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -621,7 +621,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>juag2cKD7h7RlVJ85cosvT8gKHnhDBm+jxyIYQbtDc8=</DigestValue>
+<DigestValue>tJcHcx51q473tVSA0u+gpWuNMuhNS6/OEIa+iRyaDdE=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -657,7 +657,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>r/xWcSD8dd6VXOqSak0PVYHFUbVAPT421dfKCX2Vlw4=</DigestValue>
+<DigestValue>iwFobUISYn6apqsZvaYkMfp3Y+ceXm2f4AcjNQALhO8=</DigestValue>
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -713,11 +713,11 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>+PCRFXhP9GkqI1SVLI+YWChrdUZh3Kw6wmRs51dtcdo=</DigestValue>
+<DigestValue>GZC9Pzve46UTbhHiJT5SeduAZ5i30upcmRON+83+qKw=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>6X1cU73RgXnl4t8nhJT4XB2SUVi4PhwPnoZ2VoeWFV0=</DigestValue>
+<DigestValue>vCuUt1AXR8UGGFCneq7eg70DvZBzbPYWJrXdHba4E5U=</DigestValue>
 </Reference>
 <Reference URI="js/packages.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3880,9 +3880,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-UcZra/PBzSjUMH6MyCgajgrk5ay9gNk0Fo8XAVrFCdP5/FOHUwnPF9b5w6MSkNr7EiKBtX1bVumb
-IgGiPb3hzF1+sTnu4dwn1FyR0ZDQzlNzEL/tDeEdEMLumvevsenvCzBNCZrsJz3dP+7HGgEUOdvU
-6xnWhb/Mdx5zIVrT5P8=
+AEV6IVUQVYEcK6nMr8CWfqbnPTYgRdP/5QVHjXsy1k2XrGEYFLbqQdR7JIi4ZG7HaMJbGLmQ1k0n
+NppYrbBPBMiuFtYRu1T/DK+0Ps4xGXzvGgW5m97PpsHgbakQKWl29bL3wqI52LuReFBbp5qrKkcP
+0aj70cldP9WOfAh1tgo=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

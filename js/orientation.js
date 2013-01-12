@@ -78,9 +78,10 @@ SystemOrientation = new function() {
 		
 		generateCategoryBarForSta();
 		setTimeout(function () {
+			resetMyDiscussionScroll();
 			if(myDiscussionScroll)
 				myDiscussionScroll.refresh();
-		},1000);
+		},100);
 	};
 	
 	// register for the orientation event changes

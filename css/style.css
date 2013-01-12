@@ -2,6 +2,7 @@ body,.ui-page {
 background-image: url('./images/background.png');
 }
 
+a:link{text-decoration : none ;color : black ;}
 
 #div_content{
 	height:40%;
@@ -107,6 +108,8 @@ opacity:1;
 	position:absolute; 
 	bottom:0;
 	width:100%; 
+	height:40px;
+	line-height:40px; 
 	left:0;
 	border:2px solid gray;
 	font-family:"Times New Roman";
@@ -139,6 +142,10 @@ opacity:1;
 #choicePanelContainer{
 	position: absolute; bottom: 0px; width: 100%; left: 0; height: 100px;text-align:center;
 	z-index:1;
+}
+
+#choicePanelContainer img{
+	width:40px;
 }
 .choicePanelMarginTd{
 	width:35%;
@@ -183,4 +190,23 @@ opacity:1;
 	border:0px solid red;
 	z-index:2;
 	display:none;
+}
+
+#canvas_replay_btn_container{
+	position: absolute; bottom: 0;  left: 0; height: 150px;
+	z-index:2;
+	display:none;
+}
+
+#thumb_nail{
+	
+	width:300px; 
+	height: 200px; 
+	line-height: 50px; 
+	border: 0px solid red; 
+	text-align: center;
+}
+#wrapper_discussion{
+	top: 40px;
+	height:85%;
 }

@@ -30,7 +30,6 @@ opacity:1;
 	height: 45px;
 }
 
-
 #div_head{
 	background-image: url('./images/top_bar.jpg');
 	background-repeat:repeat;
@@ -96,7 +95,9 @@ opacity:1;
 #discussion_post_comment{
 	position:absolute; 
 	bottom:0;
-	width:100%; 
+	width:100%;
+	height:40px;
+	line-height:40px; 
 	left:0;
 	border:2px solid gray;
 	font-family:"Times New Roman";
@@ -188,4 +189,16 @@ opacity:1;
 	display:none;
 }
 
+#thumb_nail{
+	
+	width:300px; 
+	height: 200px; 
+	line-height: 50px; 
+	border: 0px solid red; 
+	text-align: center;
+}
 
+#wrapper_discussion{
+	top: 40px;
+	height:90%;
+}
