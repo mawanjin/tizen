@@ -17,7 +17,7 @@
 </Reference>
 <Reference URI="config.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WNtG+93HiQBEYcOXJqlmph8UOfKeltn1PzHuOl/PIT0=</DigestValue>
+<DigestValue>tgNVyvDj+6v2/ccche22xR8XdytGaKjMhKBrhgNrnvE=</DigestValue>
 </Reference>
 <Reference URI="css/images/LSAT2011.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -533,7 +533,7 @@
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>DqjgGtJ4+LfRZt9ruv9i2IgszLwYZ7lGCx9Fef4jl9Y=</DigestValue>
+<DigestValue>KoA2oEED5bVBdnJDqdQex9iLr+S2FBDDzawC6InhrHU=</DigestValue>
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -621,7 +621,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>tJcHcx51q473tVSA0u+gpWuNMuhNS6/OEIa+iRyaDdE=</DigestValue>
+<DigestValue>NwftpcOQjVQvVldItwNF5q5LPzas/R8kOKfHxJtnzgs=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -653,11 +653,11 @@
 </Reference>
 <Reference URI="js/constant.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>tdVw/Y3EEw2RHrStCtpxj/uibw+z7N0Oygn6pS1LjEs=</DigestValue>
+<DigestValue>mmVTOVOrklTVVTZJ9oJ2GWdnUOhop/muDL91Xz2H6sc=</DigestValue>
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>iwFobUISYn6apqsZvaYkMfp3Y+ceXm2f4AcjNQALhO8=</DigestValue>
+<DigestValue>SC52Up5fZz/bhqW2/b3YUEvtSVSvy0qa5eR3bquYuuI=</DigestValue>
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -673,7 +673,7 @@
 </Reference>
 <Reference URI="js/http.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>tcdL89pJXwBg08JAdKHPec6CQcnPU+5SZSTLy5pxn48=</DigestValue>
+<DigestValue>jy6inQ7pCTYlT0bWEiIbfx1/ld/Txwtn8Bsg2VNQH68=</DigestValue>
 </Reference>
 <Reference URI="js/iscroll-lite.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -713,11 +713,11 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GZC9Pzve46UTbhHiJT5SeduAZ5i30upcmRON+83+qKw=</DigestValue>
+<DigestValue>Gqrjs6dvcIbhOIe9yLN0uySFS4lmCNsQVaOWpUkK3/k=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vCuUt1AXR8UGGFCneq7eg70DvZBzbPYWJrXdHba4E5U=</DigestValue>
+<DigestValue>V1VuPY0iRGxB7K5GtSGzXKsThH2aqTz2rw1hcn7xxwY=</DigestValue>
 </Reference>
 <Reference URI="js/packages.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -798,6 +798,10 @@
 <Reference URI="test.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>tho2GY7YexD5+LKdWWgrxCLffD/TDzlvKpPSJzRtxGI=</DigestValue>
+</Reference>
+<Reference URI="test_orien.html">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>DqB0+2HROlJQR98P95PvaIktfZSk2A2CmcZbYmfiXTo=</DigestValue>
 </Reference>
 <Reference URI="tizen-web-ui-fw/latest/js/cultures/globalize.culture.af-ZA.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3880,9 +3884,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-AEV6IVUQVYEcK6nMr8CWfqbnPTYgRdP/5QVHjXsy1k2XrGEYFLbqQdR7JIi4ZG7HaMJbGLmQ1k0n
-NppYrbBPBMiuFtYRu1T/DK+0Ps4xGXzvGgW5m97PpsHgbakQKWl29bL3wqI52LuReFBbp5qrKkcP
-0aj70cldP9WOfAh1tgo=
+U6wfNXWbq5kIOn+DEP/W23A62hXRChnEziJW22D6LtrXpughxMWU7rIwPCZbu66puySbQYPAilC3
+jkgB9q+3cRmJG0e7N920yi3pwufuxw7y5HZ37AXOBhn9LvkSkGB6dD8sPSvYiRdV+HM5gkNg9DTb
+OnaKgM99hGci4VK+IPk=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

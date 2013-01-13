@@ -1,3 +1,4 @@
+var current_page = Constant.application_page_main;
 //Initialize function
 var init = function() {
 	// TODO:: Do your initialization job
@@ -116,6 +117,7 @@ function bindEvent() {
 	console.log("bindEvent() called");
 	
 	$("#btnInfo").click(function() {
+		current_page = Constant.application_page_app_intro;
 		
 		setTimeout(function(){
 			if(informations&&informations.length>0){
@@ -137,8 +139,6 @@ function bindEvent() {
 		});
 	});
 	$("#btn_login").click(function() {
-		
-		
 		if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
 			$("#btn_login").trigger('create');
@@ -156,11 +156,13 @@ function bindEvent() {
 		*/
 	});
 	$("#perfdata").click(function() {
+		current_page = Constant.application_page_st;
 		generateCategoryBarForSta(function(){
 //			db.getExamStatsBySectionAndType()
 		});
 	});
 	$("#disc_no_text").click(function() {
+		current_page = Constant.application_page_discussion;
 		destoryScroll();
 		myDiscussionScroll = new iScroll('wrapper_discussion');
 		fromQuestionView = false;
@@ -203,10 +205,11 @@ function bindEvent() {
 			
 			setTimeout(function () {
 				myDiscussionScroll.refresh();
-			},2000);
+			},1000);
 		});
 	});
 	$("#imgBookmark").click(function() {
+		current_page = Constant.application_page_bookmark;
 		destoryScroll();
 		mybookmarkScroll = new iScroll('wrapper_bookmark');
 		updateBookmark('date');
@@ -255,13 +258,18 @@ var current_examResultInfo;
  * @param type 1-post new 2-for given question 3-reply
  */ 
 function post(){
-	
 	console.log("bindEvent() called,and type="+current_post_type);
+	
 	
 	//post data to server
 	//step 1 -  check user login status if not login show the login dialog
 	//step 2 - after login post to server
-	var user = new http.User("mwj@hotmail.com","123456",5);
+	if(!http.publicUser||http.publicUser.userName==""){
+		//show pop
+		$('#popupDiscussion').popup("open");
+		return;
+	}
+	var user = new http.User(http.publicUser.userName,http.publicUser.password,http.publicUser.profile);
 	var message = $("#reply_textarea").val();
 	if(message==""){
 		alert("Please input something.");
@@ -568,7 +576,7 @@ var recommendations;
 var ListItemMyQuestions;
 function refreshList(sectionShortName, sectionName) {
 	console.log("refreshList() called");
-	
+	current_page =Constant.application_page_main;
 	current_section = sectionName;
 	current_section_short = sectionShortName; 
 	
@@ -592,6 +600,8 @@ function refreshList(sectionShortName, sectionName) {
 			fireRefreshList();
 		});
 	}
+	
+	
 	
 //	if (!recommendations || recommendations.length == 0) {
 //		getAllPackageItems(function(data) {
@@ -749,6 +759,7 @@ function update(recommendations,myquestions){
 }
 
 function showPackageIntro(position){
+	current_page = Constant.application_page_package_intro;
 	resetPackageIntroScroll();
 	var o = recommendations[position];
 	$("#package_intro_name").html(o.title);
@@ -772,7 +783,7 @@ function showInforContent(which){
 		
 		setTimeout(function () {
 			myInfoScroll.refresh();
-		},2000);
+		},1000);
 	}
 }
 var current_exAppId;
@@ -784,7 +795,7 @@ var fromQuestionView=false;
 var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
-	
+		current_page = Constant.application_page_intro;
 		//initialization for scroll
 		destoryScroll();
 		if(!myProblemIntroScroll)
@@ -819,7 +830,7 @@ function showProblemSetInforContent(position){
 			setTimeout(function () {
 				if(myProblemIntroScroll)
 					myProblemIntroScroll.refresh();
-			},2000);
+			},1000);
 			
 			//$("#wrapper_problemIntro").hide();
 	    });
@@ -851,7 +862,7 @@ function showProblemSetInforContent(position){
 		});
 }
 
-function login(){
+function login(type){
 	//show loading
 	$("#loading_login").html(util.getLoading());
 	$("#loading_login").show();
@@ -866,6 +877,24 @@ function login(){
 			http.publicUser = data;
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
 			$( "#popupBasic" ).popup( "close" );
+		}
+	});
+}
+
+function loginDiscussion(){
+	//show loading
+	$("#loading_login_discussion").html(util.getLoading());
+	$("#loading_login_discussion").show();
+	var login_name = $("#login_name_discussion").val();
+	var login_pass = $("#login_pass_discussion").val();
+	http.login(login_name,login_pass,function(data){
+		$("#loading_login_discussion").hide();
+		if(data==-1){
+			alert("Invalid Log-in or Password...");
+		}else{
+			http.publicUser = data;
+			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			$( "#popupDiscussion" ).popup( "close" );
 		}
 	});
 }
@@ -886,9 +915,33 @@ function register(){
 		$("#loading_login").hide();
 		if(data==-1){
 			alert("please try later");
-		}else if(data.userName){//register success and login success
+		}else if(data.userName&&data.userName!=""){//register success and login success
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
 			$( "#popupRegister" ).popup( "close" );
+		}else{
+			alert(data);
+		}
+	});
+}
+
+function registerDiscussion(){
+	//show loading
+	$("#loading_login_discussion").html(util.getLoading());
+	$("#loading_login_discussion").show();
+	
+	var fname = $("#dfname").val();
+	var lname = $("#dlname").val();
+	var email = $("#demail").val();
+	var pass = $("#dpass").val();
+	var r_pass = $("#dr_pass").val();
+	var exam = "";
+	//fname,lname,email,pass,r_pass,exam,callback
+	http.register(fname,lname,email,pass,r_pass,exam,function(data){
+		$("#loading_login_discussion").hide();
+		if(data==-1){
+			alert("please try later");
+		}else if(data.userName&&data.userName!=""){//register success and login success
+			$( "#popupRegisterDiscussion" ).popup( "close" );
 		}else{
 			alert(data);
 		}
@@ -1008,9 +1061,9 @@ function resumeForExamReview(callback){
 		
 	});
 }
-
+var is_exam_review = false;
 function exam_review(position){
-	
+	is_exam_review = true;
 	$("#questionview_done").show();
 	$("#questionview_menu").hide();
 	$("#choice_bg").hide();
@@ -1091,6 +1144,7 @@ function updateDiscussionNumber(){
 }
 
 function showDiscussionForQuestion(){
+	current_page = Constant.application_page_discussion;
 	console.log("showDiscussionForQuestion() called");
 	fromQuestionView = true;
 	//show loading
@@ -1127,8 +1181,9 @@ function showDiscussionForQuestion(){
 		$("#thelist_discussion").trigger("create");
 		
 		setTimeout(function () {
+			resetMyDiscussionScroll();
 			myDiscussionScroll.refresh();
-		},2000);
+		},1000);
 	});
 }
 
@@ -1224,6 +1279,7 @@ function showQuestionMenu(){
 }
 
 function exitExam(){
+	is_exam_review = false;
 	resetMainScroll();
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(false,function(){
@@ -1234,6 +1290,7 @@ function exitExam(){
 }
 
 function finishExam(){
+	is_exam_review = false;
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(true,function(){
 		showExam();
@@ -1290,6 +1347,7 @@ var start_timer_date;
  * @param i
  */
 function changePage(i){
+	current_page = Constant.application_page_question_view;
 	hidePainterController();
 	hasInperson = false;
 	saveInperson();
@@ -1527,8 +1585,9 @@ function saveExamStatus(finish,callback){
 	});
 }
 function showExam(){
+	is_exam_review = false;
 	console.log("showExam() called.");
-	
+	current_page = Constant.application_page_exam;
 	resetExamScroll();
 	
 	$("#exam_title").html(current_exAppName);
@@ -1848,12 +1907,66 @@ function destoryScroll(){
 	
 }
 
+function resetmyPackageIntroScroll(){
+	destoryScroll();
+	myPackageIntroScroll = new iScroll('wrapper_package_intro');
+	setTimeout(function () {
+		myPackageIntroScroll.refresh();
+	},100);
+}
+
+function resetmyInfoScroll(){
+	destoryScroll();
+	myInfoScroll = new iScroll('wrapper_info');
+	setTimeout(function () {
+		myInfoScroll.refresh();
+	},100);
+}
+
+function resetmyStaScroll(){
+	destoryScroll();
+	myStaScroll = new iScroll('wrapper_sta');
+	setTimeout(function () {
+		myStaScroll.refresh();
+	},100);
+}
+
+
+function resetMyProblemIntroMenuScroll(){
+	destoryScroll();
+	myProblemIntroScroll = new iScroll('wrapper_problemIntro');
+	myProblemIntroMenuScroll = new iScroll('wrapper_problemIntroMenu');
+	setTimeout(function () {
+		myProblemIntroScroll.refresh();
+		myProblemIntroMenuScroll.refresh();
+	},100);
+}
+
 function resetBookMarkScroll(){
 	destoryScroll();
 	mybookmarkScroll = new iScroll('wrapper_bookmark');
+	setTimeout(function () {
+		mybookmarkScroll.refresh();
+	},500);
+}
+
+function resetmyExamScroll(){
+	destoryScroll();
+	myExamScroll = new iScroll('wrapper_exam', { fixedScrollbar: false,bounce:false});
+	myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:false});
+	setTimeout(function () {
+		myExamScroll.refresh();
+		myExamIntroScroll.refresh();
+	},500);
 }
 
 function resetMainScroll(){
+	//check login status
+	if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){//register success and login success
+		$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+		$("#btn_login").trigger("create");
+	}
+	current_page = Constant.application_page_main;
 	destoryScroll();
 	/*myScroll = new iScroll('wrapper');*/
 	fireRefreshList();
@@ -1863,6 +1976,7 @@ function resetMainScroll(){
 }
 function resetQuestionViewScroll(){
 	console.debug("resetQuestionViewScroll() called.");
+	if(is_exam_review==false)
 	$("#questionview_menu").show();
 	$("#choice_bg").show();
 	$("#choicePanelContainer").show();
@@ -1871,6 +1985,11 @@ function resetQuestionViewScroll(){
 	destoryScroll();
 	myQuestionMenuScroll = new iScroll('wrapper_question_menu', { fixedScrollbar: false,bounce:false});
 	myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
+	setTimeout(function () {
+		myQuestionMenuScroll.refresh();
+		myQuestionListScroll.refresh();
+	},100);
+	
 }
 function resetExamScroll(){
 	destoryScroll();
@@ -1889,11 +2008,17 @@ function resetExamScroll(){
 function resetMyDiscussionScroll(){
 	destoryScroll();
 	myDiscussionScroll = new iScroll('wrapper_discussion');
+	setTimeout(function () {
+		myDiscussionScroll.refresh();
+	},100);
 }
 
 function resetPackageIntroScroll(){
 	destoryScroll();
 	myPackageIntroScroll = new iScroll('wrapper_package_intro');
+	setTimeout(function () {
+		myPackageIntroScroll.refresh();
+	},100);
 }
 
 function resetReplayBtn(){

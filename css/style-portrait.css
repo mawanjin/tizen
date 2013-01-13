@@ -1,7 +1,7 @@
 body,.ui-page {
 background-image: url('./images/background.png');
 }
-
+a:link{text-decoration : none ;color : black ;}
 #div_content{
 	height:40%;
 	text-align:center;

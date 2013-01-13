@@ -9,5 +9,15 @@ Constant = new function(){
 	this.application_mail_content = "Hello,";
 	this.DEFAULT_APP_CAPTURE_DIRECTORY="ArcadiaPrep/capture";
 	
+	this.application_page_main = "1001";
+	this.application_page_intro = "1002";
+	this.application_page_question_view = "1003";
+	this.application_page_app_intro = "1004";
+	this.application_page_st = "1005";
+	this.application_page_discussion = "1006";
+	this.application_page_bookmark = "1007";
+	this.application_page_exam = "1008";
+	this.application_page_package_intro = "1009";	
 	this.ajax_timeout = 10000;
 };
+

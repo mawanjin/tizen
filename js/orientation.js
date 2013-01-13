@@ -70,22 +70,36 @@ SystemOrientation = new function() {
 			if($("#reply_textarea"))
 				$("#reply_textarea").attr("rows",10);
 		}
-		generateCategoryBar(function(){
-			refreshMainListViewHeight();
-			if(callback)
-				callback();
-		});
 		
-		generateCategoryBarForSta();
-		setTimeout(function () {
+		if(current_page == Constant.application_page_main){
+			generateCategoryBar(function(){
+				refreshMainListViewHeight();
+				if(callback)
+					callback();
+				resetMainScroll();
+				
+			});
+		}else if(current_page == Constant.application_page_intro){
+			resetMyProblemIntroMenuScroll();
+		}else if (current_page == Constant.application_page_question_view) {
+			resetQuestionViewScroll();
+		}else if(current_page == Constant.application_page_app_intro){
+			resetmyInfoScroll();
+		}else if(current_page == Constant.application_page_st){
+			generateCategoryBarForSta();
+			resetmyStaScroll();
+		}else if(current_page == Constant.application_page_discussion){
 			resetMyDiscussionScroll();
-			if(myDiscussionScroll)
-				myDiscussionScroll.refresh();
-		},100);
+		}else if(current_page == Constant.application_page_bookmark){
+			resetBookMarkScroll();
+		}else if(current_page == Constant.application_page_exam){
+			resetmyExamScroll();
+		}else if(current_page == Constant.application_page_package_intro){
+			resetmyPackageIntroScroll();
+		}
+		
 	};
 	
-	// register for the orientation event changes
-	//
 	if ('onorientationchange' in window) {
 		window.onorientationchange = function() {
 			self.setOrientation();

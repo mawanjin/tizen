@@ -1193,7 +1193,7 @@ function DBManager() {
 //					console.log("insert called."+$(this).text());
 					self.executeSQL($(this).text(),function(){
 						i++;
-						console.log(i+";"+len);
+//						console.log(i+";"+len);
 						if(i==len){
 							callback();
 						}

@@ -214,6 +214,7 @@ http = new function() {
 			timeout : Constant.ajax_timeout,
 			data : {"login_user":username,"login_pass":password,"login":"login"},
 			success : function(data) {
+				
 				var login = data.login;
 				if(login=="Yes"){
 					
