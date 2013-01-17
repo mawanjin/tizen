@@ -116,7 +116,7 @@ opacity:1;
 }
 
 #userinfo_bg{
-	background-color:white;position:absolute;width:100%;height:92%;
+	background-color:white;position:absolute;width:100%;height:94%;
 }
 
 #choice_bg{
@@ -124,12 +124,12 @@ opacity:1;
 }
 
 #choice_bg img{
-	width:60%;
+	width:80%;
 	height:70%;
 }
 
 #choicePanelContainer{
-	position: absolute; bottom: 0px; width: 100%; left: 0; height: 80px;text-align:center;
+	position: absolute; bottom: 0px; width: 100%; left: 0; height: 100px;text-align:center;
 	z-index:1;
 }
 
@@ -140,22 +140,21 @@ opacity:1;
 	width:35%;
 }
 .choice_panel_img_two_btn{
-	width:100%;
+	width:200px;
 	height:30px;
 }
 #workspace{
 	background-image: url('./images/ws_tile.jpg');
-	
 	background-repeat:repeat;
-	position:absolute;width:100%;height:90%;border:2px solid gray;margin-top:0px;
+	position:absolute;width:100%;height:90%;border:0px solid gray;margin-top:0px;
 	margin-right:10px;
 }
 #i_workspace{
 	width:100%;
-	height:100%;
+	height:90%;
 	background-color:white;
 	border:0px solid gray;
-	margin-top:10px;
+	margin-top:0px;
 	margion-left:10px;
 }
 #video_container{
@@ -164,13 +163,22 @@ opacity:1;
 	diaplay:none;
 }
 #popContent{
-	width:600px;
-	height:450px;
+	width:300px;
+	height:225px;
 }
 #painter_controller{
 	position: absolute; top: 50px; right: 0; text-align:right;
 	z-index:1;
 }
+
+#painter_controller_bg{
+	position:absolute;
+}
+#painter_controller_bg img{
+	width:60px;
+	height:330px;
+}
+
 #painter_controller_content{
 	position: absolute; top: 50px; left:85%; text-align:right;
 	z-index:1;
@@ -201,4 +209,13 @@ opacity:1;
 #wrapper_discussion{
 	top: 40px;
 	height:90%;
+}
+
+#discussion_num{
+	position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:13px;color:red;
+}
+
+#controller_img_container img{
+	width:40;
+	height:40;
 }

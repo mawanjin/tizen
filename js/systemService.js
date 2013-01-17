@@ -1,7 +1,7 @@
 var system_service = {};
 system_service = new function() {
 
-	 this.launchImagePickService = function() {
+	 this.launchImagePickService = function(callback) {
 		var service = new tizen.ApplicationService(
 				"http://tizen.org/appcontrol/operation/pick", null, "*/*");
 
@@ -15,23 +15,8 @@ system_service = new function() {
 
 		this.serviceReply = {
 			onsuccess : function(reply) {
-				var data;
-				var html = '';
-				//file:///opt/media/Images/image6.jpg
-//				alert("Selected image path : <br/>" + reply[0].value[0]);
-				for ( var i = 0; i < reply.length; i++) {
-					html += 'Data ' + i + ': <br/>';
-
-					data = reply[i];
-					html += 'Key:' + data.key + '<br/>';
-					html += 'Values: <br/>';
-
-					for (var j = 0; j < data.value.length; j++) {
-						html += j + ': ' + data.value[j] + '<br/>';
-					}
-					html += '<br/>';
-				}
-				alert(html);
+				callback(reply[0].value[0]);
+				//alert("Selected image path : <br/>" + reply[0].value[0]);
 			},
 			onfail : function() {
 				alert("Appservice request failed");
@@ -46,9 +31,13 @@ system_service = new function() {
 	};
 	
 	this.launchEmailService = function(){
-
+		var appServiceDataTo = 
+		      new tizen.ApplicationServiceData("To", ["mwj@gmail.com"]);
+		var appServiceDataSubject = 
+		      new tizen.ApplicationServiceData("Subject", ["test"]);
+		//alert(appServiceDataTo);
 		var service = new tizen.ApplicationService(
-				"http://tizen.org/appcontrol/operation/send", null, "image/*");
+				"http://tizen.org/appcontrol/operation/send", null, "*/*",[appServiceDataTo,appServiceDataSubject]);
 
 		this.onSuccess = function () {
 			console.log("Appservice launched");
@@ -73,6 +62,8 @@ system_service = new function() {
 			alert("launchService exc: " + exc.message);
 		}
 	};
+	
+	
 	
 	this.getAppinfo = function(){
 		var appInfo = tizen.application.getAppInfo();

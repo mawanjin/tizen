@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>canvas</title>
+<link rel="stylesheet" href="./css/jquery.mobile-1.2.0.min.css" />
+<style type="text/css">
+#can {
+	width: 300px;
+	height: 500px;
+	border: 1px solid #ccc;
+	margin-top: 0px;
+	margin-left: 20px;
+}
+</style>
+<script src="./js/jquery-1.8.2.min.js"></script>
+<script src="./js/jquery.mobile-1.2.0.min.js"></script>
+<script type="text/javascript" src="./js/util.js"></script>
+
+<script>
+	(function() {
+		var init = function() {
+			var updateOrientation = function() {
+				var orientation = window.orientation;
+				alert(orientation);
+				switch (orientation) {
+				case 90:
+				case -90:
+					orientation = 'landscape';
+					break;
+				default:
+					orientation = 'portrait';
+				}
+
+				// set the class on the HTML element (i.e. )  
+				document.body.parentNode.setAttribute('class', orientation);
+			};
+
+			// event triggered every 90 degrees of rotation  
+			window.addEventListener('orientationchange', updateOrientation,
+					false);
+
+			// initialize the orientation  
+			updateOrientation();
+		}
+
+		window.addEventListener('DOMContentLoaded', init, false);
+
+	})();
+</script>
+</head>
+<body>
+	<input type="button" value="ss" onclick="lala()" />
+	<img src="/opt/media/Camera/20130109-223256.jpg" />
+</body>
+</html>
