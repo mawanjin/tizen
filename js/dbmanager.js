@@ -237,18 +237,21 @@ function DBManager() {
 	//insertInpersonStatement
 	self.insertInperson = function(ex_app_id, question_id,_base64,_xml,date, callback) {
 		self.db.transaction(function(tx) {
-			//console.log("insertInperson() called."+ex_app_id+";"+question_id+";"+_base64+";"+_xml+";"+date);
+			console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
 			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
+				console.log("delete inperson success.question_id="+question_id);
 				tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
 					console.log("insert inperson success.");
 					callback(1);
 				}, function(tx,err) {
-					callback(0);
+					alert("delete failure11");
 					self.onError(tx,err);
+					callback(0);
 				});
 			}, function(tx,err) {
-				callback(0);
+				alert("delete failure");
 				self.onError(tx,err);
+				callback(0);
 			});
 			
 		});
@@ -269,9 +272,11 @@ function DBManager() {
 		self.db.transaction(function(tx) {
 			console.log("deleteInpersonByQuestionId() called. question_id="+question_id);
 			tx.executeSql(self.deleteInpersonStatement, [ question_id], function() {
-				callback(1);
+				if(callback)
+					callback(1);
 			}, function() {
-				callback(0);
+				if(callback)
+					callback(0);
 			});
 		});
 	};

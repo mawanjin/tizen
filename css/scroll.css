@@ -6,6 +6,14 @@
 	overflow:auto;
 }
 
+#wrapper_workspace{
+	position:absolute; z-index:1;
+	top:40px; bottom:0px; left:0;
+	width:100%;
+	background:#fafafa;
+	overflow:auto;
+}
+
 #scroller {
 	position:absolute; z-index:1;
 /*	-webkit-touch-callout:none;*/
@@ -126,7 +134,7 @@ list-style:none;
 }
 #scrollerquestionMenu li{
 	text-align:center;
-	padding:5px 0 5px 0;	
+	padding:10px 5px 10px 5px;	
 	border-bottom:1px solid #ccc;
 	border-top:1px solid #fff;
 	background-color:#fafafa;

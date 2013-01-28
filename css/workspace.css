@@ -1,0 +1,58 @@
+body {
+        margin: 0px 5px 20px 5px;
+        -webkit-user-select: text;
+        font-size: 13pt;
+        font-family: "Times";
+    }
+    TD{font-family: "Times"; font-size: 13pt;}
+    
+    #content1 {
+        height: auto !important;
+        padding: 0px
+    }
+
+    #content2 {
+        height: auto !important;
+        padding: 5px
+    }
+
+    .choice_text {
+    	padding-left:15px;
+    }
+
+    .choice_letter {
+        vertical-align: top;
+        width: 15px;
+    }
+
+    .choice_tip {
+        border: 4px double;
+        display: none;
+    }
+
+    .choice_discussion {
+        display: none;
+    }
+
+    .choice_icon {
+        position: absolute;
+        display: none;
+    }
+
+    #solution {
+        display: none;
+    }
+
+    .text_correct {
+        color: green;
+    }
+
+    .text_wrong {
+        color: red;
+    }
+
+   .block
+    {
+    	vertical-align:middle;
+       	max-width:300px;
+    }

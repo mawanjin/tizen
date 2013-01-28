@@ -35,7 +35,6 @@ opacity:1;
 #div_head{
 	background-image: url('./images/top_bar.jpg');
 	background-repeat:repeat;
-	text-align:center;
 }
 
 .head_bg{ 
@@ -49,10 +48,11 @@ opacity:1;
 	height:30px;
 }
 
+
 #div_head table tr td{
 
 	height: 10px; width: 14%;
-	vertical-align:bottom;
+	vertical-align:middle;
 }
 #category_bar_container{
 	border:0px; 
@@ -151,6 +151,11 @@ opacity:1;
 	width:35%;
 }
 
+.choice_panel_img_two_btn{
+	width:200px;
+	height:30px;
+}
+
 #workspace{
 	background-image: url('./images/ws_tile.jpg');
 	background-repeat:repeat;
@@ -172,28 +177,43 @@ opacity:1;
 }
 
 #popContent{
-	width:600px;
-	height:450px;
+	width:450px;
+	height:300px;
 }
 
 #painter_controller{
 	position: absolute; top:50px; right: 0; text-align:right;
-	z-index:1;
+	z-index:5;
 }
 #painter_controller_content{
-	position: absolute; top: 50px; left: 92%; text-align:center;
-	z-index:1;
+	position: absolute; top: 45px; 
+	left: 90%; text-align:center;
+	z-index:5;
 	display:none;
 }
+#painter_controller_bg{
+	position:absolute;
+}
+#painter_controller_bg img{
+	width:60px;
+	height:250px;
+}
 #painter_controller_up{
-	position: absolute; bottom: 0; left: 92%;text-align:right;
+	position: absolute; 
+	bottom: -10px; 
+	left: 92%;
+	text-align:right;
 	border:0px solid red;
-	z-index:2;
+	z-index:5;
 	display:none;
 }
 
 #canvas_replay_btn_container{
-	position: absolute; bottom: 0;  left: 0; height: 150px;
+	position: absolute;
+	top:80%; 
+	bottom: 0;  
+	left: 0; 
+	height: 150px;
 	z-index:2;
 	display:none;
 }
@@ -209,4 +229,11 @@ opacity:1;
 #wrapper_discussion{
 	top: 40px;
 	height:85%;
+}
+#discussion_num{
+	position:absolute;width:60px;text-align:center;border:0px solid red;padding-top:5px;padding-left:10px;color:red;
+}
+#controller_img_container img{
+	width:30px;
+	height:30px;
 }

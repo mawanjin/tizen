@@ -59,7 +59,7 @@ http = new function() {
 				"login_pass" : user.password,
 				"login" : "login",
 				"step" : "2",
-				"cod" : "123",
+				"cod" : ""+Math.random(),
 				"type" : "1",
 				"play_time" : "0",
 				"message" : message,
@@ -93,7 +93,7 @@ http = new function() {
 				"login_pass" : user.password,
 				"login" : "login",
 				"step" : "2",
-				"cod" : "123",
+				"cod" : ""+Math.random(),
 				"type" : "1",
 				"play_time" : "0",
 				"message" : message,
@@ -111,6 +111,7 @@ http = new function() {
 	};
 	//
 	self.postReply = function(user,discussionId, message, callback) {
+		alert(discussionId);
 		var server_url = (Constant.GET_SERVER_URL_POST_REPLY+discussionId);
 		var subject = message;
 		if (message.length > 32)
@@ -125,7 +126,7 @@ http = new function() {
 				"login_pass" : user.password,
 				"login" : "login",
 				"step" : "2",
-				"cod" : "123",
+				"cod" : ""+Math.random(),
 				"type" : "1",
 				"play_time" : "0",
 				"message" : message,

@@ -2,15 +2,17 @@ var sh ;
 function getBodyOffset(e) {
 	var e = e || window.event;
 	var left = e.clientX + document.body.scrollLeft
-	+ document.documentElement.scrollLeft,top = e.clientY + document.body.scrollTop
+	+ document.documentElement.scrollLeft,
+	top = e.clientY + document.body.scrollTop
 	+ document.documentElement.scrollTop + drawer.offset;
+	
 	
 	return {
 		x : left,
 		//x : e.clientX,
 			
 		//y:e.clientY		
-		y : top
+		y : top-35
 	};
 }
 
@@ -42,6 +44,7 @@ Drawing.prototype = {
 		}
 	},*/
 	init : function(canvas) {
+		this.firstOperation=true;
 		this.enable = true;
 		this.callback;
 		this.interval = 1000;
@@ -49,6 +52,8 @@ Drawing.prototype = {
 		this.isPause = false;
 		this.isStop = false;
 		this.isResume = false;
+		this.isPutText = false;
+		this.isPutTextMoving = false;
 		this.offset = 0;
 		this.type_line = 0;
 		this.type_text = 1;
@@ -82,6 +87,10 @@ Drawing.prototype = {
 		this.lastIndex = 0;
 		this.allstrokers = new Array();
 		this.index = 0;
+		this.c_text_control = false;
+		this.index_text = 0 ;
+		this.temp_font_size=0;
+		this.enable_del = true;
 	},
 	initAfterReady:function(){
 		console.log("initAfterReady() called.");
@@ -125,10 +134,10 @@ Drawing.prototype = {
 			
 		$("#div_text_settings").bind({
 			popupafterclose: function(event, ui) {
-				
-				setTimeout(function(){
-					$('#div_can_txt').popup('open');
-				},100);
+//				
+//				setTimeout(function(){
+//					$('#div_can_txt').popup('open');
+//				},100);
 			}
 			});
 			
@@ -190,7 +199,7 @@ Drawing.prototype = {
 	},
 	onMouseMove : function(pos) {
 		// console.log("onMouseMove() called.x="+pos.x+";y="+pos.y);
-		if (this.isButtonDown&&this.enable) {
+		if (this.isButtonDown&&this.enable&&this.isButtonDown==true&&this.enable==true&&this.curDrawingType != this.type_text) {
 			/*
 			var p = this.toolbarspos;
 			for ( var i in p) {
@@ -215,7 +224,10 @@ Drawing.prototype = {
 			} else if (this.curDrawingType == this.type_clear) {
 				this.context.clearRect(0, 0, 1000, 2000);
 				return;
-			} else if (this.curDrawingType == this.type_text) {
+			}else if(this.isPutText==true){
+				return;
+			} 
+			else if (this.curDrawingType == this.type_text) {
 				updateCanTxtPos(pos);
 				this.lastX = pos.x;
 				this.lastY = pos.y;
@@ -246,9 +258,12 @@ Drawing.prototype = {
 			}
 		}*/
 		this.isButtonDown = true;
-		
-		this.lastX = pos.x;
-		this.lastY = pos.y;
+		if(this.isPutText==true){
+			this.isButtonDown = false;
+		}else{
+			this.lastX = pos.x;
+			this.lastY = pos.y;
+		}
 		this.context.beginPath();
 		this.context.moveTo(this.lastX, this.lastY);
 		this.curStroker.type = this.curDrawingType;
@@ -259,19 +274,17 @@ Drawing.prototype = {
 	},
 	onMouseUp : function(event, pos) {
 		console.log("onMouseUp() called.");
+		//this.firstOperation
+		if(this.curDrawingType == this.type_line||this.curDrawingType == this.type_text){
+			this.firstOperation = false;
+		}
 
 		if (this.curDrawingType == this.type_clear
 				|| this.curDrawingType == this.type_text) {
+			this.isButtonDown = false;
 			return;
 		}
-		/*
-		var p = this.toolbarspos;
-		for ( var i in p) {
-			if (pos.x >= p[i].x && pos.x <= p[i].x + p[i].w && pos.y >= p[i].y
-					&& pos.y <= p[i].y + p[i].h) {
-				return;
-			}
-		}*/
+		
 		this.isButtonDown = false;
 		this.curStroker.eraserSize = curEraserSize;
 		this.historyStroker.push(this.curStroker);
@@ -291,7 +304,7 @@ Drawing.prototype = {
 		//this.ResetDrawToolbar();
 	},
 	ResetDrawCentre : function(interval) {
-		// console.log("ResetDrawCentre() called.");
+		 console.log("ResetDrawCentre() called.");
 		var p = this.historyStroker, p2, curColor = this.context.strokeStyle;
 		var strokers = new Array();
 		var data = new Array();
@@ -307,7 +320,7 @@ Drawing.prototype = {
 		for ( var i = 0; i < p.length; i++) {
 			
 			var temp = new Array();
-
+			
 			if (p[i].type == this.type_back) {
 				strokers.pop();
 			} else if (p[i].type == this.type_forward) {
@@ -331,7 +344,7 @@ Drawing.prototype = {
 				}
 
 				var c = count_back - count_forward;
-
+				if(c<0)continue;
 				index_content = index_content + 1;
 				for ( var m = 0; m < c; m++) {
 					data.push(p[m + index_content]);
@@ -400,6 +413,7 @@ Drawing.prototype = {
 
 		var _data = new Array();
 		for ( var i = 0; i < p.length; i++) {
+			
 			if (p[i].type == this.type_back) {
 				strokers.pop();
 			} else if (p[i].type == this.type_forward) {
@@ -448,6 +462,7 @@ Drawing.prototype = {
 
 		this.context.clearRect(0, 0, 1000, 2000);
 		var p = data, p2, curColor = this.context.strokeStyle;
+		if(!p)return;
 		for ( var i = 0; i < p.length; i++) {
 			this.context.beginPath();
 			if (p[i].type == this.type_clear) {
@@ -518,17 +533,81 @@ Drawing.prototype = {
 	,
 	onClick : function(pos) {
 		console.log("onClick() called.");
-		/*
-		var p = this.toolbarspos;
-		for ( var i in p) {
-			if (pos.x >= p[i].x && pos.x <= p[i].x + p[i].w && pos.y >= p[i].y
-					&& pos.y <= p[i].y + p[i].h) {
-				this.curColor = this.option.colors[i];
-				this.curDrawingType = this.type_line;
-				this.context.strokeStyle = this.curColor;
-				this.ResetDrawAll();
+		
+		if(drawer.enable==false||this.curDrawingType != this.type_text)return;
+		//alert(this.isPutText+";"+this.isPutTextMoving);
+		if(this.isPutText==true&&this.isPutTextMoving==false){
+			$("#c_input_txt_container").hide();
+			if($("#c_input_txt").val()!=""&&$("#c_input_txt").val().length>0)
+				executeInputTxt();
+			this.isPutTextMoving = true;
+			focusTop();
+			return;
+		}
+		
+		var exists =false;
+		//check whether current position has a text. historyStroker
+		for(var i=0;i<this.historyStroker.length;i++){
+			if(drawer.type_text==this.historyStroker[i].type){
+				var p_x = this.historyStroker[i].position.x;
+				var p_y = this.historyStroker[i].position.y;
+				var p_text = this.historyStroker[i].text;
+				
+				if(pos.x>=p_x&&pos.x<=(p_x+10*p_text.length)&&pos.y>=p_y-10&&pos.y<=(p_y+10)){
+					this.temp_font_size = this.historyStroker[i].lineWidth;
+					//show the text control
+					$("#c_text_control").show();
+					$("#c_text_control").css("left", p_x);
+					$("#c_text_control").css("top", p_y-document.getElementById("c_text_control").offsetHeight);
+					
+					//$("#c_text").css("{font-color:red;font-size:"+this.temp_font_size+"px;}");
+					$("#c_text").css({"font-size":this.temp_font_size+"px"});
+					$("#c_text").html(p_text);
+					$("#c_text").trigger("create");
+					
+					this.c_text_control = true;
+					this.isPutText=false;
+					exists = true;
+					this.index_text = i;
+					this.enable_del = false;
+					break;
+				}
 			}
-		}*/
+				
+		}
+		if(exists==true)return;
+		
+		
+		if(this.c_text_control==true&&this.isPutText==false){
+			$("#c_text_control").hide();
+			
+			this.historyStroker[this.index_text].lineWidth = this.temp_font_size;
+			this.ResetDrawCentre();
+			this.c_text_control = false;
+			this.isPutText=true;
+			this.isPutTextMoving=false;
+			focusTop();
+		}
+		
+		if(this.isPutText==true&&this.isPutTextMoving==true){
+			$("#c_input_txt_container").show();
+			$("#inner_text_container").css({"height":"35px"});
+			$("#c_input_txt").css({"height":"35px"});
+			$("#c_input_txt").css({"font-size":curTextSize+"px"});
+			
+			updateCanTxtPos(pos);
+			this.isPutTextMoving = false;
+			this.lastX = pos.x;
+			this.lastY = pos.y;
+		}else if(this.isPutText==true){
+			$("#c_input_txt_container").hide();
+			if($("#c_input_txt").val()!=""&&$("#c_input_txt").val().length>0)
+				executeInputTxt();
+			
+			this.isPutTextMoving = true;
+			focusTop();
+		}
+		
 	},
 	onPen : function() {
 		console.log("onPen called.");
@@ -542,6 +621,7 @@ Drawing.prototype = {
 		console.log("onEraser called.");
 		this.curDrawingType = this.type_eraser;
 		this.context.eraserSize = curEraserSize;
+		this.isPutText = false;
 	},
 	onClear : function() {
 		console.log("onClear called.");
@@ -549,6 +629,7 @@ Drawing.prototype = {
 		this.curDrawingType = this.type_clear;
 		this.curStroker.type = this.curDrawingType;
 		this.curStroker.time = util.currentTimeMillis();
+		if(this.historyStroker.length>0)
 		this.historyStroker.push(this.curStroker);
 		this.curStroker = {
 			color : this.curColor,
@@ -558,8 +639,12 @@ Drawing.prototype = {
 		};
 		
 		this.context.clearRect(0, 0, 1000, 2000);
-		//this.ResetDrawToolbar();
-		// this.ResetDrawAll();
+		
+		if(this.firstOperation==true){
+			//delete from db
+			deleteCanvas();
+			clearInperson();			
+		}
 	},
 	onUndo : function() {
 		console.log("onUndo called.");
@@ -570,6 +655,7 @@ Drawing.prototype = {
 		this.curDrawingType = this.type_back;
 		this.curStroker.type = this.curDrawingType;
 		this.curStroker.time = util.currentTimeMillis();
+		if(this.historyStroker.length>0)
 		this.historyStroker.push(this.curStroker);
 		this.curStroker = {
 			color : this.curColor,
@@ -588,6 +674,7 @@ Drawing.prototype = {
 		this.curDrawingType = this.type_forward;
 		this.curStroker.type = this.curDrawingType;
 		this.curStroker.time = util.currentTimeMillis();
+		if(this.historyStroker.length>0)
 		this.historyStroker.push(this.curStroker);
 		this.curStroker = {
 			color : this.curColor,
@@ -614,13 +701,13 @@ Drawing.prototype = {
 
 		this.context.fillStyle = this.curStroker.color;
 		this.context.font = this.curStroker.lineWidth + "px Times New Roman";
-		this.context.fillText($("#c_input_txt").html(), this.lastX, this.lastY);
+		this.context.fillText($("#c_input_txt").val(), this.lastX, this.lastY);
 
 		this.curStroker.position = {
 			x : this.lastX,
 			y : this.lastY
 		};
-		this.curStroker.text = $("#c_input_txt").html();
+		this.curStroker.text = $("#c_input_txt").val();
 
 		this.historyStroker.push(this.curStroker);
 		this.curStroker = {
@@ -686,14 +773,15 @@ Drawing.prototype = {
 			return false;
 	},
 	replay : function(strokers, interval) {
+		
 		if(strokers&&strokers!=-1)
 			this.historyStroker = strokers;
 		this.ResetDrawCentre(interval);
 	}
 };
 
-function eraserOn(pop) {
-	console.log("eraserOn() called.");
+function eraserOnWorkspace(pop) {
+	console.log("eraserOnWorkspace() called.");
 	
 	if(pop==false){
 		drawer.onEraser();
@@ -717,9 +805,13 @@ function redo() {
 	drawer.onRedo();
 }
 
-function putText() {
+function putTextWorkspace() {
 	console.log("putText() called.");
-	$('#div_can_txt').popup('open');
+	//$('#div_can_txt').popup('open');
+	drawer.curDrawingType = drawer.type_text;
+	drawer.c_text_control = false;
+	drawer.isPutText = true;
+	drawer.isPutTextMoving = true;
 }
 
 function fireCanTxt() {
@@ -750,9 +842,15 @@ function executeInputTxt() {
 	drawer.onExecuteInputText();
 	$("#c_input_txt").val("");
 	$("#can_txt").val("");
+	if(hasFinishedDrawingCheck==false){
+		updateReplayIconWhenDrawing();
+	}
 }
 
-function penOn(pop) {
+function penOnWorkspace(pop) {
+	$("#c_input_txt_container").hide();
+	drawer.isPutText=false;
+	
 	if(pop==false){
 		drawer.onPen();
 	}else{
@@ -809,7 +907,7 @@ var curPenSize = 5;
 var curEraserSize = 10;
 var curTextColor = "#000000";
 ;
-var curTextSize = 5;
+var curTextSize = 25;
 
 function updateCurPenColor(color) {
 	curPenColor = color;
@@ -864,7 +962,8 @@ function convertStrokerToXML(strokers) {
 	return xml;
 }
 
-function replayDrawing(interval,callback){
+function replayDrawingWorkspace(interval,callback){
+	console.log("replayDrawing() called.");
 	drawer.callback = callback;
 	drawer.replay(-1, interval);
 }
@@ -878,15 +977,16 @@ function replay() {
 	});
 }
 
-function pauseDrawing(){
+function pauseWorkspaceDrawing(){
 	drawer.isPause = true;
 }
 
-function resumeReplay(callback){
+function resumeWorkspaceReplay(callback){
 	drawer.resumeReplay(callback);
 }
 
 function stopReplay(){
+	if(!drawer)return;
 	console.log("stopReplay() called.");
 	drawer.isPlaying = false;
 	drawer.isPause = false;
@@ -993,33 +1093,101 @@ function parseStrokerXML(xml,callback) {
 }
 
 function getInpersonVO(){
+	hideInputText();
 	
 //	var xml = convertStrokerToXML(drawer.allstrokers);
+	if(!drawer){
+		return;
+	}
 	var xml = convertStrokerToXML(drawer.historyStroker);
 	var data = drawer.canvas.toDataURL();
-//	console.log(xml);
 	var inperson = {"xml":xml,"data":data};
 	return inperson;
 }
 
-function setInperson(inperson){
+function setInpersonWorkspace(inperson){
 	
 	parseStrokerXML(inperson._xml,function(strokers) {
 		console.log("parseStrokerXML() called.and stroker length is "
 				+ strokers.length);
 		drawer.historyStroker = strokers;
 		drawer.allstrokers =  strokers;
+		drawer.firstOperation = true;
 	});
 }
 function clearInperson(){
+	console.log("clearInperson() called.");
+	stopReplay();
 	hasFinishedDrawingCheck = false;
 	drawer.historyStroker = new Array();
 	drawer.allstrokers =  new Array();
+	this.firstOperation = true;
+	$("#c_text").html("");
+	$("#c_text_control").hide();
+	hasInperson=false;
+	updateCanvasReplayIcnonStatus();
 }
 var hasFinishedDrawingCheck = false;
 function updateReplayIconWhenDrawing(){
-	parent.hasInperson = true;
-	parent.shoReplayIcon();
+	hasInperson = true;
+	shoReplayIcon();
 	hasFinishedDrawingCheck = true;
 }
+function showTextSettingPop(){
+	$("#div_text_settings").popup( "open" );
+}
+function c_add(){
+	drawer.temp_font_size = parseInt(drawer.temp_font_size)+5;
+	if(drawer.temp_font_size>50)drawer.temp_font_size=50;
+	
+	$("#c_text").css({"font-size":drawer.temp_font_size+"px"});
+	$("#c_text_control").css({"font-size":drawer.temp_font_size+"px"});
+	
+	$("#c_text_control").trigger("create");
+	$("#c_text_control").hide();
+	setTimeout(function(){$("#c_text_control").show();});
+	
+}
 
+function c_subtract(){
+	drawer.temp_font_size = parseInt(drawer.temp_font_size)-5;
+	
+	if(parseInt(drawer.temp_font_size)<5){
+		drawer.temp_font_size = 5;
+	}
+	
+	$("#c_text").css({"font-size":drawer.temp_font_size+"px"});
+//	$("#c_text").trigger("create");
+	
+	$("#c_text_control").css({"font-size":drawer.temp_font_size+"px"});
+	$("#c_text_control").trigger("create");
+	$("#c_text_control").hide();
+	setTimeout(function(){$("#c_text_control").show();});
+}
+
+function c_del(){
+	console.log("c_del() called.");
+	//this.enable_del
+	if(drawer.enable_del == false){
+		drawer.enable_del = true;
+		return;	
+	}
+	var temp = new Array();
+	$("#c_text_control").hide();
+	for(var i=0;i<drawer.historyStroker.length;i++){
+		if(i==drawer.index_text)continue;
+		temp.push(drawer.historyStroker[i]);
+	}
+	drawer.historyStroker = temp;
+	
+	drawer.c_text_control = false;
+	drawer.isPutText=true;
+	drawer.isPutTextMoving=true;
+	drawer.ResetDrawCentre();
+	focusTop();
+}
+
+
+function hideInputText(){
+	$("#c_input_txt_container").hide();
+}

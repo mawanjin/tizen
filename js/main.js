@@ -3,6 +3,7 @@ var current_page = Constant.application_page_main;
 var init = function() {
 	// TODO:: Do your initialization job
 	console.log("init() called");
+	
 	//show loading
 	$("#loading_login").html(util.getLoading());
 	$("#loading_login").show();
@@ -89,6 +90,7 @@ var informations;
 function startup() {
 	
 	console.log("startup() called");
+	
 	parser.getmoduleinfo(function(moduleinfo) {
 		main_moduleinfo = moduleinfo;
 		console.log("afert getmoduleinfo() called");
@@ -97,11 +99,12 @@ function startup() {
 		 parser.getInformation(function(array) {
 			 informations = array;
 			 bindEvent();
-			 $(window).trigger("resize");
-			 SystemOrientation.refresh(function (){
-					console.log("afert SystemOrientation.refresh() called");
-					
-				});
+			 SystemOrientation.setOrientation(90);
+			 //$(window).trigger("resize");
+//			 SystemOrientation.refresh(function (){
+//					console.log("afert SystemOrientation.refresh() called");
+//					
+//				});
 			 $("#loading_login").hide();
 		 });
 		

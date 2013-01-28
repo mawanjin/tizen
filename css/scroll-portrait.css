@@ -6,6 +6,14 @@
 	overflow:auto;
 }
 
+#wrapper_workspace{
+	position:absolute; z-index:1;
+	top:40px; bottom:0px; left:0;
+	width:100%;
+	background:#fafafa;
+	overflow:auto;
+}
+
 #scroller {
 	position:absolute; z-index:1;
 /*	-webkit-touch-callout:none;*/
@@ -66,7 +74,7 @@
 
 #wrapper_problemIntro{
 	top:50px;
-	height:80%; 
+	height:85%; 
 }
 
 #wrapper_problemIntroMenu{
@@ -106,7 +114,13 @@ padding:0 10px;
 	top:60px;height:75%
 }
 #wrapper_discussion{
-	height:87%;
+	position:absolute;
+	z-index:1;
+	width:100%;
+	top: 40px;
+	height:87%;	
+	background:#fafafa;
+	overflow:auto;
 }
 
 
@@ -114,9 +128,9 @@ padding:0 10px;
 	position:absolute;position:absolute; z-index:3;
 /*	-webkit-touch-callout:none;*/
 	-webkit-tap-highlight-color:rgba(0,0,0,0);
-	width:50%;
+	width:60%;
 	margin-right:0;
-	margin-left:50%;
+	margin-left:40%;
 	padding:0;
 	border:2px solid gray;
 }
@@ -131,11 +145,11 @@ list-style:none;
 }
 #scrollerquestionMenu li{
 	text-align:center;
-	padding:5px 0 5px 0;	
+	padding:10px 5px 10px 5px;	
 	border-bottom:1px solid #ccc;
 	border-top:1px solid #fff;
 	background-color:#fafafa;
-	font-size:14px;
+	font-size:18px;
 }
 
 
@@ -176,7 +190,7 @@ list-style:none;
 
 #wrapper_exam{
 	position:absolute; z-index:1;
-	top:120px; bottom:0px; left:0;
+	top:140px; bottom:0px; left:0;
 	width:100%;
 	/*background:#aaa;*/
 	background:#fafafa;
@@ -186,10 +200,10 @@ list-style:none;
 #wrapper_exam_intro{
 	position:absolute; z-index:1;
 	border:2px solid gray;
-	top:30px; bottom:0px; left:10px;
+	top:30px; bottom:0px; left:6px;
 	right:10px;
 	width:95%;
-	height:90%;
+	height:85%;
 	background:#fafafa;
 	overflow:auto;
 }

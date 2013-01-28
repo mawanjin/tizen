@@ -5,6 +5,7 @@ SystemOrientation = new function() {
 
 	self.setOrientation = function(orientation) {
 		self.orientation = orientation;
+		
 		switch (self.orientation) {
 		case 0:
 			self.refresh();
@@ -20,8 +21,6 @@ SystemOrientation = new function() {
 			break;
 
 		case 90: // landscape mode, screen turned to the left
-			self.refresh();
-			break;
 		case -90: // landscape mode, screen turned to the right
 			self.refresh();
 			// generateCategoryBar();
@@ -41,9 +40,9 @@ SystemOrientation = new function() {
 		
 		if (self.orientation == 0) {// portrait mode
 			
-			if($("#view_model")){
-				$("#view_model").attr("href", "./css/sl_portrait.css");
-			}
+//			if($("#view_model")){
+//				$("#view_model").attr("href", "./css/sl_portrait.css");
+//			}
 			
 			if ($("#main_css")) {
 				$("#main_css").attr("href", "./css/style-portrait.css");
@@ -67,9 +66,9 @@ SystemOrientation = new function() {
 
 		} else {
 			
-			if($("#view_model")){
-				$("#view_model").attr("href", "./css/sl_landscape.css");
-			}
+//			if($("#view_model")){
+//				$("#view_model").attr("href", "./css/sl_landscape.css");
+//			}
 			if ($("#main_css")){
 				$("#main_css").attr("href", "./css/style.css");
 			}
@@ -129,10 +128,10 @@ function onErrorCallback(){
 	console.log("error.......a a a ");
 }
 
-tizen.systeminfo.addPropertyValueChangeListener("DeviceOrientation",
-		onSuccessCallback, onErrorCallback, {
-			lowThreshold : 0.2
-});
+//tizen.systeminfo.addPropertyValueChangeListener("DeviceOrientation",
+//		onSuccessCallback, onErrorCallback, {
+//			lowThreshold : 0.2
+//});
 
 function onSuccessCallback(orientation) {
 	switch (orientation.status) {
