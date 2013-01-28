@@ -6,7 +6,6 @@ var init = function() {
 	//show loading
 	$("#loading_login").html(util.getLoading());
 	$("#loading_login").show();
-	
 	prepare();
 	
 };
@@ -26,10 +25,10 @@ var db;
  * 
  */
 function prepare() {
+	
 	console.log("prepare() called");
 	db = new DBManager();
 	
-	// var xmlParser = new XMLParser();
 	function prepareDatabase() {
 		console.log("prepareDatabase() called");
 		db.createTables(afterCreateTable);
@@ -39,12 +38,10 @@ function prepare() {
 	var timer_check_data_exist = null;
 
 	var func_check_data_exist = function() {
+		
 		db.getIphoneExAppPagesCount();
 		db.getIphoneExAppsCount();
 		db.getIphoneQuestionsCount();
-//		console.log("db.data_count_iphone_ex_apps = "+db.data_count_iphone_ex_apps);
-//		console.log("db.data_count_IphoneExAppPages ="+db.data_count_IphoneExAppPages);
-//		console.log("db.data_count_iphoneQuestions = "+db.data_count_iphoneQuestions);
 		if (db.data_count_iphone_ex_apps == 152
 				&& db.data_count_IphoneExAppPages == 42
 				&& db.data_count_iphoneQuestions == 1510) {
@@ -60,7 +57,6 @@ function prepare() {
 	function afterCreateTable() {
 		console.log("After createTables ,now filling the data...");
 		setTimeout(db.fillData(startup));
-//		setTimeout(function(){timer_check_data_exist = setInterval(func_check_data_exist, 2000);},1000);
 	}
 
 	var func_check_table_exist = function() {
@@ -91,23 +87,27 @@ var parser = new XMLParser();
 var main_moduleinfo;
 var informations;
 function startup() {
+	
 	console.log("startup() called");
 	parser.getmoduleinfo(function(moduleinfo) {
 		main_moduleinfo = moduleinfo;
 		console.log("afert getmoduleinfo() called");
-		//generateCategoryBar();
-		SystemOrientation.refresh(function (){
-			console.log("afert SystemOrientation.refresh() called");
-		});
 		initConstant();
+		
+		 parser.getInformation(function(array) {
+			 informations = array;
+			 bindEvent();
+			 $(window).trigger("resize");
+			 SystemOrientation.refresh(function (){
+					console.log("afert SystemOrientation.refresh() called");
+					
+				});
+			 $("#loading_login").hide();
+		 });
+		
 	});
 //	 ================================================
-	 parser.getInformation(function(array) {
-		 informations = array;
-	 });
-
-	bindEvent();
-	$("#loading_login").hide();
+	
 }
 
 // ======================
@@ -124,7 +124,7 @@ function bindEvent() {
 				$("#intro_list").html('');
 				for ( var i = 0; i < informations.length; i++){
 					if(i==informations.length-1){
-						$("#intro_list").append('<li><a href="#" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+						$("#intro_list").append('<li><a href="http://www.baidu.com" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
 					}else
 						$("#intro_list").append('<li><a href="#info_content" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
 				}
@@ -139,12 +139,25 @@ function bindEvent() {
 		});
 	});
 	$("#btn_login").click(function() {
+		
 		if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){
+			
 			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
 			$("#btn_login").trigger('create');
 			http.publicUser.userName="";
 			http.publicUser.password="";
 			http.publicUser.profile="";
+		}else{
+			
+			system_service.getNetWorkInfo(function(rs){
+				if(rs==true){
+					$("#popupBasic").popup("open");
+				}else{
+					$("#popupNetWorkAlert").popup("open");
+				}
+			});
+			
+			
 		}
 		/*
 		//check log status
@@ -162,51 +175,66 @@ function bindEvent() {
 		});
 	});
 	$("#disc_no_text").click(function() {
-		current_page = Constant.application_page_discussion;
-		destoryScroll();
-		myDiscussionScroll = new iScroll('wrapper_discussion');
-		fromQuestionView = false;
-		//show loading
-		$("#loading_discussion").html(util.getLoading());
-		$("#loading_discussion").show();
-		$("#discussion_back").attr("href","#main");
-		$("#discussion_back").bind("click",function(){
-			resetMainScroll();
-		});
-		//load data from server(HTTP).
-		http.findDiscussionsByExamType(function(data){
-			console.log("findDiscussionsByExamType() called");
-			if(data==-1){
-				$("#loading_discussion").hide();
-				alert("time out ,please try later.");
+		
+		system_service.getNetWorkInfo(function(rs){
+			if(rs==true){
+				$("#a_discussion").attr("href","#discussion");
+				$("#a_discussion").trigger("click");
+				current_page = Constant.application_page_discussion;
+				destoryScroll();
+				myDiscussionScroll = new iScroll('wrapper_discussion');
+				fromQuestionView = false;
+				//show loading
+				$("#loading_discussion").html(util.getLoading());
+				$("#loading_discussion").show();
+				$("#discussion_back").attr("href","#main");
+				$("#discussion_back").bind("click",function(){
+					resetMainScroll();
+				});
+				//load data from server(HTTP).
+				http.findDiscussionsByExamType(function(data){
+					console.log("findDiscussionsByExamType() called");
+					if(data==-1){
+						$("#loading_discussion").hide();
+						alert("time out ,please try later.");
+						return;
+					}
+					var html='';
+					for(var i=0;i<data.length;i++){
+						var o = data[i];
+						var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
+						var questionID = o.questionId;
+						var id = o.id;
+						var date = '<font color=blue size=1>'+o.date+'</font>';
+						var title = o.uname;
+						var attach = o.attachIamge;
+						var go = '';
+						/*
+						if(questionID!=0)
+							go = '<font color=blue size=1>Go to problemset</font>';
+						*/
+						if(!attach)attach='';
+						else
+							attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
+						var content = o.message;
+						
+						html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply" onclick="setCurrentDiscussionId('+id+')"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
+					}
+					$("#loading_discussion").hide();
+					$("#thelist_discussion").html(html);
+					$("#thelist_discussion").trigger("create");
+					
+					setTimeout(function () {
+						myDiscussionScroll.refresh();
+					},1000);
+				});
+			}else{
+				$("#a_discussion").attr("href","#");
+				$("#popupNetWorkAlert").popup("open");
 				return;
 			}
-			var html='';
-			for(var i=0;i<data.length;i++){
-				var o = data[i];
-				var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
-				var questionID = o.questionId;
-				var date = '<font color=blue size=1>'+o.date+'</font>';
-				var title = o.uname;
-				var attach = o.attachIamge;
-				var go = '';
-				if(questionID!=0)
-					go = '<font color=blue size=1>Go to problemset</font>';
-				if(!attach)attach='';
-				else
-					attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
-				var content = o.message;
-				
-				html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
-			}
-			$("#loading_discussion").hide();
-			$("#thelist_discussion").html(html);
-			$("#thelist_discussion").trigger("create");
-			
-			setTimeout(function () {
-				myDiscussionScroll.refresh();
-			},1000);
 		});
+		
 	});
 	$("#imgBookmark").click(function() {
 		current_page = Constant.application_page_bookmark;
@@ -215,7 +243,7 @@ function bindEvent() {
 		updateBookmark('date');
 	});
 	$("#mail").click(function() {
-		alert("mail");
+		email();
 	});
 	$("#search_icon").click(function() {
 		alert("search_icon");
@@ -225,6 +253,7 @@ function bindEvent() {
 	});
 	$("#post").click(function() {
 		//check the type of reply:plain or reply for one
+		
 		if(fromQuestionView)
 			current_post_type = 2;
 		else
@@ -236,6 +265,10 @@ function bindEvent() {
 		popupafterclose: function(event, ui) {setTimeout(showPopupRegister,100);}
 	});
 	
+}
+
+function email(){
+	system_service.launchEmailService();
 }
 
 function showPopupRegister(){
@@ -298,7 +331,8 @@ function post(){
 				
 		});
 	}else if(current_post_type==2){
-		http.postForAGivenQuestion(user,current_question_id, message,function(data){
+		
+		http.postForAGivenQuestion(user,current_question.id, message,function(data){
 			$("#loading_post").hide();
 			if(data==-1){
 				$("#loading_post").hide();
@@ -307,7 +341,7 @@ function post(){
 			}else{
 				if(fromQuestionView){
 					$("#discussionForQ").trigger("click");
-					showDiscussionForQuestion();
+					//showDiscussionForQuestion();
 				}else{
 					$("#disc_no_text").trigger("click");
 				}
@@ -389,8 +423,11 @@ function showBigScreenShot(){
 		$("#screenshot_big").hide();	
 	});
 }
-
+var current_bookmark_order = 'date';
 function updateBookmark(orderby){
+	if(!orderby)orderby = current_bookmark_order;
+	else
+		current_bookmark_order = orderby;
 	//title
 	db.findAllBookMark(orderby,function(data){
 		
@@ -408,6 +445,7 @@ function updateBookmark(orderby){
 		$("#thelist_bookmark").trigger("create");
 		
 		setTimeout(function () {
+			if(!mybookmarkScroll)mybookmarkScroll = new iScroll('wrapper_bookmark');
 			mybookmarkScroll.refresh();
 		},100);
 	});
@@ -781,9 +819,10 @@ function showInforContent(which){
 		$("#thelist_info").trigger("create");
 		
 		
-		setTimeout(function () {
+		setTimeout(function(){
+			myInfoScroll = new iScroll('wrapper_info');
 			myInfoScroll.refresh();
-		},1000);
+		},500);
 	}
 }
 var current_exAppId;
@@ -953,6 +992,9 @@ function showGallery(){
 }
 
 function beginPractice(){
+	initWorkspace();
+	is_bookmark_review = false;
+	is_exam_review = false;
 	hasInperson = false;
 	current_showsolution = false;
 	$("#questionview_done").hide();
@@ -967,18 +1009,20 @@ function beginPractice(){
 		console.log("beginPractice() called");
 		db.findQuestionsByExAppID(current_exAppId,function(questions){
 			current_questions = questions;
-			console.log("current_questions.length="+current_questions.length);
+			console.log("beginPractice()--->current_questions.length="+current_questions.length);
 			//update the number indicator of questions 
 			$("#questionview_number_indicator").html("1/"+current_questions.length);
+			console.log("beginPractice()--->updateQuestionList()");
 			updateQuestionList();
 			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
-				console.log("generateChoicePancel() successed");
+				console.log("beginPractice()--->generateChoicePancel() successed");
 			});
 			//get examResultInfo
 			db.getExamResultInfoNew(current_exAppId,current_exAppName,questions,function(info){
+				console.log("beginPractice()--->getExamResultInfoNew()");
 				current_examResultInfo = info;
 				current_examResultInfo.startTime = util.currentTimeMillis;
-				
+				console.log("beginPractice()--->changePage()");
 				changePage(current_question_position);
 			});
 			
@@ -999,7 +1043,7 @@ function resume(callback){
 	$("#questionview_done").hide();
 	resetQuestionViewScroll();
 	current_showsolution = false;
-	
+	is_exam_review = false;
 	setTimeout(function(){
 		
 		current_question_position = 0;
@@ -1033,42 +1077,48 @@ function resume(callback){
 
 function resumeForExamReview(callback){
 	
+	console.log("resumeForExamReview() called");
+	initWorkspace();
+	hasInperson = false;
+	is_exam_review_first = true;
 	setTimeout(function(){
-		
-		console.log("resumeForExamReview() called");
 		db.findQuestionsByExAppID(current_exAppId,function(questions){
+			
 			current_questions = questions;
 			console.log("current_questions.length="+current_questions.length);
 			//update the number indicator of questions 
 			$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
-			updateQuestionList();
-			mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
-				console.log("generateChoicePancel() successed");
+			updateQuestionList(function(){
+				mChoicePanel.generateChoicePancel(current_questions[0],whenChoiceOnClick,function(){
+					console.log("generateChoicePancel() successed");
+					changePage(current_question_position);
+					setTimeout(function () {
+						if(myQuestionListScroll)
+						myQuestionListScroll.refresh();
+					},100);
+					if(callback)
+						callback();
+				});
 			});
-			
-			changePage(current_question_position);
-			if(callback)
-			callback();
 		});
 		
-		setTimeout(function () {
-			if(myQuestionListScroll)
-			myQuestionListScroll.refresh();
-		},100);
+		
 		
 		//start count 
-		start_timer_date = timer.start();
+		//start_timer_date = timer.start();
 		
 	});
 }
 var is_exam_review = false;
+var is_bookmark_review = false;
 function exam_review(position){
+	console.log("exam_review() called.");
+	is_bookmark_review = false;
 	is_exam_review = true;
 	$("#questionview_done").show();
 	$("#questionview_menu").hide();
-	$("#choice_bg").hide();
-	$("#choicePanelContainer").hide();
-	$("#questionview_done").html('<a href="#exam" onclick="showExam();saveInperson();setInperson();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	
+	$("#questionview_done").html('<a href="#exam" onclick="saveInpersonForExamBack()" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
 	$("#questionview_done").trigger('create');
 	
 	current_question_position = position;
@@ -1076,13 +1126,23 @@ function exam_review(position){
 	resumeForExamReview(function(){
 		showSolution();
 		current_showsolution = true;
+		$("#choice_bg").hide();
+		$("#choicePanelContainer").hide();
 	});
+	
+	
+//	db.findInpersonByQuestionId(current_questions[current_question_position].id,function(inperson){
+//		setInperson(inperson);
+//	});
 	
 }
 
 function bookmark_review(exapp_id,position){
-	resetQuestionViewScroll();
+	initWorkspace();
+	hasInperson = false;
 	
+	resetQuestionViewScroll();
+	is_bookmark_review = true;
 	$("#questionview_done").show();
 	$("#questionview_menu").hide();
 	$("#choice_bg").hide();
@@ -1091,15 +1151,17 @@ function bookmark_review(exapp_id,position){
 	$("#imgNxt").hide();
 	
 	
-	$("#questionview_done").html('<a href="#bookmark" onclick="resetBookMarkScroll();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").html('<a href="#bookmark" onclick="updateBookmark();saveInperson();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
 	$("#questionview_done").trigger('create');
 	
 	current_exAppId = exapp_id;
 	current_question_position = position;
 	
+	
 	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
 		examResultInfo = rs[0];
 		current_examResultInfo = examResultInfo;
+		current_exAppName = examResultInfo.exAppName;
 		resumeForBookmarkReview(function(){
 			setTimeout(function () {
 				if(myQuestionListScroll){
@@ -1114,7 +1176,7 @@ function bookmark_review(exapp_id,position){
 }
 
 function resumeForBookmarkReview(callback){
-	
+	is_exam_review = false;
 	setTimeout(function(){
 		
 		console.log("resumeForBookmarkReview() called");
@@ -1163,18 +1225,21 @@ function showDiscussionForQuestion(){
 			var o = data[i];
 			var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
 			var questionID = o.questionId;
+			var id = o.id;
 			var date = '<font color=blue size=1>'+o.date+'</font>';
 			var title = o.uname;
 			var attach = o.attachIamge;
 			var go = '';
+			/*
 			if(questionID!=0)
 				go = '<font color=blue size=1>Go to problemset</font>';
+				*/
 			if(!attach)attach='';
 			else
 				attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
 			var content = o.message;
 			
-			html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
+			html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply" onclick="setCurrentDiscussionId('+id+')"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
 		}
 		$("#loading_discussion").hide();
 		$("#thelist_discussion").html(html);
@@ -1200,7 +1265,7 @@ function checkBookMark(){
 	});
 }
 
-function updateQuestionList(){
+function updateQuestionList(callback){
 	console.log("updateQuestionList() called");
 	db.findBookMarkByExappId(current_exAppId,function(bookmarks){
 		console.log("findBookMarkByExappId() called,and exAppId="+current_exAppId);
@@ -1228,12 +1293,17 @@ function updateQuestionList(){
 		
 		$("#thelist_question_list").html(html);
 		$("#thelist_question_list").trigger("create");
+		
+		setTimeout(function () {
+			if(myQuestionListScroll)
+				myQuestionListScroll.refresh();
+			
+			if(callback)callback();
+		},100);
+		
 	});
 	
-	setTimeout(function () {
-		if(myQuestionListScroll)
-			myQuestionListScroll.refresh();
-	},100);
+	
 }
 
 function updateBookMark(){
@@ -1290,14 +1360,34 @@ function exitExam(){
 }
 
 function finishExam(){
+	console.log("finishExam() called.");
 	is_exam_review = false;
 	$("#wrapper_question_menu").hide();
+	console.log("finishExam---->saveExamStatus() called.");
 	saveExamStatus(true,function(){
-		showExam();
+		
+		//begin
+		var inperson = getInpersonVO();
+		if(inperson&&inperson.xml&&inperson.xml.length>60){
+			console.log("finishExam---->insertInperson() called.");
+			db.insertInperson(current_exAppId,current_questions[current_question_position].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+				showExam();
+			});
+		}else{
+			showExam();
+		}
+			
+		//end
+		
+		
+//		saveInperson(function(){
+//			showExam();	
+//		});
+		
 		//refresh list
-		refreshList(current_section_short,current_section);
+		//refreshList(current_section_short,current_section);
 	});
-	setTimeout(saveInperson);
+	//setTimeout(saveInperson);
 }
 
 function report(){
@@ -1346,22 +1436,32 @@ var start_timer_date;
  * when i=true,current_question_position will ++,false --.other numbers is the value of current_question_position 
  * @param i
  */
+
+var last_question_id=-1;
+var is_exam_review_first = true;
 function changePage(i){
+	console.log("changePage() called.");
 	current_page = Constant.application_page_question_view;
+	console.log("changePage() called.---->hidePainterController()"); 
 	hidePainterController();
 	hasInperson = false;
-	saveInperson();
-	//rest
+	last_question_id = current_question_position;
+	console.log("changePage() called.---->reset_user_choice()");
 	reset_user_choice();
 	
 	$("#wrapper_question_list").hide();
 	
 	if(i=="true"){
 		current_question_position = current_question_position+1;
+		if(is_exam_review==true)is_exam_review_first=false;
 	}else if(i=="false"){
 		current_question_position = current_question_position-1;
-	}else
+		if(is_exam_review==true)is_exam_review_first=false;
+	}else{
+		if(is_exam_review==true)is_exam_review_first=true;
 		current_question_position = i;
+	}
+		
 	
 	if(current_questions.length==0)return;
 	if(current_question_position>current_questions.length-1)current_question_position=current_questions.length-1;
@@ -1369,52 +1469,121 @@ function changePage(i){
 	 
 	//update the number indicator of questions 
 	$("#questionview_number_indicator").html((current_question_position+1)+"/"+current_questions.length);
-	
-	current_question = current_questions[current_question_position];
-	
-	//set correct choice
-	current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_question.solution;
-	
-	setTimeout(function () {
-		checkBookMark();
-	});
-	
-	setTimeout(function () {
-		updateDiscussionNumber();
-	});
-	
-	//load content
-	loadContent(current_showsolution);
-	
-	//set progress
-	if(current_examResultInfo.progress<current_question_position+1)
-		current_examResultInfo.progress = current_question_position+1;
-	
-	//reset choice panel
-	mChoicePanel.generateChoicePancel(current_question,whenChoiceOnClick,function(){
-		console.log("generateChoicePancel() successed");
-	});
-	
-	//set privious selection
-	if(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)!=-1)
-		mChoicePanel.setChoice(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)+"");
-	
-	//change button in pop
-	if(current_question_position==(current_questions.length-1)){
-		$("#btnPopFinish").show();
-		$("#btnPopNxt").hide();
-	}else{
-		$("#btnPopFinish").hide();
-		$("#btnPopNxt").show();
-	}
-	
-	//load video
-	loadVideo();
-	//load inperson
-	
-	db.findInpersonByQuestionId(current_question.id,function(inperson){
-		setInperson(inperson);
-	});
+		if(is_exam_review==true&&is_exam_review_first==true){
+				
+				current_question = current_questions[current_question_position];
+				console.log("changePage-->findInpersonByQuestionId()");
+				db.findInpersonByQuestionId(current_question.id,function(inperson){
+					setInperson(inperson);
+				});
+				
+				//set correct choice
+				current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_question.solution;
+				
+				setTimeout(function () {
+					console.log("changePage-->checkBookMark()");
+					checkBookMark();
+				});
+				
+				setTimeout(function () {
+					console.log("changePage-->updateDiscussionNumber()");
+					updateDiscussionNumber();
+				});
+				
+				
+				//load content
+				loadContent(current_showsolution);
+				
+				//set progress
+				if(current_examResultInfo.progress<current_question_position+1)
+					current_examResultInfo.progress = current_question_position+1;
+				
+//				//reset choice panel
+//				mChoicePanel.generateChoicePancel(current_question,whenChoiceOnClick,function(){
+//					console.log("generateChoicePancel() successed");
+//				});
+				
+				//set privious selection
+				if(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)!=-1)
+					mChoicePanel.setChoice(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)+"");
+				
+				//change button in pop
+				if(current_question_position==(current_questions.length-1)){
+					$("#btnPopFinish").show();
+					$("#btnPopNxt").hide();
+				}else{
+					$("#btnPopFinish").hide();
+					$("#btnPopNxt").show();
+				}
+				
+				//load video
+				loadVideo();
+				//load inperson
+				
+				if(is_exam_review==true||is_bookmark_review==true){
+					$("#choice_bg").hide();
+					$("#choicePanelContainer").hide();
+				}
+		}else{
+			console.log("changePage-->saveInperson()");
+			saveInperson(function(){
+				console.log("changePage-->after saveInperson()");
+				current_question = current_questions[current_question_position];
+				console.log("changePage-->findInpersonByQuestionId()");
+				db.findInpersonByQuestionId(current_question.id,function(inperson){
+					setInperson(inperson);
+				});
+				//set correct choice
+				current_examResultInfo.QuestionExamStatus[current_question_position].correctChoice = current_question.solution;
+				
+				setTimeout(function () {
+					checkBookMark();
+				});
+				
+				setTimeout(function () {
+					updateDiscussionNumber();
+				});
+				
+				//load content
+				loadContent(current_showsolution);
+				
+				//set progress
+				if(current_examResultInfo.progress<current_question_position+1)
+					current_examResultInfo.progress = current_question_position+1;
+				
+				//reset choice panel
+				mChoicePanel.generateChoicePancel(current_question,whenChoiceOnClick,function(){
+					console.log("generateChoicePancel() successed");
+				});
+				
+				//set privious selection
+				if(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)!=-1)
+					mChoicePanel.setChoice(parseInt(current_examResultInfo.QuestionExamStatus[current_question_position].choice)+"");
+				
+				//change button in pop
+				if(current_question_position==(current_questions.length-1)){
+					$("#btnPopFinish").show();
+					$("#btnPopNxt").hide();
+				}else{
+					$("#btnPopFinish").hide();
+					$("#btnPopNxt").show();
+				}
+				
+				//load video
+				loadVideo();
+				//load inperson
+
+				
+				
+				if(is_exam_review==true||is_bookmark_review==true){
+					$("#choice_bg").hide();
+					$("#choicePanelContainer").hide();
+				}
+			});
+		}
+		
+		
+	//current_question = current_questions[current_question_position];
 	
 }
 
@@ -1471,9 +1640,7 @@ function setVideoContent(content){
 function loadContent(isShowSolution){
 	console.log("loadContent() called");
 	
-//	var question =  current_questions[current_question_position];
 	var question =   current_question;
-	console.log(question.id);
 	  
 	var solution = current_questions[current_question_position].solution;
 	
@@ -1505,35 +1672,42 @@ function loadContent(isShowSolution){
 	}
 	
 	//refresh scroll
-	window.frames["i_workspace"].refreshList();
+	refreshWorkspaceList();
 }
 
 function reset_user_choice(){
 	console.log("reset_user_choice() called");
 	$( "#popupConfirm" ).popup( "close" );
-	window.frames["i_workspace"].reset_user_choice();
+//	window.frames["i_workspace"].reset_user_choice();
+	reset_user_choice();
 }
 
 function showSolution(){
 	console.log("showSolution() called");
 	$( "#popupConfirm" ).popup( "close" );
-	window.frames["i_workspace"].showSolution();
+//	window.frames["i_workspace"].showSolution();
+	showWorkspaceSolution();
 	//refresh scroll
-	window.frames["i_workspace"].refreshList();
+//	window.frames["i_workspace"].refreshList();
+	refreshWorkspaceList();
 }
 
 function choice(option){
-	window.frames["i_workspace"].choice(option);
+//	window.frames["i_workspace"].choice(option);
+	choice(option);
 }
 
 function cancelchoice(option){
-	window.frames["i_workspace"].cancelchoice(option);
+//	window.frames["i_workspace"].cancelchoice(option);
+	cancelchoice(option);
 }
 
 function freshPassageHtml(content){
-	window.frames["i_workspace"].freshPassageHtml(content);
+//	window.frames["i_workspace"].freshPassageHtml(content);
+	freshPassageHtmlWorkspace(content);
 	//refresh scroll
-	window.frames["i_workspace"].refreshList();
+//	window.frames["i_workspace"].refreshList();
+	refreshWorkspaceList();
 }
 
 
@@ -1544,7 +1718,7 @@ function freshPassageStemChoices(passage,stem,answers,solution,solutionText){
 	answers = util.strToJson(answers);
 	
 	//invoke js method in iframe
-	window.frames["i_workspace"].freshPassageStemChoices(false,passage.replaceAll("\'", "\\\\'"),stem.replaceAll("\'", "\\\\'"),answers,solution,solutionText.replaceAll("\'", "\\\\'"));
+	freshWorkspacePassageStemChoices(false,passage.replaceAll("\\\\", ""),stem.replaceAll("\\\\", ""),answers,solution,solutionText.replaceAll("\\\\", ""));
 }
 
 /**
@@ -1584,8 +1758,21 @@ function saveExamStatus(finish,callback){
 		//redirect to exam review page. 
 	});
 }
+
+function saveInpersonForExamBack(){
+	var inperson = getInpersonVO();
+	if(inperson&&inperson.xml&&inperson.xml.length>60)
+		db.insertInperson(current_exAppId,current_questions[current_question_position].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+			showExam();
+		});
+	else
+		showExam();
+}
+
 function showExam(){
+	
 	is_exam_review = false;
+	is_bookmark_review = false;
 	console.log("showExam() called.");
 	current_page = Constant.application_page_exam;
 	resetExamScroll();
@@ -1593,13 +1780,14 @@ function showExam(){
 	$("#exam_title").html(current_exAppName);
 	//get exam_result_info
 	db.GetExamResultInfoByExAppIDs(current_exAppId,function(rs){
+		console.log("GetExamResultInfoByExAppIDs() called. exappid="+current_exAppId);
 		examResultInfo = rs[0];
 		current_examResultInfo = examResultInfo;
-		console.log("GetExamResultInfoByExAppIDs() called. exappid="+current_exAppId);
-		//id,section,exAppID,exAppName,score,finish,progress,startTime,endTime,questionCount,QuestionExamStatus
+		
 		$("#exam_score").html(examResultInfo.score+"/"+parseInt(examResultInfo.questionCount));
 		$("#exam_totalTime").html(util.getTime(parseInt(examResultInfo.endTime)));
 		$("#exam_per").html(parseInt(util.getTime(parseInt(examResultInfo.endTime)/examResultInfo.questionCount)));
+		
 		
 		//generate list
 		var html = '';
@@ -1634,13 +1822,14 @@ function showExam(){
 				
 			var correct = o.correctChoice;
 			if(correct==choice)
-				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')" ><table width=100% border=0><tr><td width=40px><img src="./css/images/select.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
+				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')" ><table width=100% border=0><tr><td width=20% align=center><img src="./css/images/select.png" /></td><td width=20% align=center>'+(i+1)+'</td><td width=20% align=center>'+choice+'</td><td width=20% align=center>('+correct+')</td><td width=20% align=center><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 			else
-				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')"><table width=100% border=0><tr><td width=40px><img src="./css/images/delete.png" /></td><td>'+(i+1)+'</td><td>'+choice+'</td><td>('+correct+')</td><td><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
+				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')"><table width=100% border=0><tr><td width=20% align=center><img src="./css/images/delete.png" /></td><td width=20% align=center>'+(i+1)+'</td><td width=20% align=center>'+choice+'</td><td width=20% align=center>('+correct+')</td><td width=20% align=center><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 		}
 		
 		$("#thelist_exam").html(html);
 		$("#thelist_exam").trigger("create");
+		
 		setTimeout(function () {
 			myExamScroll.refresh();
 		},100);
@@ -1651,9 +1840,12 @@ function showExamIntro(){
 	console.log("showExamIntro() called.");
 	db.findProblemSetIntroductionForExamResultByExAppId(current_exAppId,function(data){
 		
-		$("#thelist_exam_intro").html('<li>'+data+'</li>');
+		$("#thelist_exam_intro").html('<li style="font-size:16px;">'+data+'</li>');
 		$("#thelist_exam_intro").trigger("create");
 		setTimeout(function(){
+			if(!myExamIntroScroll){
+				myExamIntroScroll = new iScroll('wrapper_exam_intro', { fixedScrollbar: false,bounce:false});
+			}
 			myExamIntroScroll.refresh();
 		});
 	});
@@ -1721,7 +1913,8 @@ function showPainterController(){
 	//hide the choice panel
 	$("#choice_bg").hide();
 	$("#choicePanelContainer").hide();
-	window.frames["i_workspace"].showCanvas();
+//	window.frames["i_workspace"].showCanvas();
+	showCanvas();
 	penOn(1);
 	//draw if exits before
 	updateCanvasReplayIcnonStatus();
@@ -1730,8 +1923,8 @@ function showPainterController(){
 function updateCanvasReplayIcnonStatus(){
 	if(hasInperson==true){
 		$("#canvas_replay_btn_container").show();
-		//window.frames["i_workspace"].replayDrawing(0,function(){});
-		window.frames["i_workspace"].stopReplay();
+		//window.frames["i_workspace"].stopReplay();
+		stopReplay();
 	}
 	else
 		$("#canvas_replay_btn_container").hide();
@@ -1742,14 +1935,17 @@ function shoReplayIcon(){
 }
 
 function hidePainterController(){
+	$("#qeustionview").focus();
 	$("#canvas_replay_btn_container").hide();
 	$("#video_container").show();
 	$("#painter_controller").show();
 	$("#painter_controller_content").hide();
 	$("#painter_controller_up").hide();
-	window.frames["i_workspace"].hideCanvas();
+	//window.frames["i_workspace"].hideCanvas();
+	hideCanvas();
 	$("#choice_bg").show();
 	$("#choicePanelContainer").show();
+	$("#qeustionview").focus();
 }
 
 function penOn(on){
@@ -1758,27 +1954,33 @@ function penOn(on){
 		resetDrawerToolsColor();
 		$("#a_pen_settings").html('<img src="./css/images/draw_on.png" width=40 height=40 />');
 		$("#a_pen_settings").trigger("create");
-		window.frames["i_workspace"].penOn(false);
+		//window.frames["i_workspace"].penOn(false);
+		penOnWorkspace(false);
 	}else{
 		if (util.contains(("" + $("#a_pen_settings").html()), "off", false)) {
 			resetDrawerToolsColor();
 			$("#a_pen_settings").html('<img src="./css/images/draw_on.png" width=40 height=40 />');
 			$("#a_pen_settings").trigger("create");
-			window.frames["i_workspace"].penOn(false);
+			penOnWorkspace(false);
 		} else {
-			window.frames["i_workspace"].penOn(true);
+			penOnWorkspace(true);
 		}
 	}
 		
 }
 
 function putText(){
-	resetDrawerToolsColor();
+	
 	if (util.contains(("" + $("#a_text_settings").html()), "off", false)) {
+		resetDrawerToolsColor();
 		$("#a_text_settings").html('<img src="./css/images/text_on.png" width=40 height=40 />');
 		$("#a_text_settings").trigger("create");
+		
+		putTextWorkspace();
+	}else{
+		showTextSettingPop();
 	}
-	window.frames["i_workspace"].putText();
+	
 }
 
 function eraserOn() {
@@ -1789,32 +1991,38 @@ function eraserOn() {
 		$("#a_eraser_settings")
 				.html('<img src="./css/images/eraser_on.png" width=40 height=40 />');
 		$("#a_eraser_settings").trigger("create");
-		window.frames["i_workspace"].eraserOn(false);
+//		window.frames["i_workspace"].eraserOn(false);
+		eraserOnWorkspace(false);
 	} else {
-		window.frames["i_workspace"].eraserOn(true);
+//		window.frames["i_workspace"].eraserOn(true);
+		eraserOnWorkspace(true);
 	}
 }
 
 function clearOn() {
 	console.log("clearOn() called.");
 	resetDrawerToolsColor();
-	window.frames["i_workspace"].clear();
+//	window.frames["i_workspace"].clear();
+	clear();
 }
 
 function undo() {
 	console.log("undo() called.");
 	resetDrawerToolsColor();
-	window.frames["i_workspace"].undo();
+//	window.frames["i_workspace"].undo();
+	undo();
 }
 
 function redo() {
 	console.log("redo() called.");
 	resetDrawerToolsColor();
-	window.frames["i_workspace"].redo();
+//	window.frames["i_workspace"].redo();
+	redo();
 }
 
 function resetDrawerToolsColor(){
-	window.frames["i_workspace"].cancelCanTxt();
+	//window.frames["i_workspace"].cancelCanTxt();
+	cancelCanTxt();
 	
 	$("#a_pen_settings").html('<img  src="./css/images/draw_off.png" width=40 height=40 />');
 	$("#a_pen_settings").trigger('create');
@@ -1833,12 +2041,14 @@ function switchMode(){
 	if (!util.contains(("" + $("#a_mode").html()), "off", false)) {
 		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-		window.frames["i_workspace"].switchPenOn();
+//		window.frames["i_workspace"].switchPenOn();
+		switchPenOn();
 		
 	} else {
 		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-		window.frames["i_workspace"].penOff();
+//		window.frames["i_workspace"].penOff();
+		penOff();
 		
 	}
 	
@@ -1967,12 +2177,15 @@ function resetMainScroll(){
 		$("#btn_login").trigger("create");
 	}
 	current_page = Constant.application_page_main;
-	destoryScroll();
-	/*myScroll = new iScroll('wrapper');*/
-	fireRefreshList();
-	setTimeout(function () {
-		myScroll.refresh();
-	},500);
+	generateCategoryBar(function(){
+		refreshMainListViewHeight();
+		destoryScroll();
+		fireRefreshList();
+		setTimeout(function () {
+			myScroll.refresh();
+		},500);
+	});
+	
 }
 function resetQuestionViewScroll(){
 	console.debug("resetQuestionViewScroll() called.");
@@ -2034,26 +2247,33 @@ function replayDrawing(interval){
 	hidePainterController1();
 	$("#inperson_btn_2").show();
 	$("#inperson_btn_play").hide();
-	if(!interval)
-		window.frames["i_workspace"].replayDrawing(1000,resetReplayBtn);
-	else
-		window.frames["i_workspace"].replayDrawing(interval,resetReplayBtn);
+	if(!interval){
+//		window.frames["i_workspace"].replayDrawing(1000,resetReplayBtn);
+		replayDrawingWorkspace(1000,resetReplayBtn);
+	}else{
+//		window.frames["i_workspace"].replayDrawing(interval,resetReplayBtn);
+		replayDrawingWorkspace(interval,resetReplayBtn);
+	}
+		
 }
 
 function pauseDrawing(){
 	$("#inperson_pause_container").html('<img  src="./css/images/inperson_inner_pause.png" onclick="resumeDrawing()" />');
 	$("#inperson_pause_container").trigger('create');
-	window.frames["i_workspace"].pauseDrawing();
+//	window.frames["i_workspace"].pauseDrawing();
+	pauseWorkspaceDrawing();
 }
 
 function resumeDrawing(){
 	$("#inperson_pause_container").html('<img  src="./css/images/inperson_pause1.png" onclick="pauseDrawing()" />');
 	$("#inperson_pause_container").trigger('create');
-	window.frames["i_workspace"].resumeReplay(resetReplayBtn);
+//	window.frames["i_workspace"].resumeReplay(resetReplayBtn);
+	resumeWorkspaceReplay(resetReplayBtn);
 }
 
 function stopDrawing(){
-	window.frames["i_workspace"].stopReplay();
+//	window.frames["i_workspace"].stopReplay();
+	stopReplay();
 	resetReplayBtn();
 }
 
@@ -2064,26 +2284,36 @@ function hidePainterController1(){
 }
 var hasInperson = false;
 function setInperson(inperson){
-	window.frames["i_workspace"].clearInperson();
+	clearInperson();
 	console.log("setInperson() called.");
 	if(inperson&&inperson._xml&&inperson._xml.length>60){
-		window.frames["i_workspace"].setInperson(inperson);
+		setInpersonWorkspace(inperson);
 		hasInperson = true;
 	}else{
+		drawer.onClear();
 		hasInperson = false;
 	}
 }
 
-function saveInperson(){
-	var inperson = window.frames["i_workspace"].getInpersonVO();
+function saveInperson(callback){
 	
-	if(inperson&&inperson.xml&&inperson.xml.length>60)
-		db.insertInperson(current_exAppId,current_questions[current_question_position].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
-			
+	var inperson = getInpersonVO();
+	console.log("saveInperson() called. length="+inperson.xml.length);
+	if(inperson&&inperson.xml&&inperson.xml.length>60){
+		
+		db.insertInperson(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+			if(callback)
+				callback();
 		});
+	}else{
+		if(callback)
+			callback();	
+	}
+		
 }
 
-function getInperson(){
+function getInperson(){ 
+	console.log("getInperson() called.--->findInpersonByQuestionId()");
 	db.findInpersonByQuestionId(current_questions[current_question_position].id,function(inperson){
 		//exAppID questionId _base64 _xml date
 	});
@@ -2093,7 +2323,12 @@ function closePopupChooseImg(){
 	$( "#popupChooseImg" ).popup( "close" );
 }
 function showAlbum(){
-	alert("showAlbum()");
+	system_service.launchImagePickService(function(img){
+		postImg = img;
+		$( "#popupChooseImg" ).popup( "close" );
+		$("#thumb_nail").html("<img src='"+postImg+"' width=100% height=100% />");
+		$("#thumb_nail").trigger("create");
+	});
 }
 var postImg='';
 
@@ -2111,18 +2346,25 @@ function clearImg(){
 }
 var screenshot = new Array();
 function showScreenshot(){
+	
 	screenshot = new Array();
 	var html = '<div id="slides"><div id="ccc" class="slides_container">';
 	
 	db.findAllInperson(function(data){
 		console.log("showScreenshot() called. and the length is "+data.length);
+		if(data.length==0){
+			alert("no image here");
+			$("#popupChooseImg").popup("open");
+			return false;
+		}
+		
 		for(var i=0;i<data.length;i++){
 			//var img = data[i]._base64.substring(22);
 			var img = data[i]._base64;
 			screenshot.push(img);
 			//var img = "data:image/png;base64,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";
 			//console.log(img);
-			html+='<div><a href="javascript:setPostImg('+i+');" title="" ><img src="'+img+'" width="380" height="270" /></a></div>';
+			html+='<div><a href="javascript:setPostImg('+i+');" title="" ><img src="'+img+'" width="250" height="220" /></a></div>';
 		}
 		html+='</div><a href="#" class="prev"><img src="./css/images/arrow-prev.png" width="24" height="43" alt="prev"></a><a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="next"></a></div><img src="./css/images/example-frame.png"  alt="Example Frame" id="slider_frame"></div>';
 		
@@ -2138,9 +2380,35 @@ function showScreenshot(){
 			preloadImage: './css/images/loading.gif',
 			play: 0,
 		});
+		$('#popupChooseImg').popup("close");
+		setTimeout(function(){
+			$('#popupPhotoPicker_discussion').popup("open");	
+		},500);
+		
 	});
-	
 //	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-1.jpg" width="380" height="270" alt="Slide 1"></a></div>';
 //	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-2.jpg" width="380" height="270" alt="Slide 1"></a></div>';
 	
+}
+
+function deleteCanvas() {
+	console.log("deleteCanvas() called.");
+	db.deleteInpersonByQuestionId(current_question.id);
+}
+
+function register_select_img(){
+	system_service.launchImagePickService(function(img){
+		$("#register_img").html("<img src='"+img+"' width=95px height=100px />");
+		$("#register_img").trigger("create");
+	});
+}
+
+function focusTop(){
+	$("#qeustionview").focus();
+	$("#choice_bg").hide();
+	$("#choicePanelContainer").hide();
+}
+
+function setCurrentDiscussionId(id){
+	current_discussion_id = id;
 }

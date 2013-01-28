@@ -14,6 +14,7 @@
 
 <link rel="stylesheet" href="./css/jquery.mobile-1.2.0.min.css" />
 <link rel="stylesheet" href="./css/loading-portrait.css" />
+<link id="view_model" rel="stylesheet" href="./css/sl_portrait.css" />
 
 <script src="./js/jquery-1.8.2.min.js"></script>
 <script src="./js/jquery.mobile-1.2.0.min.js"></script>
@@ -22,7 +23,7 @@
 <link id="loading_css" rel="stylesheet" href="./css/loading-portrait.css" />
 <link id="listview_css" rel="stylesheet" href="./css/listview-portrait.css" />
 
-
+<script type="text/javascript" src="./js/systemService.js"></script>
 <script type="text/javascript" src="./js/timer.js"></script>
 <script type="text/javascript" src="./js/base64.js"></script>
 <script type="text/javascript" src="./js/sha1.js"></script>
@@ -40,9 +41,13 @@
 
 <script type="text/javascript" src="./js/packages.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript" src="./js/problemfull.js"></script>
+<script type="text/javascript" src="./js/drawer.js"></script>
 
-<link rel="stylesheet" href="./css/slider.css">
+<link id="slider_css" rel="stylesheet" href="./css/slider-portrait.css">
 <link id="main_css" rel="stylesheet" href="./css/style-portrait.css" />
+<link id="main_css" rel="stylesheet" href="./css/workspace.css" />
+
 <script>
 	var myScroll;
 	var myInfoScroll;
@@ -100,13 +105,13 @@
 	
 		<div data-role="none" data-id="foo" id="header">
 			<div id="div_head">
-				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="center">
+				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="top">
 					<tr>
 						<td><a href="#info"><img id="btnInfo"
 								src="./css/images/infoicon.png" height="30px" /></a></td>
 						<td><a href="#perfdata"><img id="perfdata"
 								src="./css/images/perfdata.png" height="30px" /></a></td>
-						<td><a href="#discussion"> <img id="disc_no_text"
+						<td><a id="a_discussion" href="#"> <img id="disc_no_text"
 								src="./css/images/disc_no_text.png" height="30px" /></a></td>
 						<td><a href="#bookmark"><img id="imgBookmark"
 								src="./css/images/bookmark.png" height="30px" /></a></td>
@@ -115,9 +120,8 @@
 							height="30px" /></td>
 						<td>
 						<!-- <div data-role="popup" id="popupBasic">This is a completely basic popup, no options set.</div>-->
-						 <a id="btn_login" href="#popupBasic" data-rel="popup" data-position-to="window"  >
-								<input type="image" width=100% height=25px
-									src="./css/images/bttn_no_txt.png" data-role="none" /></a>
+						 <a id="btn_login" href="#" data-rel="popup" data-position-to="window"  >
+						 		<img alt="" src="./css/images/bttn_no_txt.png" height=25px />
 							</td>
 						<!--<td><a href="index.html" data-role="button" data-theme="b"
 							style="height: 30px;">Login</a></td>-->
@@ -191,11 +195,11 @@
 				<div style="padding: 5px 0px;">
 					<font>&nbsp;<b>Register</b></font>
 					<hr>
-					<table>
+					<table cellpadding=0 cellspacing=0>
 						<tr>
 							<!-- photo -->
 							<td style="background-color:gray;">
-								<a href="#popupPhotoPicker" style="text-decoration:none;" data-rel="popup" data-position-to="window">Set Photo</a>
+								<a id="register_img" href="javascript:register_select_img();" style="text-decoration:none;" data-rel="popup" data-position-to="window">Set Photo</a>
 							</td>
 							<td>
 								<input type="text"  id="fname" value="" placeholder="First Name*">
@@ -236,6 +240,13 @@
 				</ul>
 		</div>
 		<!-- /header -->
+		
+		<!-- popup -photo picker -->
+		<div data-role="popup" id="popupNetWorkAlert" data-theme="c" class="ui-content"
+				data-position-to="window">
+				<h3>Network Alert</h3>
+				You need to have an internet connect to use this feature!
+		</div>	
 
 	</div>
 	<!-- /page -->
@@ -246,7 +257,7 @@
 	<div data-role="page" id="info">
 		<div class="head_bg">
 			<!-- back button -->
-			<a href="#main" onclick="resetMainScroll()"><img id="info" src="./css/images/back_button.png"
+			<a href="#main" onclick="resetMainScroll()"><img id="info" src="./css/images/normal_back_btn.png"
 				height="30px" /></a>
 		</div>
 		<!-- /header -->
@@ -511,14 +522,14 @@
 						</div>
 					</td>
 					<td align="center">
-						<div style="text-align: center; color: white; font-size: 12px;">Discussions</div>
+						<div style="text-align: center; color: white; font-size: 12px;">Discussions&nbsp;&nbsp;&nbsp;&nbsp;</div>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<!-- /header -->
 		<!-- content -->
-		<div id="wrapper_discussion" class="wrapper" >
+		<div id="wrapper_discussion" >
 			<div class="scroller">
 				<ul id="thelist_discussion">
 
@@ -624,11 +635,9 @@
 		<div id="div_test">
 			<table width=100%>
 				<tr>
-					<td>Comment:<a href="#popupChooseImg" id="video1" data-rel="popup" data-position-to="window" style="text-decoration:none;">
-					<font color=blue>Attach a screenshot
-							or photo</font></a></td>
-					<td align="right">
-					<a href="#popupChooseImg" id="video1" data-rel="popup" data-position-to="window" style="text-decoration:none;">
+					<td>Comment:</td>
+					<td align="center">
+					<a href="#popupChooseImg"  data-rel="popup" data-position-to="window" style="text-decoration:none;">
 					<font color=blue>Attach a screenshot
 							or photo</font></a></td>
 					<td>&nbsp;</td>
@@ -651,15 +660,14 @@
 		<!-- loading -->
 		<div id="loading_post" class='div_center'></div>
 		<div data-role="popup" id="popupChooseImg" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
-			<div style="text-align:center">
-				<p>Attachment<p>
+			<div>
+				<div style="text-align:center;">Attachment</div>
 				Choose the attachment to post:
 			</div>
-			<a  href="#pop_slider" data-rel="popup" data-position-to="window" onclick='showScreenshot();' >
-			<div id="btnPopFinish"  data-role="button">
+			<div data-role="button" onclick="showScreenshot()">
 				Workspace Screenshot
-			</div></a>
-			<div id="btnPopNxt" onclick="showAlbum()" data-role="button">
+			</div>
+			<div onclick="showAlbum()" data-role="button">
 				Photo Album
 			</div>
 			<div onclick="closePopupChooseImg()" data-role="button">
@@ -667,8 +675,7 @@
 			</div>
 		</div>
 		
-		<div id="pop_slider" data-role="popup" id="popupPhotoPicker" data-theme="b"
-				data-position-to="window">
+		<div data-role="popup" id="popupPhotoPicker_discussion" data-theme="b" data-position-to="window" data-corners="false" data-shadow="false">		
 			<div id="slider_container">
 			<div id="slides">
 				<div id="ccc" class="slides_container">
@@ -678,7 +685,7 @@
 				<a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="下一张"></a>
 			</div>
 			
-		</div>		
+			</div>		
 		</div>
 		<!-- pop login -->
 		<!-- Popup -login -->
@@ -759,7 +766,7 @@
 	<!-- #qeustionview -->
 	<div data-role="page" id="qeustionview">
 		<div class="head_bg">
-		<table width=100% height=100% cellpadding=0 cellspacing=0 border=0
+		<table width=100%  cellpadding=0 cellspacing=0 border=0
 				valign="top">
 				<tr>
 					<td>
@@ -781,7 +788,7 @@
 								src="./css/images/forward.png" height="30px" />
 					</td>
 					<td align=center>
-						<div id="discussion_num" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:25px;color:red;">0</div>
+						<div id="discussion_num" >0</div>
 						<a id="discussionForQ" href="#discussion" onclick="showDiscussionForQuestion();"><img id="btnDiscussion"
 								src="./css/images/disc_no_text.png" height="30px" /></a>
 					</td>
@@ -802,14 +809,14 @@
 		<!-- /header -->
 		
 		<div id="painter_controller">
-			<img onclick="showPainterController()"  src="./css/images/down.png"  />
+			<img onclick="showPainterController()"  src="./css/images/down.png" width=40px height=40px />
 		</div>
 		
 		<div id="painter_controller_content">
-		<div style="position:absolute;">
+		<div id="painter_controller_bg" >
 			<img  src="./css/images/painter_control_bg.png" height="330px" width="60px" />
 		</div>
-			<div style="position:absolute;left:15px;top:10px;" >
+			<div id="controller_img_container" style="position:absolute;left:10px;top:10px;" >
 				<div id="a_mode" onclick="switchMode()" ><img  src="./css/images/penmodeoff.png"  width=40 height=40  /></div>
 				<div id="a_pen_settings" onclick="penOn()" ><img  src="./css/images/draw_off.png" width=40 height=40 /></div>
 				<div id="a_text_settings" onclick="putText()"><img  src="./css/images/text_off.png" width=40 height=40 /></div>
@@ -820,7 +827,7 @@
 			</div>
 		</div>
 		<div id="painter_controller_up">
-			<img  src="./css/images/up.png"  onclick="hidePainterController()" />
+			<img  src="./css/images/up.png"  onclick="hidePainterController()" width=40px height=40px />
 		</div>
 		
 		<!-- replay canvas -->
@@ -833,10 +840,10 @@
 			</div>
 		</div>
 		
-		<!-- content -->
+		<!-- content --><!--
 		<div id="workspace">
-			<iframe id="i_workspace" name="i_workspace" scrolling="no" frameborder=2 src="problemfull.html" ></iframe>
-		</div>
+			<iframe id="i_workspace" name="i_workspace" scrolling="no" frameborder=0 src="problemfull.html" ></iframe>
+		</div>-->
 		<!-- Menu -->
 		<div id="wrapper_question_menu" style="display: none;">
 			<div id="scrollerquestionMenu">
@@ -844,7 +851,7 @@
 					<li style="background-color:black;color:white;">Exam option</li>
 					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()">Exit the Exam</a></li>
 					<li><a id="a_finish_review" href="#exam" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
-					<li><a href="#" onclick="report()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
+					<li><a href="#" onclick="email()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
 					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()">Cancel</a></li>
 				</ul>
 			</div>
@@ -875,7 +882,7 @@
 		</div>
 		
 		<div data-role="popup" id="popupVideo" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false" >
-			<div id="popContent" ><video controls height="100%" id="vid" onclick="this.play();" poster="http://view.vzaar.com/928797/image" preload="none" src="http://view.vzaar.com/928797/video" width="100%"></video></div>
+			<div id="popContent" ></div>
 		</div>
 		
 		<!-- video_container -->
@@ -895,14 +902,14 @@
 			<table width=100% height=100% border=0>
 				<tr>
 					<td valign="bottom">
-						<img width=60% src="./css/images/answerpannel.png" />
+						<img width=100% src="./css/images/answerpannel.png" />
 					</td>
 				</tr>
 			</table>
 		</div>
 		
 		<div id="choicePanelContainer">
-			<table width=100% height=100% border=0>
+			<table width=100% height=100% border=1>
 				<tr>
 					<td class="choicePanelMarginTd"></td>
 					<td valign=top>
@@ -926,11 +933,181 @@
 					<td class="choicePanelMarginTd"></td>
 				</tr>
 				<tr>
-					<td colspan=4 align="right"><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
+					<td colspan=4 align="right" ><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
 					<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td>
 				</tr>
 			</table>
 		</div>
+		
+		<!-- problemfull -->
+		<div id="wrapper_workspace">
+		<div class="scroller">
+			<ul>
+				<li>
+					<div id="div_body"></div>
+					<div id="canvas_container" style="position: absolute;left:0px;top:0px;width:480px;height:500px; z-index:-1; border:0px solid red;">
+					
+		<canvas id="can" width=480 height=500 ></canvas>
+		<div data-role="popup" class="ui-content" id="div_can_txt">
+			<label>put what you want&nbsp;&nbsp;&nbsp;&nbsp;<a
+				id="a_text_settings" href="#div_text_settings" data-rel="popup"
+				data-position-to="window">setting</a></label> <input type="text"
+				id="can_txt" name="can_txt" /> <input type="button" value="ok"
+				onclick="fireCanTxt()" /> <input type="button" value="cancel"
+				onclick="cancelCanTxt()" />
+		</div>
+		<div id="c_text_control" style="position:absolute;display:none;">
+			<div id="text_control" >
+					<table cellspacing=0 cellpadding=0 border=0>
+						<tr><td valign="bottom" style="padding-right:50px;"><img src="css/images/c_del.png" onclick="c_del()" /></td><td align=right valign="bottom"><img src="css/images/c_add.png" onclick="c_add()" style="padding-right:50px;" /><img src="css/images/c_sbutract.png" onclick="c_subtract()" /></td></tr>
+					</table>
+			</div>
+			<div id="c_text" style="border:1px solid gray;background-color:white;"></div>
+		</div>
+		<div id="c_input_txt_container"
+			style="position: absolute; display: none;height:10px;">
+			<div >
+				
+			<div id="inner_text_container" style="position:absolute;left:-10px;top:-30px;width:100px;height:10px;">
+				<input type="text" id="c_input_txt"   />
+			</div>
+			</div>
+			<!-- <div>[put here?]</div>
+			<div>
+				<input type="button" value="ok" onclick="executeInputTxt()" /> <input
+					type="button" value="cancel" onclick="cancelInputTxt()" />
+			</div> -->
+		</div>
+		<!-- Pen settings -->
+		<div data-role="popup" class="ui-content" id="div_pen_settings" >
+			<div>
+				&nbsp;&nbsp;<b>Pen Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_pen_setting" width=200 height=50
+					style="border: 2px solid gray;"></canvas>
+			</div>
+			<div name="pen_slider">
+				<input type="range" id="slider-mini-pen" value="5" min="1" max="50"
+					data-highlight="true" data-mini="true" />
+			</div>
+			<div id="div_colors">
+				<table>
+					<tr>
+						<td width=20 height=20 style="background-color: #a7c3ff;"
+							onclick="updateCurPenColor('#a7c3ff')"></td>
+						<td width=20 height=20 style="background-color: #d70000;"
+							onclick="updateCurPenColor('#d70000')"></td>
+						<td width=20 height=20 style="background-color: #ceda00;"
+							onclick="updateCurPenColor('#ceda00')"></td>
+						<td width=20 height=20 style="background-color: #7e005d;"
+							onclick="updateCurPenColor('#7e005d')"></td>
+						<td width=20 height=20 style="background-color: #ff2fff;"
+							onclick="updateCurPenColor('#ff2fff')"></td>
+						<td width=20 height=20 style="background-color: #5bff77;"
+							onclick="updateCurPenColor('#5bff77')"></td>
+						<td width=20 height=20 style="background-color: #0a32a5;"
+							onclick="updateCurPenColor('#0a32a5')"></td>
+						<td width=20 height=20 style="background-color: #050658;"
+							onclick="updateCurPenColor('#050658')"></td>
+					</tr>
+					<tr>
+						<td width=20 height=20 style="background-color: #ffb99f;"
+							onclick="updateCurPenColor('#ffb99f')"></td>
+						<td width=20 height=20 style="background-color: #f9beff;"
+							onclick="updateCurPenColor('#f9beff')"></td>
+						<td width=20 height=20 style="background-color: #85c500;"
+							onclick="updateCurPenColor('#85c500')"></td>
+						<td width=20 height=20 style="background-color: #704700;"
+							onclick="updateCurPenColor('#704700')"></td>
+						<td width=20 height=20 style="background-color: #7d009a;"
+							onclick="updateCurPenColor('#7d009a')"></td>
+						<td width=20 height=20 style="background-color: #066565;"
+							onclick="updateCurPenColor('#066565')"></td>
+						<td width=20 height=20 style="background-color: #000000;"
+							onclick="updateCurPenColor('#000000')"></td>
+						<td width=20 height=20 style="background-color: #ff931f;"
+							onclick="updateCurPenColor('#ff931f')"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- Text settings -->
+		<div data-role="popup" class="ui-content" id="div_text_settings">
+			<div>
+				&nbsp;&nbsp;<b>Text Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_text_setting" width=200 height=50
+					></canvas>
+			</div>
+			<div name="text_slider">
+				<input type="range" id="slider-mini-text" value="25" min="1" max="50"
+					data-highlight="true" data-mini="true" />
+			</div>
+			<div id="div_colors">
+				<table>
+					<tr>
+						<td width=20 height=20 style="background-color: #a7c3ff;"
+							onclick="updateCurTextColor('#a7c3ff')"></td>
+						<td width=20 height=20 style="background-color: #d70000;"
+							onclick="updateCurTextColor('#d70000')"></td>
+						<td width=20 height=20 style="background-color: #ceda00;"
+							onclick="updateCurTextColor('#ceda00')"></td>
+						<td width=20 height=20 style="background-color: #7e005d;"
+							onclick="updateCurTextColor('#7e005d')"></td>
+						<td width=20 height=20 style="background-color: #ff2fff;"
+							onclick="updateCurTextColor('#ff2fff')"></td>
+						<td width=20 height=20 style="background-color: #5bff77;"
+							onclick="updateCurTextColor('#5bff77')"></td>
+						<td width=20 height=20 style="background-color: #0a32a5;"
+							onclick="updateCurTextColor('#0a32a5')"></td>
+						<td width=20 height=20 style="background-color: #050658;"
+							onclick="updateCurTextColor('#050658')"></td>
+					</tr>
+					<tr>
+						<td width=20 height=20 style="background-color: #ffb99f;"
+							onclick="updateCurTextColor('#ffb99f')"></td>
+						<td width=20 height=20 style="background-color: #f9beff;"
+							onclick="updateCurTextColor('#f9beff')"></td>
+						<td width=20 height=20 style="background-color: #85c500;"
+							onclick="updateCurTextColor('#85c500')"></td>
+						<td width=20 height=20 style="background-color: #704700;"
+							onclick="updateCurTextColor('#704700')"></td>
+						<td width=20 height=20 style="background-color: #7d009a;"
+							onclick="updateCurTextColor('#7d009a')"></td>
+						<td width=20 height=20 style="background-color: #066565;"
+							onclick="updateCurTextColor('#066565')"></td>
+						<td width=20 height=20 style="background-color: #000000;"
+							onclick="updateCurTextColor('#000000')"></td>
+						<td width=20 height=20 style="background-color: #ff931f;"
+							onclick="updateCurTextColor('#ff931f')"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<!-- Eraser Settidngs -->
+		<div data-role="popup" class="ui-content" id="div_eraser_settings">
+			<div>
+				&nbsp;&nbsp;<b>Eraser Settings</b>
+			</div>
+			<div id="pen_preview">
+				<canvas id="canvas_eraser_setting" width=200 height=50
+					style="border: 2px solid gray;"></canvas>
+			</div>
+			<div name="eraser_slider">
+				<input type="range" id="slider-mini-eraser" value="5" min="1"
+					max="50" data-highlight="true" data-mini="true" />
+			</div>
+		</div>
+
+		<div id="rs_img"></div>
+	</div>
+					
+				</li> 
+			</ul>
+		</div>
+	</div>
 		
 	</div>
 	<!-- /page qeustionview -->
@@ -967,8 +1144,8 @@
 			</table>
 		</div>
 		<!-- /header -->
-		<div width=100% style="padding-top:10px">
-			<table width=100% ><tr><td width=30px></td><td>NO.</td><td>Your Choice</td><td>Correct Answer</td><td width=19px></td></tr></table>
+		<div width=100% style="padding-top:-5px;font-size:5px;">
+			<table  width=100% style="font-size:2px;"><tr><td width=20%></td><td width=20% align="center">NO.</td><td width=20% align="center">Your Choice</td><td width=20% align="center">Correct Answer</td><td width=20%></td></tr></table>
 		</div>
 		
 		<!-- content -->
@@ -996,7 +1173,7 @@
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
 			<table width=100% height=100%>
 				<tr>
-					<td width=100% align="right"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
+					<td width=100% align="right" valign="bottom"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
 						src="./css/images/continue_button.png" height="30px" /></a></td>
 				</tr>
 			</table>
@@ -1020,9 +1197,9 @@
 		<!-- Exit Button -->
 		<div
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
-			<table width=100% height=100%>
+			<table width=100% height=100% border=0>
 				<tr>
-					<td width=100% align="right"><a href="#exam"><img id="btnExamExit"
+					<td width=100% align="right" valign="bottom"><a href="#exam"><img id="btnExamExit"
 						src="./css/images/normal_back_btn.png" height="30px" /></a></td>
 				</tr>
 			</table>

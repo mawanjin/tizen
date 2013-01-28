@@ -1,15 +1,14 @@
 var SystemOrientation = {};
 SystemOrientation = new function() {
 	var self = this;
-	self.orientation=0;
-	
-	self.setOrientation = function() {
-		var orientation = window.orientation;
+	self.orientation = 0;
+
+	self.setOrientation = function(orientation) {
 		self.orientation = orientation;
-		switch (orientation) {
+		switch (self.orientation) {
 		case 0:
 			self.refresh();
-			//generateCategoryBar();
+			// generateCategoryBar();
 			// portrait mode
 			// document.getElementById('sl_style').href='css/sl_portrait.css';
 			// document.getElementById('editlist_view_style').href='css/editlist_view_portrait.css';
@@ -21,9 +20,11 @@ SystemOrientation = new function() {
 			break;
 
 		case 90: // landscape mode, screen turned to the left
+			self.refresh();
+			break;
 		case -90: // landscape mode, screen turned to the right
 			self.refresh();
-			//generateCategoryBar();
+			// generateCategoryBar();
 			// document.getElementById('sl_style').href='css/sl_landscape.css';
 			// document.getElementById('editlist_view_style').href='css/editlist_view_landscape.css';
 			// document.getElementById('edititem_view_style').href='css/edititem_view_landscape.css';
@@ -36,89 +37,131 @@ SystemOrientation = new function() {
 
 	};
 
-	self.refresh = function(callback){
+	self.refresh = function(callback) {
 		
-		if(self.orientation==0){//portrait mode
-			if($("#main_css")){
-				$("#main_css").attr("href","./css/style-portrait.css");
-			}
-			if($("#listview_css")){
-				$("#listview_css").attr("href","./css/listview-portrait.css");
+		if (self.orientation == 0) {// portrait mode
+			
+			if($("#view_model")){
+				$("#view_model").attr("href", "./css/sl_portrait.css");
 			}
 			
-			if($("#scroll_css")){
-				$("#scroll_css").attr("href","./css/scroll-portrait.css");
+			if ($("#main_css")) {
+				$("#main_css").attr("href", "./css/style-portrait.css");
 			}
-			if($("#loading_css")){
-				$("#loading_css").attr("href","./css/loading-portrait.css");
+			if ($("#listview_css")) {
+				$("#listview_css").attr("href", "./css/listview-portrait.css");
 			}
-			if($("#reply_textarea"))
-				$("#reply_textarea").attr("rows",20);
+
+			if ($("#scroll_css")) {
+				$("#scroll_css").attr("href", "./css/scroll-portrait.css");
+			}
+			if ($("#loading_css")) {
+				$("#loading_css").attr("href", "./css/loading-portrait.css");
+			}
+			if ($("#reply_textarea"))
+				$("#reply_textarea").attr("rows", 20);
+
+			if ($("#slider_css")) {
+				$("#slider_css").attr("href", "./css/slider-portrait.css");
+			}
+
+		} else {
 			
-		}else{
-			if($("#main_css"))
-				$("#main_css").attr("href","./css/style.css");
-			if($("#listview_css")){
-				$("#listview_css").attr("href","./css/listview.css");
+			if($("#view_model")){
+				$("#view_model").attr("href", "./css/sl_landscape.css");
 			}
-			if($("#scroll_css")){
-				$("#scroll_css").attr("href","./css/scroll.css");
+			if ($("#main_css")){
+				$("#main_css").attr("href", "./css/style.css");
 			}
-			if($("#loading_css")){
-				$("#loading_css").attr("href","./css/loading.css");
+			if ($("#listview_css")) {
+				$("#listview_css").attr("href", "./css/listview.css");
 			}
-			if($("#reply_textarea"))
-				$("#reply_textarea").attr("rows",10);
-		}
-		
-		if(current_page == Constant.application_page_main){
-			generateCategoryBar(function(){
-				refreshMainListViewHeight();
-				if(callback)
-					callback();
-				resetMainScroll();
+			if ($("#scroll_css")) {
+				$("#scroll_css").attr("href", "./css/scroll.css");
+			}
+			if ($("#loading_css")) {
+				$("#loading_css").attr("href", "./css/loading.css");
+			}
+
+			if ($("#slider_css")) {
+				$("#slider_css").attr("href", "./css/slider.css");
+			}
+
+			if ($("#reply_textarea")){
+				$("#reply_textarea").attr("rows", 10);
+			}
 				
+		}
+
+		if (current_page == Constant.application_page_main) {
+
+			generateCategoryBar(function() {
+				refreshMainListViewHeight();
+				resetMainScroll();
+				if (callback)
+					callback();
 			});
-		}else if(current_page == Constant.application_page_intro){
+		} else if (current_page == Constant.application_page_intro) {
 			resetMyProblemIntroMenuScroll();
-		}else if (current_page == Constant.application_page_question_view) {
+		} else if (current_page == Constant.application_page_question_view) {
 			resetQuestionViewScroll();
-		}else if(current_page == Constant.application_page_app_intro){
+		} else if (current_page == Constant.application_page_app_intro) {
 			resetmyInfoScroll();
-		}else if(current_page == Constant.application_page_st){
+		} else if (current_page == Constant.application_page_st) {
 			generateCategoryBarForSta();
 			resetmyStaScroll();
-		}else if(current_page == Constant.application_page_discussion){
+		} else if (current_page == Constant.application_page_discussion) {
 			resetMyDiscussionScroll();
-		}else if(current_page == Constant.application_page_bookmark){
+		} else if (current_page == Constant.application_page_bookmark) {
 			resetBookMarkScroll();
-		}else if(current_page == Constant.application_page_exam){
+		} else if (current_page == Constant.application_page_exam) {
 			resetmyExamScroll();
-		}else if(current_page == Constant.application_page_package_intro){
+		} else if (current_page == Constant.application_page_package_intro) {
 			resetmyPackageIntroScroll();
 		}
-		
+
 	};
-	
-	if ('onorientationchange' in window) {
-		window.onorientationchange = function() {
-			self.setOrientation();
-		};
-	} else {
-		window.onresize = function() {
-			if ($(window).height() > $(window).width()) {
-				window.orientation = 0;
-			} else {
-				window.orientation = 90;
-			}
-			self.setOrientation();
-		}
-		if ($(window).height() > $(window).width()) {
-			window.orientation = 0;
-		} else {
-			window.orientation = 90;
-		}
-	}
-	
+
 	return self;
 };
+
+function onErrorCallback(){
+	console.log("error.......a a a ");
+}
+
+tizen.systeminfo.addPropertyValueChangeListener("DeviceOrientation",
+		onSuccessCallback, onErrorCallback, {
+			lowThreshold : 0.2
+});
+
+function onSuccessCallback(orientation) {
+	switch (orientation.status) {
+
+	case 0:
+		console.log(" Device current Orientation " + "portrait-primary");
+		
+		SystemOrientation.setOrientation(0);
+		break;
+
+	case 1:
+		console.log(" Device current Orientation " + "portrait-secondary");
+		
+		SystemOrientation.setOrientation(0);
+		break;
+
+	case 2:
+		console.log(" Device current Orientation " + "landscape-primary");// Reverse
+		
+		SystemOrientation.setOrientation(90);																	// landscape
+																			// in
+																			// emulator
+		break;
+
+	case 3:
+		console.log(" Device current Orientation " + "landscape-secondary");// Landscape
+		SystemOrientation.setOrientation(90);																	// landscape																			// in
+																			// emulator
+		break;
+
+	}
+}

@@ -1,0 +1,18 @@
+/*
+ * Copyright (c) 2012, Intel Corporation.
+ *
+ * This program is licensed under the terms and conditions of the
+ * Apache License, version 2.0.  The full text of the Apache License is at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
+
+
+/* hack for landscape mode in emulator */
+/* 320 x 480 */
+@media (orientation: portrait) {
+  body { -webkit-transform: translate(-50%, -50%) rotate(90deg) scale(1.0, 0.59)  translate(50%, -50%);
+  	width: 615px;
+    height: 300px;
+  }
+}
