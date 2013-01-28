@@ -22,7 +22,7 @@
 <link id="loading_css" rel="stylesheet" href="./css/loading-portrait.css" />
 <link id="listview_css" rel="stylesheet" href="./css/listview-portrait.css" />
 
-<script type="text/javascript" src="./js/systemService.js"></script>
+
 <script type="text/javascript" src="./js/timer.js"></script>
 <script type="text/javascript" src="./js/base64.js"></script>
 <script type="text/javascript" src="./js/sha1.js"></script>
@@ -41,7 +41,7 @@
 <script type="text/javascript" src="./js/packages.js"></script>
 <script type="text/javascript" src="./js/main.js"></script>
 
-<link id="slider_css" rel="stylesheet" href="./css/slider-portrait.css">
+<link rel="stylesheet" href="./css/slider.css">
 <link id="main_css" rel="stylesheet" href="./css/style-portrait.css" />
 <script>
 	var myScroll;
@@ -511,7 +511,7 @@
 						</div>
 					</td>
 					<td align="center">
-						<div style="text-align: center; color: white; font-size: 12px;">Discussions&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div style="text-align: center; color: white; font-size: 12px;">Discussions</div>
 					</td>
 				</tr>
 			</table>
@@ -624,9 +624,11 @@
 		<div id="div_test">
 			<table width=100%>
 				<tr>
-					<td>Comment:</td>
-					<td align="center">
-					<a href="#popupChooseImg"  data-rel="popup" data-position-to="window" style="text-decoration:none;">
+					<td>Comment:<a href="#popupChooseImg" id="video1" data-rel="popup" data-position-to="window" style="text-decoration:none;">
+					<font color=blue>Attach a screenshot
+							or photo</font></a></td>
+					<td align="right">
+					<a href="#popupChooseImg" id="video1" data-rel="popup" data-position-to="window" style="text-decoration:none;">
 					<font color=blue>Attach a screenshot
 							or photo</font></a></td>
 					<td>&nbsp;</td>
@@ -649,14 +651,15 @@
 		<!-- loading -->
 		<div id="loading_post" class='div_center'></div>
 		<div data-role="popup" id="popupChooseImg" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
-			<div>
-				<div style="text-align:center;">Attachment</div>
+			<div style="text-align:center">
+				<p>Attachment<p>
 				Choose the attachment to post:
 			</div>
-			<div data-role="button" onclick="showScreenshot()">
+			<a  href="#pop_slider" data-rel="popup" data-position-to="window" onclick='showScreenshot();' >
+			<div id="btnPopFinish"  data-role="button">
 				Workspace Screenshot
-			</div>
-			<div onclick="showAlbum()" data-role="button">
+			</div></a>
+			<div id="btnPopNxt" onclick="showAlbum()" data-role="button">
 				Photo Album
 			</div>
 			<div onclick="closePopupChooseImg()" data-role="button">
@@ -664,7 +667,8 @@
 			</div>
 		</div>
 		
-		<div data-role="popup" id="popupPhotoPicker_discussion" data-theme="b" data-position-to="window" data-corners="false" data-shadow="false">		
+		<div id="pop_slider" data-role="popup" id="popupPhotoPicker" data-theme="b"
+				data-position-to="window">
 			<div id="slider_container">
 			<div id="slides">
 				<div id="ccc" class="slides_container">
@@ -674,7 +678,7 @@
 				<a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="下一张"></a>
 			</div>
 			
-			</div>		
+		</div>		
 		</div>
 		<!-- pop login -->
 		<!-- Popup -login -->
@@ -755,7 +759,7 @@
 	<!-- #qeustionview -->
 	<div data-role="page" id="qeustionview">
 		<div class="head_bg">
-		<table width=100%  cellpadding=0 cellspacing=0 border=0
+		<table width=100% height=100% cellpadding=0 cellspacing=0 border=0
 				valign="top">
 				<tr>
 					<td>
@@ -777,7 +781,7 @@
 								src="./css/images/forward.png" height="30px" />
 					</td>
 					<td align=center>
-						<div id="discussion_num" >0</div>
+						<div id="discussion_num" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:25px;color:red;">0</div>
 						<a id="discussionForQ" href="#discussion" onclick="showDiscussionForQuestion();"><img id="btnDiscussion"
 								src="./css/images/disc_no_text.png" height="30px" /></a>
 					</td>
@@ -798,14 +802,14 @@
 		<!-- /header -->
 		
 		<div id="painter_controller">
-			<img onclick="showPainterController()"  src="./css/images/down.png" width=40px height=40px />
+			<img onclick="showPainterController()"  src="./css/images/down.png"  />
 		</div>
 		
 		<div id="painter_controller_content">
-		<div id="painter_controller_bg" >
+		<div style="position:absolute;">
 			<img  src="./css/images/painter_control_bg.png" height="330px" width="60px" />
 		</div>
-			<div id="controller_img_container" style="position:absolute;left:15px;top:10px;" >
+			<div style="position:absolute;left:15px;top:10px;" >
 				<div id="a_mode" onclick="switchMode()" ><img  src="./css/images/penmodeoff.png"  width=40 height=40  /></div>
 				<div id="a_pen_settings" onclick="penOn()" ><img  src="./css/images/draw_off.png" width=40 height=40 /></div>
 				<div id="a_text_settings" onclick="putText()"><img  src="./css/images/text_off.png" width=40 height=40 /></div>
@@ -816,7 +820,7 @@
 			</div>
 		</div>
 		<div id="painter_controller_up">
-			<img  src="./css/images/up.png"  onclick="hidePainterController()" width=40px height=40px />
+			<img  src="./css/images/up.png"  onclick="hidePainterController()" />
 		</div>
 		
 		<!-- replay canvas -->
@@ -831,7 +835,7 @@
 		
 		<!-- content -->
 		<div id="workspace">
-			<iframe id="i_workspace" name="i_workspace" scrolling="no" frameborder=0 src="problemfull.html" ></iframe>
+			<iframe id="i_workspace" name="i_workspace" scrolling="no" frameborder=2 src="problemfull.html" ></iframe>
 		</div>
 		<!-- Menu -->
 		<div id="wrapper_question_menu" style="display: none;">
@@ -840,7 +844,7 @@
 					<li style="background-color:black;color:white;">Exam option</li>
 					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()">Exit the Exam</a></li>
 					<li><a id="a_finish_review" href="#exam" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
-					<li><a href="#" onclick="email()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
+					<li><a href="#" onclick="report()" style="color:black;text-decoration:none;" onclick="exitExam()">Report a problem</a></li>
 					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()">Cancel</a></li>
 				</ul>
 			</div>
@@ -871,7 +875,7 @@
 		</div>
 		
 		<div data-role="popup" id="popupVideo" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false" >
-			<div id="popContent" ></div>
+			<div id="popContent" ><video controls height="100%" id="vid" onclick="this.play();" poster="http://view.vzaar.com/928797/image" preload="none" src="http://view.vzaar.com/928797/video" width="100%"></video></div>
 		</div>
 		
 		<!-- video_container -->
@@ -891,14 +895,14 @@
 			<table width=100% height=100% border=0>
 				<tr>
 					<td valign="bottom">
-						<img width=100% src="./css/images/answerpannel.png" />
+						<img width=60% src="./css/images/answerpannel.png" />
 					</td>
 				</tr>
 			</table>
 		</div>
 		
 		<div id="choicePanelContainer">
-			<table width=100% height=100% border=1>
+			<table width=100% height=100% border=0>
 				<tr>
 					<td class="choicePanelMarginTd"></td>
 					<td valign=top>
@@ -922,7 +926,7 @@
 					<td class="choicePanelMarginTd"></td>
 				</tr>
 				<tr>
-					<td colspan=4 align="right" ><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
+					<td colspan=4 align="right"><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
 					<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td>
 				</tr>
 			</table>
@@ -963,8 +967,8 @@
 			</table>
 		</div>
 		<!-- /header -->
-		<div width=100% style="padding-top:5px;font-size:10px;">
-			<table width=100% ><tr><td width=20%></td><td width=20% align="center">NO.</td><td width=20% align="center">Your Choice</td><td width=20% align="center">Correct Answer</td><td width=20%></td></tr></table>
+		<div width=100% style="padding-top:10px">
+			<table width=100% ><tr><td width=30px></td><td>NO.</td><td>Your Choice</td><td>Correct Answer</td><td width=19px></td></tr></table>
 		</div>
 		
 		<!-- content -->
@@ -992,7 +996,7 @@
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
 			<table width=100% height=100%>
 				<tr>
-					<td width=100% align="right" valign="bottom"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
+					<td width=100% align="right"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
 						src="./css/images/continue_button.png" height="30px" /></a></td>
 				</tr>
 			</table>
@@ -1016,9 +1020,9 @@
 		<!-- Exit Button -->
 		<div
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
-			<table width=100% height=100% border=0>
+			<table width=100% height=100%>
 				<tr>
-					<td width=100% align="right" valign="bottom"><a href="#exam"><img id="btnExamExit"
+					<td width=100% align="right"><a href="#exam"><img id="btnExamExit"
 						src="./css/images/normal_back_btn.png" height="30px" /></a></td>
 				</tr>
 			</table>

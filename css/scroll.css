@@ -126,7 +126,7 @@ list-style:none;
 }
 #scrollerquestionMenu li{
 	text-align:center;
-	padding:10px 5px 10px 5px;	
+	padding:5px 0 5px 0;	
 	border-bottom:1px solid #ccc;
 	border-top:1px solid #fff;
 	background-color:#fafafa;

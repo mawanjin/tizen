@@ -13,6 +13,6 @@
     <feature name="http://tizen.org/api/mediacontent" required="true"/>
 
 <feature name="http://tizen.org/api/application.read" required="true"/>
-<tizen:setting screen-orientation="portrait" contextmenu="disable"/>
+<tizen:setting screen-orientation="portrait" contextmenu="enable"/>
 <feature name="http://tizen.org/api/systeminfo" required="true"/>
 </widget>
