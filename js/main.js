@@ -4,8 +4,13 @@ var init = function() {
 	// TODO:: Do your initialization job
 	console.log("init() called");
 	
+	//show screen-orientation is landscape
+	$("#loading_css").attr("href", "./css/loading.css");
+	
+	
 	//show loading
 	$("#loading_login").html(util.getLoading());
+	
 	$("#loading_login").show();
 	prepare();
 	
@@ -103,7 +108,7 @@ function startup() {
 			 //$(window).trigger("resize");
 //			 SystemOrientation.refresh(function (){
 //					console.log("afert SystemOrientation.refresh() called");
-//					
+//					  
 //				});
 			 $("#loading_login").hide();
 		 });
@@ -188,7 +193,13 @@ function bindEvent() {
 				myDiscussionScroll = new iScroll('wrapper_discussion');
 				fromQuestionView = false;
 				//show loading
-				$("#loading_discussion").html(util.getLoading());
+				if(SystemOrientation.orientation==0)
+					$("#loading_discussion").html(util.getLoading());
+				else{
+					$("#loading_discussion").html(util.getLoadingForDiscussion());
+				}
+					
+				
 				$("#loading_discussion").show();
 				$("#discussion_back").attr("href","#main");
 				$("#discussion_back").bind("click",function(){
@@ -1204,7 +1215,16 @@ function resumeForBookmarkReview(callback){
 function updateDiscussionNumber(){
 	console.log("updateDiscussionNumber() called");
 	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
-		$("#discussion_num").html(data.length);
+		if(data.length){
+			if(data.length>9){
+				$("#discussion_num").html(data.length);
+			}else{
+				$("#discussion_num").html("&nbsp;"+data.length);
+			}
+		}else{
+			$("#discussion_num").html("0");
+		}
+		
 	});
 }
 

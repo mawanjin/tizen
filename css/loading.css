@@ -3,8 +3,14 @@
 }
 .marginLeft{
 	margin-left:40%;
-	margin-top:30%;
+	margin-top:15%;
 }
+
+.marginLeftDiscussion{
+	margin-left:5%;
+	margin-top:15%;
+}
+
 #warning{
 	font-size:16px;
 }
