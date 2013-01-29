@@ -185,15 +185,14 @@
 					<hr>
 					<div style="font-color: white; font-size: 10px;">Don't have
 						an AcrediaPrep.com log-in?</div>
-					<a href="#popupRegister" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div data-role="button" data-theme="b">Register</div></a>
+					<a href="#popupRegister" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b">Register</div></a>
 				</div>
 			</div>
 			<!-- Popup -register -->
-			<div data-role="popup" id="popupRegister" data-theme="b"
-				data-position-to="origin" class="ui-content">
+			<div data-role="popup" id="popupRegister" data-theme="b" class="ui-content popupRegister">
 
-				<div style="padding: 5px 0px;">
-					<font>&nbsp;<b>Register</b></font>
+				<div style="width:300px;">
+					<font >&nbsp;Register</font>
 					<hr>
 					<table cellpadding=0 cellspacing=0>
 						<tr>
@@ -644,11 +643,11 @@
 				</tr>
 			</table>
 		</div>
-		<div>
+		<div id="reply_textarea_container">
 			<textarea id="reply_textarea" data-role="none" rows="20"
 				style="margin-left: 5px; width: 95%; border: 1px solid gray; overflow: hidden;"></textarea>
 		</div>
-		<div style="text-align: right"><div onclick="clearImg()"> Remove Attachment</div></div>
+		<div id="attach_container" style="text-align: right"><div onclick="clearImg()"> Remove Attachment</div></div>
 		<!-- dialog for attach -->
 		<div id="screenshot_big" class="div_attach" ></div>
 		<div style="width:100%;text-align:center;border:0px solid red;">
@@ -714,17 +713,17 @@
 					<hr>
 					<div style="font-color: white; font-size: 10px;">Don't have
 						an AcrediaPrep.com log-in?</div>
-					<a href="#popupRegisterDiscussion" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div data-role="button" data-theme="b">Register</div></a>
+					<a href="#popupRegisterDiscussion" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b">Register</div></a>
 				</div>
 			</div>
 			<!-- Popup -register -->
 			<div data-role="popup" id="popupRegisterDiscussion" data-theme="b"
-				data-position-to="origin" class="ui-content">
+				 class="ui-content popupRegister">
 
-				<div style="padding: 5px 0px;">
+				<div style="width:300px;">
 					<font>&nbsp;<b>Register</b></font>
 					<hr>
-					<table>
+					<table cellpadding=0>
 						<tr>
 							<!-- photo -->
 							<td style="background-color:gray;">

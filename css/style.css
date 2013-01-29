@@ -225,8 +225,8 @@ opacity:1;
 
 #thumb_nail{
 	
-	width:300px; 
-	height: 200px; 
+	width:100px; 
+	height: 70px; 
 	line-height: 50px; 
 	border: 0px solid red; 
 	text-align: center;
@@ -244,4 +244,24 @@ padding-left:30px;
 #controller_img_container img{
 	width:30px;
 	height:30px;
+}
+
+.popupRegister {
+	position:absolute;left:150px;top:-30px;
+}
+
+.popupRegister input{
+	
+	height:30px;
+}
+
+.popupRegister div{
+	
+}
+
+#reply_textarea_container{
+	padding-left:20px;
+}
+#attach_container{
+	padding-right:20px;
 }

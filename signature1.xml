@@ -561,7 +561,7 @@
 </Reference>
 <Reference URI="css/style.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Gm1wtNBrmPRcho0RIrcqbaEJzMGKJ8a2fOcqh6jaBKI=</DigestValue>
+<DigestValue>NrUrAQGP+KTdySwjnuzE69VDtydVVyj0FMNMvP2cp34=</DigestValue>
 </Reference>
 <Reference URI="css/style.min.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -649,7 +649,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GTu4f3i97Vqp7GQq87LPYIIcahoA0rvNPvlxpwn7qlg=</DigestValue>
+<DigestValue>ZS7IDlYj/pMMg9fmfOxdFw8B2LLnT1VPD8HxoMUCWhA=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -685,7 +685,7 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JkbJKUzeF0/mrOndf67iEZC5C2bni21t2RCzKiNcmIA=</DigestValue>
+<DigestValue>w69reYxiYHc1881xcpdb6FTm+m/dW46Lbbq3NPizhog=</DigestValue>
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -741,7 +741,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>FIZaVLpECsKPEd/vFgEUN7SLhyhCZFdGux4Oyd4ivZI=</DigestValue>
+<DigestValue>l9SaQgbaZPY+jwMk15qAqhrQ8OAhpZMGQV3uMB9T7bY=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -765,7 +765,7 @@
 </Reference>
 <Reference URI="js/systemService.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>m+ugsMVSUxMOCgzZkCgWo4Dy1qN9my+goBwkNTFo1yM=</DigestValue>
+<DigestValue>Ecbei3eC/AdalAQNuiWJ8zMatnRoMSH5bgy9FrrJDmI=</DigestValue>
 </Reference>
 <Reference URI="js/timer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3912,9 +3912,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-HDyqMrvqDRFFx13xDhk9CIDzNFxEvLvjv3XU1F6Bjj2q4qpWiOQN+Tva8uuZV1JCUv3H8nusxnGO
-Oraddy0HqxrtpwxhwJTpitr91G770F3tVc18RbrYXhgwsIQT4D6Q8QY4gntSD/sK1obo9MLbsLWO
-rrY9CfmmojwpE5EWoqM=
+O2HaCdRH5YxzqivcFR5dZz8zixbR5wHnMS/1S8aMb43/l2afhD8VdkfTvpYCJKPrX3MKxZ1x+QEk
+lmEjaFQZ+Q5OQ3Ve4SxwOrVfdn+Qg0DzmBwkxt8bY5eiV7KxO5V5lkrXp8A73707LhpuXWxEs288
+SvLCLPeQD8kiiJ+bAB8=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

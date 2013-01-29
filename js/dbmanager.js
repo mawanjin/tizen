@@ -236,10 +236,11 @@ function DBManager() {
 	};
 	//insertInpersonStatement
 	self.insertInperson = function(ex_app_id, question_id,_base64,_xml,date, callback) {
-		self.db.transaction(function(tx) {
-			console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
-			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
-				console.log("delete inperson success.question_id="+question_id);
+		
+		self.deleteInpersonByQuestionId(question_id,function(rs){
+			if(rs==0)return;
+			self.db.transaction(function(tx) {
+				console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
 				tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
 					console.log("insert inperson success.");
 					callback(1);
@@ -248,13 +249,31 @@ function DBManager() {
 					self.onError(tx,err);
 					callback(0);
 				});
-			}, function(tx,err) {
-				alert("delete failure");
-				self.onError(tx,err);
-				callback(0);
+				
 			});
-			
 		});
+		
+//		self.db.transaction(function(tx) {
+//			console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
+//			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
+//				console.log("delete inperson success.question_id="+question_id);
+//
+//					tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
+//						console.log("insert inperson success.");
+//						callback(1);
+//					}, function(tx,err) {
+//						alert("delete failure11");
+//						self.onError(tx,err);
+//						callback(0);
+//					});
+//				
+//			}, function(tx,err) {
+//				alert("delete failure");
+//				self.onError(tx,err);
+//				callback(0);
+//			});
+//			
+//		});
 	};
 	
 	self.deleteQuestionExamResultInfoByExappId = function(ex_app_id,callback) {

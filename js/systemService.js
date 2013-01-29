@@ -171,5 +171,25 @@ system_service = new function() {
 			console.log("Exception: " + exc.message + '<br/>');
 		}
 	};
+	
+	this.launchWebBrowserService = function(){
+		
+		var service = new tizen.ApplicationService(
+				"http://tizen.org/appsvc/operation/view", Constant.WEBSITE_URL);
+
+		this.onSuccess = function () {
+			console.log("Appservice launched");
+		};
+
+		this.onError = function(err) {
+			alert("Appservice launch failed: " + err.message);
+		};
+
+		try {
+			tizen.application.launchService(service, "org.tizen.browser", this.onSuccess, this.onError, null);
+		} catch (exc) {
+			alert("launchService exc: " + exc.message);
+		}
+	};
 
 };

@@ -132,7 +132,7 @@ function bindEvent() {
 				$("#intro_list").html('');
 				for ( var i = 0; i < informations.length; i++){
 					if(i==informations.length-1){
-						$("#intro_list").append('<li><a href="http://www.baidu.com" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
+						$("#intro_list").append('<li><a href="#" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
 					}else
 						$("#intro_list").append('<li><a href="#info_content" onclick="showInforContent('+i+');" >'+informations[i].name+'</a></li>');
 				}
@@ -167,14 +167,6 @@ function bindEvent() {
 			
 			
 		}
-		/*
-		//check log status
-		if(http.User){//log out
-			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
-		}else{//log in
-			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
-		}
-		*/
 	});
 	$("#perfdata").click(function() {
 		current_page = Constant.application_page_st;
@@ -185,7 +177,7 @@ function bindEvent() {
 	$("#disc_no_text").click(function() {
 		
 		system_service.getNetWorkInfo(function(rs){
-			if(rs==true){
+			if(rs!=true){
 				$("#a_discussion").attr("href","#discussion");
 				$("#a_discussion").trigger("click");
 				current_page = Constant.application_page_discussion;
@@ -512,6 +504,7 @@ function generateCategoryBar(callback) {
 }
 
 function initConstant(){
+	Constant.WEBSITE_URL  =main_moduleinfo.websiteURL;
 	Constant.SERVER_URL = main_moduleinfo.ServerURL+"/";
 	if(!Constant.SERVER_URL.startWith("http"))Constant.SERVER_URL="http://"+Constant.SERVER_URL+"/";
 	Constant.GET_SERVER_URL_DISCUSSIONS_BY_QUESTION_ID=Constant.SERVER_URL+"jreq.php?discussions_question=1&q_id=";
@@ -723,10 +716,10 @@ function createListItemMyQuestions(data){
 	if(data.progress!=''&&data.finish=="false"){
 		progress = '<div><meter min="0" max="'+data.progressMax+'" value="'+data.progressCount+'" /></div>';
 	}
-	status='<div style="float:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>';
+	status='<div style="float:left;text-align:left;"><div style="font-size:10px;">'+data.progress+'</div>'+progress+'</div>';
 	
 	 
-	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="td_last" align="right" valign="center"><table width="100%" border="0"><tr><td><div style="text-align:right;">'+status+'</div></td><td align="right">'+img_arrow+'</td></tr></table></td></tr></table>';
+	var html = '<table cellspacing=0 cellpadding=0><tr><td name="td_logo" valign="middle" >'+img+'</td><td name="title">'+title+'</td><td name="td_last" align="right" valign="center"><table width="100%" border="0"><tr><td ><div style="text-align:right;">'+status+'</div></td><td align="right">'+img_arrow+'</td></tr></table></td></tr></table>';
 	return html;
 }
 
@@ -826,7 +819,7 @@ function showPackageIntro(position){
 
 function showInforContent(which){
 	if(which == informations.length-1){
-		alert("invoke web browser.");
+		system_service.launchWebBrowserService();
 	}else{
 		$("#infor_content_title").html('<h3>'+informations[which].name+"</h3>");
 		$("#thelist_info").html('<li>'+informations[which].content+'</li>');
