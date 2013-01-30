@@ -175,72 +175,7 @@ function bindEvent() {
 		});
 	});
 	$("#disc_no_text").click(function() {
-		
-		system_service.getNetWorkInfo(function(rs){
-			if(rs!=true){
-				$("#a_discussion").attr("href","#discussion");
-				$("#a_discussion").trigger("click");
-				current_page = Constant.application_page_discussion;
-				destoryScroll();
-				myDiscussionScroll = new iScroll('wrapper_discussion');
-				fromQuestionView = false;
-				//show loading
-				if(SystemOrientation.orientation==0)
-					$("#loading_discussion").html(util.getLoading());
-				else{
-					$("#loading_discussion").html(util.getLoadingForDiscussion());
-				}
-					
-				
-				$("#loading_discussion").show();
-				$("#discussion_back").attr("href","#main");
-				$("#discussion_back").bind("click",function(){
-					resetMainScroll();
-				});
-				//load data from server(HTTP).
-				http.findDiscussionsByExamType(function(data){
-					console.log("findDiscussionsByExamType() called");
-					if(data==-1){
-						$("#loading_discussion").hide();
-						alert("time out ,please try later.");
-						return;
-					}
-					var html='';
-					for(var i=0;i<data.length;i++){
-						var o = data[i];
-						var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
-						var questionID = o.questionId;
-						var id = o.id;
-						var date = '<font color=blue size=1>'+o.date+'</font>';
-						var title = o.uname;
-						var attach = o.attachIamge;
-						var go = '';
-						/*
-						if(questionID!=0)
-							go = '<font color=blue size=1>Go to problemset</font>';
-						*/
-						if(!attach)attach='';
-						else
-							attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
-						var content = o.message;
-						
-						html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply" onclick="setCurrentDiscussionId('+id+')"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
-					}
-					$("#loading_discussion").hide();
-					$("#thelist_discussion").html(html);
-					$("#thelist_discussion").trigger("create");
-					
-					setTimeout(function () {
-						myDiscussionScroll.refresh();
-					},1000);
-				});
-			}else{
-				$("#a_discussion").attr("href","#");
-				$("#popupNetWorkAlert").popup("open");
-				return;
-			}
-		});
-		
+		showDiscussion();
 	});
 	$("#imgBookmark").click(function() {
 		current_page = Constant.application_page_bookmark;
@@ -271,6 +206,75 @@ function bindEvent() {
 		popupafterclose: function(event, ui) {setTimeout(showPopupRegister,100);}
 	});
 	
+}
+
+function showDiscussion(){
+	system_service.getNetWorkInfo(function(rs){
+		if(rs!=true){
+			
+			$("#a_discussion").attr("href","#discussion");
+			$("#a_discussion").trigger("click");
+			current_page = Constant.application_page_discussion;
+			destoryScroll();
+			myDiscussionScroll = new iScroll('wrapper_discussion');
+			fromQuestionView = false;
+			//show loading
+			if(SystemOrientation.orientation==0)
+				$("#loading_discussion").html(util.getLoading());
+			else{
+				$("#loading_discussion").html(util.getLoadingForDiscussion());
+			}
+				
+			
+			$("#loading_discussion").show();
+			
+			$("#discussion_back").bind("click",function(){
+				resetMainScroll();
+			});
+			//load data from server(HTTP).
+			http.findDiscussionsByExamType(function(data){
+				console.log("findDiscussionsByExamType() called");
+				if(data==-1){
+					$("#loading_discussion").hide();
+					alert("time out ,please try later.");
+					return;
+				}
+				var html='';
+				for(var i=0;i<data.length;i++){
+					var o = data[i];
+					var img = '<a href="#userInfo" onclick="showUserInfo('+o.userId+',\''+o.profilePic+'\',\''+o.attachIamge+'\');"><img width=40px src="'+o.profilePic+'" /></a>';
+					var questionID = o.questionId;
+					var id = o.id;
+					var date = '<font color=blue size=1>'+o.date+'</font>';
+					var title = o.uname;
+					var attach = o.attachIamge;
+					var go = '';
+					
+					if(questionID!=0)
+						go = '<font color=blue size=1 onclick="showDiscussionForQuestion(true,'+questionID+');">Go to problemset</font>';
+					
+					if(!attach)attach='';
+					else
+						attach='<img width=80px height=60px src="'+attach+'" onclick=showBigAttach("'+attach+'"); />';
+					var content = o.message;
+					
+					html+='<li><table width=100%><tr><td width="50px">'+img+'</td><td><table width=100% border=0><tr><td colspan=2><table width=100%><tr><td>'+title+'</td><td align=right><a href="#reply" onclick="setCurrentDiscussionId('+id+')"><img src="./css/images/chat.png " onclick="postForQuestion('+questionID+');" /></a></td></tr></table></td></tr><tr><td width=80>'+attach+'</td><td>'+content+'</td></tr><tr><td colspan=2><table width=100%><tr><td>'+go+'</td><td align=right>'+date+'</td></tr></table></td></tr></table></td></tr></table></li>';
+				}
+				$("#loading_discussion").hide();
+				$("#thelist_discussion").html(html);
+				$("#thelist_discussion").trigger("create");
+				
+				setTimeout(function () {
+					myDiscussionScroll.refresh();
+				},1000);
+			});
+		}else{
+			$("#a_discussion").attr("href","#");
+			$("#popupNetWorkAlert").popup("open");
+			return;
+		}
+	});
+	setTimeout(function(){$("#discussion_back").attr("href","#main");});
 }
 
 function email(){
@@ -838,6 +842,7 @@ var current_questions;
 var current_question_position;
 var current_question;
 var fromQuestionView=false;
+var fromGoto=false;
 var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
@@ -1221,21 +1226,42 @@ function updateDiscussionNumber(){
 	});
 }
 
-function showDiscussionForQuestion(){
+function showDiscussionForQuestion(isFromGoto,questionID){
 	current_page = Constant.application_page_discussion;
 	console.log("showDiscussionForQuestion() called");
-	fromQuestionView = true;
+	if(isFromGoto&&isFromGoto==true){
+		fromQuestionView = false;
+		fromGoto = true;
+	}else{
+		fromQuestionView = true;
+		fromGoto = false;
+	}
+		
 	//show loading
 	$("#loading_discussion").html(util.getLoadingForQuestion());
 	$("#loading_discussion").show();
-	$("#discussion_back").attr("href","#qeustionview");
+	if(fromGoto&&fromGoto==true){
+		$("#discussion_back").attr("href","#discussion");
+		$("#discussion_back").bind("click",function(){
+			showDiscussion();
+		});
+		
+	}else{
+		$("#discussion_back").attr("href","#qeustionview");
+		$("#discussion_back").bind("click",function(){
+			resetQuestionViewScroll();
+		});
+	}
+		
 	$("#discussion_back").trigger("create");
-	$("#discussion_back").bind("click",function(){
-		resetQuestionViewScroll();
-	});
+	var qid = -1;
+	if(fromGoto == true){
+		//current_questions is null,load it.
+		qid = questionID;
+	}else
+		qid = current_questions[current_question_position].id;
 	
-	
-	http.findDiscussionsByQuestionid(current_questions[current_question_position].id,function(data){
+	http.findDiscussionsByQuestionid(qid,function(data){
 		var html='';
 		for(var i=0;i<data.length;i++){
 			var o = data[i];
