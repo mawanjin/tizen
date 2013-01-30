@@ -553,7 +553,7 @@
 </Reference>
 <Reference URI="css/slider.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>gbs4arbSQwvqD8q3Sl+VFsOWRFhSLWHNjqF02B8ejdI=</DigestValue>
+<DigestValue>rfuyD7/mGH6u8qNcG32KVnf/EqPs6zr/Nbyp39qoGDA=</DigestValue>
 </Reference>
 <Reference URI="css/style-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -649,7 +649,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ZS7IDlYj/pMMg9fmfOxdFw8B2LLnT1VPD8HxoMUCWhA=</DigestValue>
+<DigestValue>7YUkBjC6RxTvysGkAno8aL0rkn5R5JqKGahkVEZwJXY=</DigestValue>
 </Reference>
 <Reference URI="index2.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -741,7 +741,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>l9SaQgbaZPY+jwMk15qAqhrQ8OAhpZMGQV3uMB9T7bY=</DigestValue>
+<DigestValue>msmnjzd3H9PBls4ut4L2ftDPzcwBFn9ZlP2AouDfSfk=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -781,7 +781,7 @@
 </Reference>
 <Reference URI="js/util.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>+Yb8/X+8k3gUNRXn8ToJkhX3sQsuVlfb4GUxBIrjQow=</DigestValue>
+<DigestValue>/pFtp6BzcV7fOmfUO4Li1w2MlkvEQc/Ez4ELtY/lIN8=</DigestValue>
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3912,9 +3912,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-O2HaCdRH5YxzqivcFR5dZz8zixbR5wHnMS/1S8aMb43/l2afhD8VdkfTvpYCJKPrX3MKxZ1x+QEk
-lmEjaFQZ+Q5OQ3Ve4SxwOrVfdn+Qg0DzmBwkxt8bY5eiV7KxO5V5lkrXp8A73707LhpuXWxEs288
-SvLCLPeQD8kiiJ+bAB8=
+R5mi887YPttwRSAWhHPnuITuL3YReFjqxYfDCtp5qfnrMEEVcTjvSCsKUwCEt/R/Resy50z6z+OY
+iFuBTmFZFV3QHDSkuyoBv2ABIghAoHscb/GRLyU6GwuY0CEnUj/Q6g/sShg479K3/t1vNXavD51x
+SIYCDGRrZymhhi6sK+U=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

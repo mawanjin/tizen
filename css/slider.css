@@ -9,9 +9,9 @@
 #slider_frame {
 	position:absolute;
 	z-index:0;
-	width:400px;
+	width:420px;
 	height:341px;
-	top:-3px;
+	top:-10px;
 	left:1px;
 }
 
@@ -24,7 +24,7 @@
 #slides .next,#slides .prev {
 	position:absolute;
 	top:107px;
-	left:-39px;
+	left:-30px;
 	width:24px;
 	height:43px;
 	display:block;
@@ -32,7 +32,7 @@
 }
 
 .slides_container {
-	width:380px;
+	width:300px;
 	height:270px;
 	left:10px;
 	top:5px;
@@ -42,7 +42,7 @@
 }
 
 #slides .next {
-	left:410px;
+	left:420px;
 }
 
 .pagination {

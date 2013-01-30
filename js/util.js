@@ -19,6 +19,10 @@ util = new function() {
 	this.getLoadingForDiscussion= function(){
 		return "<div class='marginLeftDiscussion'><div id='circular_1' class='circular'></div><div id='circular_2' class='circular'></div><div id='circular_3' class='circular'></div><div id='circular_4' class='circular'></div><div id='circular_5' class='circular'></div><div id='circular_6' class='circular'></div><div id='circular_7' class='circular'></div><div id='circular_8' class='circular'></div><div class='clearfix'></div></div>";
 	};
+	this.getLoadingForQuestion= function(){
+		return "<div class='marginLeftDiscussion'><div id='circular_1' class='circular'></div><div id='circular_2' class='circular'></div><div id='circular_3' class='circular'></div><div id='circular_4' class='circular'></div><div id='circular_5' class='circular'></div><div id='circular_6' class='circular'></div><div id='circular_7' class='circular'></div><div id='circular_8' class='circular'></div><div class='clearfix'></div></div>";
+	};
+	
 	this.currentTimeMillis = function(){
 		
 		return Date.parse(new Date());

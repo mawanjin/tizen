@@ -1226,7 +1226,7 @@ function showDiscussionForQuestion(){
 	console.log("showDiscussionForQuestion() called");
 	fromQuestionView = true;
 	//show loading
-	$("#loading_discussion").html(util.getLoading());
+	$("#loading_discussion").html(util.getLoadingForQuestion());
 	$("#loading_discussion").show();
 	$("#discussion_back").attr("href","#qeustionview");
 	$("#discussion_back").trigger("create");
