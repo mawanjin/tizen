@@ -30,6 +30,12 @@
 	text-align:left;
 }
 
+.scrollColor{
+	background-color:#fafafa;
+}
+
+
+
 #scroller li {
 	
 	/*height:40px;*/
@@ -37,6 +43,12 @@
 	border-top:1px solid #fff;
 	background-color:#fafafa;
 	font-size:14px;
+}
+
+
+
+#scroller li:active {
+	 background: #ffcb74;
 }
 
 .wrapper {
@@ -70,6 +82,8 @@
 	background-color:#fafafa;
 	font-size:14px;
 }
+
+
 
 #wrapper_problemIntro{
 	top:50px;
@@ -107,6 +121,11 @@ padding:0 10px;
 	background-color:#fafafa;
 	font-size:14px;
 }
+
+#scrollerproblemIntroMenu li:active {
+	 background: #ffcb74;
+}
+
 #wrapper_package_intro{
 	top:60px;height:65%
 }
@@ -147,6 +166,19 @@ list-style:none;
 	font-size:14px;
 }
 
+#scrollerquestionMenu li:active {
+	 background: #ffcb74;
+}
+
+#wrapper_bookmark li:active {
+	 background: #ffcb74;
+}
+#wrapper_exam li:active {
+	 background: #ffcb74;
+}
+
+
+
 #wrapper_question_list{
 	border:2px solid gray;
 	position:absolute; z-index:3;
@@ -182,6 +214,10 @@ list-style:none;
 	font-size:14px;
 }
 
+#scrollerQuestionList li:active {
+	 background: #ffcb74;
+}
+
 #wrapper_exam{
 	position:absolute; z-index:1;
 	top:120px; bottom:0px; left:0;
@@ -196,7 +232,7 @@ list-style:none;
 	top:30px; bottom:0px; left:10px;
 	right:10px;
 	width:95%;
-	height:90%;
+	height:75%;
 	background:#fafafa;
 	overflow:auto;
 }

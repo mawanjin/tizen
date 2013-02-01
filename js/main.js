@@ -210,7 +210,7 @@ function bindEvent() {
 
 function showDiscussion(){
 	system_service.getNetWorkInfo(function(rs){
-		if(rs!=true){
+		if(rs==true){
 			
 			$("#a_discussion").attr("href","#discussion");
 			$("#a_discussion").trigger("click");
@@ -777,10 +777,10 @@ function update(recommendations,myquestions){
 	var html='';
 	if(myquestions&&myquestions.length>0){
 		
-		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>MY Question Sets</strong></li>';
+		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"  ><strong>MY Question Sets</strong></li>';
 		for(var i=0;i<myquestions.length;i++){
 			var o = myquestions[i];
-			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+'); style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
+			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+');  style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
 		}
 			
 	}
@@ -789,7 +789,7 @@ function update(recommendations,myquestions){
 		html+='<li style="height:30px; line-height:30px;background-color:#73ff8c;"><strong>Recommendations</strong></li>';
 		for(var i=0;i<recommendations.length;i++){
 			var o = recommendations[i];
-			html+='<li data-icon="arrow-r" data-iconpos="right" ><a href="#package_intro" onclick="showPackageIntro('+i+');" style="color:black;text-decoration:none;">'+createListItemRecommendation(o)+'</a></li>';
+			html+='<li data-icon="arrow-r" data-iconpos="right" ><a href="#package_intro"  onclick="showPackageIntro('+i+');" style="color:black;text-decoration:none;">'+createListItemRecommendation(o)+'</a></li>';
 		}
 	}
 	$("#thelist").html(html);
@@ -1140,6 +1140,12 @@ function exam_review(position){
 		current_showsolution = true;
 		$("#choice_bg").hide();
 		$("#choicePanelContainer").hide();
+		//reset drawer model
+		resetDrawerToolsColor();
+		
+		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
+		$("#a_mode").trigger("create");
+		
 	});
 	
 	
@@ -1395,10 +1401,19 @@ function exitExam(){
 	resetMainScroll();
 	$("#wrapper_question_menu").hide();
 	saveExamStatus(false,function(){
+		var inperson = getInpersonVO();
+		if(inperson&&inperson.xml&&inperson.xml.length>60){
+			console.log("exitExam---->insertInperson() called.");
+			db.insertInperson(current_exAppId,current_questions[current_question_position].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+				showExam();
+			});
+		}else{
+			showExam();
+		}
 		//refresh list
 		refreshList(current_section_short,current_section);
 	});
-	setTimeout(saveInperson);
+//	setTimeout(saveInperson);
 }
 
 function finishExam(){
@@ -2083,15 +2098,12 @@ function switchMode(){
 	if (!util.contains(("" + $("#a_mode").html()), "off", false)) {
 		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-//		window.frames["i_workspace"].switchPenOn();
 		switchPenOn();
 		
 	} else {
 		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-//		window.frames["i_workspace"].penOff();
 		penOff();
-		
 	}
 	
 }
@@ -2343,10 +2355,21 @@ function saveInperson(callback){
 	console.log("saveInperson() called. length="+inperson.xml.length);
 	if(inperson&&inperson.xml&&inperson.xml.length>60){
 		
-		db.insertInperson(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
-			if(callback)
-				callback();
+		db.deleteInpersonByQuestionId(current_questions[last_question_id].id,function(r){
+			if(r==1){
+				//ex_app_id, question_id,_base64,_xml,date
+				db.insertInpersonReal(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(rs){
+					console.log("insert rs="+rs);
+					callback();
+				});
+			}
+				
 		});
+		
+//		db.insertInpersonReal(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
+//			if(callback)
+//				callback();
+//		});
 	}else{
 		if(callback)
 			callback();	

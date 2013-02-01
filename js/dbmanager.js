@@ -142,6 +142,13 @@ function DBManager() {
 			// self.onSuccess, self.onError);
 		});
 	};
+	
+	self.createTableInperson = function(callback){
+		console.log("createTableInperson() called.");
+		self.db.transaction(function(tx) {
+		tx.executeSql(self.createInpersonStatement, [], callback(1),
+				self.onError);});
+	};
 
 	self.insertIphoneQuestions = function(id, ex_app_id, name, difficulty,
 			text_block1a, text_block1b, text_block1c, text_block1d, image,
@@ -234,24 +241,36 @@ function DBManager() {
 			});
 		});
 	};
+	
+	self.insertInpersonReal = function(ex_app_id, question_id,_base64,_xml,date, callback){
+		console.log("insertInpersonReal() called.");
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
+				console.log("insertInpersonReal() successed.");
+				callback(1);
+			}, function() {
+				alert("no");
+				callback(0);
+			});
+			
+//			tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
+//				console.log("insertInpersonReal() successed.");
+//				callback(1);
+//			}, function() {
+//				callback(0);
+//			});
+		});
+		
+	};
+	
 	//insertInpersonStatement
 	self.insertInperson = function(ex_app_id, question_id,_base64,_xml,date, callback) {
 		
 		self.deleteInpersonByQuestionId(question_id,function(rs){
 			if(rs==0)return;
-			self.db.transaction(function(tx) {
-				console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
-				tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
-					console.log("insert inperson success.");
-					callback(1);
-				}, function(tx,err) {
-					alert("delete failure11");
-					self.onError(tx,err);
-					callback(0);
-				});
-				
-			});
 		});
+		
+		self.insertInpersonReal(ex_app_id, question_id,_base64,_xml,date, callback);
 		
 //		self.db.transaction(function(tx) {
 //			console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);

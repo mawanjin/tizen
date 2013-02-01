@@ -199,7 +199,8 @@ Drawing.prototype = {
 	},
 	onMouseMove : function(pos) {
 		// console.log("onMouseMove() called.x="+pos.x+";y="+pos.y);
-		if (this.isButtonDown&&this.enable&&this.isButtonDown==true&&this.enable==true&&this.curDrawingType != this.type_text) {
+		
+		if (this.isButtonDown&&drawer.enable&&this.isButtonDown==true&&drawer.enable==true&&this.curDrawingType != this.type_text) {
 			/*
 			var p = this.toolbarspos;
 			for ( var i in p) {
@@ -243,7 +244,8 @@ Drawing.prototype = {
 		}
 	},
 	onMouseDown : function(event, pos) {
-		if(!this.enable)return;
+		console.log("onMouseDown() called.and enable = "+drawer.enable);
+		if(!drawer.enable||drawer.enable!=true){this.isButtonDown = false;return;}
 		console.log("onMouseDown() called.x="+pos.x+";y="+pos.y);
 
 		if (this.curDrawingType == this.type_clear) {

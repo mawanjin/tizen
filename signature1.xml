@@ -529,7 +529,7 @@
 </Reference>
 <Reference URI="css/scroll-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>wBCWOrCqRYp50sHrkkLqBf4RClLNzXg4ezEysoTVt8Q=</DigestValue>
+<DigestValue>UqMtsoiiNHf7m3TUlirefpp4KwdrLczntOx5TjdU/G8=</DigestValue>
 </Reference>
 <Reference URI="css/scroll-workspace-portrait.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -537,7 +537,7 @@
 </Reference>
 <Reference URI="css/scroll.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>+wbj1KI+cVfBqLdVkIYkxuRQnwQWv5DGvzBNSb+e7Bw=</DigestValue>
+<DigestValue>IdrwgVktk5JpKYaW/gVhwrIdMadECpyvqhQZOJOD9+U=</DigestValue>
 </Reference>
 <Reference URI="css/sl_landscape.css">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -685,11 +685,11 @@
 </Reference>
 <Reference URI="js/dbmanager.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>w69reYxiYHc1881xcpdb6FTm+m/dW46Lbbq3NPizhog=</DigestValue>
+<DigestValue>wEkdoywnQ/8ubaWwQj37Qxt5U8zdzrk+EoWf0O/gm1k=</DigestValue>
 </Reference>
 <Reference URI="js/drawer.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>LJC4YjOpKK3zcG//zOEmOnq8TnHJmU4rCL/LZg/ahXg=</DigestValue>
+<DigestValue>LR2+597kY24zCklswgp0llGIdTK2voL9XKnZOoAuTKs=</DigestValue>
 </Reference>
 <Reference URI="js/encryptionUtil.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -741,7 +741,7 @@
 </Reference>
 <Reference URI="js/main.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>msmnjzd3H9PBls4ut4L2ftDPzcwBFn9ZlP2AouDfSfk=</DigestValue>
+<DigestValue>Lro3ih/Zrv2KQkPXRl2x/huFI3yjh0y6gElE/IvJfF8=</DigestValue>
 </Reference>
 <Reference URI="js/orientation.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -753,7 +753,7 @@
 </Reference>
 <Reference URI="js/problemfull.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>e7qxU644WpKF85n7fwWO8st8ZtnyXAMEW04KJwzFlWU=</DigestValue>
+<DigestValue>BwujfciJvU+zaGNLp8ZAp2X0BgBHoFJgrMtuJvziXyE=</DigestValue>
 </Reference>
 <Reference URI="js/sha1.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -785,7 +785,7 @@
 </Reference>
 <Reference URI="list.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JfB5HJ8TnkTAfKAfZ5k0IXdJgpASER8NtZm6gzzwsMM=</DigestValue>
+<DigestValue>INHGMMq40Ukzm2S5j0giYb4Z55npYSx/KQ/ujd8mrjc=</DigestValue>
 </Reference>
 <Reference URI="listView.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3912,9 +3912,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-R5mi887YPttwRSAWhHPnuITuL3YReFjqxYfDCtp5qfnrMEEVcTjvSCsKUwCEt/R/Resy50z6z+OY
-iFuBTmFZFV3QHDSkuyoBv2ABIghAoHscb/GRLyU6GwuY0CEnUj/Q6g/sShg479K3/t1vNXavD51x
-SIYCDGRrZymhhi6sK+U=
+kDkzgqVw3xVHMJTfBc8/s/jZ25waPbWLRFbUddyQ88rjzlWC8NZBS377/VFPgY0V7ul+tG/5VPhw
+7fBUnHvq1Vi9XJIHBx5+WrVmoAASVODzKMPgVocibQIHfte8os1TWkb/v59eGOvrPFWY/S/281O7
+ELIRisTc5twyq7IBQJs=
 </SignatureValue>
 <KeyInfo>
 <X509Data>

@@ -389,6 +389,7 @@ function hideCanvas(){
 }
 
 function switchPenOn(){
+	console.log("switchPenOn() called.");
 	drawer.offset = Math.abs(questionScroll.y);
 	//make scrolling disable
 	questionScroll.disable();

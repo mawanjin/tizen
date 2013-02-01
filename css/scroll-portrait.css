@@ -207,3 +207,21 @@ list-style:none;
 	background:#fafafa;
 	overflow:auto;
 }
+#scroller li:active {
+	 background: #ffcb74;
+}
+#scrollerproblemIntroMenu li:active {
+	 background: #ffcb74;
+}
+#scrollerquestionMenu li:active {
+	 background: #ffcb74;
+}
+#wrapper_bookmark li:active {
+	 background: #ffcb74;
+}
+#wrapper_exam li:active {
+	 background: #ffcb74;
+}
+#scrollerQuestionList li:active {
+	 background: #ffcb74;
+}
