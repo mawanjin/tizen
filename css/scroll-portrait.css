@@ -192,6 +192,7 @@ list-style:none;
 	position:absolute; z-index:1;
 	top:140px; bottom:0px; left:0;
 	width:100%;
+	height:70%;
 	/*background:#aaa;*/
 	background:#fafafa;
 	overflow:auto;

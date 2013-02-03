@@ -22,6 +22,7 @@ function DBManager() {
 	self.createExamResultInfo = 'CREATE TABLE exam_result_info( id integer primary key,ex_app_id integer,ex_app_name text,score integer,finish text,progress integer,start_time text,end_time text, question_count text,section text);';
 	self.createquestionExamResultInfo = 'CREATE TABLE question_exam_result_info( id integer primary key,ex_app_id integer,question_id integer,choice text,correctChoice text,mark text);';
 	self.createInpersonStatement='CREATE TABLE inperson(ex_app_id integer ,question_id integer primary key,_base64,_xml,date text);';
+	self.createInpersonBase64Statement='CREATE TABLE inperson_base64(question_id integer primary key,_base64);';
 	// self.createQuestionWorkspaceNotes = 'CREATE TABLE
 	// question_workspace_notes( id integer primary key,ex_app_id integer,
 	// question_id integer, note text);';
@@ -36,6 +37,8 @@ function DBManager() {
 	self.insertquestionExamResultInfoStatement = 'insert into  question_exam_result_info(ex_app_id,question_id,choice,correctChoice,mark) values(?,?,?,?,?);';
 	self.insertQuestionWorkSpaceNoteStatement = 'insert into question_workspace_notes (ex_app_id,question_id,note) values(?,?,?);';
 	self.insertInpersonStatement = 'insert into inperson (ex_app_id,question_id,_base64,_xml,date) values(?,?,?,?,?);';
+	self.insertInpersonBase64Statement = 'insert into inperson_base64 (question_id,_base64) values(?,?);';
+	
 	
 	
 	
@@ -107,7 +110,10 @@ function DBManager() {
 						tx.executeSql(self.createBookmark, [], function(){
 							tx.executeSql(self.createExamResultInfo, [], function(){
 								tx.executeSql(self.createquestionExamResultInfo, [], function(){
-									tx.executeSql(self.createInpersonStatement, [], callback,
+									tx.executeSql(self.createInpersonStatement, [], function(){
+										tx.executeSql(self.createInpersonBase64Statement, [], callback,
+												self.onError);
+									},
 											self.onError);
 								},
 										self.onError);
@@ -242,57 +248,30 @@ function DBManager() {
 		});
 	};
 	
-	self.insertInpersonReal = function(ex_app_id, question_id,_base64,_xml,date, callback){
-		console.log("insertInpersonReal() called.");
-		self.db.transaction(function(tx) {
-			tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
-				console.log("insertInpersonReal() successed.");
-				callback(1);
-			}, function() {
-				alert("no");
-				callback(0);
-			});
-			
-//			tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
-//				console.log("insertInpersonReal() successed.");
-//				callback(1);
-//			}, function() {
-//				callback(0);
-//			});
-		});
-		
-	};
-	
 	//insertInpersonStatement
 	self.insertInperson = function(ex_app_id, question_id,_base64,_xml,date, callback) {
 		
-		self.deleteInpersonByQuestionId(question_id,function(rs){
-			if(rs==0)return;
-		});
-		
-		self.insertInpersonReal(ex_app_id, question_id,_base64,_xml,date, callback);
-		
-//		self.db.transaction(function(tx) {
+		self.db.transaction(function(tx) {
 //			console.log("insertInperson() called.question_id="+question_id+";ex_app_id="+ex_app_id+";_base64="+_base64+";_xml="+_xml+";date="+date);
-//			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
-//				console.log("delete inperson success.question_id="+question_id);
-//
-//					tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,_base64,_xml,date], function() {
-//						console.log("insert inperson success.");
-//						callback(1);
-//					}, function(tx,err) {
-//						alert("delete failure11");
-//						self.onError(tx,err);
-//						callback(0);
-//					});
-//				
-//			}, function(tx,err) {
-//				alert("delete failure");
-//				self.onError(tx,err);
-//				callback(0);
-//			});
-//			
-//		});
+			tx.executeSql(self.deleteInpersonStatement, [ question_id ], function() {
+				console.log("delete inperson success.question_id="+question_id);
+					tx.executeSql(self.insertInpersonStatement, [ ex_app_id, question_id,"base64","xml",date], function() {
+						mStorage.saveInperson(question_id,_base64,_xml);
+						console.log("insert inperson success.");
+						callback(1);
+					}, function(tx,err) {
+						alert("delete failure11");
+						self.onError(tx,err);
+						callback(0);
+					});
+				
+			}, function(tx,err) {
+				alert("delete failure");
+				self.onError(tx,err);
+				callback(0);
+			});
+			
+		});
 	};
 	
 	self.deleteQuestionExamResultInfoByExappId = function(ex_app_id,callback) {
@@ -332,7 +311,7 @@ function DBManager() {
 						var questionExamStatus = examResultInfo.QuestionExamStatus;
 						for(var i=0;i<questionExamStatus.length;i++){
 							var o = questionExamStatus[i];
-							console.log("insertquestionExamResultInfo() called.");
+							console.log("insertquestionExamResultInfo() called.choice="+o.choice);
 							//id,exAppID,questionId,choice,correctChoice,mark
 							self.insertquestionExamResultInfo(o.exAppID, o.questionId, o.choice, o.correctChoice, o.mark,function(){
 								count = count+1;
@@ -546,7 +525,9 @@ function DBManager() {
 						
 						for(var i=0;i<dataset.length;i++){
 							var o = dataset.item(i);
-							callback (new self.InpersonVO(o['ex_app_id'], o['question_id'], o['_base64'], o['_xml'], o['date']));
+							var base64 = mStorage.getInpersonBase64(o['question_id']);
+							var xml = mStorage.getInpersonXml(o['question_id']);
+							callback (new self.InpersonVO(o['ex_app_id'], o['question_id'], base64, xml, o['date']));
 							break;
 						}
 						
@@ -1236,8 +1217,8 @@ function DBManager() {
 //					console.log("insert called."+$(this).text());
 					self.executeSQL($(this).text(),function(){
 						i++;
-//						console.log(i+";"+len);
-						if(i==len){
+						console.log(i+";"+len);
+						if(i==200){
 							callback();
 						}
 					});

@@ -1097,7 +1097,6 @@ function parseStrokerXML(xml,callback) {
 function getInpersonVO(){
 	hideInputText();
 	
-//	var xml = convertStrokerToXML(drawer.allstrokers);
 	if(!drawer){
 		return;
 	}

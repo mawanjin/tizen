@@ -104,7 +104,7 @@ function startup() {
 		 parser.getInformation(function(array) {
 			 informations = array;
 			 bindEvent();
-			 SystemOrientation.setOrientation(90);
+			 SystemOrientation.setOrientation(0);
 			 //$(window).trigger("resize");
 //			 SystemOrientation.refresh(function (){
 //					console.log("afert SystemOrientation.refresh() called");
@@ -1107,6 +1107,7 @@ function resumeForExamReview(callback){
 					setTimeout(function () {
 						if(myQuestionListScroll)
 						myQuestionListScroll.refresh();
+						
 					},100);
 					if(callback)
 						callback();
@@ -1142,9 +1143,10 @@ function exam_review(position){
 		$("#choicePanelContainer").hide();
 		//reset drawer model
 		resetDrawerToolsColor();
-		
 		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
+		$("#choice_bg").hide();
+		$("#choicePanelContainer").hide();
 		
 	});
 	
@@ -1851,7 +1853,8 @@ function showExam(){
 		for(var i=0;i<examResultInfo.QuestionExamStatus.length;i++){
 			var o = examResultInfo.QuestionExamStatus[i];
 			//id,exAppID,questionId,choice,correctChoice,mark
-			var choice = parseInt(o.choice)+"";
+//			var choice = parseInt(o.choice)+"";
+			var choice = o.choice+"";
 			
 			if(choice!="-1"&&choice.length>1){
 				var _c ="";
@@ -2000,6 +2003,7 @@ function hidePainterController(){
 	$("#painter_controller_up").hide();
 	//window.frames["i_workspace"].hideCanvas();
 	hideCanvas();
+	if(is_exam_review==true)return;
 	$("#choice_bg").show();
 	$("#choicePanelContainer").show();
 	$("#qeustionview").focus();
@@ -2354,22 +2358,11 @@ function saveInperson(callback){
 	var inperson = getInpersonVO();
 	console.log("saveInperson() called. length="+inperson.xml.length);
 	if(inperson&&inperson.xml&&inperson.xml.length>60){
-		
-		db.deleteInpersonByQuestionId(current_questions[last_question_id].id,function(r){
-			if(r==1){
-				//ex_app_id, question_id,_base64,_xml,date
-				db.insertInpersonReal(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(rs){
-					console.log("insert rs="+rs);
-					callback();
-				});
-			}
-				
-		});
-		
-//		db.insertInpersonReal(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(){
-//			if(callback)
-//				callback();
-//		});
+		//ex_app_id, question_id,_base64,_xml,date
+		db.insertInperson(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(rs){
+			console.log("insert rs="+rs);
+			callback();					
+		});		
 	}else{
 		if(callback)
 			callback();	
@@ -2415,6 +2408,40 @@ function showScreenshot(){
 	screenshot = new Array();
 	var html = '<div id="slides"><div id="ccc" class="slides_container">';
 	
+	var data = mStorage.getInpersonKeys();
+	console.log("showScreenshot() called. and the length is "+data.length);
+	if(data.length==0){
+		alert("no image here");
+		$("#popupChooseImg").popup("open");
+		return false;
+	}
+	
+	for(var i=0;i<data.length;i++){
+		var img = mStorage.getInpersonBase64(data[i]);
+		screenshot.push(img);
+//		console.log(img);
+		html+='<div><a href="javascript:setPostImg('+i+');" title="" ><img src="'+img+'" width="250" height="220" /></a></div>';
+	}
+	html+='</div><a href="#" class="prev"><img src="./css/images/arrow-prev.png" width="24" height="43" alt="prev"></a><a href="#" class="next"><img src="./css/images/arrow-next.png" width="24" height="43" alt="next"></a></div><img src="./css/images/example-frame.png"  alt="Example Frame" id="slider_frame"></div>';
+	
+	$('#slider_container').html(html);
+	
+	$('#slider_container').trigger('create');
+	
+	
+	$('#slides').slides({
+		preload: false,
+		generatePagination: false,
+		pagination: false,
+		preloadImage: './css/images/loading.gif',
+		play: 0,
+	});
+	$('#popupChooseImg').popup("close");
+	setTimeout(function(){
+		$('#popupPhotoPicker_discussion').popup("open");	
+	},500);
+	
+	/*
 	db.findAllInperson(function(data){
 		console.log("showScreenshot() called. and the length is "+data.length);
 		if(data.length==0){
@@ -2450,9 +2477,7 @@ function showScreenshot(){
 			$('#popupPhotoPicker_discussion').popup("open");	
 		},500);
 		
-	});
-//	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-1.jpg" width="380" height="270" alt="Slide 1"></a></div>';
-//	html+='<div><a href="http://www.zzjs.net/" title="" target="_blank"><img src="./css/images/slide-2.jpg" width="380" height="270" alt="Slide 1"></a></div>';
+	});*/
 	
 }
 
