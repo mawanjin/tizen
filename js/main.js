@@ -760,7 +760,6 @@ function updateListView(){
 			var o = ListItemMyQuestions[i];
 			html+='<li><a href="#problemIntro" onclick=showProblemSetInforContent('+i+'); style="color:black;text-decoration:none;" >'+createListItemMyQuestions(o)+'</a></li>';
 		}
-			
 	}
 	
 	$("#thelist_problemIntroMenu").html(html);
@@ -846,6 +845,7 @@ var fromGoto=false;
 var isQuestoinViewPage = false;
 
 function showProblemSetInforContent(position){
+		closeVideo();
 		current_page = Constant.application_page_intro;
 		//initialization for scroll
 		destoryScroll();
@@ -870,8 +870,11 @@ function showProblemSetInforContent(position){
 		
 		current_exAppId = exAppId;
 		current_exAppName = title;
-		
+		//test begin
+		//current_exAppId = 874;
+		//test end
 	    db.findProblemSetIntroductionByExAppId(exAppId,function(data){
+	    	//data="<video width=\"100%\" height=\"100%\" id=\"vid\" controls=\"\" tabindex=\"0\" onclick=\"this.play();\" poster=\"sbvideos/DSF-1.jpg\" preload=\"none\" src=\"http://video-js.zencoder.com/oceans-clip.mp4\"> Your browser does not support the video tag. </video>";
 	    	var content = data.replaceAll('\\\\','');;
 	    	
 	    	$("#problemIntro_title").html(title);
@@ -1019,6 +1022,7 @@ function beginPractice(){
 	setTimeout(function(){
 		current_question_position = 0;
 		console.log("beginPractice() called");
+		
 		db.findQuestionsByExAppID(current_exAppId,function(questions){
 			current_questions = questions;
 			console.log("beginPractice()--->current_questions.length="+current_questions.length);
@@ -1500,6 +1504,7 @@ var last_question_id=-1;
 var is_exam_review_first = true;
 function changePage(i){
 	console.log("changePage() called.");
+	closeVideo();
 	current_page = Constant.application_page_question_view;
 	console.log("changePage() called.---->hidePainterController()"); 
 	hidePainterController();
@@ -1651,15 +1656,19 @@ var video_is_playing=false;
 function loadVideo(){
 
 	$("#video_container").show();
-//	var video1 = current_questions[current_question_position].video1.replaceAll('\\\\','');
-//	var video2 = current_questions[current_question_position].video2.replaceAll('\\\\','');
+	
+	//test begin
+	//var video1 = "<video controls height=\"100%\" id=\"vid\" onclick=\"this.play();\" poster=\"http://view.vzaar.com/918059/image\" preload=\"none\" src=\"http://view.vzaar.com/918059/video\" width=\"100%\"></video>";	
+	//test end
+	
 	var video1 = current_question.video1.replaceAll('\\\\','');
 	var video2 = current_question.video2.replaceAll('\\\\','');
 	
-	
 	if(video1&&video1.length>10){
+		
 		$("#video1").show();
 		$("#videoReplay").show();
+		current_video_content = video1;
 	}else{
 		$("#video1").hide();
 		$("#videoReplay").hide();
@@ -1688,8 +1697,8 @@ function loadVideo(){
 }
 
 function setVideoContent(content){
-	
 	$("#popContent").html(content);
+	$("#popContent").trigger("create");
 }
 
 /**
@@ -2229,6 +2238,7 @@ function resetmyExamScroll(){
 }
 
 function resetMainScroll(){
+	closeVideo();
 	//check login status
 	if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){//register success and login success
 		$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
@@ -2501,4 +2511,10 @@ function focusTop(){
 
 function setCurrentDiscussionId(id){
 	current_discussion_id = id;
+}
+
+function closeVideo(){
+	$("video").each(function(){
+		$(this).attr("src","");
+	});
 }
