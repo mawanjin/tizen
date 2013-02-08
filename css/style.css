@@ -146,7 +146,7 @@ opacity:1;
 #choicePanelContainer{
 	position: absolute; bottom: 0px;width:100px;  left: 220px; height: 100px;text-align:center;
 	border:0px solid green;
-	z-index:5;
+	z-index:9999999;
 }
 
 #choicePanelContainer img{

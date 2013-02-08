@@ -130,8 +130,14 @@ opacity:1;
 }
 
 #choicePanelContainer{
-	position: absolute; bottom: 0px; width: 100%; left: 0; height: 100px;text-align:center;
-	z-index:5;
+	position: absolute; 
+	bottom: 0px; 
+	width: 100%; 
+	left: 0; 
+	height: 100px;
+	text-align:center;
+	border:1 solid red;
+	z-index:9999999;
 }
 
 #choicePanelContainer img{

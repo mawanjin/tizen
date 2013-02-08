@@ -1856,7 +1856,6 @@ function showExam(){
 		$("#exam_totalTime").html(util.getTime(parseInt(examResultInfo.endTime)));
 		$("#exam_per").html(parseInt(util.getTime(parseInt(examResultInfo.endTime)/examResultInfo.questionCount)));
 		
-		
 		//generate list
 		var html = '';
 		for(var i=0;i<examResultInfo.QuestionExamStatus.length;i++){
@@ -1865,43 +1864,49 @@ function showExam(){
 //			var choice = parseInt(o.choice)+"";
 			var choice = o.choice+"";
 			
-			if(choice!="-1"&&choice.length>1){
+			if(choice!="-1"&&choice.length>1&&choice!="0.0"&&choice!="1.0"&&choice!="2.0"&&choice!="3.0"&&choice!="4.0"&&choice!="5.0"){
+				
 				var _c ="";
 				for(var i=0;i<choice.length;i++){
-					if(choice.charAt(i)==0)_c=_c+'a';
-					else if(choice.charAt(i)==1)_c=_c+'b';
-					else if(choice.charAt(i)==2)_c=_c+'c';
-					else if(choice.charAt(i)==3)_c=_c+'d';
-					else if(choice.charAt(i)==4)_c=_c+'e';
-					else if(choice.charAt(i)==5)_c=_c+'f';
+					var c = parseInt(choice.charAt(i));
+					
+					if(c==0)_c=_c+'a';
+					else if(c==1)_c=_c+'b';
+					else if(c==2)_c=_c+'c';
+					else if(c==3)_c=_c+'d';
+					else if(c==4)_c=_c+'e';
+					else if(c==5)_c=_c+'f';
 					
 					if(i!=choice.length-1)_c=_c+',';
 				}
 				if(_c!="")choice=_c;
 				
 			}else{
-				if(choice=="-1")choice="--";
-				else if(choice==0)choice='a';
-				else if(choice==1)choice='b';
-				else if(choice==2)choice='c'; 
-				else if(choice==3)choice='d';
-				else if(choice==4)choice='e';
-				else if(choice==5)choice='f';
+				var c = parseInt(choice);
+				if(c==-1)c="--";
+				else if(c==0)c='a';
+				else if(c==1)c='b';
+				else if(c==2)c='c'; 
+				else if(c==3)c='d';
+				else if(c==4)c='e';
+				else if(c==5)c='f';
+				choice = c; 
 			}
 				
 			var correct = o.correctChoice;
+			
 			if(correct==choice)
 				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')" ><table width=100% border=0><tr><td width=20% align=center><img src="./css/images/select.png" /></td><td width=20% align=center>'+(i+1)+'</td><td width=20% align=center>'+choice+'</td><td width=20% align=center>('+correct+')</td><td width=20% align=center><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 			else
 				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')"><table width=100% border=0><tr><td width=20% align=center><img src="./css/images/delete.png" /></td><td width=20% align=center>'+(i+1)+'</td><td width=20% align=center>'+choice+'</td><td width=20% align=center>('+correct+')</td><td width=20% align=center><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 		}
-		
+		console.log(html);
 		$("#thelist_exam").html(html);
 		$("#thelist_exam").trigger("create");
 		
 		setTimeout(function () {
 			myExamScroll.refresh();
-		},100);
+		},500);
 	});
 }
 
