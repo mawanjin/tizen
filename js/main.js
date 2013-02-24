@@ -186,12 +186,12 @@ function bindEvent() {
 	$("#mail").click(function() {
 		email();
 	});
-	$("#search_icon").click(function() {
-		alert("search_icon");
-	});
-	$("#btnVisit").click(function() {
-		alert("btnVisit");
-	});
+//	$("#search_icon").click(function() {
+//		alert("search_icon");
+//	});
+//	$("#btnVisit").click(function() {
+//		alert("btnVisit");
+//	});
 	$("#post").click(function() {
 		//check the type of reply:plain or reply for one
 		
@@ -1135,7 +1135,8 @@ function exam_review(position){
 	$("#questionview_done").show();
 	$("#questionview_menu").hide();
 	
-	$("#questionview_done").html('<a href="#exam" onclick="saveInpersonForExamBack()" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	//$("#questionview_done").html('<a href="#exam" onclick="saveInpersonForExamBack()" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").html('<a href="#exam" onclick="saveInpersonForExamBack()" ><div class="button" style="width:36px;">Done</div></a>');
 	$("#questionview_done").trigger('create');
 	
 	current_question_position = position;
@@ -1147,7 +1148,8 @@ function exam_review(position){
 		$("#choicePanelContainer").hide();
 		//reset drawer model
 		resetDrawerToolsColor();
-		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
+		//$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
+		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
 		$("#choice_bg").hide();
 		$("#choicePanelContainer").hide();
@@ -1388,6 +1390,7 @@ function showQuestionList(){
 		$("#wrapper_question_list").show();
 		updateQuestionList();
 		setTimeout(function () {
+			if(!myQuestionListScroll)myQuestionListScroll = new iScroll('wrapper_question_list',{ fixedScrollbar: false,bounce:false,vScrollbar: false });
 			myQuestionListScroll.refresh();
 		},100);
 	}
@@ -1900,7 +1903,7 @@ function showExam(){
 			else
 				html +='<li><a href="#qeustionview" style="color:black;text-decoration:none;" onclick="exam_review('+i+')"><table width=100% border=0><tr><td width=20% align=center><img src="./css/images/delete.png" /></td><td width=20% align=center>'+(i+1)+'</td><td width=20% align=center>'+choice+'</td><td width=20% align=center>('+correct+')</td><td width=20% align=center><img src="./css/images/arrow.png" /></td></tr></table></a></li>';
 		}
-		console.log(html);
+//		console.log(html);
 		$("#thelist_exam").html(html);
 		$("#thelist_exam").trigger("create");
 		
@@ -1937,10 +1940,15 @@ function onHintClick(hintCount){
 			freshPassageHtml(current_question.textBlock1C.replaceAll("\'", "\\\\'"));
 		}
 		current_hint_index++;
-		if(current_hint_index==1)
-			$("#btnHint").attr("src","./css/images/hint.png");
-		else
-			$("#btnHint").attr("src","./css/images/hint"+current_hint_index+".png");
+		if(current_hint_index==1){
+			//$("#btnHint").attr("src","./css/images/hint.png");
+			$("#btnHint").html("Hint&nbsp;&nbsp;&nbsp;");
+		}
+		else{
+			//$("#btnHint").attr("src","./css/images/hint"+current_hint_index+".png");
+			$("#btnHint").html("Hint"+current_hint_index+"&nbsp;&nbsp;&nbsp;");
+		}
+			
 		
 	}else if(current_hint_index==hintCount){
 		if(current_hint_index==1){
@@ -1959,11 +1967,12 @@ function onHintClick(hintCount){
 		
 		current_hint_index++;
 		
-		$("#btnHint").attr("src","./css/images/passage.png");
+		//$("#btnHint").attr("src","./css/images/passage.png");
+		$("#btnHint").html("Passage");
 	}else if(current_hint_index>hintCount){
 		current_hint_index=1;
-		$("#btnHint").attr("src","./css/images/hint.png");
-//		freshPassageHtml(current_questions[current_question_position].textBlock1A.replaceAll("\'", "\\\\'"));
+//		$("#btnHint").attr("src","./css/images/hint.png");
+		$("#btnHint").html("Hint&nbsp;&nbsp;&nbsp;");
 		freshPassageHtml(current_question.textBlock1A.replaceAll("\'", "\\\\'"));
 		
 	}
@@ -2115,13 +2124,15 @@ function switchMode(){
 	
 	if (!util.contains(("" + $("#a_mode").html()), "off", false)) {
 		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
+//		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-		switchPenOn();
+		penOff();		
 		
 	} else {
 		$("#a_mode").html('<img src="./css/images/penmode.png" width=40 height=40 />');
+//		$("#a_mode").html('<img src="./css/images/penmodeoff.png" width=40 height=40 />');
 		$("#a_mode").trigger("create");
-		penOff();
+		switchPenOn();
 	}
 	
 }
@@ -2371,7 +2382,9 @@ function setInperson(inperson){
 function saveInperson(callback){
 	
 	var inperson = getInpersonVO();
-	console.log("saveInperson() called. length="+inperson.xml.length);
+	if(inperson.xml)
+		console.log("saveInperson() called. length="+inperson.xml.length);
+	
 	if(inperson&&inperson.xml&&inperson.xml.length>60){
 		//ex_app_id, question_id,_base64,_xml,date
 		db.insertInperson(current_exAppId,current_questions[last_question_id].id,inperson.data,inperson.xml,util.currentTimeMillis(),function(rs){

@@ -43,7 +43,7 @@ function setChoices(choices, a_correct_inxs,solution_details) {
         var _isCorrectInx = isCorrectInx(i);
 
         innerHTML += '<tr>' +
-        '<td class="choice_letter"><div style="position:absolute;padding-left:7px;padding-top:2px;">' + translateLetter(i) + '</div><div id="' + circleID + i + '" class="choice_icon" ><img src="circle.png" width="28px" height="28px"/></div><div id="' + correctID + i + '" class="choice_icon"><img src="select.png" width="28px" height="28px"/></div></td>' +
+        '<td class="choice_letter"><div style="position:absolute;padding-left:7px;padding-top:2px;">' + translateLetter(i) + '</div><div id="' + circleID + i + '" class="choice_icon" ><img src="css/images/circle.png" width="28px" height="28px"/></div><div id="' + correctID + i + '" class="choice_icon"><img src="css/images/select.png" width="28px" height="28px"/></div></td>' +
         '<td class="choice_text">' + choice.text + '</td>' +
         '</tr>';
         
@@ -55,7 +55,7 @@ function setChoices(choices, a_correct_inxs,solution_details) {
 		
 		if (_isCorrectInx) {
             innerHTML += '<tr><td class="choice_discussion" colspan=2><b>' +
-                    'If you don\'t understand why this answer choice is correct, leave a comment in the discussion board <img src="discussion.png" width="30px"/>.' +
+                    'If you don\'t understand why this answer choice is correct, leave a comment in the discussion board <img src="css/images/discussion.png" width="30px"/>.' +
                     '</b></td></tr>';
         }
         innerHTML += '<tr><td>&nbsp;</td></tr>';

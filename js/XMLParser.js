@@ -74,7 +74,7 @@ function XMLParser() {
 //		if (self.problempackages.length == 0) {
 		if (0 == 0) {
 			$.ajax({
-				url : "problempackages.plist",
+				url : "active/problempackages.plist",
 				type : 'GET',
 				dataType : 'xml',
 				success : function(xml) {
@@ -194,7 +194,7 @@ function XMLParser() {
 		if (self.moduleinfo) {
 			$
 					.ajax({
-						url : "moduleinfo.plist",
+						url : "active/moduleinfo.plist",
 						type : 'GET',
 						dataType : 'xml',
 						success : function(xml) {
@@ -332,7 +332,7 @@ function XMLParser() {
 	self.getInformation = function(callback) {
 		if (self.information.length == 0) {
 			$.ajax({
-				url : "information.plist",
+				url : "active/information.plist",
 				type : 'GET',
 				dataType : 'xml',
 				success : function(xml) {

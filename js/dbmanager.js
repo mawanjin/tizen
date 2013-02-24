@@ -1207,7 +1207,7 @@ function DBManager() {
 	};
 	self.fillData = function(callback) {
 		$.ajax({
-			url : "database.xml",
+			url : "active/database.xml",
 			type : 'GET',
 			dataType : 'xml',
 			success : function(xml) {
@@ -1218,7 +1218,7 @@ function DBManager() {
 					self.executeSQL($(this).text(),function(){
 						i++;
 						console.log(i+";"+len);
-						if(i==200){
+						if(i==1704){
 							callback();
 						}
 					});

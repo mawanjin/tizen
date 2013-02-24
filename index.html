@@ -18,6 +18,7 @@
 
 <script src="./js/jquery-1.8.2.min.js"></script>
 <script src="./js/jquery.mobile-1.2.0.min.js"></script>
+<link  rel="stylesheet" href="./css/button.css" />
 <link id="scroll_css" rel="stylesheet" href="./css/scroll-portrait.css" />
 
 <link id="loading_css" rel="stylesheet" href="./css/loading-portrait.css" />
@@ -105,8 +106,8 @@
 	<div data-role="page" id="main">
 	
 		<div data-role="none" data-id="foo" id="header">
-			<div id="div_head">
-				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="top">
+			<div id="div_head" >
+				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="bottom" style="padding-top:5px;" >
 					<tr>
 						<td><a href="#info"><img id="btnInfo"
 								src="./css/images/infoicon.png" height="30px" /></a></td>
@@ -117,12 +118,13 @@
 						<td><a href="#bookmark"><img id="imgBookmark"
 								src="./css/images/bookmark.png" height="30px" /></a></td>
 						<td><img id="mail" src="./css/images/mail.png" height="30px" /></td>
-						<td><img id="search_icon" src="./css/images/search_icon.png"
-							height="30px" /></td>
+						<td><!-- <img id="search_icon" src="./css/images/search_icon.png"
+							height="30px" /> --></td>
 						<td>
 						<!-- <div data-role="popup" id="popupBasic">This is a completely basic popup, no options set.</div>-->
 						 <a id="btn_login" href="#" data-rel="popup" data-position-to="window"  >
-						 		<img alt="" src="./css/images/bttn_no_txt.png" height=25px />
+						 		<!-- <img alt="" src="./css/images/bttn_no_txt.png" height=25px /> -->
+						 		<div class="button">Login</div>
 							</td>
 						<!--<td><a href="index.html" data-role="button" data-theme="b"
 							style="height: 30px;">Login</a></td>-->
@@ -135,13 +137,14 @@
 			<div id="div_main_logo">
 				<img src="./css/images/logo_arcadia.png" />
 			</div>
+			
 			<table width="100%" id="main_category_bar_container">
 				<tr>
-					<td>
-						<!-- visit Marketplace> -->
+					<td>&nbsp;
+						<!--  
 						<div id="btnVisit" style="text-align: right;">
 							<span>Visit Marketplace></span>
-						</div>
+						</div>-->
 					</td>
 				</tr>
 				<tr>
@@ -257,8 +260,10 @@
 	<div data-role="page" id="info">
 		<div class="head_bg">
 			<!-- back button -->
-			<a href="#main" onclick="resetMainScroll()"><img id="info" src="./css/images/normal_back_btn.png"
-				height="30px" /></a>
+			<a href="#main" onclick="resetMainScroll()">
+				<!-- <img id="info" src="./css/images/normal_back_btn.png" height="30px" /> -->
+				<div id="info" class="button" style="width:38px;">Back</div>
+			</a>
 		</div>
 		<!-- /header -->
 		<!-- Title LOGO -->
@@ -286,8 +291,9 @@
 	<div data-role="page" id="info_content">
 		<div class="head_bg">
 			<!-- back button -->
-			<a href="#info"  ><img id="info"
-				src="./css/images/normal_back_btn.png" height="30px" /></a>
+			
+			<a href="#info"  ><!--  <img id="info"
+				src="./css/images/normal_back_btn.png" height="30px" />--><div id="info" class="button" style="width:38px;">Back</div></a>
 		</div>
 		<!-- /header -->
 		<!-- Title-->
@@ -314,8 +320,10 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
+							<!--  
 							<img id="btnMenu" onclick="showProblemMenuList();"
-								src="./css/images/menu_button.png" height="30px" width="80px" />
+								src="./css/images/menu_button.png" height="30px" width="80px" />-->
+								<div id="btnMenu" class="button" style="width:38px;" onclick="showProblemMenuList();">Menu</div>
 						</div>
 
 						<div id="wrapper_problemIntroMenu" style="display: none;">
@@ -331,8 +339,11 @@
 					</td>
 					<td align="right">
 						<div id="problemIntro_btnReview"><a href="#exam" onclick="showExam();">
+						<!--  
 							<img id="btnReview" src="./css/images/review_button.png"
-								width="80px" height="30px" /></a>
+								width="80px" height="30px" /> -->
+								<div id="btnReview" class="button">Review</div>
+							</a>
 						</div>
 					</td>
 				</tr>
@@ -351,10 +362,18 @@
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;">
 			<table width=100% height=100%>
 				<tr>
-					<td width=50% valign="middle"><a href="#qeustionview" onclick="resume()"><img id="btnResume"
-						src="./css/images/resume_button.png" height="30px" /></a></td>
-					<td width=50% align=right valign="middle"><a href="#qeustionview"> <img id="btnBegin"
-						src="./css/images/begin_button.png" height="30px" onclick="beginPractice()" /></a></td>
+					<td width=50% valign="middle"><a href="#qeustionview" onclick="resume()">
+					<div id="btnResume" class="button_cancle" style="width:65px;">Resume</div>
+					
+					<!-- 
+					<img id="btnResume"
+						src="./css/images/resume_button.png" height="30px" /> -->
+						
+						</a></td>
+					<td width=50% align=right valign="middle"><a href="#qeustionview"> <!-- <img id="btnBegin"
+						src="./css/images/begin_button.png" height="30px" onclick="beginPractice()" /> -->
+						<div id="btnBegin" onclick="beginPractice()" class="button">Begin Practice&nbsp;&nbsp;</div>
+						</a></td>
 				</tr>
 			</table>
 		</div>
@@ -371,14 +390,16 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main" onclick="resetMainScroll()"><img src="./css/images/done_button.png"
-								height="30px" width="80px" /></a>
+							<a href="#main" onclick="resetMainScroll()">
+							<!--<img src="./css/images/done_button.png" height="30px" width="80px" /> -->
+								<div class="button" style="width:30px;">Back</div>
+								</a>
 						</div>
 					</td>
 					<td align="center">
 						<div id="package_title"
 							style="text-align: center; color: white; font-size: 12px;">Market
-							Place</div>
+							Place&nbsp;&nbsp;</div>
 					</td>
 				</tr>
 			</table>
@@ -398,8 +419,10 @@
 			style="position: absolute; border: 0px solid red; bottom: 0; width: 100%; left: 0; height: 48px; text-align: right;">
 			<table width=100% height=100%>
 				<tr>
-					<td valign="bottom" align=right><img id="btnResume"
-						src="./css/images/buy_button.png" height="30px" /></td>
+					<td valign="bottom" align=right><!--  <img id="btnResume"
+						src="./css/images/buy_button.png" height="30px" /> -->
+						<div id="btnResume" class="button" style="width:30px;">Buy Now</div>
+						</td>
 				</tr>
 			</table>
 
@@ -416,8 +439,12 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main" onclick="resetMainScroll()" ><img src="./css/images/normal_back_btn.png"
-								height="30px" width="80px" /></a>
+							<a href="#main" onclick="resetMainScroll()" >
+							<!-- 
+							<img src="./css/images/normal_back_btn.png"
+								height="30px" width="80px" /> -->
+								<div class="button" style="width:38px;">Back</div>
+								</a>
 						</div>
 					</td>
 					<td align="center">
@@ -448,8 +475,12 @@
 			style="position: absolute; border: 0px solid red; bottom: 0; width: 100%; left: 0; height: 48px; text-align: right;">
 			<table width=100% height=100%>
 				<tr>
-					<td valign="bottom" align=right><img id="btnResume"
-						src="./css/images/buy_button.png" height="30px" /></td>
+					<td valign="bottom" align=right>
+					<!--  
+					<img id="btnResume"
+						src="./css/images/buy_button.png" height="30px" /> -->
+						<div id="btnResume" class="button">Buy Now</div>
+						</td>
 				</tr>
 			</table>
 
@@ -466,8 +497,12 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main" onclick="resetMainScroll()"><img src="./css/images/done_button.png"
-								height="30px" width="80px" /></a>
+							<a href="#main" onclick="resetMainScroll()">
+							<!--  
+							<img src="./css/images/done_button.png"
+								height="30px" width="80px" /> -->
+								<div class="button" style="width:38px;">Back</div>
+								</a>
 						</div>
 					</td>
 					<td align="center">
@@ -499,8 +534,10 @@
 			style="position: absolute; border: 0px solid red; bottom: 0; width: 100%; left: 0; height: 48px; text-align: right;">
 			<table width=100% height=100%>
 				<tr>
-					<td valign="bottom" align=right><img id="btnResume"
-						src="./css/images/buy_button.png" height="30px" /></td>
+					<td valign="bottom" align=right><!--  <img id="btnResume"
+						src="./css/images/buy_button.png" height="30px" /> -->
+						<div id="btnResume" class="button">Buy Now</div>
+						</td>
 				</tr>
 			</table>
 
@@ -517,8 +554,12 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a id="discussion_back" href="#main"><img src="./css/images/normal_back_btn.png"
-								height="30px" width="80px" /></a>
+							<a id="discussion_back" href="#main">
+							<!--
+							<img src="./css/images/normal_back_btn.png"
+								height="30px" width="80px" /> -->
+								<div class="button" style="width:38px;">Back</div>
+								</a>
 						</div>
 					</td>
 					<td align="center">
@@ -559,8 +600,12 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#discussion"><img src="./css/images/done_button.png"
-								height="30px" width="80px" /></a>
+							<a href="#discussion">
+							<!--  
+							<img src="./css/images/done_button.png"
+								height="30px" width="80px" />-->
+								<div class="button" style="width:38px;">Done</div>
+								</a>
 						</div>
 					</td>
 					<td align="center">
@@ -620,12 +665,19 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a id="reply_cancel" href="#discussion"><img
-								src="./css/images/cancel_button.png" height="30px" width="80px" /></a>
+							<a id="reply_cancel" href="#discussion">
+							<!--  
+							<img
+								src="./css/images/cancel_button.png" height="30px" width="80px" /> -->
+								<div class="button_cancle" style="width:45px;">Cancel</div>
+							</a>
 						</div>
 					</td>
-					<td align="right"><a href="#" onclick="post()"><img
-							src="./css/images/post_button.png" height="30px" width="80px" /></td>
+					<td align="right"><a href="#" onclick="post()">
+					<!-- 
+					<img src="./css/images/post_button.png" height="30px" width="80px" /> -->
+					<div class="button" style="width:38px;">Post</div>
+							</td>
 				</tr>
 			</table>
 		</div>
@@ -637,10 +689,11 @@
 			<table width=100%>
 				<tr>
 					<td>Comment:</td>
-					<td align="right">
+					<td align="right">&nbsp;
+					<!-- 
 					<a href="#popupChooseImg"  data-rel="popup" data-position-to="window" style="text-decoration:none;">
 					<font color=blue>Attach a screenshot
-							or photo</font></a></td>
+							or photo</font></a> --></td>
 					<td>&nbsp;</td>
 				</tr>
 			</table>
@@ -649,7 +702,11 @@
 			<textarea id="reply_textarea" data-role="none" rows="20"
 				style="margin-left: 5px; width: 95%; border: 1px solid gray; overflow: hidden;"></textarea>
 		</div>
-		<div id="attach_container" style="text-align: right;"><label onclick="clearImg()" style="border:0px solid red;"> Remove Attachment</label></div>
+		<div id="attach_container" style="text-align: right;">
+			<!--
+			<label onclick="clearImg()" style="border:0px solid red;"> Remove Attachment</label>
+			 -->
+		</div>
 		<!-- dialog for attach -->
 		<div id="screenshot_big" class="div_attach" ></div>
 		<div style="width:100%;text-align:center;border:0px solid red;">
@@ -771,13 +828,18 @@
 				valign="top">
 				<tr>
 					<td>
-						<div id="questionview_done" style="display:none;"><a href="#exam"><img  src="./css/images/done_button.png" width=80px height="30px" /></a></div>
+						<div id="questionview_done" style="display:none;">
+						<a href="#exam"><!--<img  src="./css/images/done_button.png" width=80px height="30px" /> -->
+							<div class="button">Done</div>
+						</a></div>
 					</td>
 					<td width=80px align=left valign="middle">
 						<!-- back button -->
-							<div onclick="showQuestionList();" id="questionview_number_indicator" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:5px;padding-left:19px;color:white;">10/26</div>
+							<div onclick="showQuestionList();" id="questionview_number_indicator" style="position:absolute;wdith:80px;text-align:center;border:0px solid red;padding-top:10px;padding-left:19px;color:white;">10/26</div>
+							<!-- 
 							<img  onclick="showQuestionList();"
-								src="./css/images/btn.png" height="30px" width="80px" />
+								src="./css/images/btn.png" height="30px" width="80px" /> -->
+								<div class="button" style="width:38px;">&nbsp;</div>
 					</td>
 					<td></td>
 					<td align=center>
@@ -800,8 +862,10 @@
 					
 					<td align="right">
 						<div id="questionview_menu">
+						  <!-- 
 							<img  src="./css/images/menu_button.png"
-								width="80px" height="30px" onclick="showQuestionMenu();" />
+								width="80px" height="30px" onclick="showQuestionMenu();" /> -->
+								<div class="button" onclick="showQuestionMenu();" style="width:38px;">Menu</div>
 						</div>
 					</td>
 				</tr>
@@ -818,7 +882,7 @@
 			<img  src="./css/images/painter_control_bg.png" height="330px" width="60px" />
 		</div>
 			<div id="controller_img_container"  >
-				<div id="a_mode" onclick="switchMode()" ><img  src="./css/images/penmodeoff.png"  width=40 height=40  /></div>
+				<div id="a_mode" onclick="switchMode()" ><img  src="./css/images/penmode.png"  width=40 height=40  /></div>
 				<div id="a_pen_settings" onclick="penOn()" ><img  src="./css/images/draw_off.png" width=40 height=40 /></div>
 				<div id="a_text_settings" onclick="putText()"><img  src="./css/images/text_off.png" width=40 height=40 /></div>
 				<div id="a_eraser_settings" onclick="eraserOn()"><img  src="./css/images/eraser_off.png" width=40 height=40 /></div>
@@ -890,7 +954,10 @@
 			<table width=100%>
 				<tr>
 					<td>&nbsp;</td>
-					<td width=10px><img id="videoReplay" src="./css/images/replay_button.png" width=100px height=30px style="display:none;" /></td>
+					<td width=10px>
+						<img id="videoReplay" src="./css/images/replay_button.png" width=100px height=30px style="display:none;" /> 
+						<!-- <div id="videoReplay" class="button" style="display:none;">Reply</div>-->
+					</td>
 					<td width=10px><a href="#popupVideo" id="video1" data-rel="popup" data-position-to="window" style="display:none;"><img src="./css/images/movie_button.png" width=100px height=30px /></a></td>
 					<td width=10px><a href="#popupVideo" id="video2" data-rel="popup" data-position-to="window" style="display:none;"><img src="./css/images/movie_button.png" width=100px height=30px /></a></td>
 				</tr>
@@ -932,9 +999,9 @@
 					</td>
 					<td class="choicePanelMarginTd"></td>
 				</tr>
-				<tr>
+				<tr> 
 					<td colspan=4 align="right" ><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
-					<td colspan=4 align="left">&nbsp;&nbsp;<img class="choice_panel_img_two_btn"  src="./css/images/confirm_button.png" /></td>
+					<td colspan=4 align="left">&nbsp;&nbsp;<div class="button_choice" >Confirm</div></td>
 				</tr>
 			</table>
 		</div>
@@ -1126,8 +1193,10 @@
 					<td width=80px>
 						<!-- back button -->
 						<div>
-							<a href="#main" onclick="javascript:current_showsolution = false;resetMainScroll();"><img src="./css/images/normal_back_btn.png"
-								height="30px" width="80px" /></a>
+							<a href="#main" onclick="javascript:current_showsolution = false;resetMainScroll();">
+								<!-- <img src="./css/images/normal_back_btn.png" height="30px" width="80px" /> -->
+								<div class="button" style="width:38px;">Back</div>
+							</a>
 						</div>
 					</td>
 				</tr>
@@ -1156,25 +1225,20 @@
 				</ul>
 			</div>
 		</div>
-
-		<div
-			style="position: absolute; border: 0px solid red; bottom: 0; width: 100%; left: 0; height: 48px; text-align: right;">
-			<table width=100% height=100%>
-				<tr>
-					<td valign="bottom" align=right><img id="btnResume"
-						src="./css/images/buy_button.png" height="30px" /></td>
-				</tr>
-			</table>
-
-		</div>
+		
+		
 		
 		<!-- Continue Button -->
 		<div
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
 			<table width=100% height=100%>
 				<tr>
-					<td width=100% align="right" valign="bottom"><a href="#exam_intro" onclick="showExamIntro()" > <img id="btnContinue"
-						src="./css/images/continue_button.png" height="30px" /></a></td>
+					<td width=100% align="right" valign="bottom"><a href="#exam_intro" onclick="showExamIntro()" >
+					<!-- 
+					<img id="btnContinue"
+						src="./css/images/continue_button.png" height="30px" /> -->
+						<div id="btnContinue" class="button" style="width:75px;">continue</div>
+					</a></td>
 				</tr>
 			</table>
 		</div>
@@ -1199,8 +1263,12 @@
 			style="position: absolute; bottom: 0; width: 100%; left: 0; height: 48px;z-index:4;">
 			<table width=100% height=100% border=0>
 				<tr>
-					<td width=100% align="right" valign="bottom"><a href="#exam"><img id="btnExamExit"
-						src="./css/images/normal_back_btn.png" height="30px" /></a></td>
+					<td width=100% align="right" valign="bottom"><a href="#exam">
+					<!-- 
+					<img id="btnExamExit"
+						src="./css/images/normal_back_btn.png" height="30px" /> -->
+						<div class="button" style="width:38px;" id="btnExamExit">Back</div>
+						</a></td>
 				</tr>
 			</table>
 		</div>
