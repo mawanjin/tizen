@@ -601,7 +601,7 @@
 </Reference>
 <Reference URI="index.html">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>oH3XozJBYDYO75wYFqJmcZYGOrcYRxy5jmdhNil/IjA=</DigestValue>
+<DigestValue>Tcovlo5jju+308mXIogNApXGZpebTjxc07PLofwA6OY=</DigestValue>
 </Reference>
 <Reference URI="js/XMLParser.js">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -3828,9 +3828,9 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-H5UBFnK4TqQ88oCjrPGOnT7G4PQyhO6vYvnt7822SpcfSutvD863BPnqrt714bwY/rFULCM3QSFu
-JXhY1L7zyslpIo8aNCij2nM947dY2EFTfrpRwUV4QMmpSEiGDz6EAluvWvkRRL2t6M7SECg4Dps/
-C5MkjKGjauTuPWNCCQk=
+bqnwetU0a1fuEtsS5CqT6V/RTKobfkGjNm+mO5HR2053Gok4fGoHWxrRLRXMy3nrzeeXX/ME2y5e
+LTIWM1k9gMx84HAKVjCubaTAe6NhKXAHKYN9au6KRQIFQxLAIOe+XZ1Bnf6zCOfCRqBo3amZNNRq
+8ma/GQLcN6d4QjIGtys=
 </SignatureValue>
 <KeyInfo>
 <X509Data>
