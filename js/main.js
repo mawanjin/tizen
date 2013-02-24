@@ -150,7 +150,10 @@ function bindEvent() {
 		
 		if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){
 			
-			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
+			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
+			$("#btn_login").html('<div class="button">Login</div>');
+			
+			
 			$("#btn_login").trigger('create');
 			http.publicUser.userName="";
 			http.publicUser.password="";
@@ -392,7 +395,7 @@ function showUserInfo(userId,head,attach){
 			return;
 		}
 		
-		$("#userinfo_content_head").html("<img src='"+head+"' />");
+		$("#userinfo_content_head").html("<img src='"+head+"' width='40px' height='40px' />");
 		
 		$("#userinfo_content_title").html(data.uname);
 		$("#userinfo_content_name").html(data.uname);
@@ -697,7 +700,8 @@ function showProblemSetIntro(){
 
 //List View
 function createListItemMyQuestions(data){
-	var img = '<img src="./css/images/'+data.logoImg+'" />';
+	//var img = '<img src="./css/images/'+data.logoImg+'" />';
+	var img = '<img src="'+data.logoImg+'" />';
 	var title ='<div><strong>'+data.title+'</strong></div>';
 	if(data.info){
 		var info = data.info;
@@ -728,7 +732,8 @@ function createListItemMyQuestions(data){
 }
 
 function createListItemRecommendation(data){
-	var img = '<img name="recommend_logo" src="./css/images/'+data.icon+'" />';
+	//var img = '<img name="recommend_logo" src="./css/images/'+data.icon+'" />';
+	var img = '<img name="recommend_logo" src="'+data.icon+'" />';
 	var title ='<div><strong>'+data.title+'</strong></div>';
 	var price = data.price;
 	
@@ -929,7 +934,8 @@ function login(type){
 		}else{
 			//alert(http.User.profile);
 			http.publicUser = data;
-			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			$("#btn_login").html('<div class="button" style="width:55px;">Logout</div>');
 			$( "#popupBasic" ).popup( "close" );
 		}
 	});
@@ -1177,7 +1183,8 @@ function bookmark_review(exapp_id,position){
 	$("#imgNxt").hide();
 	
 	
-	$("#questionview_done").html('<a href="#bookmark" onclick="updateBookmark();saveInperson();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	//$("#questionview_done").html('<a href="#bookmark" onclick="updateBookmark();saveInperson();" ><img  src="./css/images/done_button.png" width=80px height="30px" /></a>');
+	$("#questionview_done").html('<a href="#bookmark" onclick="updateBookmark();saveInperson();" ><div class="button" style="width:38px;">Done</div></a>');
 	$("#questionview_done").trigger('create');
 	
 	current_exAppId = exapp_id;
