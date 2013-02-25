@@ -104,7 +104,45 @@ system_service = new function() {
 	};
 
 	this.getNetWorkInfo = function(callback) {
-		var isSupported = tizen.systeminfo.isSupported("WifiNetwork");
+		var isSupported;
+		try{
+			isSupported = tizen.systeminfo.isSupported("WifiNetwork");	
+		}catch (e) {
+			var deviceCapabilities;
+			 deviceCapabilities = tizen.systeminfo.getCapabilities();
+			 if (deviceCapabilities.wifi)
+			 {
+			     console.log("WifiNetwork is supported");
+			     tizen.systeminfo.getPropertyValue("WIFI_NETWORK", function(wifi_stat){
+			    	 if(wifi_stat.status=="ON"){
+			    		 callback(true);
+			    		 return;
+			    	 }else{
+			    		//check network  
+				    	 tizen.systeminfo.getPropertyValue("CELLULAR_NETWORK",function(wifi_stat){
+				    		 if(wifi_stat.status=="ON"){
+					    		 callback(true);
+					    		 return;
+					    	 }
+				    	 },function(){
+				    		 isSupported = false;
+				    	 });
+			    	 }
+			     }, function(){
+			    	 //check network  
+			    	 tizen.systeminfo.getPropertyValue("CELLULAR_NETWORK",function(wifi_stat){
+			    		 if(wifi_stat.status=="ON"){
+				    		 callback(true);
+				    		 return;
+				    	 }
+			    	 },function(){
+			    		 isSupported = false;
+			    	 });
+			     });
+			 }else{
+				 isSupported = false;
+			 }
+		}
 		
 		if (isSupported) {
 			console.log("WifiNetwork is supported");
@@ -112,8 +150,11 @@ system_service = new function() {
 				system_service.wifiSuccess(wifi);
 				if(wifi.status=="OFF"||wifi.signalStrength==0)
 					system_service.checkNetWork(callback);
-				else
+				else{
 					callback(true);
+					return;
+				}
+					
 			},
 			function(){
 				system_service.checkNetWork(callback);
@@ -125,7 +166,13 @@ system_service = new function() {
 	};
 	
 	this.checkNetWork = function(callback){
-		var isSupported = tizen.systeminfo.isSupported("Network");
+		var isSupported;
+		try {
+			isSupported = tizen.systeminfo.isSupported("Network");	
+		} catch (e) {
+			callback(false);
+			return;
+		}
 		
 		if (isSupported) {
 			console.log("Network is supported");

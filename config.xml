@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/arcadiaprep" version="1.0" viewmodes="fullscreen">
-    <icon src="app_icon.png"/>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/arcadiaprep" version="1.0.0" viewmodes="fullscreen">
+    <access origin="*" subdomains="true"/>
+    <tizen:application id="0zE9nn6hMI" required_version="1.0"/>
     <content src="index.html"/>
-<name>arcadiaprep</name>
-<tizen:application id="0zE9nn6hMI" required_version="1.0"/>
-<feature name="http://tizen.org/api/download" required="true"/>
+    <feature name="http://tizen.org/api/download" required="true"/>
     <feature name="http://tizen.org/api/filesystem" required="true"/>
     <feature name="http://tizen.org/api/tizen" required="true"/>
-<access origin="*" subdomains="true"/>
     <feature name="http://tizen.org/api/application.launch" required="true"/>
     <feature name="http://tizen.org/api/application" required="true"/>
     <feature name="http://tizen.org/api/mediacontent" required="true"/>
+    <feature name="http://tizen.org/api/application.read" required="true"/>
+    <feature name="http://tizen.org/api/systeminfo" required="true"/>
+    <icon src="app_icon.png"/>
+    <name>arcadiaprep</name>
+    <tizen:privilege name="http://tizen.org/privilege/tizen"/>
+    <tizen:privilege name="http://tizen.org/privilege/systeminfo"/>
+    <tizen:setting screen-orientation="portrait" context-menu="enable" background-support="disable" encryption="disable" install-location="auto"/>
+ 
+ 
+ 
+ 
 
-<feature name="http://tizen.org/api/application.read" required="true"/>
-<tizen:setting screen-orientation="portrait" contextmenu="enable"/>
-<feature name="http://tizen.org/api/systeminfo" required="true"/>
+ 
+ 
+ 
 </widget>
