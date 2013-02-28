@@ -52,7 +52,7 @@ function DBManager() {
 	self.dropBookmarkStatement = 'DROP TABLE bookmark';
 	self.dropExamResultInfoStatement = 'DROP TABLE exam_result_info';
 	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
-	self.dropQuestionExamResultInfoStatement = 'DROP TABLE question_exam_result_info';
+	self.dropInpersonBase64Statement = 'DROP TABLE inperson_base64';
 	self.dropInpersonStatement = 'DROP TABLE inperson';
 	
 	//select
@@ -104,9 +104,9 @@ function DBManager() {
 		self.db.transaction(function(tx) {
 			
 
-			tx.executeSql(self.createIphoneExAppsStatement, [], function(){
-				tx.executeSql(self.createExAppPages, [], function(){
-					tx.executeSql(self.createQuestionsStatement, [], function(){
+//			tx.executeSql(self.createIphoneExAppsStatement, [], function(){
+//				tx.executeSql(self.createExAppPages, [], function(){
+//					tx.executeSql(self.createQuestionsStatement, [], function(){
 						tx.executeSql(self.createBookmark, [], function(){
 							tx.executeSql(self.createExamResultInfo, [], function(){
 								tx.executeSql(self.createquestionExamResultInfo, [], function(){
@@ -121,31 +121,13 @@ function DBManager() {
 									self.onError);
 						},
 								self.onError);
-					},
-							self.onError);
-				},
-						self.onError);
-			},
-					self.onError);
+//					},
+//							self.onError);
+//				},
+//						self.onError);
+//			},
+//					self.onError);
 			
-			/*
-			tx.executeSql(self.createIphoneExAppsStatement, [], self.onSuccess,
-					self.onError);
-			tx.executeSql(self.createExAppPages, [], self.onSuccess,
-					self.onError);
-			tx.executeSql(self.createQuestionsStatement, [], self.onSuccess,
-					self.onError);
-			tx
-					.executeSql(self.createBookmark, [], self.onSuccess,
-							self.onError);
-			tx.executeSql(self.createExamResultInfo, [], self.onSuccess,
-					self.onError);
-			tx.executeSql(self.createquestionExamResultInfo, [], callback,
-					self.onError);
-			tx.executeSql(self.createInpersonStatement, [], callback,
-					self.onError);*/
-			// tx.executeSql(self.createQuestionWorkspaceNotes, [],
-			// self.onSuccess, self.onError);
 		});
 	};
 	
@@ -1214,11 +1196,11 @@ function DBManager() {
 				var len = $(xml).find("sql").length;
 				var i =0;
 				$(xml).find("sql").each(function() {
-//					console.log("insert called."+$(this).text());
+				//	console.log("insert called."+$(this).text());
 					self.executeSQL($(this).text(),function(){
 						i++;
 						console.log(i+";"+len);
-						if(i==1704){
+						if(i==Constant.application_db_sql_count){
 							callback();
 						}
 					});
@@ -1260,6 +1242,12 @@ function DBManager() {
 		
 		self.db.transaction(function(tx) {
 			tx.executeSql(self.dropInpersonStatement, [],
+					function(tx, result) {
+					});
+		});
+		
+		self.db.transaction(function(tx) {
+			tx.executeSql(self.dropInpersonBase64Statement, [],
 					function(tx, result) {
 					});
 		});

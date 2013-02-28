@@ -37,7 +37,9 @@ function prepare() {
 	
 	function prepareDatabase() {
 		console.log("prepareDatabase() called");
-		db.createTables(afterCreateTable);
+		db.dropDB();
+		setTimeout(function(){db.createTables(afterCreateTable);},1000);
+		
 	}
 	
 	var timer_check_table_exist = null;
