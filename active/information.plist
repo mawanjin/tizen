@@ -4,101 +4,27 @@
 <array>
 	<dict>
 		<key>content</key>
-		<string>&lt;p align=&quot;center&quot; class=&quot;p1&quot;&gt;&lt;font size=&quot;4&quot;&gt;&lt;strong&gt;Arcadia Prep&apos;s LSAT Course: The LSAT, in bite-size chunks&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br /&gt;
-&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;We&apos;ve  taken all of the LSAT tests released since 1991, broken them down by  question type, and made them accessible anywhere you can bring an iPhone  or iPad. The Arcadia App allows you to master every question type seen  on the LSAT, at your pace and at your convenience.&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br /&gt;
-&lt;/p&gt;
-&lt;p align=&quot;center&quot; class=&quot;p1&quot;&gt;&lt;font size=&quot;4&quot;&gt;&lt;strong&gt;Exercise Sets, Lesson Sets, Practice Sets, Complete Sections:&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br /&gt;
-&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&lt;font size=&quot;3&quot;&gt;&amp;nbsp; &amp;nbsp; &lt;/font&gt;&lt;/span&gt;&lt;font size=&quot;3&quot;&gt;Our course features four types of Question Set: Exercise Sets, Lesson Sets, Practice Sets, and Complete Sections.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;br /&gt;
-&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;font size=&quot;3&quot;&gt;&lt;/font&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;The &lt;strong&gt;Exercise Sets &lt;/strong&gt;are  like spring training or boot camp. They&apos;re designed to help you develop  the core skills you&apos;ll need to tackle the LSAT. They each feature a  mini-lesson on a specific concept, followed by a series of questions  that drill you on that concept. We currently have five Exercise Sets  available, and you can expect more soon.&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;The &lt;strong&gt;Lesson Sets&lt;/strong&gt;  are designed to build the LSAT-specific skills necessary to get you to  the top of your game. Lesson Sets employ &amp;quot;Reduce&amp;quot; buttons to simplify  the passage or game. Most questions feature multiple levels of  reduction, each of which allows you to get closer to the logical  framework upon which all LSAT questions are based. Currently, we have  Lesson Sets available for the Logical Reasoning and Logic Games  sections. Reading Comprehension Lesson Sets are coming soon.&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;strong&gt;Practice Sets&lt;/strong&gt;  are the key to mastery. They are broken up by question type, and  feature either 12 or 25 questions. The optimal strategy?: Start with to  the LR section and pick a question type (we recommend you start with  &amp;quot;Main Point&amp;quot; questions). Complete the Lesson Set so that you understand  how questions of that type should be approached. Then hit the Practice  Sets until you&apos;re Bobby Fischer-good at that question type. Move on to  the next question type.&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;&lt;strong&gt;Complete Sections&lt;/strong&gt;  are taken directly from recently administered LSATs. These will give  you an opportunity to assess where your strengths and weaknesses are.  Once you&apos;ve determined where you&apos;re weak, you&apos;ll know which Practice  Sets to focus on. &lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p align=&quot;center&quot; class=&quot;p1&quot;&gt;&lt;font size=&quot;4&quot;&gt;&lt;strong&gt;The Breakdown, by Question/Passage Type:&lt;/strong&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;br /&gt;
-&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;Logical Reasoning (LR) - 12 Question Types Total*:&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;1. &amp;quot;Main Point&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;2. &amp;quot;Disagree/Agree&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;3. &amp;quot;Stronger&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;4. &amp;quot;Weaker&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;5. &amp;quot;Resolve/Explain&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;6. &amp;quot;Drawing Conclusions&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;7. &amp;ldquo;Necessary Premise&amp;rdquo; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;8. &amp;quot;Method/Function&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;9. &amp;quot;Flawed Reasoning&amp;quot; Questions&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;10. &amp;quot;Illustrating/Identifying Principles&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;11. &amp;quot;Parallel Structure&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;12. &amp;quot;Parallel Flaw&amp;quot; Questions&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;br /&gt;
-&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;Logical Reasoning (LG) - 5 Game Types Total*:&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;1. &amp;quot;Sequencing&amp;quot; Games&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;2. &amp;quot;Grouping&amp;quot; Games&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;3. &amp;quot;Assignment&amp;quot; Games&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;4. &amp;quot;Sequential Assignment&amp;quot; Games&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;5. &amp;quot;Spatial&amp;quot; Games&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;br /&gt;
-&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;Reading Comprehension (RC) - 5 Game Types Total:&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;1. &amp;quot;Law&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;2. &amp;quot;History &amp;amp; Humanities&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;3. &amp;quot;Government &amp;amp; Economics&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;4. &amp;quot;Science &amp;amp; Technology&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;5. &amp;quot;Art &amp;amp; Literature&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &lt;/span&gt;6. &amp;quot;Comparative Reading&amp;quot; Passages&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;br /&gt;
-&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p class=&quot;p3&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;&amp;nbsp;&amp;nbsp; &amp;nbsp; &lt;/span&gt;*Note that  some LR Question Types and LG Game Types have subsections. In order to  truly master a Question Type or Game Type, you&apos;ll need to master each  sub-section.&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;font size=&quot;3&quot;&gt;&lt;/font&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;br /&gt;
-&lt;/p&gt;</string>
+		<string>&lt;strong style=&quot;font-size:medium;font-family:&apos;Times New Roman&apos;;font-weight:normal&quot;&gt;&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;Kaplan &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; &lt;span class=&quot;il&quot;&gt;Quiz&lt;/span&gt; &lt;span class=&quot;il&quot;&gt;U&lt;/span&gt; allows you to squeeze serious &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; prep into your busy schedule. Get real practice &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; questions in timed mini &lt;span class=&quot;il&quot;&gt;quizzes&lt;/span&gt;, helping you study the most valuable, score-raising topics in &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; Math, &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; Critical Reading and &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; Writing.&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;Features:&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- FREE timed diagnostic &lt;span class=&quot;il&quot;&gt;quiz&lt;/span&gt; for each section tells you what topics you should focus your study on to raise your &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; score more quickly&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- Access to more than 450 &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; practice questions (upgrade required to access all questions)&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- Full answers &amp;amp; detailed explanations for every practice question taught by certified Kaplan &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; teachers&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- Challenge yourself with a practice set of the highest difficulty questions for each &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; section (upgrade required)&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- Get immediate feedback on your overall progress as you study &amp;amp; master new &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; topics&lt;/span&gt;&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;- Use the discussion feature to ask your questions to Kaplan &lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; teachers, and get a response within 24 hours!&lt;/span&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;span style=&quot;font-size:15px;font-family:Arial;background-color:transparent;vertical-align:baseline;white-space:pre-wrap&quot;&gt;&lt;span class=&quot;il&quot;&gt;SAT&lt;/span&gt; is a registered trademark of the College Board. The College Board does not sponsor or endorse this product.&lt;/span&gt;&lt;/strong&gt;&lt;br clear=&quot;all&quot; /&gt;
+&lt;div&gt;&lt;br /&gt;
+&lt;/div&gt;</string>
 		<key>name</key>
-		<string>The Arcadia LSAT Course</string>
-	</dict>
-	<dict>
-		<key>content</key>
-		<string>&lt;style type=&quot;text/css&quot;&gt;
-    p.p1 {font: 17.0px Times; min-height: 20.0px}
-    p.p2 {font: 17.0px Times}
-    p.p3 {text-align: center; font: 18.0px Times}
-    span.s1 {font: 17.0px Symbol}
-  &lt;/style&gt; &lt;p class=&quot;p2&quot;&gt;&lt;b&gt;K:3 :&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt; Shorthand for K appears third. This is most often used in sequences, but variations appear in &quot;Grouping&quot; and &quot;Assignment&quot; games as well. For example, &quot;R:tu&quot; might be used to indicate that the variable R is assigned to Tuesday.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;~P :&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt; Shorthand for “Not ‘P’”. Negation is one of the most important and widely used notations in formal logic, so you should become familiar with it. If you see &quot;~P&quot;, that means there is no P. If you see &quot;~M:7&quot;, that means M is not 7th.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;P &lt;/b&gt;&lt;span class=&quot;s1&quot;&gt;→&lt;/span&gt;&lt;b&gt; Q :&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This means if you have P, you &lt;i&gt;must&lt;/i&gt; also have Q. This relationship is called a conditional relationship (as in, “if you have condition A, then you must also have condition B”) or a causal relationship (as in “A causes B”). Make sure you understand that this does not mean “B means you must have A”. (That relationship would be written B &lt;span class=&quot;s1&quot;&gt;→&lt;/span&gt; A.) You will often use the conditional arrow in conjunction with the negation symbol. For instance, the relationship “if on Wednesday you have X, then on Tuesday you cannot have Y” would be translated as “Wed: X &lt;span class=&quot;s1&quot;&gt;→&lt;/span&gt; Tue: ~Y”.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;P &lt;/b&gt;&lt;span class=&quot;s1&quot;&gt;↔&lt;/span&gt;&lt;b&gt; Q :&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/b&gt; This shorthand represents the “biconditional” relationship. The biconditional relationship is expressed by an “if and only if” statement. The double arrow means that the existence of one element in the biconditional relationship always implies the existence of the second element.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;[A, B] : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A is positioned directly before B”. The comma indicates that the order is fixed (A appears before B).&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;[A / B] : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A is positioned next to B”. The slash notation is used because no order is given. You could have [A, B], or you could have [B, A].&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;A...B : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A occurs sometime before B”. Note that the number of characters between A and B is unspecified. All this notation says is that “A” comes before “B”.&lt;/p&gt;
-
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;[A,__,B] : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A is positioned exactly one space before B”.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;A...B/C : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A is positioned before B and C”. The order of B and C is not stated, so they are separated with a slash. An alternative shorthand method is to break it into two Rules: A...B and A...C. However, this will make your shorthand more confusing and cluttered, and is therefore not recommended.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;A...[B, C] : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “A is positioned before B, which is placed directly before C”. This notation is most often used when combining Rules, but sometimes results from a single Rule.&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;[A/B, __, B/A] : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;Shorthand for the Rule “There is exactly one package between A and B, whether or not A is delivered before B”. An alternative shorthand method is write out both possibilities: [A, __, B] -or- [B, __, A]. You will also see variations of this shorthand that include more space in between the characters. For example, the Rule “there are exactly two students between Becky and Chris” would be translated into shorthand as [B/C, __, __, C/B].&lt;/p&gt;
-
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;A/ : &lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This indicates a possible position for a variable. For example, if you know that “Z” must be placed in slot 3 or 7, you can place a Z/ underneath the third and seventh slots of your model.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Not Consec :&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This means that characters do not appear consecutively. For instance, a Rule might state &quot;no boys in the group can appear consecutively&quot;.&lt;span class=&quot;Apple-converted-space&quot;&gt; &lt;/span&gt;&lt;/p&gt;
-&lt;p class=&quot;p2&quot;&gt;&lt;b&gt;Each x1+ :&lt;/b&gt;&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;This shorthand denotes the requirements for the number of times that each character must appear. In this case (“Each x1+”), each character must appear at least once. Variations on this notation include Each x2 Max, Each x2,&lt;span class=&quot;Apple-converted-space&quot;&gt;  &lt;/span&gt;x3 Max.&lt;/p&gt;
-&lt;p class=&quot;p1&quot;&gt;&lt;br&gt;&lt;/p&gt;
-</string>
-		<key>name</key>
-		<string>Shorthand/Notation</string>
+		<string>Kaplan SAT Quiz U</string>
 	</dict>
 	<dict>
 		<key>content</key>
 		<string>The Company text</string>
 		<key>name</key>
-		<string>Go To ArcadiaPrep.com</string>
+		<string>Go To Arcadia-Apps.com</string>
 	</dict>
 </array>
 </plist>
