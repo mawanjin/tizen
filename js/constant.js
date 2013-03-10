@@ -20,6 +20,6 @@ Constant = new function(){
 	this.application_page_package_intro = "1009";	
 	this.ajax_timeout = 10000;
 	
-	this.application_db_sql_count=560
+	this.application_db_sql_count=1139
 };
 

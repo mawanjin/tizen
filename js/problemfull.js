@@ -79,7 +79,7 @@ function freshWorkspacePassageStemChoices(fscreen,passage,stem,choices, a_correc
 	freshPassageHtmlWorkspace(passage);
 	freshQuestionContent(stem);
 	setChoices(choices, a_correct_inxs,sol_details);
-	
+	console.log(passage+"-------------------------"+stem);
 	
 }
 

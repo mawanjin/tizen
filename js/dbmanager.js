@@ -1544,6 +1544,7 @@ function DBManager() {
 			code = "a"+1+"r"+5+"c"+0+"p?";
 			try{
 				this.questionStemA = EncryptionUtil.dencrypt(questionStemA,false,code);
+				console.log(".................."+this.questionStemA);
 			}catch(error){
 				this.questionStemA = "";
 				console.log("[ERR] DBmanager:EncryptionUtil.dencrypt error:: " + error.message);
@@ -1669,7 +1670,7 @@ function DBManager() {
 				rs +=",";
 				e = this.answer5A.replaceAll("\'", "\\'");
 			} else {
-				rs = rs.substring(0, rs.length() - 1);
+//				rs = rs.substring(0, rs.length() - 1);
 				rs += "]";
 				return rs;
 			}

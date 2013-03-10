@@ -88,7 +88,7 @@ function prepare() {
 
 	timer_check_table_exist = setInterval(func_check_table_exist, 1000);
 
-	// db.dropDB();
+//	 db.dropDB();
 	db.exists();
 };
 var parser = new XMLParser();
