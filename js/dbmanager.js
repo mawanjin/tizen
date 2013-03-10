@@ -380,7 +380,7 @@ function DBManager() {
 				for(var i=0;i<dataset.length;i++){
 					var o = dataset.item(i);
 					
-					if(o['price']==0.0||new UserService().getProfile()>=5||main_moduleinfo.Developer){
+					if(o['price']==0.0||o['price']==0.00||new UserService().getProfile()>=5||main_moduleinfo.Developer){
 						rs.push(new self.ExApps(o['pid'], o['section'], o['subsection'], o['name'], o['date'], o['duration'], o['solving_title'], o['evaluation_title'], o['price'], o['total_time'], o['difficulty'], o['video_url']));
 					}
 						

@@ -173,6 +173,9 @@ function XMLParser() {
 								index++;
 							});
 					callback(self.problempackages);
+				},
+				error:function(XMLHttpRequest, textStatus, errorThrown){
+					callback(self.problempackages);
 				}
 			});
 		} else {
