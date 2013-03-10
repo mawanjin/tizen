@@ -19,15 +19,24 @@
    font-family: Georgia, serif;
    text-decoration: none;
    vertical-align: middle;
+   
+   
    }
 .button:hover {
    border-top-color: #28597a;
    background: #28597a;
    color: #ccc;
+   
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   box-shadow: rgba(0,0,0,1) 0 1px 8px;
    }
 .button:active {
    border-top-color: #9db6c7;
    background: #9db6c7;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 18px;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 18px;
+   box-shadow: rgba(0,0,0,1) 0 1px 18px
    }
    
    
@@ -57,10 +66,16 @@
    border-top-color: #28597a;
    background: #28597a;
    color: #ccc;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   box-shadow: rgba(0,0,0,1) 0 1px 8px
    }
 .button_cancle:active {
    border-top-color: #9db6c7;
    background: #9db6c7;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 8px;
+   box-shadow: rgba(0,0,0,1) 0 1px 8px
    }
    
    
