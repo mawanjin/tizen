@@ -35,7 +35,7 @@ function freshQuestionContent(content) {
  * @param a_correct_inxs  正确答案的下标数组 0-A 1-B 2-C ....
  */
 function setChoices(choices, a_correct_inxs,solution_details) {
-	
+	if(JSON.stringify(solution_details)=="\"null\"")solution_details="";
     correct_inxs = a_correct_inxs;
     var innerHTML = '<table>';
     for (var i = 0; i < choices.length; i++) {
@@ -405,3 +405,15 @@ function penOff(){
 	//make drawer disable.
 	drawer.enable = false;
 }
+
+
+$("#div_body").live("tap", function(e) {
+	if(is_exam_review==true||is_bookmark_review==true){
+		
+	}else{
+		$("#choice_bg").toggle();
+		$("#choicePanelContainer").toggle();	
+	}
+	
+});
+

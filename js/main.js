@@ -1755,6 +1755,10 @@ function loadContent(isShowSolution){
 	refreshWorkspaceList();
 }
 
+function showConfirm(){
+	$( "#popupConfirm" ).popup( "open" );
+}
+
 function reset_user_choice(){
 	console.log("reset_user_choice() called");
 	$( "#popupConfirm" ).popup( "close" );
@@ -1765,11 +1769,15 @@ function reset_user_choice(){
 function showSolution(){
 	console.log("showSolution() called");
 	$( "#popupConfirm" ).popup( "close" );
-//	window.frames["i_workspace"].showSolution();
 	showWorkspaceSolution();
 	//refresh scroll
-//	window.frames["i_workspace"].refreshList();
 	refreshWorkspaceList();
+	//change button "confirm" to "next"
+	$("#btnConfirm").html("Next");
+	$("#btnConfirm").live("click",function(){
+		showNextQuestion();
+	});
+	$("#btnConfirm").trigger("create");
 }
 
 function choice(option){
@@ -1992,6 +2000,13 @@ function onHintClick(hintCount){
 function showNextQuestion(){
 	changePage('true');
 	$( "#popupConfirm" ).popup( "close" );
+	$("#btnConfirm").html("Confirm");
+	$("#btnConfirm").unbind();
+	$("#btnConfirm").die("click")
+	$("#btnConfirm").live("click",function(){
+		$( "#popupConfirm" ).popup( "open" );	
+	});
+	$("#btnConfirm").trigger("create");
 }
 
 function showPainterController(){

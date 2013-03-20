@@ -1584,15 +1584,16 @@ function DBManager() {
 			return rs;
 		};
 		
-		this.getAnswerLetters = function(){
+		this.getAnswerLetters = function(){ 
+			
 			//alert(this.answer1A+";"+this.answer2A+this.answer3A+";"+this.answer4A+";"+this.answer5A+";"+this.answer6A);
 			var rs = new Array();
-			if(this.answer1A&&this.answer1A!="")rs.push("A");
-			if(this.answer2A&&this.answer2A!="")rs.push("B");
-			if(this.answer3A&&this.answer3A!="")rs.push("C");
-			if(this.answer4A&&this.answer4A!="")rs.push("D");
-			if(this.answer5A&&this.answer5A!="")rs.push("E");
-			if(this.answer6A&&this.answer6A!="")rs.push("F");
+			if(this.answer1A&&this.answer1A!=""&&this.answer1A!="{null}"&&JSON.stringify(this.answer1A)!="\"null\"")rs.push("A");
+			if(this.answer2A&&this.answer2A!=""&&this.answer2A!="{null}"&&JSON.stringify(this.answer2A)!="\"null\"")rs.push("B");
+			if(this.answer3A&&this.answer3A!=""&&this.answer3A!="{null}"&&JSON.stringify(this.answer3A)!="\"null\"")rs.push("C");
+			if(this.answer4A&&this.answer4A!=""&&this.answer4A!="{null}"&&JSON.stringify(this.answer4A)!="\"null\"")rs.push("D");
+			if(this.answer5A&&this.answer5A!=""&&this.answer5A!="{null}"&&JSON.stringify(this.answer5A)!="\"null\"")rs.push("E");
+			if(this.answer6A&&this.answer6A!=""&&this.answer6A!=null&&JSON.stringify(this.answer6A)!="\"null\"")rs.push("F");
 			return rs;
 		};
 		
@@ -1601,14 +1602,14 @@ function DBManager() {
 			var a2,b2,c2,d2,e2,f2;
 			var rs = "[";
 			
-			if (this.answer1A&&this.answer1A!="") {
+			if (this.answer1A&&this.answer1A!=""&&JSON.stringify(this.answer1A)!="\"null\"") {
 				a = this.answer1A.replaceAll("\'", "\\'");
 			} else {
 				rs += "]";
 				return rs;
 			}
 			
-			if (this.solutionText1&&this.solutionText1!="") {
+			if (this.solutionText1&&this.solutionText1!=""&&JSON.stringify(this.solutionText1)!="\"null\"") {
 				a2 = this.solutionText1.replaceAll("\'", "\\'");
 			} else { 
 				a2 = "";
@@ -1616,7 +1617,7 @@ function DBManager() {
 			
 			rs += "{text:'" + a + "',tip:'" + a2 + "'}";
 			
-			if (this.answer2A&&this.answer2A!="") {
+			if (this.answer2A&&this.answer2A!=""&&JSON.stringify(this.answer2A)!="\"null\"") {
 				 rs +=",";
 				 b = this.answer2A.replaceAll("\'", "\\'");
 			} else {
@@ -1626,7 +1627,7 @@ function DBManager() {
 				return rs;
 			}
 			
-			if (this.solutionText2&&this.solutionText2!="") {
+			if (this.solutionText2&&this.solutionText2!=""&&JSON.stringify(this.solutionText2)!="\"null\"") {
 				b2 = this.solutionText2.replaceAll("\'", "\\'");
 			} else {
 				b2 = "";
@@ -1634,7 +1635,7 @@ function DBManager() {
 			
 			rs += "{text:'" + b + "',tip:'" + b2 + "'}";
 			
-			if (this.answer3A&&this.answer3A!="") {
+			if (this.answer3A&&this.answer3A!=""&&JSON.stringify(this.answer3A)!="\"null\"") {
 				rs +=",";
 				c = this.answer3A.replaceAll("\'", "\\'");
 			} else {
@@ -1643,14 +1644,14 @@ function DBManager() {
 				return rs;
 			}
 			
-			if (this.solutionText3&&this.solutionText3!="") {
+			if (this.solutionText3&&this.solutionText3!=""&&JSON.stringify(this.solutionText3)!="\"null\"") {
 				c2 = this.solutionText3.replaceAll("\'", "\\'");
 			} else {
 				c2 = "";
 			}
 			rs += "{text:'" + c + "',tip:'" + c2 + "'}";
 			
-			if (this.answer4A&&this.answer4A!="") {
+			if (this.answer4A&&this.answer4A!=""&&JSON.stringify(this.answer4A)!="\"null\"") {
 				rs +=",";
 				d = this.answer4A.replaceAll("\'", "\\'");
 			} else {
@@ -1659,14 +1660,14 @@ function DBManager() {
 				return rs;
 			}
 			
-			if (this.solutionText4&&this.solutionText4!="") {
+			if (this.solutionText4&&this.solutionText4!=""&&JSON.stringify(this.solutionText4)!="\"null\"") {
 				d2 = this.solutionText4.replaceAll("\'", "\\'");
 			} else {
 				d2 = "";
 			}
 			rs += "{text:'" + d + "',tip:'" + d2 + "'}";
 			
-			if (this.answer5A &&this.answer5A!="") {
+			if (this.answer5A &&this.answer5A!=""&&JSON.stringify(this.answer5A)!="\"null\"") {
 				rs +=",";
 				e = this.answer5A.replaceAll("\'", "\\'");
 			} else {
@@ -1675,14 +1676,14 @@ function DBManager() {
 				return rs;
 			}
 			
-			if (this.solutionText5&&this.solutionText5!="") {
+			if (this.solutionText5&&this.solutionText5!=""&&JSON.stringify(this.solutionText5)!="\"null\"") {
 				e2 = this.solutionText5.replaceAll("\'", "\\'");
 			} else {
 				e2 = "";
 			}
 			rs += "{text:'" + e + "',tip:'" + e2 + "'}";
 			
-			if (this.answer6A &&this.answer6A!="") {
+			if (this.answer6A &&this.answer6A!=""&&JSON.stringify(this.answer6A)!="\"null\"") {
 				rs+=",";
 				f = this.answer6A.replaceAll("\'", "\\'");
 			} else {

@@ -132,13 +132,13 @@ util = new function() {
 	};
 	
 	this.convertChoiceToIndex = function(i){
-		if(i=='a')return 0;
-		else if(i=='b')return 1;
-		else if(i=='c')return 2;
-		else if(i=='d')return 3;
-		else if(i=='e')return 4;
-		else if(i=='f')return 5;
-		else if(i=='g')return 6;
+		if(i=='a'||i=='A')return 0;
+		else if(i=='b'||i=='B')return 1;
+		else if(i=='c'||i=='C')return 2;
+		else if(i=='d'||i=='D')return 3;
+		else if(i=='e'||i=='E')return 4;
+		else if(i=='f'||i=='F')return 5;
+		else if(i=='g'||i=='G')return 6;
 	};
 	
 	this.pause = function(millisecondi)

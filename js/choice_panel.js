@@ -20,6 +20,7 @@ mChoicePanel = new function(){
 				';
 		
 		var len = question.getAnswerLetters().length;
+		if(len==0)len=5;
 		
 		var w ='a';
 		for(var i=0;i<len;i++){
@@ -38,7 +39,7 @@ mChoicePanel = new function(){
 		if(hintCount>0){
 			current_hint_index = 1;
 			//hint='<td colspan=4 align="right"><img id="btnHint" style="width:70px;height:35px;"  src="./css/images/hint.png" onclick="onHintClick('+hintCount+')" />&nbsp;&nbsp;</td>';
-			hint='<td colspan=4 align="right" valign="top"><div id="btnHint" onclick="onHintClick('+hintCount+')" class="button_choice" style="width:55px;height:20px;">Hint&nbsp;&nbsp;&nbsp;</div>&nbsp;&nbsp;</td>';
+			hint='<td colspan=4 align="right" valign="top"><div id="btnHint" onclick="onHintClick('+hintCount+')" class="button_choice" style="width:55px;height:20px;text-align:center;">Hint</div></td>';
 		}
 		else{
 			current_hint_index =-1;
@@ -46,8 +47,8 @@ mChoicePanel = new function(){
 		}
 			
 		
-		//html+='<tr>'+hint+'<td colspan=4 align="left">&nbsp;&nbsp;<a href="#popupConfirm" data-rel="popup"><img style="width:70px;"  src="./css/images/confirm_button.png" /></a></td></tr></table>';
-		html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><a href="#popupConfirm" data-rel="popup"><div class="button_choice" style="width:55px;height:20px;">Confirm</div></a></td></tr></table>';
+		//html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><a href="#popupConfirm" data-rel="popup"><div class="button_choice" style="width:55px;height:20px;">Confirm</div></a></td></tr></table>';
+		html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><div id="btnConfirm" class="button_choice" style="width:55px;height:20px;text-align:center;" onclick="showConfirm()" >Confirm</div></td></tr></table>';
 		
 		//console.log("start create choice panel::"+html);
 		$("#choicePanelContainer").html(html);
@@ -56,6 +57,7 @@ mChoicePanel = new function(){
 	};
 	
 	this.changeButtonsBg = function(which){
+		
 		var w ='a';
 			if(which==0)w='a';
 			else if(which==1)w='b';
@@ -81,6 +83,8 @@ mChoicePanel = new function(){
 				$("#imgChoiceBtn_"+i).attr("src","./css/images/answer_"+_w+".png");
 				$("#imgChoiceBtn_"+i).trigger("create");
 			}
+		}else if(this.question.solution.length>1){
+			
 		}
 		
 		var select = "true";
@@ -90,6 +94,8 @@ mChoicePanel = new function(){
 			select = "true";
 		}else{
 			select = "false";
+			$("#imgChoiceBtn_"+which).attr("src","./css/images/answer_"+w+".png");
+			$("#imgChoiceBtn_"+which).trigger("create");
 		}
 		
 		this.onChoiceClick(which,select);
