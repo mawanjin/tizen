@@ -2,7 +2,8 @@ var current_page = Constant.application_page_main;
 //Initialize function
 var init = function() {
 	// TODO:: Do your initialization job
-	console.log("init() called");
+	console.log("init() called."+localD.get("i18n_key"));
+	
 	
 	//show screen-orientation is landscape
 	$("#loading_css").attr("href", "./css/loading.css");
@@ -12,6 +13,10 @@ var init = function() {
 	$("#loading_login").html(util.getLoading());
 	
 	$("#loading_login").show();
+	
+	//i18n
+	localD.translate();
+	
 	prepare();
 	
 };

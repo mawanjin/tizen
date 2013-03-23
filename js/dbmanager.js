@@ -1188,6 +1188,7 @@ function DBManager() {
 		});
 	};
 	self.fillData = function(callback) {
+	console.log("fillData called.");
 		$.ajax({
 			url : "active/database.xml",
 			type : 'GET',
@@ -1205,6 +1206,9 @@ function DBManager() {
 						}
 					});
 				});
+			},
+			error:function(o,e){
+				console.log("fillData error="+e.message);
 			}
 		});
 	};

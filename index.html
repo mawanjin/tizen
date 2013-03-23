@@ -12,43 +12,46 @@
 
 <title>Tizen Web IDE - Tizen - jQuery Mobile - Single-Page</title>
 
-<link rel="stylesheet" href="./css/jquery.mobile-1.2.0.min.css" />
-<link rel="stylesheet" href="./css/loading-portrait.css" />
-<link id="view_model" rel="stylesheet" href="./css/sl_portrait.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.2.0.min.css" />
+<link rel="stylesheet" href="css/loading-portrait.css" />
+<link id="view_model" rel="stylesheet" href="css/sl_portrait.css" />
 
-<script src="./js/jquery-1.8.2.min.js"></script>
-<script src="./js/jquery.mobile-1.2.0.min.js"></script>
-<link  rel="stylesheet" href="./css/button.css" />
-<link id="scroll_css" rel="stylesheet" href="./css/scroll-portrait.css" />
+<script src="js/map.js"></script>
+<script src="js/local_def.js"></script>
 
-<link id="loading_css" rel="stylesheet" href="./css/loading-portrait.css" />
-<link id="listview_css" rel="stylesheet" href="./css/listview-portrait.css" />
+<script src="js/jquery-1.8.2.min.js"></script>
+<script src="js/jquery.mobile-1.2.0.min.js"></script>
+<link  rel="stylesheet" href="css/button.css" />
+<link id="scroll_css" rel="stylesheet" href="css/scroll-portrait.css" />
 
-<script type="text/javascript" src="./js/systemService.js"></script>
-<script type="text/javascript" src="./js/localstorage.js"></script>
-<script type="text/javascript" src="./js/timer.js"></script>
-<script type="text/javascript" src="./js/base64.js"></script>
-<script type="text/javascript" src="./js/sha1.js"></script>
-<script type="text/javascript" src="./js/http.js"></script>
-<script type="text/javascript" src="./js/util.js"></script>
-<script type="text/javascript" src="./js/encryptionUtil.js"></script>
-<script type="text/javascript" src="./js/choice_panel.js"></script>
-<script type="text/javascript" src="./js/iscroll-lite.js?v4"></script>
-<script id="constant_js" type="text/javascript" src="./js/constant.js"></script>
-<script type="text/javascript" src="./js/dbmanager.js"></script>
-<script type="text/javascript" src="./js/XMLParser.js"></script>
-<script type="text/javascript" src="./js/user.js"></script>
-<script type="text/javascript" src="./js/orientation.js"></script>
-<script src="./js/slides.min.jquery.js"></script>
+<link id="loading_css" rel="stylesheet" href="css/loading-portrait.css" />
+<link id="listview_css" rel="stylesheet" href="css/listview-portrait.css" />
 
-<script type="text/javascript" src="./js/packages.js"></script>
-<script type="text/javascript" src="./js/main.js"></script>
-<script type="text/javascript" src="./js/problemfull.js"></script>
-<script type="text/javascript" src="./js/drawer.js"></script>
+<script type="text/javascript" src="js/systemService.js"></script>
+<script type="text/javascript" src="js/localstorage.js"></script>
+<script type="text/javascript" src="js/timer.js"></script>
+<script type="text/javascript" src="js/base64.js"></script>
+<script type="text/javascript" src="js/sha1.js"></script>
+<script type="text/javascript" src="js/http.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript" src="js/encryptionUtil.js"></script>
+<script type="text/javascript" src="js/choice_panel.js"></script>
+<script type="text/javascript" src="js/iscroll-lite.js?v4"></script>
+<script id="constant_js" type="text/javascript" src="js/constant.js"></script>
+<script type="text/javascript" src="js/dbmanager.js"></script>
+<script type="text/javascript" src="js/XMLParser.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript" src="js/orientation.js"></script>
+<script src="js/slides.min.jquery.js"></script>
 
-<link id="slider_css" rel="stylesheet" href="./css/slider-portrait.css">
-<link id="main_css" rel="stylesheet" href="./css/style-portrait.css" />
-<link rel="stylesheet" href="./css/workspace.css" />
+<script type="text/javascript" src="js/packages.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/problemfull.js"></script>
+<script type="text/javascript" src="js/drawer.js"></script>
+
+<link id="slider_css" rel="stylesheet" href="css/slider-portrait.css">
+<link id="main_css" rel="stylesheet" href="css/style-portrait.css" />
+<link rel="stylesheet" href="css/workspace.css" />
 
 <script>
 	var myScroll;
@@ -124,7 +127,7 @@
 						<!-- <div data-role="popup" id="popupBasic">This is a completely basic popup, no options set.</div>-->
 						 <a id="btn_login" href="#" data-rel="popup" data-position-to="window"  >
 						 		<!-- <img alt="" src="./css/images/bttn_no_txt.png" height=25px /> -->
-						 		<div class="button">Login</div>
+						 		<div class="button i18n">Login</div>
 							</td>
 						<!--<td><a href="index.html" data-role="button" data-theme="b"
 							style="height: 30px;">Login</a></td>-->
@@ -168,41 +171,40 @@
 				data-position-to="origin" class="ui-content">
 
 				<div style="padding: 5px 0px;">
-					<font>&nbsp;<b>Login to ArcadiaPrep.com</b></font>
+					<font>&nbsp;<b class="i18n">Login_to_ArcadiaPrep_com</b></font>
 					<hr>
 					<table>
 						<tr>
-							<td>Login</td>
+							<td class="i18n">Login</td>
 							<td><input type="text" name="user" id="login_name" value=""
 								placeholder="Enter an e-mail."></td>
 						</tr>
 						<tr>
-							<td>Password</td>
+							<td class="i18n">Password</td>
 							<td><input type="password" name="user" id="login_pass" value=""
 								placeholder="Enter a pass."></td>
 						</tr>
 						<tr>
 							<td colspan=2 align=right><div onclick="login();"
-									style="width: 50%;" data-role="button">Login</div></td>
+									style="width: 50%;" data-role="button" class="i18n">Login</div></td>
 						</tr>
 					</table>
 					<hr>
-					<div style="font-color: white; font-size: 10px;">Don't have
-						an AcrediaPrep.com log-in?</div>
-					<a href="#popupRegister" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b">Register</div></a>
+					<div style="font-color: white; font-size: 10px;" class="i18n">need_login</div>
+					<a href="#popupRegister" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b" class="i18n">Register</div></a>
 				</div>
 			</div>
 			<!-- Popup -register -->
 			<div data-role="popup" id="popupRegister" data-theme="b" class="ui-content popupRegister">
 
 				<div style="width:300px;">
-					<font >&nbsp;Register</font>
+					<font class="i18n">nbsp_Register</font>
 					<hr>
 					<table cellpadding=0 cellspacing=0>
 						<tr>
 							<!-- photo -->
 							<td style="background-color:gray;">
-								<a id="register_img" href="javascript:register_select_img();" style="text-decoration:none;" data-rel="popup" data-position-to="window">Set Photo</a>
+								<a id="register_img" href="javascript:register_select_img();" style="text-decoration:none;" data-rel="popup" data-position-to="window" class="i18n">Set_Photo</a>
 							</td>
 							<td>
 								<input type="text"  id="fname" value="" placeholder="First Name*">
@@ -223,9 +225,9 @@
 						</tr>
 						<tr>
 							<td><a href="#popupBasic" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div 
-									data-role="button">Cancel</div></a></td>
+									data-role="button" class="i18n">Cancel</div></a></td>
 							<td><div onclick="register();" 
-									data-role="button" data-theme="b">Register</div></td>
+									data-role="button" data-theme="b" class="i18n">Register</div></td>
 						</tr>
 					</table>
 				</div>
@@ -238,8 +240,8 @@
 		<div data-role="popup" id="popupPhotoPicker" data-theme="b"
 				data-position-to="window">
 				<ul data-role="listview" data-icon="arrow-r">
-					<li><a href="#" onclick="showGallery();">Select from gallery</a></li>
-					<li><a href="#">Take photo</a></li>
+					<li><a href="#" onclick="showGallery();" class="i18n">Select_from_gallery</a></li>
+					<li><a href="#" class="i18n">take_photo</a></li>
 				</ul>
 		</div>
 		<!-- /header -->
@@ -247,7 +249,7 @@
 		<!-- popup -photo picker -->
 		<div data-role="popup" id="popupNetWorkAlert" data-theme="c" class="ui-content"
 				data-position-to="window">
-				<h3>Network Alert</h3>
+				<h3 class="i18n">network_alert</h3>
 				You need to have an internet connect to use this feature!
 		</div>	
 
@@ -262,7 +264,7 @@
 			<!-- back button -->
 			<a href="#main" onclick="resetMainScroll()">
 				<!-- <img id="info" src="./css/images/normal_back_btn.png" height="30px" /> -->
-				<div id="info" class="button" style="width:38px;">Back</div>
+				<div id="info" class="button i18n" style="width:38px;" >Back</div>
 			</a>
 		</div>
 		<!-- /header -->
@@ -270,7 +272,7 @@
 		<div style="text-align: center; margin-top: 15px;">
 			<img class="div_main_logo" src="./css/images/logo_arcadia.png" />
 			<div>
-				<h3>Information</h3>
+				<h3 class="i18n">Information</h3>
 			</div>
 		</div>
 		<!-- List -->
@@ -293,7 +295,7 @@
 			<!-- back button -->
 			
 			<a href="#info"  ><!--  <img id="info"
-				src="./css/images/normal_back_btn.png" height="30px" />--><div id="info" class="button" style="width:38px;">Back</div></a>
+				src="./css/images/normal_back_btn.png" height="30px" />--><div id="info" class="button i18n" style="width:38px;">Back</div></a>
 		</div>
 		<!-- /header -->
 		<!-- Title-->
@@ -323,7 +325,7 @@
 							<!--  
 							<img id="btnMenu" onclick="showProblemMenuList();"
 								src="./css/images/menu_button.png" height="30px" width="80px" />-->
-								<div id="btnMenu" class="button" style="width:38px;" onclick="showProblemMenuList();">Menu</div>
+								<div id="btnMenu" class="button i18n" style="width:38px;" onclick="showProblemMenuList();">Menu</div>
 						</div>
 
 						<div id="wrapper_problemIntroMenu" style="display: none;">
@@ -342,7 +344,7 @@
 						<!--  
 							<img id="btnReview" src="./css/images/review_button.png"
 								width="80px" height="30px" /> -->
-								<div id="btnReview" class="button">Review</div>
+								<div id="btnReview" class="button i18n">Review</div>
 							</a>
 						</div>
 					</td>
@@ -363,7 +365,7 @@
 			<table width=100% height=100%>
 				<tr>
 					<td width=50% valign="middle"><a href="#qeustionview" onclick="resume()">
-					<div id="btnResume" class="button_cancle" style="width:65px;">Resume</div>
+					<div id="btnResume" class="button_cancle i18n" style="width:65px;">Resume</div>
 					
 					<!-- 
 					<img id="btnResume"
@@ -372,7 +374,7 @@
 						</a></td>
 					<td width=50% align=right valign="middle"><a href="#qeustionview"> <!-- <img id="btnBegin"
 						src="./css/images/begin_button.png" height="30px" onclick="beginPractice()" /> -->
-						<div id="btnBegin" onclick="beginPractice()" class="button" style="width:150px;">Begin Practice&nbsp;&nbsp;</div>
+						<div id="btnBegin" onclick="beginPractice() " class="button i18n" style="width:150px;">Begin_Practice_nbsp_nbsp</div>
 						</a></td>
 				</tr>
 			</table>
@@ -392,14 +394,13 @@
 						<div>
 							<a href="#main" onclick="resetMainScroll()">
 							<!--<img src="./css/images/done_button.png" height="30px" width="80px" /> -->
-								<div class="button" style="width:30px;">Back</div>
+								<div class="button i18n" style="width:30px;">Back</div>
 								</a>
 						</div>
 					</td>
 					<td align="center">
 						<div id="package_title"
-							style="text-align: center; color: white; font-size: 12px;">Market
-							Place&nbsp;&nbsp;</div>
+							style="text-align: center; color: white; font-size: 12px;" class="i18n">MarketPlace_nbsp_nbsp</div>
 					</td>
 				</tr>
 			</table>
@@ -421,7 +422,7 @@
 				<tr>
 					<td valign="bottom" align=right><!--  <img id="btnResume"
 						src="./css/images/buy_button.png" height="30px" /> -->
-						<div id="btnResume" class="button" style="width:30px;">Buy Now</div>
+						<div id="btnResume" class="button i18n" style="width:30px;">Buy_Now</div>
 						</td>
 				</tr>
 			</table>
@@ -443,13 +444,13 @@
 							<!-- 
 							<img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /> -->
-								<div class="button" style="width:38px;">Back</div>
+								<div class="button i18n" style="width:38px;">Back</div>
 								</a>
 						</div>
 					</td>
 					<td align="center">
 						<div id="package_title"
-							style="text-align: center; color: white; font-size: 12px;">Bookmarks</div>
+							style="text-align: center; color: white; font-size: 12px;" class="i18n" >Bookmarks</div>
 					</td>
 				</tr>
 			</table>
@@ -458,8 +459,8 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" class="ui-btn-active"
-					onclick="updateBookmark('date');">By Date</a></li>
-				<li><a href="#" onclick="updateBookmark('title');">By Sets</a></li>
+					onclick="updateBookmark('date');" class="i18n">By_Date</a></li>
+				<li><a href="#" onclick="updateBookmark('title');" class="i18n">By_Sets</a></li>
 			</ul>
 		</div>
 		<!-- /header -->
@@ -479,7 +480,7 @@
 					<!--  
 					<img id="btnResume"
 						src="./css/images/buy_button.png" height="30px" /> -->
-						<div id="btnResume" class="button">Buy Now</div>
+						<div id="btnResume" class="button i18n">Buy_Now</div>
 						</td>
 				</tr>
 			</table>
@@ -501,7 +502,7 @@
 							<!--  
 							<img src="./css/images/done_button.png"
 								height="30px" width="80px" /> -->
-								<div class="button" style="width:38px;">Back</div>
+								<div class="button i18n" style="width:38px;">Back</div>
 								</a>
 						</div>
 					</td>
@@ -514,11 +515,11 @@
 
 		<div data-role="navbar" style="margin-top: 20px;">
 			<ul>
-				<li><a id="Last" href="#" class="ui-btn-active"
-					onclick="refreshListStaByType('1');">Last</a></li>
+				<li><a id="Last" href="#" class="ui-btn-active i18n"
+					onclick="refreshListStaByType('1');" >Last</a></li>
 				<li><a id="Average" href="#"
-					onclick="refreshListStaByType('2');">Average</a></li>
-				<li><a id="Best" href="#" onclick="refreshListStaByType('3');">Best</a></li>
+					onclick="refreshListStaByType('2');" class="i18n">Average</a></li>
+				<li><a id="Best" href="#" onclick="refreshListStaByType('3');" class="i18n">Best</a></li>
 			</ul>
 		</div>
 		<!-- /header -->
@@ -536,7 +537,7 @@
 				<tr>
 					<td valign="bottom" align=right><!--  <img id="btnResume"
 						src="./css/images/buy_button.png" height="30px" /> -->
-						<div id="btnResume" class="button">Buy Now</div>
+						<div id="btnResume" class="button i18n">Buy_Now</div>
 						</td>
 				</tr>
 			</table>
@@ -558,12 +559,12 @@
 							<!--
 							<img src="./css/images/normal_back_btn.png"
 								height="30px" width="80px" /> -->
-								<div class="button" style="width:38px;">Back</div>
+								<div class="button i18n" style="width:38px;">Back</div>
 								</a>
 						</div>
 					</td>
 					<td align="center">
-						<div style="text-align: center; color: white; font-size: 12px;">Discussions&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div style="text-align: center; color: white; font-size: 12px;" class="i18n">Discussions_nbsp</div>
 					</td>
 				</tr>
 			</table>
@@ -581,12 +582,11 @@
 		<!-- dialog for attach -->
 		<div id="div_attach"></div>
 		<!-- loading -->
-		<div id="loading_discussion" class='div_center'>dd</div>
+		<div id="loading_discussion" class='div_center'></div>
 		<!-- Post Your Comments -->
 		<div id="discussion_post_comment">
 			<a id="post" href="#reply"
-				style="color: black; text-decoration: none;"> Post Your comment
-				here </a>
+				style="color: black; text-decoration: none;" class="i18n">post_your_comment_here</a>
 		</div>
 	</div>
 	<!-- /page discussion -->
@@ -604,12 +604,12 @@
 							<!--  
 							<img src="./css/images/done_button.png"
 								height="30px" width="80px" />-->
-								<div class="button" style="width:38px;">Done</div>
+								<div class="button i18n" style="width:38px;">Done</div>
 								</a>
 						</div>
 					</td>
 					<td align="center">
-						<div style="text-align: center; color: white; font-size: 12px;">Discussions</div>
+						<div style="text-align: center; color: white; font-size: 12px;" class="i18n">Discussions</div>
 					</td>
 				</tr>
 			</table>
@@ -621,7 +621,7 @@
 			style="padding-left: 5px; padding-top: 5px;">
 			<table>
 				<tr>
-					<td><div id="userinfo_content_head">head</div></td>
+					<td><div id="userinfo_content_head" class="i18n">head</div></td>
 					<td><div id="userinfo_content_title" style="color: #072277;">Arcadia
 							Admin</div>
 						<div id="userinfo_content_name"
@@ -634,10 +634,10 @@
 			<div style="width: 96%; height: 90%;">
 				<div id="userinfo_inner_content">
 					<div>
-						Location:<label id="userinfo_content_location"></label>
+						<label class="i18n">Location</label><label id="userinfo_content_location"></label>
 					</div>
 					<div>
-						About me:<label id="userinfo_content_aboutme"></label>
+						<label class="i18n">About_me</label><label id="userinfo_content_aboutme"></label>
 					</div>
 					<!-- Attach IMAGE -->
 					<div style="width: 100%; height: 100%; text-align: center">
@@ -669,14 +669,14 @@
 							<!--  
 							<img
 								src="./css/images/cancel_button.png" height="30px" width="80px" /> -->
-								<div class="button_cancle" style="width:50px;">Cancel</div>
+								<div class="button_cancle i18n" style="width:50px;">Cancel</div>
 							</a>
 						</div>
 					</td>
 					<td align="right"><a href="#" onclick="post()">
 					<!-- 
 					<img src="./css/images/post_button.png" height="30px" width="80px" /> -->
-					<div class="button" style="width:38px;">Post</div>
+					<div class="button i18n" style="width:38px;">Post</div>
 							</td>
 				</tr>
 			</table>
@@ -688,7 +688,7 @@
 			<form action=""></form>
 			<table width=100%>
 				<tr>
-					<td>Comment:</td>
+					<td class="i18n">Comment</td>
 					<td align="right">&nbsp;
 					<!-- 
 					<a href="#popupChooseImg"  data-rel="popup" data-position-to="window" style="text-decoration:none;">
@@ -719,7 +719,7 @@
 		<div id="loading_post" class='div_center'></div>
 		<div data-role="popup" id="popupChooseImg" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
 			<div>
-				<div style="text-align:center;">Attachment</div>
+				<div style="text-align:center;" class="i18n">Attachment</div>
 				Choose the attachment to post:
 			</div>
 			<div data-role="button" onclick="showScreenshot()">
@@ -728,7 +728,7 @@
 			<div onclick="showAlbum()" data-role="button">
 				Photo Album
 			</div>
-			<div onclick="closePopupChooseImg()" data-role="button">
+			<div onclick="closePopupChooseImg()" data-role="button" class="i18n">
 				Cancel
 			</div>
 		</div>
@@ -751,28 +751,27 @@
 				data-position-to="origin" class="ui-content">
 
 				<div style="padding: 5px 0px;">
-					<font>&nbsp;<b>Login to ArcadiaPrep.com</b></font>
+					<font>&nbsp;<b class="i18n">Login_to_ArcadiaPrep_com</b></font>
 					<hr>
 					<table>
 						<tr>
-							<td>Login</td>
+							<td class="i18n">Login</td>
 							<td><input type="text" name="user" id="login_name_discussion" value=""
 								placeholder="Enter an e-mail."></td>
 						</tr>
 						<tr>
-							<td>Password</td>
+							<td class="i18n">Password</td>
 							<td><input type="password" name="user" id="login_pass_discussion" value=""
 								placeholder="Enter a pass."></td>
 						</tr>
 						<tr>
 							<td colspan=2 align=right><div onclick="loginDiscussion()"
-									style="width: 50%;" data-role="button">Login</div></td>
+									style="width: 50%;" data-role="button" class="i18n">Login</div></td>
 						</tr>
 					</table>
 					<hr>
-					<div style="font-color: white; font-size: 10px;">Don't have
-						an AcrediaPrep.com log-in?</div>
-					<a href="#popupRegisterDiscussion" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b">Register</div></a>
+					<div style="font-color: white; font-size: 10px;" class="i18n">need_login</div>
+					<a href="#popupRegisterDiscussion" style="text-decoration:none;" data-rel="popup" data-position-to="origin"><div data-role="button" data-theme="b" class="i18n">Register</div></a>
 				</div>
 			</div>
 			<!-- Popup -register -->
@@ -780,13 +779,13 @@
 				 class="ui-content popupRegister">
 
 				<div style="width:300px;">
-					<font>&nbsp;<b>Register</b></font>
+					<font>&nbsp;<b class="i18n">Register</b></font>
 					<hr>
 					<table cellpadding=0>
 						<tr>
 							<!-- photo -->
 							<td style="background-color:gray;">
-								<a href="#popupPhotoPicker" style="text-decoration:none;" data-rel="popup" data-position-to="window">Set Photo</a>
+								<a href="#popupPhotoPicker" style="text-decoration:none;" data-rel="popup" data-position-to="window" class="i18n">Set_Photo</a>
 							</td>
 							<td>
 								<input type="text"  id="dfname" value="" placeholder="First Name*">
@@ -807,9 +806,9 @@
 						</tr>
 						<tr>
 							<td><a href="#popupDiscussion" style="text-decoration:none;" data-rel="popup" data-position-to="window"><div 
-									data-role="button">Cancel</div></a></td>
+									data-role="button" class="i18n">Cancel</div></a></td>
 							<td><div onclick="registerDiscussion();" 
-									data-role="button" data-theme="b">Register</div></td>
+									data-role="button" data-theme="b" class="i18n">Register</div></td>
 						</tr>
 					</table>
 				</div>
@@ -830,7 +829,7 @@
 					<td>
 						<div id="questionview_done" style="display:none;">
 						<a href="#exam"><!--<img  src="./css/images/done_button.png" width=80px height="30px" /> -->
-							<div class="button">Done</div>
+							<div class="button i18n">Done</div>
 						</a></div>
 					</td>
 					<td width=80px align=left valign="middle">
@@ -865,7 +864,7 @@
 						  <!-- 
 							<img  src="./css/images/menu_button.png"
 								width="80px" height="30px" onclick="showQuestionMenu();" /> -->
-								<div class="button" onclick="showQuestionMenu();" style="width:38px;">Menu</div>
+								<div class="button i18n" onclick="showQuestionMenu();" style="width:38px;">Menu</div>
 						</div>
 					</td>
 				</tr>
@@ -913,11 +912,11 @@
 		<div id="wrapper_question_menu" style="display: none;">
 			<div id="scrollerquestionMenu">
 				<ul class="thelist">
-					<li style="background-color:black;color:white;">Exam option</li>
-					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()">Exit the Exam</a></li>
-					<li><a id="a_finish_review" href="#exam" style="color:black;text-decoration:none;" onclick="finishExam()">Finish&Review the Exam</a></li>
+					<li style="background-color:black;color:white;" class="i18n">Exam_option</li>
+					<li><a href="#main" style="color:black;text-decoration:none;" onclick="exitExam()" class="i18n">Exit_the_Exam</a></li>
+					<li><a id="a_finish_review" href="#exam" style="color:black;text-decoration:none;" onclick="finishExam()" class="i18n">Finish&Review</a></li>
 					<!-- <li><a href="#" onclick="email()" style="color:black;text-decoration:none;">Report a problem</a></li> -->
-					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()">Cancel</a></li>
+					<li><a href="#" onclick="dismissQuestionMenu()" style="color:black;text-decoration:none;" onclick="exitExam()" class="i18n">Cancel</a></li>
 				</ul>
 			</div>
 		</div>
@@ -933,16 +932,16 @@
 		<!-- Pop when click confirm -->
 		<div data-role="popup" id="popupConfirm" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false">
 			<div style="text-align:center">
-				<p>Finish this Question<p>
+				<p class="i18n">Finish_this_Question<p>
 			</div>
-			<div id="btnPopFinish" onclick='javascript:$("#a_finish_review").trigger("click");' data-role="button">
-				Finish & Review
+			<div id="btnPopFinish" class="i18n" onclick='javascript:$("#a_finish_review").trigger("click");' data-role="button">
+				Finish_&_Review
 			</div>
-			<div id="btnPopNxt" onclick="showNextQuestion()" data-role="button">
-				Goto the Next Question
+			<div id="btnPopNxt" class="i18n" onclick="showNextQuestion()" data-role="button">
+				Goto_the_Next_Question
 			</div>
-			<div onclick="showSolution()" data-role="button">
-				Show Correct Answers
+			<div onclick="showSolution()" class="i18n" data-role="button">
+				Show_Correct_Answers
 			</div>
 		</div>
 		<div data-role="popup" id="popupVideo" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false" >
@@ -1001,7 +1000,7 @@
 				</tr>
 				<tr> 
 					<td colspan=4 align="right" ><img class="choice_panel_img_two_btn" src="./css/images/hint.png" />&nbsp;&nbsp;</td>
-					<td colspan=4 align="left">&nbsp;&nbsp;<div class="button_choice" >Confirm</div></td>
+					<td colspan=4 align="left">&nbsp;&nbsp;<div class="button_choice" class="i18n" >Confirm</div></td>
 				</tr>
 			</table>
 		</div>
@@ -1016,9 +1015,9 @@
 					
 		<canvas id="can" width=480 height=500 ></canvas>
 		<div data-role="popup" class="ui-content" id="div_can_txt">
-			<label>put what you want&nbsp;&nbsp;&nbsp;&nbsp;<a
+			<label><label class="i18n">put_what_you_want</label><a
 				id="a_text_settings" href="#div_text_settings" data-rel="popup"
-				data-position-to="window">setting</a></label> <input type="text"
+				data-position-to="window" class="i18n">setting</a></label> <input type="text"
 				id="can_txt" name="can_txt" /> <input type="button" value="ok"
 				onclick="fireCanTxt()" /> <input type="button" value="cancel"
 				onclick="cancelCanTxt()" />
@@ -1048,7 +1047,7 @@
 		<!-- Pen settings -->
 		<div data-role="popup" class="ui-content" id="div_pen_settings" >
 			<div>
-				&nbsp;&nbsp;<b>Pen Settings</b>
+				&nbsp;&nbsp;<b class="i18n">Pen_Settings</b>
 			</div>
 			<div id="pen_preview">
 				<canvas id="canvas_pen_setting" width=200 height=50
@@ -1102,7 +1101,7 @@
 		<!-- Text settings -->
 		<div data-role="popup" class="ui-content" id="div_text_settings">
 			<div>
-				&nbsp;&nbsp;<b>Text Settings</b>
+				&nbsp;&nbsp;<b class="i18n">Text_Settings</b>
 			</div>
 			<div id="pen_preview">
 				<canvas id="canvas_text_setting" width=200 height=50
@@ -1156,7 +1155,7 @@
 		<!-- Eraser Settidngs -->
 		<div data-role="popup" class="ui-content" id="div_eraser_settings">
 			<div>
-				&nbsp;&nbsp;<b>Eraser Settings</b>
+				&nbsp;&nbsp;<b class="i18n">Eraser_Settings</b>
 			</div>
 			<div id="pen_preview">
 				<canvas id="canvas_eraser_setting" width=200 height=50
@@ -1195,7 +1194,7 @@
 						<div>
 							<a href="#main" onclick="javascript:current_showsolution = false;resetMainScroll();">
 								<!-- <img src="./css/images/normal_back_btn.png" height="30px" width="80px" /> -->
-								<div class="button" style="width:38px;">Back</div>
+								<div class="button i18n" style="width:38px;">Back</div>
 							</a>
 						</div>
 					</td>
@@ -1206,15 +1205,15 @@
 		<div width="100%">
 			<table width="100%" >
 				<tr>
-					<td align="center">Score:<span id="exam_score"></span></td>
-					<td align="center">Total Time:<span id="exam_totalTime"></span></td>
+					<td align="center"><label class="i18n">Score</label><span id="exam_score"></span></td>
+					<td align="center"><label class="i18n">Total_Time</label> <span id="exam_totalTime"></span></td>
 				</tr>
-				<tr><td align="center" colspan=2 >Average Time Per Question:<span id="exam_per"></span></td></tr>
+				<tr><td align="center" colspan=2 ><label class="i18n">Average_Time_Per_Question</label><span id="exam_per"></span></td></tr>
 			</table>
 		</div>
 		<!-- /header -->
 		<div width=100% style="padding-top:-5px;font-size:5px;">
-			<table  width=100% style="font-size:2px;"><tr><td width=20%></td><td width=20% align="center">NO.</td><td width=20% align="center">Your Choice</td><td width=20% align="center">Correct Answer</td><td width=20%></td></tr></table>
+			<table  width=100% style="font-size:2px;"><tr><td width=20%></td><td width=20% align="center" class="i18n">NO.</td><td width=20% align="center" class="i18n">Your_Choice</td><td width=20% align="center" class="i18n">Correct_Answer</td><td width=20%></td></tr></table>
 		</div>
 		
 		<!-- content -->
@@ -1237,7 +1236,7 @@
 					<!-- 
 					<img id="btnContinue"
 						src="./css/images/continue_button.png" height="30px" /> -->
-						<div id="btnContinue" class="button" style="width:75px;">continue</div>
+						<div id="btnContinue" class="button i18n" style="width:75px;">continue</div>
 					</a></td>
 				</tr>
 			</table>
@@ -1247,8 +1246,8 @@
 	
 	<!-- #exam intro -->
 	<div data-role="page" id="exam_intro">
-		<div style="color:gray;padding-left:10px;padding-top:5px;" >
-			where to go from here
+		<div style="color:gray;padding-left:10px;padding-top:5px;" class="i18n" >
+			where_to_go_from_here
 		</div>
 		<!-- /header -->
 		<!-- content -->
@@ -1267,7 +1266,7 @@
 					<!-- 
 					<img id="btnExamExit"
 						src="./css/images/normal_back_btn.png" height="30px" /> -->
-						<div class="button" style="width:38px;" id="btnExamExit">Back</div>
+						<div class="button i18n" style="width:38px;" id="btnExamExit">Back</div>
 						</a></td>
 				</tr>
 			</table>
