@@ -14,7 +14,7 @@ function localDef(){
 	map.put("Password", "Password");
 	map.put("need_login", "Don't have an AcrediaPrep.com log-in?");
 	map.put("Register", "Register");
-	map.put("nbsp_Register", "&nbsp;Register");
+	map.put("nbsp_Register", "Register");
 	map.put("Set_Photo", "Set Photo");
 	map.put("Cancel", "Cancel");
 	map.put("Select_from_gallery", "Select from gallery");
@@ -26,8 +26,8 @@ function localDef(){
 	map.put("Menu", "Menu");
 	map.put("Review", "Review");
 	map.put("Resume", "Resume");
-	map.put("Begin_Practice_nbsp_nbsp", "Begin Practice&nbsp;&nbsp;");
-	map.put("MarketPlace_nbsp_nbsp", "Market Place&nbsp;&nbsp;");
+	map.put("Begin_Practice_nbsp_nbsp", "Begin Practice");
+	map.put("MarketPlace_nbsp_nbsp", "Market Place");
 	map.put("Buy_Now", "Buy Now");
 	map.put("Bookmarks", "Bookmarks");
 	map.put("By_Date", "By Date");
@@ -35,7 +35,7 @@ function localDef(){
 	map.put("Last", "Last");
 	map.put("Average", "Average");
 	map.put("Best", "Best");
-	map.put("Discussions_nbsp", "Discussions&nbsp;&nbsp;&nbsp;&nbsp;");
+	map.put("Discussions_nbsp", "Discussions");
 	map.put("post_your_comment_here", "Post Your comment here");
 	map.put("Done", "Done");
 	map.put("Discussions", "Discussions");
@@ -47,13 +47,14 @@ function localDef(){
 	map.put("Attachment", "Attachment");
 	map.put("Exam_option", "Exam option");
 	map.put("Exit_the_Exam", "Exit the Exam");
-	map.put("Finish&Review", "Finish&Review the Exam");
+	map.put("Finish_Review", "Finish&Review the Exam");
 	map.put("Finish_this_Question", "Finish this Question");
 	map.put("Finish_&_Review", "Finish & Review");
 	map.put("Goto_the_Next_Question", "Goto the Next Question");
+	map.put("Hint", "Hint");
 	map.put("Show_Correct_Answers", "Show Correct Answers");
 	map.put("Confirm", "Confirm");
-	map.put("put_what_you_want", "put what you want&nbsp;&nbsp;&nbsp;&nbsp;");
+	map.put("put_what_you_want", "put what you want");
 	map.put("setting", "setting");
 	map.put("Pen_Settings", "Pen Settings");
 	map.put("Text_Settings", "Text Settings");
@@ -66,6 +67,12 @@ function localDef(){
 	map.put("Correct_Answer", "Correct Answer");
 	map.put("continue", "continue");
 	map.put("where_to_go_from_here", "where to go from here");
+	map.put("logout", "Logout");
+	map.put("Invalid_Log_in","Invalid Log-in or Password.");
+	map.put("time_out", "time out ,please try later.");
+	map.put("Please_input_something", "Please input something.");
+	map.put("please_try_later", "please try later");
+	map.put("Return_to_Main_Menu", "Return to Main Menu");
 	
 	
 	self.get = function(_key){
@@ -74,7 +81,7 @@ function localDef(){
 	
 	self.translate = function(){
 		$(".i18n").each(function(){
-			$(this).text(self.get($(this).text()));
+			$(this).html(self.get($(this).text()));
 		});
 	};
 	

@@ -112,26 +112,26 @@
 			<div id="div_head" >
 				<table border=0 cellspacing=0 cellpadding="0" width=100% valign="bottom" style="padding-top:5px;" >
 					<tr>
-						<td><a href="#info"><img id="btnInfo"
+						<td ><a href="#info"><img id="btnInfo"
 								src="./css/images/infoicon.png" height="30px" /></a></td>
 						<td><a href="#perfdata"><img id="perfdata"
 								src="./css/images/perfdata.png" height="30px" /></a></td>
-						<td><a id="a_discussion" href="#"> <img id="disc_no_text"
+						<td ><a id="a_discussion" href="#"> <img id="disc_no_text"
 								src="./css/images/disc_no_text.png" height="30px" /></a></td>
-						<td><a href="#bookmark"><img id="imgBookmark"
+						<td ><a href="#bookmark"><img id="imgBookmark"
 								src="./css/images/bookmark.png" height="30px" /></a></td>
-						<td><img id="mail" src="./css/images/mail.png" height="30px" /></td>
-						<td><!-- <img id="search_icon" src="./css/images/search_icon.png"
-							height="30px" /> --></td>
+						<td ><img id="mail" src="./css/images/mail.png" height="30px" /></td>
+						<!-- <td><img id="search_icon" src="./css/images/search_icon.png"
+							height="30px" /> </td>-->
 						<td>
 						<!-- <div data-role="popup" id="popupBasic">This is a completely basic popup, no options set.</div>-->
 						 <a id="btn_login" href="#" data-rel="popup" data-position-to="window"  >
 						 		<!-- <img alt="" src="./css/images/bttn_no_txt.png" height=25px /> -->
 						 		<div class="button i18n">Login</div>
-							</td>
+						</td>
 						<!--<td><a href="index.html" data-role="button" data-theme="b"
 							style="height: 30px;">Login</a></td>-->
-						<td width="">&nbsp;</td>
+						
 					</tr>
 				</table>
 			</div>
@@ -934,14 +934,14 @@
 			<div style="text-align:center">
 				<p class="i18n">Finish_this_Question<p>
 			</div>
-			<div id="btnPopFinish" class="i18n" onclick='javascript:$("#a_finish_review").trigger("click");' data-role="button">
-				Finish_&_Review
+			<div id="btnPopFinish"  onclick='javascript:$("#a_finish_review").trigger("click");' data-role="button">
+				<label class="i18n">Finish_Review</label>
 			</div>
-			<div id="btnPopNxt" class="i18n" onclick="showNextQuestion()" data-role="button">
-				Goto_the_Next_Question
+			<div id="btnPopNxt"  onclick="showNextQuestion()" data-role="button" class="i18n">
+				<label class="i18n">Goto_the_Next_Question</label>
 			</div>
 			<div onclick="showSolution()" class="i18n" data-role="button">
-				Show_Correct_Answers
+				<label class="i18n">Show_Correct_Answers</label>
 			</div>
 		</div>
 		<div data-role="popup" id="popupVideo" data-theme="a" data-position-to="window" data-corners="false" data-shadow="false" >
@@ -1246,8 +1246,8 @@
 	
 	<!-- #exam intro -->
 	<div data-role="page" id="exam_intro">
-		<div style="color:gray;padding-left:10px;padding-top:5px;" class="i18n" >
-			where_to_go_from_here
+		<div style="color:gray;padding-left:10px;padding-top:5px;"  >
+			<label class="i18n">where_to_go_from_here</label>
 		</div>
 		<!-- /header -->
 		<!-- content -->

@@ -158,7 +158,7 @@ function bindEvent() {
 		if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){
 			
 			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/bttn_no_txt.png" data-role="none" />');
-			$("#btn_login").html('<div class="button">Login</div>');
+			$("#btn_login").html('<div class="button">'+localD.get("Login")+'</div>');
 			
 			
 			$("#btn_login").trigger('create');
@@ -246,7 +246,8 @@ function showDiscussion(){
 				console.log("findDiscussionsByExamType() called");
 				if(data==-1){
 					$("#loading_discussion").hide();
-					alert("time out ,please try later.");
+//					alert("time out ,please try later.");
+					alert(localD.get("time_out"));
 					return;
 				}
 				var html='';
@@ -325,7 +326,7 @@ function post(){
 	var user = new http.User(http.publicUser.userName,http.publicUser.password,http.publicUser.profile);
 	var message = $("#reply_textarea").val();
 	if(message==""){
-		alert("Please input something.");
+		alert(localD.get("Please_input_something"));
 		return;
 	}
 	//show loading
@@ -337,7 +338,8 @@ function post(){
 			$("#loading_post").hide();
 			if(data==-1){
 				$("#loading_post").hide();
-				alert("time out ,please try later.");
+//				alert("time out ,please try later.");
+				alert(localD.get("time_out"));
 				return;
 			}else{
 				if(fromQuestionView){
@@ -356,7 +358,8 @@ function post(){
 			$("#loading_post").hide();
 			if(data==-1){
 				$("#loading_post").hide();
-				alert("time out ,please try later.");
+//				alert("time out ,please try later.");
+				alert(localD.get("time_out"));
 				return;
 			}else{
 				if(fromQuestionView){
@@ -374,7 +377,8 @@ function post(){
 			$("#loading_post").hide();
 			if(data==-1){
 				$("#loading_post").hide();
-				alert("time out ,please try later.");
+//				alert("time out ,please try later.");
+				alert(localD.get("time_out"));
 				return;
 			}else{
 				if(fromQuestionView){
@@ -398,7 +402,8 @@ function showUserInfo(userId,head,attach){
 	
 	http.getUserInfo(userId,function(data){
 		if(data==-1){
-			alert("time out ,please try later.");
+//			alert("time out ,please try later.");
+			alert(localD.get("time_out"));
 			return;
 		}
 		
@@ -765,7 +770,7 @@ function hideMenuList(){
 }
 function updateListView(){
 	
-	var html='<li><a href="#main" onclick="hideMenuList();resetMainScroll();" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>Return to Main Menu<strong></td><td>&nbsp;</td></tr></table></a></li>';
+	var html='<li><a href="#main" onclick="hideMenuList();resetMainScroll();" style="color:black;text-decoration:none;" ><table><tr><td width=40px; valign="middle"><img src="./css/images/back.png" /></td><td><strong>'+localD.get("Return_to_Main_Menu")+'<strong></td><td>&nbsp;</td></tr></table></a></li>';
 	if(ListItemMyQuestions&&ListItemMyQuestions.length>0){
 		
 		for(var i=0;i<ListItemMyQuestions.length;i++){ 
@@ -937,12 +942,13 @@ function login(type){
 	http.login(login_name,login_pass,function(data){
 		$("#loading_login").hide();
 		if(data==-1){
-			alert("Invalid Log-in or Password...");
+//			alert("Invalid Log-in or Password...");
+			alert(localD.get("Invalid_Log_in"));
 		}else{
 			//alert(http.User.profile);
 			http.publicUser = data;
 			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
-			$("#btn_login").html('<div class="button" style="width:55px;">Logout</div>');
+			$("#btn_login").html('<div class="button" style="width:55px;">'+localD.get("logout")+'</div>');
 			$( "#popupBasic" ).popup( "close" );
 		}
 	});
@@ -957,7 +963,7 @@ function loginDiscussion(){
 	http.login(login_name,login_pass,function(data){
 		$("#loading_login_discussion").hide();
 		if(data==-1){
-			alert("Invalid Log-in or Password...");
+			alert(localD.get("Invalid_Log_in"));
 		}else{
 			http.publicUser = data;
 			//$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
@@ -983,7 +989,8 @@ function register(){
 		if(data==-1){
 			alert("please try later");
 		}else if(data.userName&&data.userName!=""){//register success and login success
-			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+//			$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+			$("#btn_login").html('<div class="button" style="width:55px;">'+localD.get("logout")+'</div>');
 			$( "#popupRegister" ).popup( "close" );
 		}else{
 			alert(data);
@@ -1006,7 +1013,7 @@ function registerDiscussion(){
 	http.register(fname,lname,email,pass,r_pass,exam,function(data){
 		$("#loading_login_discussion").hide();
 		if(data==-1){
-			alert("please try later");
+			alert(localD.get("please_try_later"));
 		}else if(data.userName&&data.userName!=""){//register success and login success
 			$( "#popupRegisterDiscussion" ).popup( "close" );
 		}else{
@@ -2286,7 +2293,8 @@ function resetMainScroll(){
 	closeVideo();
 	//check login status
 	if(http.publicUser&&http.publicUser.userName&&http.publicUser.userName!=""){//register success and login success
-		$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+//		$("#btn_login").html('<input  type="image" width=100% height=25px src="./css/images/logout_button.png" data-role="none" />');
+		$("#btn_login").html('<div class="button">'+localD.get("Logout")+'</div>');
 		$("#btn_login").trigger("create");
 	}
 	current_page = Constant.application_page_main;

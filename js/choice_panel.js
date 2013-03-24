@@ -39,7 +39,7 @@ mChoicePanel = new function(){
 		if(hintCount>0){
 			current_hint_index = 1;
 			//hint='<td colspan=4 align="right"><img id="btnHint" style="width:70px;height:35px;"  src="./css/images/hint.png" onclick="onHintClick('+hintCount+')" />&nbsp;&nbsp;</td>';
-			hint='<td colspan=4 align="right" valign="top"><div id="btnHint" onclick="onHintClick('+hintCount+')" class="button_choice" style="width:55px;height:20px;text-align:center;">Hint</div></td>';
+			hint='<td colspan=4 align="right" valign="top"><div id="btnHint" onclick="onHintClick('+hintCount+')" class="button_choice" style="width:55px;height:20px;text-align:center;">'+localD.get("Hint")+'</div></td>';
 		}
 		else{
 			current_hint_index =-1;
@@ -48,7 +48,7 @@ mChoicePanel = new function(){
 			
 		
 		//html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><a href="#popupConfirm" data-rel="popup"><div class="button_choice" style="width:55px;height:20px;">Confirm</div></a></td></tr></table>';
-		html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><div id="btnConfirm" class="button_choice" style="width:55px;height:20px;text-align:center;" onclick="showConfirm()" >Confirm</div></td></tr></table>';
+		html+='<tr>'+hint+'<td colspan=4 align="left" valign="top"><div id="btnConfirm" class="button_choice" style="width:55px;height:20px;text-align:center;" onclick="showConfirm()" >'+localD.get("Confirm")+'</div></td></tr></table>';
 		
 		//console.log("start create choice panel::"+html);
 		$("#choicePanelContainer").html(html);

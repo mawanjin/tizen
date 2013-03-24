@@ -1705,11 +1705,11 @@ function DBManager() {
 		
 		this.getHintCount = function(){
 			var c = 0;
-			if (this.textBlock1B&&this.textBlock1B!="")
+			if (this.textBlock1B&&this.textBlock1B!=""&&this.textBlock1B!="{null}"&&JSON.stringify(this.textBlock1B)!="\"null\"")
 				c++;
-			if (this.textBlock1C&&this.textBlock1C!="")
+			if (this.textBlock1C&&this.textBlock1C!=""&&this.textBlock1C!="{null}"&&JSON.stringify(this.textBlock1C)!="\"null\"")
 				c++;
-			if (this.textBlock1D&&this.textBlock1D!="")
+			if (this.textBlock1D&&this.textBlock1D!=""&&this.textBlock1D!="{null}"&&JSON.stringify(this.textBlock1D)!="\"null\"")
 				c++;
 			return c;
 		};
